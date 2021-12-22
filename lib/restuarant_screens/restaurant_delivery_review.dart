@@ -1,7 +1,4 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-
 import 'package:foodistan/widgets/reviewer_widget.dart';
 
 class RestuarantDeliveryReview extends StatefulWidget {
@@ -15,24 +12,22 @@ class RestuarantDeliveryReview extends StatefulWidget {
 class _RestuarantDeliveryMenuSReview extends State<RestuarantDeliveryReview> {
   @override
   Widget build(BuildContext context) {
-    var itemWidth = MediaQuery.of(context).size.width * 0.4;
-    var itemHeight = MediaQuery.of(context).size.height * 0.25;
-
     return Scaffold(
-      body: Column(children: [
-        Container(
-          height: MediaQuery.of(context).size.height * 0.08,
-          width: MediaQuery.of(context).size.width * 0.9,
-          child: DropdownButton(
+      body: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.08,
+              width: double.infinity,
+              child: DropdownButton(
             hint: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(11),
               child: Text(
                 "Top Rated",
                 style: const TextStyle(color: Colors.black),
               ),
             ),
             isExpanded: true,
-            iconSize: 30.0,
+            iconSize: 33,
             style: const TextStyle(color: Colors.black),
             items: ['Top Rated', 'Oldest', 'Latest'].map(
               (val) {
@@ -48,13 +43,7 @@ class _RestuarantDeliveryMenuSReview extends State<RestuarantDeliveryReview> {
             },
           ),
         ),
-        Center(
-          child: Column(
-            children: [
-              ReviewerWidget(),
-            ],
-          ),
-        )
+            ReviewerWidget(),
       ]),
     );
   }

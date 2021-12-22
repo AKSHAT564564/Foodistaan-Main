@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:foodistan/feedback.dart';
 import 'scanner.dart';
 import 'MainScreenFolder/mainScreenFile.dart';
 import 'optionScreenFile.dart';
@@ -9,11 +10,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:foodistan/UserLogin/LoginScreen.dart';
 
 void main() async {
-  // SystemChrome.setPreferredOrientations(
-  //   [
-  //     DeviceOrientation.portraitUp,
-  //   ],
-  // );
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+    ],
+  );
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
 import 'package:foodistan/functions/cart_functions.dart';
@@ -44,40 +45,87 @@ class _TotalBillBottomWidgetState extends State<TotalBillBottomWidget> {
                 if (snapshot.data!.docs.length != 0) {
                   var itemsNumber = snapshot.data!.docs.length;
                   return Container(
-                    width: MediaQuery.of(context).size.width * 1,
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    color: Colors.green,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.1,
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.09,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(11),
+                        topRight: Radius.circular(11),
+                      ),
+                    ),
+                    child: Center(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width*0.9,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(11),
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Center(
+                          child: Stack(
                             children: [
-                              Text("$itemsNumber Items in the Cart",
-                                  style: TextStyle(color: Colors.white)),
-                              Text("Extra charges may apply",
-                                  style: TextStyle(color: Colors.white)),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: 11,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("$itemsNumber Items in the Cart",
+                                          style: TextStyle(color: Colors.white)),
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      Text("Extra charges may apply",
+                                          style: TextStyle(color: Colors.white)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () async {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (c) => CartScreenMainLogin()));
+                                        },
+                                        child: Container(
+                                          height: MediaQuery.of(context).size.height*0.05,
+                                          width: MediaQuery.of(context).size.width*0.25,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(11),
+                                          ),
+                                          child: Center(
+                                            child: Text("View Bill",
+                                                style: TextStyle(color: Colors.green),),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 11,
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.25,
-                          child: GestureDetector(
-                              onTap: () async {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (c) => CartScreenMainLogin()));
-                              },
-                              child: Text("VIEW BILL",
-                                  style: TextStyle(color: Colors.white))),
-                        )
-                      ],
+                      ),
                     ),
                   );
                 } else {

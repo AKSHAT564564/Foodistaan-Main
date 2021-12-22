@@ -155,7 +155,7 @@ class _SearchState extends State<Search> {
   _SearchState({required this.SearchTask});
   Widget build(BuildContext context) {
     var h1 = MediaQuery.of(context).size.height;
-    var w1 = MediaQuery.of(context).size.width;
+    // var w1 = MediaQuery.of(context).size.width;
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 15,
@@ -168,9 +168,9 @@ class _SearchState extends State<Search> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.shade300,
+              color: Color.fromRGBO(0, 0, 0, 0.15),
               spreadRadius: 3,
-              blurRadius: 2,
+              blurRadius: 5,
             ),
           ],
         ),

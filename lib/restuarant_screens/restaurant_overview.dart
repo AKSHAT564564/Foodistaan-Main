@@ -1,8 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:foodistan/restuarant_screens/restaurant_main.dart';
 import 'package:foodistan/widgets/bottom_navbar.dart';
@@ -54,19 +49,13 @@ class _RestaurantOverviewState extends State<RestaurantOverview> {
           Stack(
             children: [
               Container(
-                  color: Colors.red,
-                  width: MediaQuery.of(context).size.width,
+                  width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.25,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16.0),
-                    child: Image.asset(
-                      'assets/images/dosa.png',
-                      fit: BoxFit.cover,
-                    ),
-                  )),
-              Center(
-                  // child: RestaurantMain(),
-                  )
+                  child: Image.asset(
+                    'assets/images/dosa.png',
+                    width: double.infinity,
+                    // fit: BoxFit.cover,
+                  ),),
             ],
           ),
           Column(

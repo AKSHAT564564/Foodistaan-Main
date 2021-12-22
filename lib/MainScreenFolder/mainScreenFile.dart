@@ -7,6 +7,7 @@ import 'package:foodistan/functions/order_functions.dart';
 import 'package:foodistan/profile/user_profile.dart';
 import 'package:foodistan/widgets/location_bottom_sheet_widget.dart';
 import 'package:foodistan/widgets/order_placed_screen.dart';
+import '../feedback.dart';
 import '../scanner.dart';
 import 'AppBar/AppBarFile.dart';
 import 'Test.dart';
@@ -57,46 +58,46 @@ class _MainScreenState extends State<MainScreen> {
     final Color unselected = Colors.grey;
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (index) => setState(() => currentIndex = index),
-        type: BottomNavigationBarType.fixed,
-        unselectedItemColor: unselected,
-        selectedItemColor: selected,
-        backgroundColor: Colors.white,
-        showUnselectedLabels: false,
-        showSelectedLabels: true,
-        elevation: 0,
-        items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'Images/bottomhome.svg',
-              color: currentIndex == 0 ? selected : unselected,
+          currentIndex: currentIndex,
+          onTap: (index) => setState(() => currentIndex = index),
+          type: BottomNavigationBarType.fixed,
+          unselectedItemColor: unselected,
+          selectedItemColor: selected,
+          backgroundColor: Colors.white,
+          showUnselectedLabels: false,
+          showSelectedLabels: true,
+          elevation: 0,
+          items: [
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'Images/bottomhome.svg',
+                color: currentIndex == 0 ? selected : unselected,
+              ),
+              label: 'Home',
             ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'Images/bottomcart.svg',
-              color: currentIndex == 1 ? selected : unselected,
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'Images/bottomcart.svg',
+                color: currentIndex == 1 ? selected : unselected,
+              ),
+              label: 'Cart',
             ),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'Images/bottomscan.svg',
-              color: currentIndex == 2 ? selected : unselected,
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'Images/bottomscan.svg',
+                color: currentIndex == 2 ? selected : unselected,
+              ),
+              label: 'Scan',
             ),
-            label: 'Scan',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'Images/bottomprofile.svg',
-              color: currentIndex == 3 ? selected : unselected,
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'Images/bottomprofile.svg',
+                color: currentIndex == 3 ? selected : unselected,
+              ),
+              label: 'Profile',
             ),
-            label: 'Profile',
-          ),
-        ],
-      ),
+          ],
+        ),
       appBar: currentIndex == 0
           ? PreferredSize(
               preferredSize:

@@ -21,9 +21,9 @@ class FoodCategories extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade300,
-            spreadRadius: 5,
-            blurRadius: 3,
+            color: Color.fromRGBO(0, 0, 0, 0.15),
+            spreadRadius: 3,
+            blurRadius: 5,
           ),
         ],
         borderRadius: BorderRadius.circular(11),

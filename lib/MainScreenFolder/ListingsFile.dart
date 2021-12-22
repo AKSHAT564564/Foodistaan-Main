@@ -123,7 +123,10 @@ class _ListedTileState extends State<ListedTile> {
             BoxShadow(
               color: Colors.grey.shade300,
               blurRadius: 3,
-              spreadRadius: 5,
+              spreadRadius: 1,
+              offset: Offset(
+                0,3,
+              ),
             ),
           ],
           borderRadius: BorderRadius.circular(11),

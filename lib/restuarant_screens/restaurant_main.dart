@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/widgets/options.dart';
 
@@ -44,24 +45,33 @@ class _RestaurantMainState extends State<RestaurantMain> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 2.5,
+                    ),
                     Text(
                       "${widget.restaurant_details['Name']}",
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 17.5,
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
+                    ),
+                    SizedBox(
+                      height: 2.5,
                     ),
                     Text(
                       "${widget.restaurant_details['Cuisines']}",
                       style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 12.5,
                           fontWeight: FontWeight.normal,
                           color: Colors.black),
+                    ),
+                    SizedBox(
+                      height: 2.5,
                     ),
                     Text(
                       "${widget.restaurant_details['Address']}",
                       style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 11,
                           fontWeight: FontWeight.normal,
                           color: Colors.grey),
                     ),
@@ -74,40 +84,45 @@ class _RestaurantMainState extends State<RestaurantMain> {
               Container(
                   decoration: BoxDecoration(
                     color: Colors.green,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      bottomLeft: Radius.circular(15),
+                    ),
                   ),
-                  padding: const EdgeInsets.all(8),
+                  height: MediaQuery.of(context).size.height*0.05,
                   width: MediaQuery.of(context).size.width * 0.2,
-                  child: TextButton(
-                      onPressed: null,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "${widget.restaurant_details['Stars']}",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 22),
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                          Center(
-                            child: Text(
-                              "10+ Ratings",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 8),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${widget.restaurant_details['Stars']}",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: MediaQuery.of(context).size.width*0.044,),
                             ),
+                            Icon(
+                              Icons.star,
+                              size: MediaQuery.of(context).size.width*0.05,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        Center(
+                          child: Text(
+                            "10+ Ratings",
+                            style:
+                                TextStyle(color: Colors.white,
+                                  fontSize: MediaQuery.of(context).size.width*0.022,),
                           ),
-                        ],
-                      )))
+                        ),
+                      ],
+                    ),
+                  ))
             ],
           ),
           Container(
@@ -168,136 +183,144 @@ class _RestaurantMainState extends State<RestaurantMain> {
           ),
           Container(
             height: MediaQuery.of(context).size.height * 0.07,
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(7),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey.shade300,
+              ),
+              borderRadius: BorderRadius.circular(25),
+            ),
             width: MediaQuery.of(context).size.width * 0.9,
             // decoration: BoxDecoration(
             //     border: Border.all(color: Colors.grey, width: 1),
             //     borderRadius: BorderRadius.circular(50)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isDeliverySelected = true;
-                      isPickupSelected = false;
-                      isOverviewSelected = false;
-                    });
-                  },
-                  child: Container(
-                    // padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        color: isDeliverySelected == true
-                            ? Colors.amber[100]
-                            : Colors.white,
-                        border: isDeliverySelected == true
-                            ? Border.all(color: Colors.amber, width: 1)
-                            : Border.all(color: Colors.white, width: 1),
-                        borderRadius: isDeliverySelected == true
-                            ? BorderRadius.circular(11)
-                            : BorderRadius.circular(0)),
-                    width: MediaQuery.of(context).size.width * 0.27,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.bike_scooter,
-                            size: 15,
-                            color: isDeliverySelected == true
-                                ? Colors.black
-                                : Colors.grey),
-                        Text(" Delivery",
-                            style: isDeliverySelected == true
-                                ? TextStyle(color: Colors.black, fontSize: 15)
-                                : TextStyle(color: Colors.grey, fontSize: 10))
-                      ],
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isDeliverySelected = true;
+                        isPickupSelected = false;
+                        isOverviewSelected = false;
+                      });
+                    },
+                    child: Container(
+                      // padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: isDeliverySelected == true
+                              ? Colors.amber[100]
+                              : Colors.white,
+                          border: isDeliverySelected == true
+                              ? Border.all(color: Colors.amber, width: 1)
+                              : Border.all(color: Colors.white, width: 1),
+                          borderRadius: isDeliverySelected == true
+                              ? BorderRadius.circular(25)
+                              : BorderRadius.circular(0)),
+                      width: MediaQuery.of(context).size.width * 0.27,
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.two_wheeler,
+                              size: 15,
+                              color: isDeliverySelected == true
+                                  ? Colors.black
+                                  : Colors.grey),
+                          Text(" Delivery",
+                              style: isDeliverySelected == true
+                                  ? TextStyle(color: Colors.black, fontSize: 15)
+                                  : TextStyle(color: Colors.grey, fontSize: 10))
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isDeliverySelected = false;
-                      isPickupSelected = true;
-                      isOverviewSelected = false;
-                    });
-                  },
-                  child: Container(
-                    // padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        color: isPickupSelected == true
-                            ? Colors.amber[100]
-                            : Colors.white,
-                        border: isPickupSelected == true
-                            ? Border.all(color: Colors.amber, width: 1)
-                            : Border.all(color: Colors.white, width: 1),
-                        borderRadius: isPickupSelected == true
-                            ? BorderRadius.circular(10)
-                            : BorderRadius.circular(0)),
-                    width: MediaQuery.of(context).size.width * 0.27,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.food_bank,
-                            size: 15,
-                            color: isPickupSelected == true
-                                ? Colors.black
-                                : Colors.grey),
-                        widget.restaurant_details["Takeaway"]
-                            ? Text(" Pickup",
-                                style: isPickupSelected == true
-                                    ? TextStyle(
-                                        color: Colors.black, fontSize: 15)
-                                    : TextStyle(
-                                        color: Colors.grey, fontSize: 10))
-                            : SizedBox()
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isDeliverySelected = false;
+                        isPickupSelected = true;
+                        isOverviewSelected = false;
+                      });
+                    },
+                    child: Container(
+                      // padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: isPickupSelected == true
+                              ? Colors.amber[100]
+                              : Colors.white,
+                          border: isPickupSelected == true
+                              ? Border.all(color: Colors.amber, width: 1)
+                              : Border.all(color: Colors.white, width: 1),
+                          borderRadius: isPickupSelected == true
+                              ? BorderRadius.circular(25)
+                              : BorderRadius.circular(0)),
+                      width: MediaQuery.of(context).size.width * 0.27,
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.food_bank,
+                              size: 15,
+                              color: isPickupSelected == true
+                                  ? Colors.black
+                                  : Colors.grey),
+                          widget.restaurant_details["Takeaway"]
+                              ? Text(" Pickup",
+                                  style: isPickupSelected == true
+                                      ? TextStyle(
+                                          color: Colors.black, fontSize: 15)
+                                      : TextStyle(
+                                          color: Colors.grey, fontSize: 10))
+                              : SizedBox()
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isDeliverySelected = false;
-                      isPickupSelected = false;
-                      isOverviewSelected = true;
-                    });
-                  },
-                  child: Container(
-                    // padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        color: isOverviewSelected == true
-                            ? Colors.amber[100]
-                            : Colors.white,
-                        border: isOverviewSelected == true
-                            ? Border.all(color: Colors.amber, width: 1)
-                            : Border.all(color: Colors.white, width: 1),
-                        borderRadius: isOverviewSelected == true
-                            ? BorderRadius.circular(10)
-                            : BorderRadius.circular(0)),
-                    width: MediaQuery.of(context).size.width * 0.27,
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.note_add_outlined,
-                            size: 15,
-                            color: isOverviewSelected == true
-                                ? Colors.black
-                                : Colors.grey),
-                        Text(" Overview",
-                            style: isOverviewSelected == true
-                                ? TextStyle(color: Colors.black, fontSize: 15)
-                                : TextStyle(color: Colors.grey, fontSize: 10))
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isDeliverySelected = false;
+                        isPickupSelected = false;
+                        isOverviewSelected = true;
+                      });
+                    },
+                    child: Container(
+                      // padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: isOverviewSelected == true
+                              ? Colors.amber[100]
+                              : Colors.white,
+                          border: isOverviewSelected == true
+                              ? Border.all(color: Colors.amber, width: 1)
+                              : Border.all(color: Colors.white, width: 1),
+                          borderRadius: isOverviewSelected == true
+                              ? BorderRadius.circular(25)
+                              : BorderRadius.circular(0)),
+                      width: MediaQuery.of(context).size.width * 0.27,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.note_add_outlined,
+                              size: 15,
+                              color: isOverviewSelected == true
+                                  ? Colors.black
+                                  : Colors.grey),
+                          Text(" Overview",
+                              style: isOverviewSelected == true
+                                  ? TextStyle(color: Colors.black, fontSize: 15)
+                                  : TextStyle(color: Colors.grey, fontSize: 10))
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
           Container(
