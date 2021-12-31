@@ -4,7 +4,6 @@ import 'package:foodistan/MainScreenFolder/accepted_order.dart';
 import 'package:foodistan/profile/your_orders.dart';
 import 'package:foodistan/widgets/order_history_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class OrderFunction {
   final _firestore = FirebaseFirestore.instance;
@@ -196,7 +195,7 @@ class OrderFunction {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                      width: 22,
+                                      width: MediaQuery.of(context).size.width*0.025,
                                     ),
                                     CircleAvatar(
                                       radius:
@@ -225,7 +224,7 @@ class OrderFunction {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: 22,
+                                      width: MediaQuery.of(context).size.width*0.025,
                                     ),
                                     Column(
                                       mainAxisAlignment:
@@ -239,14 +238,17 @@ class OrderFunction {
                                                     .toString()
                                                     .toUpperCase(),
                                                 style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: MediaQuery.of(context).size.width*0.037,
+                                                ),
                                               )
                                             : Text(
                                                 'Preparing Your Orders',
                                                 style: TextStyle(
                                                     fontWeight:
-                                                        FontWeight.bold),
+                                                        FontWeight.bold,
+                                                  fontSize: MediaQuery.of(context).size.width*0.035,
+                                                ),
                                               ),
                                         if (onlyOneOrder)
                                           Text(orderData['vendor-name'])

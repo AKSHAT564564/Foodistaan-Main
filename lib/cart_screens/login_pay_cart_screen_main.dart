@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/address_screen.dart';
 import 'package:foodistan/MainScreenFolder/coupon_screen.dart';
@@ -647,9 +646,8 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                                 AddressScreen()));
                                   },
                                   child: Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.5,
-                                    child: Text('Add Adress'),
+                                    child: Center(
+                                        child: Text('Add Address')),
                                   ),
                                 );
                               } else {

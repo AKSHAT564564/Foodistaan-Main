@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/auth/autentication.dart';
@@ -38,7 +37,6 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
   Widget build(BuildContext context) {
     var itemWidth = MediaQuery.of(context).size.width * 0.4;
     var itemHeight = MediaQuery.of(context).size.height * 0.25;
-
     return SafeArea(
       child: Scaffold(
           backgroundColor: Color.fromRGBO(250, 250, 250, 1),
@@ -97,7 +95,7 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 11),
-                      margin: EdgeInsets.only(top: 15),
+                      // margin: EdgeInsets.only(top: 15),
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: TextFormField(
                           decoration: InputDecoration(
