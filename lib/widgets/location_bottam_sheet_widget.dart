@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodistan/MainScreenFolder/Location/LocationMap.dart';
+import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
+import 'package:foodistan/functions/address_functions.dart';
 import 'package:foodistan/functions/location_functions.dart';
 import 'package:foodistan/functions/places_search_model.dart';
 import 'package:foodistan/global/global_variables.dart' as global;
@@ -323,26 +325,103 @@ class SavedAddressWidget extends StatefulWidget {
 
 class _SavedAddressWidgetState extends State<SavedAddressWidget> {
   @override
+  List<Map<String, dynamic>> addressList = [];
+  bool hasData = false;
+
   void initState() {
     super.initState();
-  }
-
-  asyncFunction() async {
-    String? userNumber = FirebaseAuth.instance.currentUser!.phoneNumber;
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(userNumber)
-        .collection('address')
-        .get()
-        .then((value) {
-      for (var item in value.docs) {
-        print(item.id);
-      }
+    UserAddress().fetchAllAddresses().then((value) {
+      setState(() {
+        addressList = value;
+        hasData = true;
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return hasData == false
+        ? CircularProgressIndicator()
+        : hasData == true && addressList.isEmpty
+            ? Center(
+                child: Text('No Saved Address'),
+              )
+            : ListView.builder(
+                shrinkWrap: true,
+                itemCount: addressList.length,
+                itemBuilder: (context, index) {
+                  Map<String, dynamic> data = addressList[index];
+                  return GestureDetector(
+                    onTap: () async {
+                      deliveryAddress.value = data;
+                      Navigator.pop(context);
+                    },
+                    child: Stack(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(
+                              width: 25,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.location_on_outlined,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 11,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  data['category'].toString().toUpperCase(),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  data['house-feild'].toString() +
+                                      ' ' +
+                                      data['street-feild'].toString(),
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                });
   }
 }

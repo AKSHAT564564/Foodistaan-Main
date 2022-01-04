@@ -247,7 +247,7 @@ class _UserProfileState extends State<UserProfile> {
                             'Notifications',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width*0.033,
+                              fontSize: MediaQuery.of(context).size.width*0.032,
                               color: Colors.black,
                             ),
                           ),

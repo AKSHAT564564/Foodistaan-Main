@@ -228,16 +228,22 @@ class _RestaurantMainState extends State<RestaurantMain> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Icon(Icons.two_wheeler,
-                              size: MediaQuery.of(context).size.width*0.035,
+                              size: MediaQuery.of(context).size.width * 0.035,
                               color: isDeliverySelected == true
                                   ? Colors.black
                                   : Colors.grey),
                           Text(" Delivery",
                               style: isDeliverySelected == true
-                                  ? TextStyle(color: Colors.black,
-                                  fontSize: MediaQuery.of(context).size.width*0.035)
-                                  : TextStyle(color: Colors.grey,
-                                  fontSize: MediaQuery.of(context).size.width*0.033))
+                                  ? TextStyle(
+                                      color: Colors.black,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.035)
+                                  : TextStyle(
+                                      color: Colors.grey,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.033))
                         ],
                       ),
                     ),
@@ -269,7 +275,7 @@ class _RestaurantMainState extends State<RestaurantMain> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Icon(Icons.food_bank,
-                              size: MediaQuery.of(context).size.width*0.035,
+                              size: MediaQuery.of(context).size.width * 0.035,
                               color: isPickupSelected == true
                                   ? Colors.black
                                   : Colors.grey),
@@ -278,10 +284,16 @@ class _RestaurantMainState extends State<RestaurantMain> {
                                   style: isPickupSelected == true
                                       ? TextStyle(
                                           color: Colors.black,
-                                      fontSize: MediaQuery.of(context).size.width*0.035)
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.035)
                                       : TextStyle(
                                           color: Colors.grey,
-                                      fontSize: MediaQuery.of(context).size.width*0.033))
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.033))
                               : SizedBox()
                         ],
                       ),
@@ -314,16 +326,22 @@ class _RestaurantMainState extends State<RestaurantMain> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Icon(Icons.note_add_outlined,
-                              size: MediaQuery.of(context).size.width*0.035,
+                              size: MediaQuery.of(context).size.width * 0.035,
                               color: isOverviewSelected == true
                                   ? Colors.black
                                   : Colors.grey),
                           Text(" Overview",
                               style: isOverviewSelected == true
-                                  ? TextStyle(color: Colors.black,
-                                  fontSize: MediaQuery.of(context).size.width*0.035)
-                                  : TextStyle(color: Colors.grey,
-                                  fontSize: MediaQuery.of(context).size.width*0.033))
+                                  ? TextStyle(
+                                      color: Colors.black,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.035)
+                                  : TextStyle(
+                                      color: Colors.grey,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.033))
                         ],
                       ),
                     ),
@@ -390,7 +408,8 @@ class _RestaurantMainState extends State<RestaurantMain> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: MediaQuery.of(context).size.width*0.03,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.027,
                               ),
                             ),
                           ),
@@ -401,7 +420,9 @@ class _RestaurantMainState extends State<RestaurantMain> {
                               Text(
                                 "20% OFF UPTO ₹300",
                                 style: TextStyle(
-                                    fontSize: MediaQuery.of(context).size.width*0.031,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.03,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -443,7 +464,8 @@ class _RestaurantMainState extends State<RestaurantMain> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: MediaQuery.of(context).size.width*0.03,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.027,
                               ),
                             ),
                           ),
@@ -454,7 +476,9 @@ class _RestaurantMainState extends State<RestaurantMain> {
                               Text(
                                 "20% OFF UPTO ₹300",
                                 style: TextStyle(
-                                    fontSize: MediaQuery.of(context).size.width*0.031,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.03,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),

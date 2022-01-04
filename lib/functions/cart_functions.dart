@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:foodistan/auth/autentication.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
 import 'package:foodistan/global/global_variables.dart';
 import 'package:foodistan/widgets/change_quantity_widget.dart';

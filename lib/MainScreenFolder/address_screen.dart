@@ -66,12 +66,12 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
   _asyncFunctions() async {
-    var userLocation = await LocationFunctions().getUserLocation();
-    if (userLocation != null) {
-      await setLocation(userLocation).then(() {
-        pointToLocation(userLocation);
+    var userLocationTemp = await LocationFunctions().getUserLocation();
+    if (userLocationTemp != null) {
+      await setLocation(userLocationTemp).then(() {
+        pointToLocation(userLocationTemp);
         setState(() {
-          userLocation = userLocation;
+          userLocation = userLocationTemp;
         });
       });
     } else {
@@ -101,6 +101,7 @@ class _AddressScreenState extends State<AddressScreen> {
       setState(() {
         addressModel = value;
         hasAddress = true;
+        userLocation = location;
       });
     });
   }
@@ -449,10 +450,11 @@ class _AddressScreenState extends State<AddressScreen> {
                   onTap: () async {
                     await UserAddress()
                         .addUserAddress(
-                            houseFeildController.text,
-                            streetFeildController.text,
-                            categorySelected,
-                            )
+                      houseFeildController.text,
+                      streetFeildController.text,
+                      categorySelected,
+                      userLocation,
+                    )
                         .then({Navigator.pop(context)});
                   },
                   child: Container(

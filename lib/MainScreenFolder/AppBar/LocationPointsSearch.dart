@@ -204,7 +204,7 @@ class _SearchState extends State<Search> {
                     "Search Cuisines",
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: h1*0.023,
+                      fontSize: h1 * 0.023,
                       //fontFamily: 'Segoe UI'
                     ),
                   ),

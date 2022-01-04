@@ -79,16 +79,22 @@ class _TotalBillBottomWidgetState extends State<TotalBillBottomWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text("$itemsNumber Items in the Cart",
-                                          style:
-                                              TextStyle(color: Colors.white,
-                                              fontSize: MediaQuery.of(context).size.width*0.044)),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.044)),
                                       SizedBox(
                                         height: 3,
                                       ),
                                       Text("Extra charges may apply",
-                                          style:
-                                              TextStyle(color: Colors.white,
-                                                  fontSize: MediaQuery.of(context).size.width*0.035)),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.035)),
                                     ],
                                   ),
                                 ],
@@ -128,7 +134,10 @@ class _TotalBillBottomWidgetState extends State<TotalBillBottomWidget> {
                                               "View Bill",
                                               style: TextStyle(
                                                 color: Colors.green,
-                                                fontSize: MediaQuery.of(context).size.width*0.035,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.035,
                                               ),
                                             ),
                                           ),

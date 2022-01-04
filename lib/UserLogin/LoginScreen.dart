@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:foodistan/UserLogin/OTPScreen.dart';
@@ -10,6 +9,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _phoneNumberController = TextEditingController();
+
+  bool text = false ;
 
   getMobileFormWidget(context) {
     return Column(
@@ -54,28 +55,35 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.symmetric(
             horizontal: 11,
           ),
-          child: TextFormField(
-            keyboardType: TextInputType.number,
-            maxLength: 10,
-            textAlign: TextAlign.center,
-            controller: _phoneNumberController,
-            decoration: const InputDecoration(
-              focusColor: Color(0xFFF7C12B),
-              hintText: 'Phone Number',
-              prefix: Text(
-                '+91',
-                // textAlign: TextAlign.end,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(7.5),),
-                borderSide: BorderSide(color: Color(0xFFF7C12B),
-                    width: 3),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(7.5),),
-                borderSide: BorderSide(
-                  color: Color(0xFFF7C12B),
-                  width: 3,
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                text = true ;
+              });
+            },
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              maxLength: 10,
+              textAlign: TextAlign.center,
+              controller: _phoneNumberController,
+              decoration: const InputDecoration(
+                focusColor: Color(0xFFF7C12B),
+                hintText: 'Phone Number',
+                prefix: Text(
+                  '+91',
+                  // textAlign: TextAlign.end,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(7.5),),
+                  borderSide: BorderSide(color: Color(0xFFF7C12B),
+                      width: 3),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(7.5),),
+                  borderSide: BorderSide(
+                    color: Color(0xFFF7C12B),
+                    width: 3,
+                  ),
                 ),
               ),
             ),

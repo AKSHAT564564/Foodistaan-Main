@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/address_screen.dart';
 import 'package:foodistan/MainScreenFolder/coupon_screen.dart';
@@ -17,7 +18,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 int maxCouponDiscount = 0;
 String couponCode = '';
-
+int minCouponValue = 0;
 Map<String, dynamic> itemMap = {};
 
 final ValueNotifier<Map<String, dynamic>> deliveryAddress =
@@ -289,6 +290,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
             .then((value) {
           couponPercentage.value = value.data()!['percentage'];
           couponCode = value.data()!['code'];
+          minCouponValue = value.data()!['min-price'];
         });
       }
     });
@@ -422,7 +424,13 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
 
   calculateCouponDiscount(couponPercentage, maxDiscount) {
     double discount = ((couponPercentage / 100) * totalPrice.value);
-    totalPriceMain.value = totalPrice.value - discount;
+    if (minCouponValue > totalPrice.value)
+      totalPriceMain.value = double.parse(totalPrice.value.toString());
+    else if (discount > maxDiscount)
+      totalPriceMain.value =
+          totalPrice.value - double.parse(maxDiscount.toString());
+    else
+      totalPriceMain.value = totalPrice.value - discount;
   }
 
   @override
@@ -547,6 +555,23 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                                             0.045,
                                                   ),
                                                 );
+                                              } else if (minCouponValue >
+                                                  totalPrice.value) {
+                                                calculateCouponDiscount(
+                                                    couponPercentage.value,
+                                                    maxCouponDiscount);
+                                                return Text(
+                                                  'Add More',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.045,
+                                                  ),
+                                                );
                                               } else {
                                                 calculateCouponDiscount(
                                                     couponPercentage.value,
@@ -645,9 +670,8 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                             builder: (context) =>
                                                 AddressScreen()));
                                   },
-                                  child: Container(
-                                    child: Center(
-                                        child: Text('Add Address')),
+                                  child: Center(
+                                    child: Text('Add Adress'),
                                   ),
                                 );
                               } else {

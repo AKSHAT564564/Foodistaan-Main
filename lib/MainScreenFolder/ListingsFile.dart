@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodistan/restuarant_screens/restaurant_delivery.dart';
@@ -278,11 +279,11 @@ class rightSide extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        foodistaanCertified == true ?
-        SizedBox() :
-        SizedBox(
-          height: 3,
-        ),
+        foodistaanCertified == true
+            ? SizedBox()
+            : SizedBox(
+                height: 3,
+              ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -299,16 +300,16 @@ class rightSide extends StatelessWidget {
               address,
               style: TextStyle(
                 color: Colors.black,
-                fontSize: w1 * 0.033,
+                fontSize: w1 * 0.031,
               ),
             ),
           ],
         ),
-        foodistaanCertified == true ?
-        SizedBox() :
-        SizedBox(
-          height: 3,
-        ),
+        foodistaanCertified == true
+            ? SizedBox()
+            : SizedBox(
+                height: 3,
+              ),
         Text(
           cuisines,
           style: TextStyle(
@@ -457,8 +458,8 @@ class rightSide extends StatelessWidget {
                 ],
               )
             : SizedBox(
-          height: 11,
-        ),
+                height: 11,
+              ),
         // Container(
         //   height: 10 * h1 / 62,
         //   width: w1 / 3,

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/auth/autentication.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -44,58 +45,65 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
             child: Image.network('${widget.menuItem['image']}'),
           ),
           Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FittedBox(
-                          fit: BoxFit.fitWidth,
-                          child: Text('${widget.menuItem['title']}',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              )),
-                        ),
-                      ],
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Text('${widget.menuItem['title']}',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: MediaQuery.of(context).size.width*0.04,
+                                )),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * 0.30,
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    child: Text("${widget.menuItem['description']}",
+                        maxLines: 3,
+                        style:
+                            TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+                  ),
+                  Container(
+                    alignment: Alignment.topCenter,
+                    height: MediaQuery.of(context).size.height * 0.05,
+                    width: MediaQuery.of(context).size.width * 0.30,
+                    child: Text("₹ ${widget.menuItem['price']}",
+                        maxLines: 3,
+                        style:
+                            TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.033,
+                    child: Center(
+                      child: CartFunctions().quantityWidgetInRestaurant(
+                          widget.cartId,
+                          widget.menuItem['id'],
+                          widget.vendor_id,
+                          widget.menuItem,
+                          widget.vendorName),
                     ),
-                  ],
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width * 0.30,
-                  height: MediaQuery.of(context).size.height * 0.07,
-                  child: Text("${widget.menuItem['description']}",
-                      maxLines: 3,
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
-                ),
-                Container(
-                  alignment: Alignment.topCenter,
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  width: MediaQuery.of(context).size.width * 0.30,
-                  child: Text("₹ ${widget.menuItem['price']}",
-                      maxLines: 3,
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.04,
-                  child: CartFunctions().quantityWidgetInRestaurant(
-                      widget.cartId,
-                      widget.menuItem['id'],
-                      widget.vendor_id,
-                      widget.menuItem,
-                      widget.vendorName),
-                )
-              ],
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                ],
+              ),
             ),
           ),
         ],

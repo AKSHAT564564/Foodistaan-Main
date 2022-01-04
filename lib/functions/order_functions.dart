@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/accepted_order.dart';
+import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
+import 'package:foodistan/global/global_variables.dart';
 import 'package:foodistan/profile/your_orders.dart';
 import 'package:foodistan/widgets/order_history_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class OrderFunction {
   final _firestore = FirebaseFirestore.instance;
@@ -21,6 +22,8 @@ class OrderFunction {
       'customer-id': userNumber,
       'time': time,
       'payment-id': paymentId,
+      'order-type': orderType.value,
+      'delivery-address': deliveryAddress.value
     }).then((value) {
       _firestore
           .collection('users')
@@ -37,6 +40,8 @@ class OrderFunction {
         'time': time,
         'payment-id': paymentId,
         'live-order': true,
+        'order-type': orderType.value,
+        'delivery-address': deliveryAddress.value
       });
     });
 
@@ -78,13 +83,13 @@ class OrderFunction {
             case ConnectionState.none:
             case ConnectionState.waiting:
               return Center(
-                child: Text('Fetching Orders'),
+                child: Text('Fetching Orders...'),
               );
             default:
               if (snapshot.hasData) {
                 if (snapshot.data!.docs.length == 0)
                   return Center(
-                    child: Text('No Orders Yet'),
+                    child: Text('No Orders Yet!'),
                   );
                 else {
                   return ListView.builder(
@@ -107,7 +112,7 @@ class OrderFunction {
                 }
               } else
                 return Center(
-                  child: Text('Error'),
+                  child: Text('Error!'),
                 );
           }
         });
@@ -152,7 +157,9 @@ class OrderFunction {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.waiting:
-              return CircularProgressIndicator();
+              return CircularProgressIndicator(
+                color: Theme.of(context).primaryColor,
+              );
             default:
               if (snapshot.hasData) {
                 int totalDocs = snapshot.data!.docs.length;
@@ -195,7 +202,8 @@ class OrderFunction {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width*0.025,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.025,
                                     ),
                                     CircleAvatar(
                                       radius:
@@ -224,7 +232,8 @@ class OrderFunction {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width*0.025,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.025,
                                     ),
                                     Column(
                                       mainAxisAlignment:
@@ -238,17 +247,22 @@ class OrderFunction {
                                                     .toString()
                                                     .toUpperCase(),
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: MediaQuery.of(context).size.width*0.037,
-                                                ),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.037),
                                               )
                                             : Text(
                                                 'Preparing Your Orders',
                                                 style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold,
-                                                  fontSize: MediaQuery.of(context).size.width*0.035,
-                                                ),
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.034),
                                               ),
                                         if (onlyOneOrder)
                                           Text(orderData['vendor-name'])
@@ -280,6 +294,7 @@ class OrderFunction {
                                                   'Track Order',
                                                   style: TextStyle(
                                                     color: Colors.white,
+                                                    fontSize: MediaQuery.of(context).size.width*0.033,
                                                   ),
                                                 )
                                               : Text(
