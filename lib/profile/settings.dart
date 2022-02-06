@@ -28,7 +28,10 @@ class ProfileSettings extends StatelessWidget {
           },
         ),
         title: Text('Settings'),
-        titleTextStyle: TextStyle(color: Colors.black, fontSize: 19),
+        titleTextStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+        ),
       ),
       body: SafeArea(
         child: Container(
@@ -260,7 +263,10 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
           },
         ),
         title: Text('Add a Place'),
-        titleTextStyle: TextStyle(color: Colors.black, fontSize: 19),
+        titleTextStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+        ),
       ),
       body: Container(
         color: Colors.white,
