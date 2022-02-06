@@ -658,7 +658,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                           Text.rich(TextSpan(
                                             text: 'Deliver to ',
                                             style: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.w400),
                                             children: <InlineSpan>[
                                               TextSpan(
@@ -666,7 +666,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                                     .addressData['category']
                                                     .toString(),
                                                 style: TextStyle(
-                                                    fontSize: 14,
+                                                    fontSize: 16,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -676,13 +676,13 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                                         .addressData[
                                                             'house-feild']
                                                         .toString() +
-                                                    '' +
+                                                    ' ' +
                                                     userAddressValue
                                                         .addressData[
                                                             'street-feild']
                                                         .toString(),
                                                 style: TextStyle(
-                                                    fontSize: 12,
+                                                    fontSize: 14,
                                                     fontWeight: FontWeight.w600,
                                                     color: Color.fromRGBO(
                                                         130, 125, 125, 1)),
@@ -1234,7 +1234,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                     ),
                     Divider(),
                     SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
                     Container(
                       // height: 100,
