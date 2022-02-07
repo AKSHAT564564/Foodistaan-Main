@@ -41,13 +41,13 @@ class _OrdersState extends State<Orders> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
+          titleSpacing: 0,
+          leadingWidth: 40,
+          titleTextStyle: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
           title: const Text(
             'Your Orders',
-            style: TextStyle(
-              color: Colors.black,
-            ),
           ),
-          centerTitle: true,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -69,7 +69,7 @@ class _OrdersState extends State<Orders> {
         //     mainAxisAlignment: MainAxisAlignment.start,
         //     crossAxisAlignment: CrossAxisAlignment.start,
         //     children: [
-     
+
         //       const SizedBox(
         //         height: 5,
         //       ),

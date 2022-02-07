@@ -14,6 +14,9 @@ class ProfileSettings extends StatelessWidget {
         elevation: 0,
         titleSpacing: 0,
         leadingWidth: 40,
+        titleTextStyle: TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
+        title: Text('Settings'),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -26,11 +29,6 @@ class ProfileSettings extends StatelessWidget {
               },
             );
           },
-        ),
-        title: Text('Settings'),
-        titleTextStyle: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
         ),
       ),
       body: SafeArea(
@@ -264,9 +262,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
         ),
         title: Text('Add a Place'),
         titleTextStyle: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-        ),
+            color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
       ),
       body: Container(
         color: Colors.white,
