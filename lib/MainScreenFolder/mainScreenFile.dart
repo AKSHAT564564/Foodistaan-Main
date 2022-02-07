@@ -61,6 +61,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             labelColor: selected,
             unselectedLabelColor: unselected,
             isScrollable: false,
+            enableFeedback: true,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorColor: Theme.of(context).primaryColor,
             controller: tabController,
@@ -71,26 +72,27 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             onTap: (value) {
               widget.currentIndex = value;
               _pageController.jumpToPage(value);
+              
             },
             tabs: [
               Tab(
                 icon: Icon(CupertinoIcons.home),
-                iconMargin: EdgeInsets.only(bottom: 5),
+                iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Home',
               ),
               Tab(
                 icon: Icon(CupertinoIcons.cart),
-                iconMargin: EdgeInsets.only(bottom: 5),
+                iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Cart',
               ),
               Tab(
                 icon: Icon(CupertinoIcons.qrcode_viewfinder),
-                iconMargin: EdgeInsets.only(bottom: 5),
+                iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Scan',
               ),
               Tab(
                 icon: Icon(CupertinoIcons.profile_circled),
-                iconMargin: EdgeInsets.only(bottom: 5),
+                iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Profile',
               ),
             ],

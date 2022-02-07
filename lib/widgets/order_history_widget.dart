@@ -13,18 +13,24 @@ class OrderHistoryWidget extends StatefulWidget {
 
 class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
   Widget itemsList(Map orderItems) {
-    if (orderItems.length != 0) {
+    List itemList = [];
+    for (var item in orderItems.keys) {
+      print(orderItems[item]);
+      itemList.add(orderItems[item]);
+    }
+    // print(itemList.toString());
+    if (itemList.length != 0) {
       return ListView.builder(
           shrinkWrap: true,
-          itemCount: orderItems.length,
+          itemCount: itemList.length,
           itemBuilder: (BuildContext context, int index) {
-            String key = orderItems.keys.elementAt(index);
-            String menuItem = key.replaceAll('-', ' ').toUpperCase();
-            return Text("${orderItems[key]} X $menuItem",
-                style: TextStyle(fontSize: 12));
+            var itemDetails = itemList[index];
+            
+            return Text(itemDetails['quantity'] + ' X ' + itemDetails['name'].toString().toUpperCase());
+           
           });
     } else
-      return Text('Some Eror');
+      return Text('Some Error');
   }
 
   Map<String, dynamic> _restaurantData = {};
@@ -192,40 +198,41 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.07,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Ordered On',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 14,
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Ordered On',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 14,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                OrderFunction()
-                                    .orderTime(widget.orderData['time']),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
+                                SizedBox(
+                                  height: 2,
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  OrderFunction()
+                                      .orderTime(widget.orderData['time']),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        // SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                        Container(
-                          child: Row(
+                          // SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -234,7 +241,9 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                     widget.orderData['order-status']
                                         .toString()
                                         .toUpperCase(),
+                                        
                                 style: TextStyle(
+                                  
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
@@ -242,8 +251,8 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                               ),
                             ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
 
@@ -260,43 +269,46 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                         ),
                       ],
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        RatingCardList(),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Container(
-                                padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.width * 0.005,
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          RatingCardList(),
+                          Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.all(
+                                    MediaQuery.of(context).size.width * 0.005,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: Color.fromRGBO(247, 193, 43, 1),
+                                  ),
+                                  child: Icon(
+                                    Icons.refresh,
+                                    size: 15,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Color.fromRGBO(247, 193, 43, 1),
+                                SizedBox(
+                                  width: 5,
                                 ),
-                                child: Icon(
-                                  Icons.refresh,
-                                  size: 15,
-                                  color: Colors.white,
+                                Text(
+                                  'Repeat Order',
+                                  style: TextStyle(fontSize: 12),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                'Repeat Order',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              SizedBox(
-                                width: 11,
-                              ),
-                            ],
+                                SizedBox(
+                                  width: 11,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],

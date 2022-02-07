@@ -15,8 +15,8 @@ class _RestaurantOverviewState extends State<RestaurantOverview> {
 
   @override
   Widget build(BuildContext context) {
-    var itemWidth = MediaQuery.of(context).size.width * 0.4;
-    var itemHeight = MediaQuery.of(context).size.height * 0.25;
+    var itemWidth = MediaQuery.of(context).size.width * 0.45;
+    var itemHeight = MediaQuery.of(context).size.height * 0.2;
 
     return Scaffold(
       backgroundColor: Color.fromRGBO(250, 250, 250, 1),

@@ -73,7 +73,7 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
   @override
   Widget build(BuildContext context) {
     var itemWidth = MediaQuery.of(context).size.width * 0.4;
-    var itemHeight = MediaQuery.of(context).size.height * 0.34;
+    var itemHeight = MediaQuery.of(context).size.height * 0.45;
 
     return Scaffold(
       body: Column(

@@ -342,26 +342,25 @@ class RightSide extends StatelessWidget {
               child: Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Container(
-                    // width: w1 * 0.55,
-                    child: Text(
-                      name,
-                      textAlign: TextAlign.start,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
+                  Text(
+                    name.length > 20 ? name.substring(0,19)+'...': name,
+                    textAlign: TextAlign.start,
+                    maxLines: 1,
+                    
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(
+                      
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.13,
-                    height: MediaQuery.of(context).size.height * 0.01,
+                    width: MediaQuery.of(context).size.width * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.02,
                     child: foodistaanCertified == true
                         ? FittedBox(
-                            fit: BoxFit.cover,
+                            // fit: BoxFit.cover,
                             child: SvgPicture.asset(
                               'Images/streatoplus.svg',
                               // width: MediaQuery.of(context).size.width * 0.15,
@@ -472,70 +471,73 @@ class RightSide extends StatelessWidget {
               children: [
                 Container(
                   width: w1 * 0.4,
-                  child: Row(
-                    children: [
-                      delivery == true
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                CircleAvatar(
-                                  backgroundColor: Colors.pink,
-                                  radius: 8,
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.two_wheeler,
-                                      color: Colors.white,
-                                      size: 10,
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Row(
+                      children: [
+                        delivery == true
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: Colors.pink,
+                                    radius: 8,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.two_wheeler,
+                                        color: Colors.white,
+                                        size: 10,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                Text(
-                                  'Delivery',
-                                  style: TextStyle(
-                                    color: Colors.grey[500],
-                                    fontSize: 10,
+                                  SizedBox(
+                                    width: 3,
                                   ),
-                                ),
-                              ],
-                            )
-                          : SizedBox(),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      takeaway == true
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                CircleAvatar(
-                                  backgroundColor: Colors.pink,
-                                  radius: 8,
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.shopping_bag_outlined,
-                                      color: Colors.white,
-                                      size: 10,
+                                  Text(
+                                    'Delivery',
+                                    style: TextStyle(
+                                      color: Colors.grey[500],
+                                      fontSize: 10,
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 3,
-                                ),
-                                Text(
-                                  'Takeaway',
-                                  style: TextStyle(
-                                    color: Colors.grey[500],
-                                    fontSize: 10,
+                                ],
+                              )
+                            : SizedBox(),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        takeaway == true
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: Colors.pink,
+                                    radius: 8,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.shopping_bag_outlined,
+                                        color: Colors.white,
+                                        size: 10,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )
-                          : SizedBox(),
-                    ],
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  Text(
+                                    'Takeaway',
+                                    style: TextStyle(
+                                      color: Colors.grey[500],
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : SizedBox(),
+                      ],
+                    ),
                   ),
                 ),
                 Container(

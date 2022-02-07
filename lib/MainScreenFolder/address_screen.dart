@@ -108,6 +108,9 @@ class _AddressScreenState extends State<AddressScreen> {
     });
   }
 
+  //form key to validate empty feilds
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -232,62 +235,79 @@ class _AddressScreenState extends State<AddressScreen> {
               const SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 11,
-                ),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.055,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadiusDirectional.circular(5),
-                  ),
-                  child: Center(
-                    child: Padding(
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 11,
-                        vertical: 5,
                       ),
-                      child: TextFormField(
-                        controller: houseFeildController,
-                        keyboardType: TextInputType.text,
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          hintText: 'House No. & Building',
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.055,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadiusDirectional.circular(5),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 11,
+                              vertical: 5,
+                            ),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty)
+                                  return 'Please Enter House';
+                                return '';
+                              },
+                              controller: houseFeildController,
+                              keyboardType: TextInputType.text,
+                              textAlign: TextAlign.left,
+                              decoration: InputDecoration(
+                                hintText: 'House No. & Building',
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 11,
-                ),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.055,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadiusDirectional.circular(5),
-                  ),
-                  child: Center(
-                    child: Padding(
+                    Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 11,
-                        vertical: 5,
                       ),
-                      child: TextFormField(
-                        controller: streetFeildController,
-                        keyboardType: TextInputType.text,
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          hintText: 'Street & Area',
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.055,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadiusDirectional.circular(5),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 11,
+                              vertical: 5,
+                            ),
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty)
+                                  return 'Please Enter Street';
+                                return '';
+                              },
+                              controller: streetFeildController,
+                              keyboardType: TextInputType.text,
+                              textAlign: TextAlign.left,
+                              decoration: InputDecoration(
+                                hintText: 'Street & Area',
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
               const SizedBox(
@@ -450,7 +470,9 @@ class _AddressScreenState extends State<AddressScreen> {
                 padding: const EdgeInsets.all(15),
                 child: GestureDetector(
                   onTap: () async {
-                    await UserAddress().addUserAddress(
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      await UserAddress().addUserAddress(
                       houseFeildController.text,
                       streetFeildController.text,
                       categorySelected,
@@ -465,6 +487,7 @@ class _AddressScreenState extends State<AddressScreen> {
                                   currentIndex: 1,
                                 )),
                         (route) => false);
+                    }
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.066,

@@ -52,422 +52,467 @@ class _TestRestaurantMainState extends State<TestRestaurantMain> {
       ),
     ];
 
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
-      ),
-      margin: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.2,
-      ),
-      width: MediaQuery.of(context).size.width * 0.97,
-      // height: MediaQuery.of(context).size.height * 9,
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                // color: Colors.red,
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.018,
-                  top: MediaQuery.of(context).size.height * 0.015,
-                ),
-                width: MediaQuery.of(context).size.width * 0.50,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 2.5,
-                    ),
-                    Text(
-                      "${widget.restaurant_details['Name']}",
-                      style: TextStyle(
-                          fontSize: 17.5,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                    SizedBox(
-                      height: 2.5,
-                    ),
-                    Text(
-                      "${widget.restaurant_details['Cuisines']}",
-                      style: TextStyle(
-                          fontSize: 12.5,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black),
-                    ),
-                    SizedBox(
-                      height: 2.5,
-                    ),
-                    Text(
-                      "${widget.restaurant_details['Address']}",
-                      style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.grey),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.2,
-              ),
-              Container(
-                  decoration: BoxDecoration(
-                    // color: Colors.green,
-                    color: Color.fromRGBO(59, 183, 85, 1),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      bottomLeft: Radius.circular(15),
-                    ),
-                  ),
+    return Column(children: [
+      Container(
+        padding: EdgeInsets.all(8),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.white,
+        ),
+        margin: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.2,
+        ),
+        width: MediaQuery.of(context).size.width * 0.97,
+        // height: MediaQuery.of(context).size.height * 9,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  // color: Colors.red,
                   margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.022,
+                    left: MediaQuery.of(context).size.width * 0.018,
+                    top: MediaQuery.of(context).size.height * 0.015,
                   ),
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${widget.restaurant_details['Stars']}",
+                  width: MediaQuery.of(context).size.width * 0.50,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 2.5,
+                      ),
+                      Text(
+                        "${widget.restaurant_details['Name']}",
+                        style: TextStyle(
+                            fontSize: 17.5,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: 2.5,
+                      ),
+                      Text(
+                        "${widget.restaurant_details['Cuisines']}",
+                        style: TextStyle(
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: 2.5,
+                      ),
+                      Text(
+                        "${widget.restaurant_details['Address']}",
+                        style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.17,
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                      // color: Colors.green,
+                      color: Color.fromRGBO(59, 183, 85, 1),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        bottomLeft: Radius.circular(15),
+                      ),
+                    ),
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.022,
+                    ),
+                    height: MediaQuery.of(context).size.height * 0.05,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "${widget.restaurant_details['Stars']}",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.044,
+                                ),
+                              ),
+                              Icon(
+                                Icons.star,
+                                size: MediaQuery.of(context).size.width * 0.05,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          Center(
+                            child: Text(
+                              "10+ Ratings",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize:
-                                    MediaQuery.of(context).size.width * 0.044,
+                                    MediaQuery.of(context).size.width * 0.022,
                               ),
                             ),
-                            Icon(
-                              Icons.star,
-                              size: MediaQuery.of(context).size.width * 0.05,
+                          ),
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                top: 8,
+                bottom: 8,
+                right: MediaQuery.of(context).size.width * 0.018,
+                left: MediaQuery.of(context).size.width * 0.018,
+              ),
+              // padding: EdgeInsets.all(8),
+
+              child: Column(children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      // padding: EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            maxRadius: 10,
+                            backgroundColor: Colors.red,
+                            child: Icon(
+                              Icons.attach_money,
+                              size: 10,
                               color: Colors.white,
-                            ),
-                          ],
-                        ),
-                        Center(
-                          child: Text(
-                            "10+ Ratings",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.022,
                             ),
                           ),
-                        ),
-                      ],
+                          Text(
+                            " Cost for Two ${widget.restaurant_details['Cost']}",
+                            style: TextStyle(color: Colors.grey, fontSize: 8),
+                          )
+                        ],
+                      ),
                     ),
-                  ))
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              top: 8,
-              bottom: 8,
-              right: MediaQuery.of(context).size.width * 0.018,
-              left: MediaQuery.of(context).size.width * 0.018,
+                    Container(
+                      // padding: EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            maxRadius: 10,
+                            backgroundColor: Color.fromRGBO(140, 200, 255, 1),
+                            child: Icon(
+                              Icons.delivery_dining_rounded,
+                              size: 10,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            " Delivery Available",
+                            style: TextStyle(color: Colors.grey, fontSize: 8),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            maxRadius: 10,
+                            backgroundColor: Color.fromRGBO(59, 183, 85, 1),
+                            child: Icon(
+                              Icons.table_chart,
+                              size: 10,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            " Seating Available",
+                            style: TextStyle(color: Colors.grey, fontSize: 8),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      // padding: EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            maxRadius: 10,
+                            backgroundColor: Colors.green,
+                            child: Icon(
+                              Icons.attach_money,
+                              size: 10,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            " Sanitisation check",
+                            style: TextStyle(color: Colors.grey, fontSize: 8),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      // padding: EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            maxRadius: 10,
+                            backgroundColor: Colors.blue,
+                            child: Icon(
+                              Icons.attach_money,
+                              size: 10,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            " Hygiene check",
+                            style: TextStyle(color: Colors.grey, fontSize: 8),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              ]),
             ),
-            // padding: EdgeInsets.all(8),
-
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  // padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        maxRadius: 10,
-                        backgroundColor: Colors.red,
-                        child: Icon(
-                          Icons.attach_money,
-                          size: 12,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "Cost for Two ${widget.restaurant_details['Cost']}",
-                        style: TextStyle(color: Colors.grey, fontSize: 10),
-                      )
-                    ],
-                  ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.058,
+              width: MediaQuery.of(context).size.width * 0.9,
+              // padding: EdgeInsets.all(7),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade300,
                 ),
-                Container(
-                  // padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        maxRadius: 10,
-                        backgroundColor: Color.fromRGBO(140, 200, 255, 1),
-                        child: Icon(
-                          Icons.delivery_dining_rounded,
-                          size: 12,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "Delivery Available",
-                        style: TextStyle(color: Colors.grey, fontSize: 10),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        maxRadius: 10,
-                        backgroundColor: Color.fromRGBO(59, 183, 85, 1),
-                        child: Icon(
-                          Icons.table_chart,
-                          size: 12,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "Seating Available",
-                        style: TextStyle(color: Colors.grey, fontSize: 10),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.058,
-            width: MediaQuery.of(context).size.width * 0.9,
-            // padding: EdgeInsets.all(7),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(25),
               ),
-              borderRadius: BorderRadius.circular(25),
-            ),
-            // decoration: BoxDecoration(
-            //     border: Border.all(color: Colors.grey, width: 1),
-            //     borderRadius: BorderRadius.circular(50)),
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isDeliverySelected = true;
-                        isPickupSelected = false;
-                        isOverviewSelected = false;
-                      });
-                      print(widget.restaurant_details);
-                      print(widget.vendorId);
-                      print(widget.vendorName);
-                      onTabTapped(0);
-                    },
-                    child: Container(
-                      // padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: isDeliverySelected == true
-                              ? Colors.amber[100]
-                              : Colors.white,
-                          border: isDeliverySelected == true
-                              ? Border.all(color: Colors.amber, width: 1)
-                              : Border.all(color: Colors.white, width: 1),
-                          borderRadius: isDeliverySelected == true
-                              ? BorderRadius.circular(25)
-                              : BorderRadius.only(
-                                  topLeft: Radius.circular(25),
-                                  bottomLeft: Radius.circular(25))),
-                      width: MediaQuery.of(context).size.width * 0.27,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.two_wheeler,
-                              size: MediaQuery.of(context).size.width * 0.035,
-                              color: isDeliverySelected == true
-                                  ? Colors.black
-                                  : Colors.grey),
-                          Text(" Delivery",
-                              style: isDeliverySelected == true
-                                  ? TextStyle(
-                                      color: Colors.black,
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.035)
-                                  : TextStyle(
-                                      color: Colors.grey,
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.033))
-                        ],
+              // decoration: BoxDecoration(
+              //     border: Border.all(color: Colors.grey, width: 1),
+              //     borderRadius: BorderRadius.circular(50)),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isDeliverySelected = true;
+                          isPickupSelected = false;
+                          isOverviewSelected = false;
+                        });
+                        print(widget.restaurant_details);
+                        print(widget.vendorId);
+                        print(widget.vendorName);
+                        onTabTapped(0);
+                      },
+                      child: Container(
+                        // padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            color: isDeliverySelected == true
+                                ? Colors.amber[100]
+                                : Colors.white,
+                            border: isDeliverySelected == true
+                                ? Border.all(color: Colors.amber, width: 1)
+                                : Border.all(color: Colors.white, width: 1),
+                            borderRadius: isDeliverySelected == true
+                                ? BorderRadius.circular(25)
+                                : BorderRadius.only(
+                                    topLeft: Radius.circular(25),
+                                    bottomLeft: Radius.circular(25))),
+                        width: MediaQuery.of(context).size.width * 0.27,
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.two_wheeler,
+                                size: MediaQuery.of(context).size.width * 0.035,
+                                color: isDeliverySelected == true
+                                    ? Colors.black
+                                    : Colors.grey),
+                            Text(" Delivery",
+                                style: isDeliverySelected == true
+                                    ? TextStyle(
+                                        color: Colors.black,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.035)
+                                    : TextStyle(
+                                        color: Colors.grey,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.033))
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isDeliverySelected = false;
-                        isPickupSelected = true;
-                        isOverviewSelected = false;
-                      });
-                      onTabTapped(1);
-                    },
-                    child: Container(
-                      // padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: isPickupSelected == true
-                              ? Colors.amber[100]
-                              : Colors.white,
-                          border: isPickupSelected == true
-                              ? Border.all(color: Colors.amber, width: 1)
-                              : Border.all(color: Colors.white, width: 1),
-                          borderRadius: isPickupSelected == true
-                              ? BorderRadius.circular(25)
-                              : BorderRadius.circular(0)),
-                      width: MediaQuery.of(context).size.width * 0.27,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.food_bank,
-                              size: MediaQuery.of(context).size.width * 0.035,
-                              color: isPickupSelected == true
-                                  ? Colors.black
-                                  : Colors.grey),
-                          widget.restaurant_details["Takeaway"]
-                              ? Text(" Pickup",
-                                  style: isPickupSelected == true
-                                      ? TextStyle(
-                                          color: Colors.black,
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.035)
-                                      : TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.033))
-                              : SizedBox()
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isDeliverySelected = false;
+                          isPickupSelected = true;
+                          isOverviewSelected = false;
+                        });
+                        onTabTapped(1);
+                      },
+                      child: Container(
+                        // padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            color: isPickupSelected == true
+                                ? Colors.amber[100]
+                                : Colors.white,
+                            border: isPickupSelected == true
+                                ? Border.all(color: Colors.amber, width: 1)
+                                : Border.all(color: Colors.white, width: 1),
+                            borderRadius: isPickupSelected == true
+                                ? BorderRadius.circular(25)
+                                : BorderRadius.circular(0)),
+                        width: MediaQuery.of(context).size.width * 0.27,
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.food_bank,
+                                size: MediaQuery.of(context).size.width * 0.035,
+                                color: isPickupSelected == true
+                                    ? Colors.black
+                                    : Colors.grey),
+                            widget.restaurant_details["Takeaway"]
+                                ? Text(" Pickup",
+                                    style: isPickupSelected == true
+                                        ? TextStyle(
+                                            color: Colors.black,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.035)
+                                        : TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.033))
+                                : SizedBox()
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isDeliverySelected = false;
-                        isPickupSelected = false;
-                        isOverviewSelected = true;
-                      });
-                      onTabTapped(2);
-                    },
-                    child: Container(
-                      // padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: isOverviewSelected == true
-                              ? Colors.amber[100]
-                              : Colors.white,
-                          border: isOverviewSelected == true
-                              ? Border.all(color: Colors.amber, width: 1)
-                              : Border.all(color: Colors.white, width: 1),
-                          borderRadius: isOverviewSelected == true
-                              ? BorderRadius.circular(25)
-                              : BorderRadius.only(
-                                  topRight: Radius.circular(25),
-                                  bottomRight: Radius.circular(25))),
-                      width: MediaQuery.of(context).size.width * 0.27,
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.note_add_outlined,
-                              size: MediaQuery.of(context).size.width * 0.035,
-                              color: isOverviewSelected == true
-                                  ? Colors.black
-                                  : Colors.grey),
-                          Text(" Overview",
-                              style: isOverviewSelected == true
-                                  ? TextStyle(
-                                      color: Colors.black,
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.035)
-                                  : TextStyle(
-                                      color: Colors.grey,
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.033))
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isDeliverySelected = false;
+                          isPickupSelected = false;
+                          isOverviewSelected = true;
+                        });
+                        onTabTapped(2);
+                      },
+                      child: Container(
+                        // padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            color: isOverviewSelected == true
+                                ? Colors.amber[100]
+                                : Colors.white,
+                            border: isOverviewSelected == true
+                                ? Border.all(color: Colors.amber, width: 1)
+                                : Border.all(color: Colors.white, width: 1),
+                            borderRadius: isOverviewSelected == true
+                                ? BorderRadius.circular(25)
+                                : BorderRadius.only(
+                                    topRight: Radius.circular(25),
+                                    bottomRight: Radius.circular(25))),
+                        width: MediaQuery.of(context).size.width * 0.27,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.note_add_outlined,
+                                size: MediaQuery.of(context).size.width * 0.035,
+                                color: isOverviewSelected == true
+                                    ? Colors.black
+                                    : Colors.grey),
+                            Text(" Overview",
+                                style: isOverviewSelected == true
+                                    ? TextStyle(
+                                        color: Colors.black,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.035)
+                                    : TextStyle(
+                                        color: Colors.grey,
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.033))
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-          Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height * 0.073,
-            margin: EdgeInsets.only(top: 10),
-            child: ListView(
-              shrinkWrap: true,
-              padding: EdgeInsets.all(10),
-              scrollDirection: Axis.horizontal,
-              children: [
-                MyOptionListView(
-                    iconColor: Colors.green,
-                    myIcon: Icons.masks,
-                    myText: "Wearing mask at all time"),
-                MyOptionListView(
-                    iconColor: Colors.pink,
-                    myIcon: Icons.wash,
-                    myText: "Washing hands at all times"),
-                MyOptionListView(
-                    iconColor: Colors.red,
-                    myIcon: Icons.thermostat,
-                    myText: "Temperature measured"),
-                MyOptionListView(
-                    iconColor: Colors.blue,
-                    myIcon: Icons.masks,
-                    myText: "Wearing mask at all time"),
-                MyOptionListView(
-                    iconColor: Colors.orange,
-                    myIcon: Icons.masks,
-                    myText: "Wearing mask at all time"),
-              ],
-            ),
-          ),
-          OfferTagsWidget(),
-          Container(
-            child: _childern[_currentIndex],
-          )
-        ],
+            // Container(
+            //   color: Colors.white,
+            //   height: MediaQuery.of(context).size.height * 0.073,
+            //   margin: EdgeInsets.only(top: 10),
+            //   child: ListView(
+            //     shrinkWrap: true,
+            //     padding: EdgeInsets.all(10),
+            //     scrollDirection: Axis.horizontal,
+            //     children: [
+            //       MyOptionListView(
+            //           iconColor: Colors.green,
+            //           myIcon: Icons.masks,
+            //           myText: "Wearing mask at all time"),
+            //       MyOptionListView(
+            //           iconColor: Colors.pink,
+            //           myIcon: Icons.wash,
+            //           myText: "Washing hands at all times"),
+            //       MyOptionListView(
+            //           iconColor: Colors.red,
+            //           myIcon: Icons.thermostat,
+            //           myText: "Temperature measured"),
+            //       MyOptionListView(
+            //           iconColor: Colors.blue,
+            //           myIcon: Icons.masks,
+            //           myText: "Wearing mask at all time"),
+            //       MyOptionListView(
+            //           iconColor: Colors.orange,
+            //           myIcon: Icons.masks,
+            //           myText: "Wearing mask at all time"),
+            //     ],
+            //   ),
+            // ),
+            // OfferTagsWidget(),
+          ],
+        ),
       ),
-    );
+      Container(
+        child: _childern[_currentIndex],
+      )
+    ]);
   }
 
 // Fuction to set _Tab Review
@@ -801,34 +846,34 @@ class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 6.6),
-            margin: EdgeInsets.only(top: 20),
-            height: MediaQuery.of(context).size.height * 0.058,
-            // color: Colors.blue,
-            child: TextFormField(
-                textAlignVertical: TextAlignVertical.bottom,
-                decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.all(7.5),
-                      child: Icon(
-                        Icons.search,
-                      ),
-                    ),
-                    hintText: "Search within the menu",
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.amber,
-                          width: 2.0,
-                        )),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.amber,
-                          width: 2.0,
-                        )))),
-          ),
+          // Container(
+          //   padding: EdgeInsets.symmetric(horizontal: 6.6),
+          //   margin: EdgeInsets.only(top: 20),
+          //   height: MediaQuery.of(context).size.height * 0.058,
+          //   // color: Colors.blue,
+          //   child: TextFormField(
+          //       textAlignVertical: TextAlignVertical.bottom,
+          //       decoration: InputDecoration(
+          //           prefixIcon: Padding(
+          //             padding: EdgeInsets.all(7.5),
+          //             child: Icon(
+          //               Icons.search,
+          //             ),
+          //           ),
+          //           hintText: "Search within the menu",
+          //           focusedBorder: OutlineInputBorder(
+          //               borderRadius: BorderRadius.circular(8),
+          //               borderSide: BorderSide(
+          //                 color: Colors.amber,
+          //                 width: 2.0,
+          //               )),
+          //           enabledBorder: OutlineInputBorder(
+          //               borderRadius: BorderRadius.circular(8),
+          //               borderSide: BorderSide(
+          //                 color: Colors.amber,
+          //                 width: 2.0,
+          //               )))),
+          // ),
           SizedBox(
             height: 15,
           ),
@@ -895,6 +940,17 @@ class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
                                       ),
                               ),
                             ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.32,
+                            ),
+                            GestureDetector(
+                              child: Row(
+                                children: [
+                                  Text("Search"),
+                                  Icon(Icons.search),
+                                ],
+                              ),
+                            )
                           ]),
                     ),
                     Container(

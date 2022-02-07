@@ -61,18 +61,18 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 actions: <Widget>[
-                  Container(
-                      padding: EdgeInsets.all(7.5),
-                      child: GestureDetector(
-                        onTap: () {
-                          // print(widget.vendorName);
-                        },
-                        child: Icon(
-                          Icons.share,
-                          color: Colors.black,
-                          size: 25,
-                        ),
-                      )),
+                  // Container(
+                  //     padding: EdgeInsets.all(7.5),
+                  //     child: GestureDetector(
+                  //       onTap: () {
+                  //         // print(widget.vendorName);
+                  //       },
+                  //       child: Icon(
+                  //         Icons.share,
+                  //         color: Colors.black,
+                  //         size: 25,
+                  //       ),
+                  //     )),
                   Container(
                       padding: EdgeInsets.all(7.5),
                       child: GestureDetector(

@@ -272,7 +272,8 @@ class CartItemsWidget extends StatefulWidget {
 
 class _CartItemsWidgetState extends State<CartItemsWidget> {
   Widget menuItemWidget(itemData) {
-    itemMap[itemData['id']] = itemData['quantity'];
+    itemMap[itemData['id']] = {'quantity' : itemData['quantity'],'name' : itemData['name']};
+    
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.13,
@@ -341,12 +342,15 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                         SizedBox(
                           width: 30,
                         ),
-                        Text(
-                          'Customize',
-                          style: TextStyle(
-                            fontSize: 14.5,
-                            fontWeight: FontWeight.w300,
-                          ),
+                        Padding(
+                          padding: EdgeInsets.all(0),
+                          child: TextButton(onPressed: null, child: Text(
+                            'Customize',
+                            style: TextStyle(
+                              fontSize: 14.5,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          )),
                         ),
                         Container(
                             // height: 25,

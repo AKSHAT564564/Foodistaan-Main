@@ -31,26 +31,34 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.18,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
+            height: MediaQuery.of(context).size.height * 0.22,
+            width: double.infinity,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                '${widget.menuItem['image']}',
+                fit: BoxFit.cover,
+              ),
             ),
-            child: Image.network('${widget.menuItem['image']}'),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Container(
+            padding: EdgeInsets.all(8),
             child: Center(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
@@ -60,11 +68,14 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
                           FittedBox(
                             fit: BoxFit.fitWidth,
                             child: Text('${widget.menuItem['title']}',
+                                maxLines: 3,
+                                // address.length > 25
+                                //   ? address.substring(0, 25) + '...'
+                                //   : address,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
+                                  fontSize: 14,
                                 )),
                           ),
                         ],
@@ -72,34 +83,52 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
                     ],
                   ),
                   Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width * 0.30,
                     height: MediaQuery.of(context).size.height * 0.07,
                     child: Text("${widget.menuItem['description']}",
                         maxLines: 3,
                         style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w500)),
+                            fontSize: 10, fontWeight: FontWeight.w500)),
                   ),
                   Container(
-                    alignment: Alignment.topCenter,
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    width: MediaQuery.of(context).size.width * 0.30,
-                    child: Text("₹ ${widget.menuItem['price']}",
-                        maxLines: 3,
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w700)),
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(254, 247, 229, 1),
+                        borderRadius: BorderRadius.all(Radius.circular(3))),
+                    padding: EdgeInsets.all(5),
+                    child: Row(children: [
+                      Icon(
+                        Icons.copyright,
+                        size: 10,
+                        color: Colors.green,
+                      ),
+                      Text(
+                        " Earn upto 200 FS points",
+                        style: TextStyle(fontSize: 8),
+                      )
+                    ]),
                   ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.04,
-                    child: Center(
-                      child: CartFunctions().quantityWidgetInRestaurant(
-                          widget.cartId,
-                          widget.menuItem['id'],
-                          widget.vendor_id,
-                          widget.menuItem,
-                          widget.vendorName),
-                    ),
+                  SizedBox(
+                    height: 5,
                   ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Text("₹ ${widget.menuItem['price']}",
+                            maxLines: 3,
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w700)),
+                      ),
+                      Container(
+                        child: CartFunctions().quantityWidgetInRestaurant(
+                            widget.cartId,
+                            widget.menuItem['id'],
+                            widget.vendor_id,
+                            widget.menuItem,
+                            widget.vendorName),
+                      ),
+                    ],
+                  )
                   // SizedBox(
                   //   height: 3,
                   // ),

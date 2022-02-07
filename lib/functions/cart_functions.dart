@@ -277,12 +277,16 @@ class CartFunctions {
                     },
                   );
                 else {
-                  return ListView.builder(
-                      itemCount: 1,
-                      itemBuilder: (BuildContext context, int index) {
-                        var data = snapshot.data!.docs[index].data();
-                        return ChangeQuantityWidget(data: data, cartId: cartId);
-                      });
+                  return SizedBox(
+                    width: 80,
+                    child: ListView.builder(
+                      shrinkWrap: true, 
+                        itemCount: 1,
+                        itemBuilder: (BuildContext context, int index) {
+                          var data = snapshot.data!.docs[index].data();
+                          return ChangeQuantityWidget(data: data, cartId: cartId);
+                        }),
+                  );
                 }
               } else {
                 return Text('ADD');
