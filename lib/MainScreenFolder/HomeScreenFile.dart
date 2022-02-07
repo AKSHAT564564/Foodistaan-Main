@@ -162,28 +162,28 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 11,
-                    left: 11,
-                  ),
-                  child: Text(
-                    'Order by Cuisines',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: h1 / 33,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            CuisineTileList(),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   crossAxisAlignment: CrossAxisAlignment.end,
+            //   children: [
+            //     Padding(
+            //       padding: const EdgeInsets.only(
+            //         top: 11,
+            //         left: 11,
+            //       ),
+            //       child: Text(
+            //         'Order by Cuisines',
+            //         textAlign: TextAlign.left,
+            //         style: TextStyle(
+            //           color: Colors.black,
+            //           fontSize: h1 / 33,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // CuisineTileList(),
 
             //builds the list of all the in the database
             //takes user location as a reuired parameter

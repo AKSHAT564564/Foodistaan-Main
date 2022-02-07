@@ -195,7 +195,7 @@ class LeftSide extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: MediaQuery.of(context).size.height * 0.17,
+          top: MediaQuery.of(context).size.height * (-0.04),
           right: MediaQuery.of(context).size.width * 0.69,
 
           // child: Container(
@@ -243,63 +243,63 @@ class LeftSide extends StatelessWidget {
             ],
           ),
         ),
-        Positioned(
-          right: MediaQuery.of(context).size.width * 0.68,
-          bottom: MediaQuery.of(context).size.height * 0.18,
-          child: foodistaanCertified == true
-              ? SvgPicture.asset(
-                  'Images/streatoplus.svg',
-                  height: MediaQuery.of(context).size.width * 0.33,
-                )
-              // ? Padding(
-              //     padding: const EdgeInsets.only(left: 10.0, top: 10),
-              //     child: Container(
-              //         padding: EdgeInsets.all(6),
-              //         decoration: BoxDecoration(
-              //             // color: Colors.black,
-              //             gradient: LinearGradient(
-              //               colors: [
-              //                 Color.fromRGBO(191, 149, 63, 1),
-              //                 Color.fromRGBO(252, 246, 186, 1),
-              //                 Color.fromRGBO(179, 135, 40, 1),
-              //                 Color.fromRGBO(251, 245, 183, 1),
-              //               ],
-              //             ),
-              //             borderRadius: BorderRadius.all(Radius.circular(4))),
-              //         child: Text.rich(
-              //           TextSpan(
-              //             children: [
-              //               TextSpan(
-              //                   text: 'STREAT',
-              //                   style: TextStyle(
-              //                       fontWeight: FontWeight.bold,
-              //                       color: Colors.white,
-              //                       fontSize: 14)),
-              //               TextSpan(
-              //                   text: 'O',
-              //                   style: TextStyle(
-              //                       fontWeight: FontWeight.bold,
-              //                       color: Colors.red,
-              //                       fontSize: 14)),
-              //               TextSpan(
-              //                   text: '+',
-              //                   style: TextStyle(
-              //                       fontWeight: FontWeight.bold,
-              //                       color: Colors.green,
-              //                       fontSize: 14)),
-              //             ],
-              //           ),
-              //         )),
-              //     // Text(
-              //     //   "CERTIFIED",
-              //     //   style: TextStyle(
-              //     //       fontSize: 14,
-              //     //       color: Colors.black,
-              //     //       fontWeight: FontWeight.bold),
-              //     // )),
-              //   )
-              : SizedBox(),
-        )
+        // Positioned(
+        //   right: MediaQuery.of(context).size.width * 0.68,
+        //   bottom: MediaQuery.of(context).size.height * 0.18,
+        //   child: foodistaanCertified == true
+        //       ? SvgPicture.asset(
+        //           'Images/streatoplus.svg',
+        //           height: MediaQuery.of(context).size.width * 0.33,
+        //         )
+        //       // ? Padding(
+        //       //     padding: const EdgeInsets.only(left: 10.0, top: 10),
+        //       //     child: Container(
+        //       //         padding: EdgeInsets.all(6),
+        //       //         decoration: BoxDecoration(
+        //       //             // color: Colors.black,
+        //       //             gradient: LinearGradient(
+        //       //               colors: [
+        //       //                 Color.fromRGBO(191, 149, 63, 1),
+        //       //                 Color.fromRGBO(252, 246, 186, 1),
+        //       //                 Color.fromRGBO(179, 135, 40, 1),
+        //       //                 Color.fromRGBO(251, 245, 183, 1),
+        //       //               ],
+        //       //             ),
+        //       //             borderRadius: BorderRadius.all(Radius.circular(4))),
+        //       //         child: Text.rich(
+        //       //           TextSpan(
+        //       //             children: [
+        //       //               TextSpan(
+        //       //                   text: 'STREAT',
+        //       //                   style: TextStyle(
+        //       //                       fontWeight: FontWeight.bold,
+        //       //                       color: Colors.white,
+        //       //                       fontSize: 14)),
+        //       //               TextSpan(
+        //       //                   text: 'O',
+        //       //                   style: TextStyle(
+        //       //                       fontWeight: FontWeight.bold,
+        //       //                       color: Colors.red,
+        //       //                       fontSize: 14)),
+        //       //               TextSpan(
+        //       //                   text: '+',
+        //       //                   style: TextStyle(
+        //       //                       fontWeight: FontWeight.bold,
+        //       //                       color: Colors.green,
+        //       //                       fontSize: 14)),
+        //       //             ],
+        //       //           ),
+        //       //         )),
+        //       //     // Text(
+        //       //     //   "CERTIFIED",
+        //       //     //   style: TextStyle(
+        //       //     //       fontSize: 14,
+        //       //     //       color: Colors.black,
+        //       //     //       fontWeight: FontWeight.bold),
+        //       //     // )),
+        //       //   )
+        //       : SizedBox(),
+        // )
       ]),
     );
   }
@@ -339,16 +339,38 @@ class RightSide extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Container(
               width: w1 * 0.7,
-              child: Text(
-                name,
-                textAlign: TextAlign.start,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Container(
+                    // width: w1 * 0.55,
+                    child: Text(
+                      name,
+                      textAlign: TextAlign.start,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.13,
+                    height: MediaQuery.of(context).size.height * 0.01,
+                    child: foodistaanCertified == true
+                        ? FittedBox(
+                            fit: BoxFit.cover,
+                            child: SvgPicture.asset(
+                              'Images/streatoplus.svg',
+                              // width: MediaQuery.of(context).size.width * 0.15,
+                              // height: MediaQuery.of(context).size.height * 0.1,
+                            ),
+                          )
+                        : SizedBox(),
+                  ),
+                ],
               ),
             ),
             Container(

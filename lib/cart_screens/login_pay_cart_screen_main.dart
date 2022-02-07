@@ -676,6 +676,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                                         .addressData[
                                                             'house-feild']
                                                         .toString() +
+                                                    ' ' +
                                                     userAddressValue
                                                         .addressData[
                                                             'street-feild']
