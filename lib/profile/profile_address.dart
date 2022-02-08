@@ -39,14 +39,14 @@ class _AddressState extends State<Address> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          elevation: 0,
           title: const Text(
             'My Addresses',
-            style: TextStyle(
-              color: Colors.black,
-            ),
           ),
-          centerTitle: true,
+          elevation: 0,
+          titleSpacing: 0,
+          leadingWidth: 40,
+          titleTextStyle: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -119,8 +119,8 @@ class _AddressState extends State<Address> {
                           String addressId = addressIdList[index];
                           return GestureDetector(
                             onTap: () async {
-                              await UserAddressProvider().selectAddress(
-                                  addressId, data);
+                              await UserAddressProvider()
+                                  .selectAddress(addressId, data);
                               Navigator.pop(context);
                             },
                             child: Stack(
