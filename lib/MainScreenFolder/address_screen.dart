@@ -122,6 +122,11 @@ class _AddressScreenState extends State<AddressScreen> {
             color: Colors.black,
           ),
         ),
+        elevation: 0,
+        titleSpacing: 0,
+        leadingWidth: 40,
+        titleTextStyle: TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);
@@ -131,8 +136,6 @@ class _AddressScreenState extends State<AddressScreen> {
             color: Colors.black,
           ),
         ),
-        centerTitle: true,
-        elevation: 0,
       ),
       backgroundColor: Colors.grey.shade100,
       body: SafeArea(
@@ -473,20 +476,20 @@ class _AddressScreenState extends State<AddressScreen> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       await UserAddress().addUserAddress(
-                      houseFeildController.text,
-                      streetFeildController.text,
-                      categorySelected,
-                      userLocation,
-                    );
-                    await UserAddressProvider()
-                        .checkDefaultDeliveryAddress(); //
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainScreen(
-                                  currentIndex: 1,
-                                )),
-                        (route) => false);
+                        houseFeildController.text,
+                        streetFeildController.text,
+                        categorySelected,
+                        userLocation,
+                      );
+                      await UserAddressProvider()
+                          .checkDefaultDeliveryAddress(); //
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainScreen(
+                                    currentIndex: 1,
+                                  )),
+                          (route) => false);
                     }
                   },
                   child: Container(
