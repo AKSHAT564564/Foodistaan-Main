@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/coupon_screen.dart';
@@ -15,6 +14,7 @@ import 'package:foodistan/providers/restaurant_data_provider.dart';
 import 'package:foodistan/providers/total_price_provider.dart';
 import 'package:foodistan/providers/user_address_provider.dart';
 import 'package:foodistan/widgets/location_bottam_sheet_widget.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 int maxCouponDiscount = 0;
@@ -231,7 +231,7 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
             children: [
               Column(
                 children: [
-                  Consumer<CartIdProvider>(builder: (context, value, child) {
+                  Consumer<CartIdProvider>(builder: (_, value, __) {
                     return value.hasData == false
                         ? Center(
                             child: Padding(
@@ -260,7 +260,7 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
 }
 
 class CartItemsWidget extends StatefulWidget {
-  //receving menu items data before hand
+  //receving menu items data before-hand
   //becoz of the stream
   List<DocumentSnapshot> data;
   String cartId;
@@ -271,9 +271,11 @@ class CartItemsWidget extends StatefulWidget {
 }
 
 class _CartItemsWidgetState extends State<CartItemsWidget> {
-  Widget menuItemWidget(itemData) {
-    itemMap[itemData['id']] = {'quantity' : itemData['quantity'],'name' : itemData['name']};
-    
+  Widget menuItemWidget(itemData, vendorId) {
+    itemMap[itemData['id']] = {
+      'quantity': itemData['quantity'],
+      'name': itemData['name']
+    };
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.13,
@@ -342,15 +344,88 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                         SizedBox(
                           width: 30,
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(0),
-                          child: TextButton(onPressed: null, child: Text(
+                        GestureDetector(
+                          onTap: () async {
+                            //initializing customization varible as a map
+                            //which will receive customization data from firebase for a specific meu item
+                            Map customizations = {};
+                            await FirebaseFirestore.instance
+                                .collection('DummyData')
+                                .doc(vendorId)
+                                .collection('menu-items')
+                                //itemData['id'] is id of menu-item in its vendor
+                                .doc(itemData['id'])
+                                .get()
+                                .then((value) {
+                              //breakpoint
+                              if (value.data() == null) return;
+                              //fetching customiZAtions data and storing it in MAP we defined earlier
+                              for (var key in value.data()!.keys) {
+                                if (key == 'customizations')
+                                  customizations = value.data()![key];
+                              }
+                            });
+                            //break point
+                            //if customizations D.N.E simply return
+                            if (customizations.isEmpty) return;
+                            
+
+                            //each customization are map containing price, title, etc.
+                            //storing it in a list to build the list widget later
+                            List<Map> test = [];
+                            if (customizations.isNotEmpty) {
+                              for (var item in customizations.keys) {
+                                test.add(customizations[item]);
+                              }
+                            }
+                            //variables for radio buttons
+                            int selected = 0;
+                            int gValue = 1;
+                            showBarModalBottomSheet(
+                                duration: const Duration(microseconds: 300),
+                                backgroundColor: Colors.white,
+                                context: context,
+                                builder: (_) {
+                                  return Container(
+                                    padding: EdgeInsets.all(20),
+                                    height: MediaQuery.of(context).size.height *
+                                        0.2,
+                                    child: SizedBox(
+                                      width: 200,
+                                      child: ListView.builder(
+                                          itemCount: test.length,
+                                          shrinkWrap: true,
+                                          itemBuilder: (_, index) {
+                                            return Row(
+                                              children: [
+                                                Radio<int>(
+                                                  value: index + 1,
+                                                  groupValue: gValue,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      selected = value!;
+                                                    });
+                                                  },
+                                                  activeColor: kOrange,
+                                                ),
+                                                Text('₹ ' +
+                                                    test[index]['price'] +
+                                                    ' ' +
+                                                    test[index]['title'])
+                                              ],
+                                            );
+                                          }),
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Text(
                             'Customize',
                             style: TextStyle(
                               fontSize: 14.5,
                               fontWeight: FontWeight.w300,
                             ),
-                          )),
+                          ),
                         ),
                         Container(
                             // height: 25,
@@ -557,6 +632,14 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
 
   ValueNotifier<double> discountApplied = ValueNotifier<double>(0);
 
+  //act of gratitude
+
+  ValueNotifier<int> actOfGratitudeButton = ValueNotifier<int>(0);
+
+  //delivery tip
+
+  int deliveryTip = 0;
+
   int calculateCouponDiscount(totalPrice, couponPercentage, maxDiscount) {
     double discount = ((couponPercentage / 100) * totalPrice);
 
@@ -595,8 +678,8 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
     context.read<CartDataProvider>().getRestaurantData(widget.cartId);
     return SafeArea(
       child: Container(
-        child: Center(
-            child: Consumer<CartDataProvider>(builder: (context, value, child) {
+        child:
+            Center(child: Consumer<CartDataProvider>(builder: (_, value, __) {
           return value.hasData == false
               ? CircularProgressIndicator(
                   color: Colors.yellow,
@@ -627,7 +710,8 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                           shrinkWrap: true,
                           itemCount: widget.data.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return menuItemWidget(widget.data[index].data());
+                            return menuItemWidget(widget.data[index].data(),
+                                value.restaurantData['id']);
                           }),
                     ),
                     Consumer<TotalPriceProvider>(
@@ -640,8 +724,8 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                               value.minCouponValue,
                               totalPriceValue.totalPriceProvider,
                               widget.cartId),
-                          Consumer<UserAddressProvider>(builder:
-                              (context, userAddressValue, userAddressWidget) {
+                          Consumer<UserAddressProvider>(
+                              builder: (_, userAddressValue, __) {
                             return userAddressValue.hasDeafultAddress
                                 ? Container(
                                     height: MediaQuery.of(context).size.height *
@@ -759,7 +843,6 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                             thickness: 8,
                             color: Colors.grey.shade200,
                           ),
-
                           Container(
                             // height: 150,
                             color: Colors.white,
@@ -817,130 +900,168 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 8),
-                                            child: InkWell(
-                                              onTap: () {},
-                                              child: Container(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    14, 7, 14, 7),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: Color.fromRGBO(
-                                                          153, 153, 153, 1)),
-                                                ),
-                                                child: Text(
-                                                  '₹20',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 8),
-                                            child: InkWell(
-                                              onTap: () {},
-                                              child: Container(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    14, 7, 14, 7),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: Color.fromRGBO(
-                                                          153, 153, 153, 1)),
-                                                ),
-                                                child: Text(
-                                                  '₹30',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 8),
-                                            child: Column(
+                                      ValueListenableBuilder(
+                                          valueListenable: actOfGratitudeButton,
+                                          builder: (_, actOfGratiudeValue, __) {
+                                            return Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
-                                                InkWell(
-                                                  onTap: () {},
-                                                  child: Container(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            14, 7, 14, 7),
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          width: 1,
-                                                          color: Color.fromRGBO(
-                                                              153,
-                                                              153,
-                                                              153,
-                                                              1)),
-                                                    ),
-                                                    child: Text(
-                                                      '₹50',
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 8),
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      actOfGratitudeButton
+                                                          .value = 1;
+
+                                                      setState(() {
+                                                        deliveryTip = 10;
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              14, 7, 14, 7),
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            width: 1,
+                                                            color:
+                                                                actOfGratiudeValue ==
+                                                                        1
+                                                                    ? kOrange
+                                                                    : Color
+                                                                        .fromRGBO(
+                                                                            153,
+                                                                            153,
+                                                                            153,
+                                                                            1)),
+                                                      ),
+                                                      child: Text(
+                                                        '₹ 10',
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 5,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 8),
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      actOfGratitudeButton
+                                                          .value = 2;
+
+                                                      setState(() {
+                                                        deliveryTip = 20;
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              14, 7, 14, 7),
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            width: 1,
+                                                            color:
+                                                                actOfGratiudeValue ==
+                                                                        2
+                                                                    ? kOrange
+                                                                    : Color
+                                                                        .fromRGBO(
+                                                                            153,
+                                                                            153,
+                                                                            153,
+                                                                            1)),
+                                                      ),
+                                                      child: Text(
+                                                        '₹ 20',
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                                Text(
-                                                  'Most tipped',
-                                                  style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          153, 153, 153, 1),
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.w300),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 8),
+                                                  child: Column(
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          actOfGratitudeButton
+                                                              .value = 3;
+                                                          setState(() {
+                                                            deliveryTip = 30;
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                                  14, 7, 14, 7),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                width: 1,
+                                                                color: actOfGratiudeValue ==
+                                                                        3
+                                                                    ? kOrange
+                                                                    : Color
+                                                                        .fromRGBO(
+                                                                            153,
+                                                                            153,
+                                                                            153,
+                                                                            1)),
+                                                          ),
+                                                          child: Text(
+                                                            '₹ 30',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        'Most tipped',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    153,
+                                                                    153,
+                                                                    153,
+                                                                    1),
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w300),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
-                                            ),
-                                          ),
-                                          // InkWell(
-                                          //   onTap: () {},
-                                          //   child: Container(
-                                          //     padding: EdgeInsets.fromLTRB(
-                                          //         14, 7, 14, 7),
-                                          //     decoration: BoxDecoration(
-                                          //       border: Border.all(
-                                          //           width: 1,
-                                          //           color: Color.fromRGBO(
-                                          //               153, 153, 153, 1)),
-                                          //     ),
-                                          //     child: Text(
-                                          //       'Other',
-                                          //       style: TextStyle(
-                                          //           color: Colors.black,
-                                          //           fontSize: 14,
-                                          //           fontWeight:
-                                          //               FontWeight.w400),
-                                          //     ),
-                                          //   ),
-                                          // ),
-                                        ],
-                                      )
+                                            );
+                                          })
                                     ],
                                   ),
                                 )
@@ -1027,53 +1148,56 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                 SizedBox(
                                   height: 5,
                                 ),
-                                // Row(
-                                //   mainAxisAlignment:
-                                //       MainAxisAlignment.spaceBetween,
-                                //   crossAxisAlignment: CrossAxisAlignment.center,
-                                //   children: [
-                                //     Text(
-                                //       'Delivery Charges',
-                                //       style: TextStyle(
-                                //         color: Colors.black,
-                                //         fontSize: 14,
-                                //       ),
-                                //     ),
-                                //     Text(
-                                //       '₹ 0',
-                                //       style: TextStyle(
-                                //         color: Colors.black,
-                                //         fontSize: 14,
-                                //       ),
-                                //     )
-                                //   ],
-                                // ),
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Delivery Tip',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                    Text(
-                                      '₹ 0',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                deliveryTip != 0
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Delivery Tip',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  actOfGratitudeButton.value =
+                                                      0;
+                                                  setState(() {
+                                                    deliveryTip = 0;
+                                                  });
+                                                },
+                                                child: Text(
+                                                  ' (Remove Tip)',
+                                                  style: TextStyle(
+                                                      color: kYellow,
+                                                      fontSize: 10),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            '₹ ' + deliveryTip.toString(),
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 14,
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    : SizedBox(),
                                 SizedBox(
-                                  height: 8,
+                                  height: deliveryTip == 0 ? 0 : 8,
                                 ),
                                 Divider(),
                                 Row(
@@ -1095,7 +1219,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                                   totalPriceValue
                                                       .totalPriceProvider
                                           ? Text(
-                                              '₹ ${calculateCouponDiscount(totalPriceValue.totalPriceProvider, value.couponPercentage, value.maxCouponDiscount).toString()}',
+                                              '₹ ${(calculateCouponDiscount(totalPriceValue.totalPriceProvider, value.couponPercentage, value.maxCouponDiscount) + deliveryTip).toString()}',
                                               style: TextStyle(
                                                 // color: Colors.yellow.shade700,
                                                 fontWeight: FontWeight.w600,
@@ -1103,7 +1227,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                               ),
                                             )
                                           : Text(
-                                              '₹ ${totalPriceValue.totalPriceProvider}',
+                                              '₹ ${(totalPriceValue.totalPriceProvider) + deliveryTip}',
                                               style: TextStyle(
                                                 // color: Colors.yellow.shade700,
                                                 fontWeight: FontWeight.w600,
@@ -1119,28 +1243,11 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                               ],
                             ),
                           ),
-                          // Padding(
-                          //   padding: const EdgeInsets.all(11),
-                          //   child: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.center,
-                          //     crossAxisAlignment: CrossAxisAlignment.center,
-                          //     children: [
-                          //       Text(
-                          //         'Cart Total - ₹ ',
-                          //         style: TextStyle(
-                          //           color: Colors.black,
-                          //         ),
-                          //       ),
-                          //       Text(totalPriceValue.totalPriceProvider
-                          //           .toString())
-                          //     ],
-                          //   ),
-                          // ),
                         ],
                       );
                     }),
                     Consumer<TotalPriceProvider>(
-                        builder: (context, totalPriceValue, payWidget) {
+                        builder: (_, totalPriceValue, __) {
                       return Container(
                           height: 45,
                           width: double.infinity,
@@ -1153,8 +1260,8 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Consumer<UserAddressProvider>(builder:
-                              (context, userAddressValue, userAddressWidget) {
+                          child: Consumer<UserAddressProvider>(
+                              builder: (_, userAddressValue, __) {
                             return GestureDetector(
                               onTap: () async {
                                 userAddressValue.hasDeafultAddress == true
@@ -1166,11 +1273,14 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                                     userAddressValue
                                                         .addressData,
                                                 finalPrice: calculateCouponDiscount(
-                                                        totalPriceValue
-                                                            .totalPriceProvider,
-                                                        value.couponPercentage,
-                                                        value.maxCouponDiscount)
-                                                    .toDouble(),
+                                                            totalPriceValue
+                                                                .totalPriceProvider,
+                                                            value
+                                                                .couponPercentage,
+                                                            value
+                                                                .maxCouponDiscount)
+                                                        .toDouble() +
+                                                    deliveryTip.toDouble(),
                                                 items: itemMap,
                                                 cartId: widget.cartId,
                                                 vednorId:
@@ -1201,7 +1311,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                           children: <InlineSpan>[
                                             TextSpan(
                                               text:
-                                                  '${calculateCouponDiscount(totalPriceValue.totalPriceProvider, value.couponPercentage, value.maxCouponDiscount).toString()}',
+                                                  '${(calculateCouponDiscount(totalPriceValue.totalPriceProvider, value.couponPercentage, value.maxCouponDiscount) + deliveryTip).toString()}',
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w700,
@@ -1220,7 +1330,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                           children: <InlineSpan>[
                                             TextSpan(
                                               text:
-                                                  '${totalPriceValue.totalPriceProvider}',
+                                                  '${totalPriceValue.totalPriceProvider + deliveryTip}',
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w700,
