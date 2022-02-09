@@ -368,7 +368,6 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                             //break point
                             //if customizations D.N.E simply return
                             if (customizations.isEmpty) return;
-                            
 
                             //each customization are map containing price, title, etc.
                             //storing it in a list to build the list widget later

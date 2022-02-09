@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/widgets/food_item_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodistan/functions/cart_functions.dart';
@@ -64,7 +65,7 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
     itemBuilder: (BuildContext context, int index) {
       return DecoratedBox(
         decoration: BoxDecoration(
-          color: index.isEven ? Colors.red : Colors.green,
+          color: index.isEven ? Colors.red : kGreen,
         ),
       );
     },

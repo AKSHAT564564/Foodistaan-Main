@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/providers/restaurant_list_provider.dart';
 import 'package:foodistan/restuarant_screens/restaurant_delivery.dart';
 import 'package:provider/provider.dart';
@@ -343,24 +344,22 @@ class RightSide extends StatelessWidget {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Text(
-                    name.length > 20 ? name.substring(0,19)+'...': name,
+                    name.length > 20 ? name.substring(0, 19) + '...' : name,
                     textAlign: TextAlign.start,
                     maxLines: 1,
-                    
                     overflow: TextOverflow.clip,
                     style: TextStyle(
-                      
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                     ),
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.15,
+                    width: MediaQuery.of(context).size.width * 0.18,
                     height: MediaQuery.of(context).size.height * 0.02,
                     child: foodistaanCertified == true
                         ? FittedBox(
-                            // fit: BoxFit.cover,
+                            fit: BoxFit.cover,
                             child: SvgPicture.asset(
                               'Images/streatoplus.svg',
                               // width: MediaQuery.of(context).size.width * 0.15,
@@ -376,7 +375,7 @@ class RightSide extends StatelessWidget {
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: Colors.green,
+                color: kGreen,
               ),
               child: Row(
                 children: [

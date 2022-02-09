@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:foodistan/constants.dart';
 
 class AcceptedOrder extends StatefulWidget {
   var orderData;
@@ -355,7 +356,7 @@ class _AcceptedOrderState extends State<AcceptedOrder> {
               Container(
                 height: 33,
                 width: double.infinity,
-                color: Colors.green,
+                color: kGreen,
                 child: Center(
                   child: Stack(
                     children: [
