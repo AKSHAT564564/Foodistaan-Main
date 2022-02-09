@@ -52,12 +52,12 @@ class _CouponScreenState extends State<CouponScreen> {
         backgroundColor: Colors.white,
         title: Text(
           'Coupon Selection',
-          style: TextStyle(
-            color: Colors.black,
-          ),
         ),
-        centerTitle: true,
         elevation: 0,
+        titleSpacing: 0,
+        leadingWidth: 40,
+        titleTextStyle: TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/restuarant_screens/restaurant_delivery_review.dart';
 import 'package:foodistan/restuarant_screens/restaurant_overview.dart';
 import 'package:foodistan/restuarant_screens/restuarant_delivery_menu.dart';
@@ -121,7 +122,7 @@ class _TestRestaurantMainState extends State<TestRestaurantMain> {
                 Container(
                     decoration: BoxDecoration(
                       // color: Colors.green,
-                      color: Color.fromRGBO(59, 183, 85, 1),
+                      color: kGreen,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15),
                         bottomLeft: Radius.circular(15),
@@ -230,7 +231,7 @@ class _TestRestaurantMainState extends State<TestRestaurantMain> {
                         children: [
                           CircleAvatar(
                             maxRadius: 10,
-                            backgroundColor: Color.fromRGBO(59, 183, 85, 1),
+                            backgroundColor: kGreen,
                             child: Icon(
                               Icons.table_chart,
                               size: 10,
@@ -256,7 +257,7 @@ class _TestRestaurantMainState extends State<TestRestaurantMain> {
                         children: [
                           CircleAvatar(
                             maxRadius: 10,
-                            backgroundColor: Colors.green,
+                            backgroundColor: kGreen,
                             child: Icon(
                               Icons.attach_money,
                               size: 10,
@@ -715,7 +716,7 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget>
                 width: MediaQuery.of(context).size.width * 0.4,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  color: Color.fromRGBO(59, 183, 85, 1),
+                  color: kGreen,
                 ),
                 child: _animation2.value <= 0.5
                     ? Container(

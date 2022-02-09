@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/auth/autentication.dart';
+import 'package:foodistan/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 
@@ -98,7 +99,7 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
                       Icon(
                         Icons.copyright,
                         size: 10,
-                        color: Colors.green,
+                        color: kGreen,
                       ),
                       Text(
                         " Earn upto 200 FS points",

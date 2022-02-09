@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 import 'package:foodistan/global/global_variables.dart';
 
@@ -60,7 +61,7 @@ class _TotalBillBottomWidgetState extends State<TotalBillBottomWidget> {
                         width: MediaQuery.of(context).size.width * 0.9,
                         height: MediaQuery.of(context).size.height * 0.07,
                         decoration: BoxDecoration(
-                          color: Colors.green,
+                          color: kGreen,
                           borderRadius: BorderRadius.circular(11),
                         ),
                         child: Center(
@@ -133,7 +134,7 @@ class _TotalBillBottomWidgetState extends State<TotalBillBottomWidget> {
                                             child: Text(
                                               "View Bill",
                                               style: TextStyle(
-                                                color: Colors.green,
+                                                color: kGreen,
                                                 fontSize: MediaQuery.of(context)
                                                         .size
                                                         .width *
