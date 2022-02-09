@@ -277,6 +277,9 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
       'name': itemData['name']
     };
 
+    ValueNotifier<int> gValue = ValueNotifier(0);
+    final _firestore = FirebaseFirestore.instance;
+
     return Container(
       height: MediaQuery.of(context).size.height * 0.13,
       width: double.infinity,
@@ -348,8 +351,8 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                           onTap: () async {
                             //initializing customization varible as a map
                             //which will receive customization data from firebase for a specific meu item
-                            Map customizations = {};
-                            await FirebaseFirestore.instance
+                            List customizations = [];
+                            await _firestore
                                 .collection('DummyData')
                                 .doc(vendorId)
                                 .collection('menu-items')
@@ -360,26 +363,33 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                               //breakpoint
                               if (value.data() == null) return;
                               //fetching customiZAtions data and storing it in MAP we defined earlier
+
                               for (var key in value.data()!.keys) {
-                                if (key == 'customizations')
+                                if (key == 'custom')
                                   customizations = value.data()![key];
                               }
                             });
                             //break point
                             //if customizations D.N.E simply return
                             if (customizations.isEmpty) return;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
                             //each customization are map containing price, title, etc.
                             //storing it in a list to build the list widget later
-                            List<Map> test = [];
-                            if (customizations.isNotEmpty) {
-                              for (var item in customizations.keys) {
-                                test.add(customizations[item]);
-                              }
-                            }
+
+                            // List<Map> test = [];
+                            // if (customizations.isNotEmpty) {
+                            //   for (var item in customizations.keys) {
+                            //     test.add({'$item': customizations[item]});
+                            //   }
+                            // }
+                            // print(test.toString());
+
                             //variables for radio buttons
                             int selected = 0;
-                            int gValue = 1;
+
                             showBarModalBottomSheet(
                                 duration: const Duration(microseconds: 300),
                                 backgroundColor: Colors.white,
@@ -392,25 +402,61 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                     child: SizedBox(
                                       width: 200,
                                       child: ListView.builder(
-                                          itemCount: test.length,
+                                          itemCount: customizations.length,
                                           shrinkWrap: true,
                                           itemBuilder: (_, index) {
+                                            Map cust = customizations[index]
+                                                .values
+                                                .first;
                                             return Row(
                                               children: [
-                                                Radio<int>(
-                                                  value: index + 1,
-                                                  groupValue: gValue,
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      selected = value!;
-                                                    });
-                                                  },
-                                                  activeColor: kOrange,
-                                                ),
+                                                ValueListenableBuilder<int>(
+                                                    valueListenable: gValue,
+                                                    builder: (_, gvalue, __) {
+                                                      return Radio<int>(
+                                                        value: index,
+                                                        groupValue: gvalue,
+                                                        onChanged:
+                                                            (value) async {
+                                                          // await _firestore
+                                                          //     .collection(
+                                                          //         'cart')
+                                                          //     .doc(
+                                                          //         widget.cartId)
+                                                          //     .collection(
+                                                          //         'items')
+                                                          //     .doc(itemData[
+                                                          //         'id'])
+                                                          //     .get()
+                                                          //     .then((value) {
+                                                          //   customizations = value
+                                                          //           .data()![
+                                                          //       'customizations'];
+                                                          // });
+
+                                                          // await _firestore
+                                                          //     .collection(
+                                                          //         'cart')
+                                                          //     .doc(
+                                                          //         widget.cartId)
+                                                          //     .collection(
+                                                          //         'items')
+                                                          //     .doc(itemData[
+                                                          //         'id'])
+                                                          //     .update({
+                                                          //   'customizations':
+                                                          //       FieldValue.arrayUnion(test[index])
+                                                          // });
+
+                                                          gValue.value = index;
+                                                        },
+                                                        activeColor: kOrange,
+                                                      );
+                                                    }),
                                                 Text('₹ ' +
-                                                    test[index]['price'] +
-                                                    ' ' +
-                                                    test[index]['title'])
+                                                    cust['price'] +
+                                                    ' - ' +
+                                                    cust['title'])
                                               ],
                                             );
                                           }),
@@ -535,6 +581,13 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
   }
 
   couponWidget(bool hasCoupon, couponCode, minCouponValue, totalPrice, cartId) {
+    //setting discount applied  to 0
+    //delay of 1 second to avoid a setState error
+    if (hasCoupon == true && minCouponValue > totalPrice) {
+      Timer(const Duration(seconds: 1), () async {
+        discountApplied.value = 0;
+      });
+    }
     return Container(
       height: MediaQuery.of(context).size.height * 0.09,
       width: double.infinity,
@@ -677,6 +730,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
     context.read<CartDataProvider>().getRestaurantData(widget.cartId);
     return SafeArea(
       child: Container(
+        padding: EdgeInsets.only(top: 10),
         child:
             Center(child: Consumer<CartDataProvider>(builder: (_, value, __) {
           return value.hasData == false
@@ -1449,11 +1503,12 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                   },
                                   child: Text(
                                     'Read Policy',
-                                    style: TextStyle(
-                                      color: Color.fromRGBO(247, 193, 43, 1),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 10,
-                                    ),
+                                    // style: TextStyle(
+                                    //giving error for unknown reason
+                                    //   color: Color.fromRGBO(247, 193, 43, 1),
+                                    //   fontWeight: FontWeight.w400,
+                                    //   fontSize: 10,
+                                    // ),
                                   ),
                                 ),
                               ],
