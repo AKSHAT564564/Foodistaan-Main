@@ -15,19 +15,18 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
   Widget itemsList(Map orderItems) {
     List itemList = [];
     for (var item in orderItems.keys) {
-      print(orderItems[item]);
       itemList.add(orderItems[item]);
     }
-    // print(itemList.toString());
+
     if (itemList.length != 0) {
       return ListView.builder(
           shrinkWrap: true,
           itemCount: itemList.length,
           itemBuilder: (BuildContext context, int index) {
             var itemDetails = itemList[index];
-            
-            return Text(itemDetails['quantity'] + ' X ' + itemDetails['name'].toString().toUpperCase());
-           
+            return Text(itemDetails['quantity'].toString() +
+                ' X ' +
+                itemDetails['name'].toString().toUpperCase());
           });
     } else
       return Text('Some Error');
@@ -186,13 +185,6 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                         const SizedBox(
                           height: 5,
                         ),
-
-                        // Text(
-                        //   '1x Masala Dosa',
-                        //   style: TextStyle(
-                        //     color: Colors.black,
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
@@ -231,7 +223,6 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                               ],
                             ),
                           ),
-                          // SizedBox(width: MediaQuery.of(context).size.width * 0.05),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -241,9 +232,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                     widget.orderData['order-status']
                                         .toString()
                                         .toUpperCase(),
-                                        
                                 style: TextStyle(
-                                  
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
@@ -326,6 +315,40 @@ class RatingCardList extends StatefulWidget {
 }
 
 class _RatingCardListState extends State<RatingCardList> {
+  Widget ratingPointWidget(int ratedValue) {
+    return InkWell(
+      child: Container(
+        padding: EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.transparent,
+        ),
+        child: Row(
+          children: [
+            Text(
+              ratedValue.toString(),
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey,
+              ),
+            ),
+            Icon(
+              Icons.star,
+              size: 8,
+              color: Colors.grey,
+            )
+          ],
+        ),
+      ),
+      onTap: () {
+        setState(() {
+          rateValue = '1';
+        });
+      },
+    );
+  }
+
   String rateValue = '';
   @override
   Widget build(BuildContext context) {
@@ -350,178 +373,26 @@ class _RatingCardListState extends State<RatingCardList> {
                 SizedBox(
                   width: 5,
                 ),
-                InkWell(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.transparent,
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          '1',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Icon(
-                          Icons.star,
-                          size: 8,
-                          color: Colors.grey,
-                        )
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    setState(() {
-                      rateValue = '1';
-                    });
-                    print(rateValue);
-                  },
-                ),
+                ratingPointWidget(1),
                 SizedBox(
                   width: 4,
                 ),
-                InkWell(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.transparent,
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          '2',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Icon(
-                          Icons.star,
-                          size: 8,
-                          color: Colors.grey,
-                        )
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    setState(() {
-                      rateValue = '2';
-                    });
-                    print(rateValue);
-                  },
-                ),
+                ratingPointWidget(2),
                 SizedBox(
                   width: 4,
                 ),
-                InkWell(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.transparent,
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          '3',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Icon(
-                          Icons.star,
-                          size: 8,
-                          color: Colors.grey,
-                        )
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    setState(() {
-                      rateValue = '3';
-                    });
-                    print(rateValue);
-                  },
-                ),
+                ratingPointWidget(3),
                 SizedBox(
                   width: 4,
                 ),
-                InkWell(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.transparent,
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          '4',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Icon(
-                          Icons.star,
-                          size: 8,
-                          color: Colors.grey,
-                        )
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    setState(() {
-                      rateValue = '4';
-                    });
-                    print(rateValue);
-                  },
-                ),
+                ratingPointWidget(4),
                 SizedBox(
                   width: 4,
                 ),
-                InkWell(
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.transparent,
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          '5',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Icon(
-                          Icons.star,
-                          size: 8,
-                          color: Colors.grey,
-                        )
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    setState(() {
-                      rateValue = '5';
-                    });
-                    print(rateValue);
-                  },
-                ),
+                ratingPointWidget(5),
+                SizedBox(
+                  width: 10,
+                )
               ],
             ),
           )

@@ -706,9 +706,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
   void initState() {
     super.initState();
 
-    // //calling cart data provider which provides all the relevent data for the cart
-    // Provider.of<CartDataProvider>(context, listen: true)
-    //     .getRestaurantData(widget.cartId);
+    //calling cart data provider which provides all the relevent data for the cart
 
     //Provides data for delivery location to the cart
     Provider.of<UserAddressProvider>(context, listen: false)
@@ -1480,31 +1478,6 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                     color: Color.fromRGBO(153, 153, 153, 1),
                                     fontWeight: FontWeight.w400,
                                     fontSize: 10,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            // padding: EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.07,
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    return;
-                                  },
-                                  child: Text(
-                                    'Read Policy',
-                                    // style: TextStyle(
-                                    //giving error for unknown reason
-                                    //   color: Color.fromRGBO(247, 193, 43, 1),
-                                    //   fontWeight: FontWeight.w400,
-                                    //   fontSize: 10,
-                                    // ),
                                   ),
                                 ),
                               ],

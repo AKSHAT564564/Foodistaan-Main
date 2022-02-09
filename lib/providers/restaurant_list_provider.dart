@@ -49,7 +49,6 @@ class RestaurantListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  
   fetchRestaurantData(String vendorId) async {
     await FirebaseFirestore.instance
         .collection('DummyData')

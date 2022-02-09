@@ -14,7 +14,7 @@ class FsPoints extends StatelessWidget {
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Foodistaan Points',style: TextStyle(
+        title: Text('Streato Points',style: TextStyle(
           color: Colors.black,
         ),),
         centerTitle: true,
@@ -179,7 +179,7 @@ class FsPoints extends StatelessWidget {
                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
-                                                    Text('Your Foodistaan Points Balance',style: TextStyle(
+                                                    Text('Your Streato Points Balance',style: TextStyle(
                                                       color: Colors.grey,
                                                     ),),
                                                     SizedBox(
@@ -232,7 +232,7 @@ class FsPoints extends StatelessWidget {
                                                       mainAxisAlignment: MainAxisAlignment.start,
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
-                                                        Text('500 Foodistaan Points',style: TextStyle(
+                                                        Text('500 Streato Points',style: TextStyle(
                                                           color: Color.fromRGBO(44, 79, 126, 1),
                                                           fontWeight: FontWeight.bold,
                                                           fontSize: w*0.035,
@@ -278,7 +278,7 @@ class FsPoints extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 22,
                                     ),
-                                    child: Text('◆ Foodistaan Points will be credited in your account within 24 hours since you place an order.',
+                                    child: Text('◆ Streato Points will be credited in your account within 24 hours since you place an order.',
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           color: Colors.white,
@@ -292,7 +292,7 @@ class FsPoints extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 22,
                                     ),
-                                    child: Text('◆ You can\'t use Foodistaan Points after they expire, they will be of no use.',
+                                    child: Text('◆ You can\'t use Streato Points after they expire, they will be of no use.',
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           color: Colors.white,
@@ -340,7 +340,7 @@ class FsPoints extends StatelessWidget {
                                             SizedBox(
                                               width: 11,
                                             ),
-                                            Text('Enter Order ID To Claim Foodistaan Points',style: TextStyle(
+                                            Text('Enter Order ID To Claim Streato Points',style: TextStyle(
                                               color: Colors.black,
                                               fontSize: w*0.032,
                                               fontWeight: FontWeight.w500,
@@ -419,7 +419,7 @@ class FsPoints extends StatelessWidget {
                               color: Colors.grey,
                             ),
                           ),
-                          Text('This means if you spend ₹500 to place an order, you will earn 500 Foodistaan Points.',
+                          Text('This means if you spend ₹500 to place an order, you will earn 500 Streato Points.',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                             color: Colors.grey.shade600,
@@ -455,7 +455,7 @@ class FsPoints extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Ultimate Savings with Foodistaan Points',style: TextStyle(
+                          Text('Ultimate Savings with Streato Points',style: TextStyle(
                             color: Color.fromRGBO(44, 79, 126, 1),
                             fontWeight: FontWeight.bold,
                             fontSize: w*0.033,
@@ -488,7 +488,7 @@ class FsPoints extends StatelessWidget {
                               color: Colors.grey,
                             ),
                           ),
-                          Text('This means if you have earned 500 Foodistaan Points, you will save ₹500 off on future Order.',
+                          Text('This means if you have earned 500 Streato Points, you will save ₹500 off on future Order.',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                             color: Colors.grey.shade600,
@@ -521,13 +521,13 @@ class FsPoints extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
-                        Text('1. What are Foodistaan Points ?',style: TextStyle(
+                        Text('1. What are Streato Points ?',style: TextStyle(
                           color: Colors.grey.shade600,
                         ),),
                         SizedBox(
                           height: 5,
                         ),
-                        Text('2. How to Claim Foodistaan Points ?',style: TextStyle(
+                        Text('2. How to Claim Streato Points ?',style: TextStyle(
                           color: Colors.grey.shade600,
                         ),),
                       ],
@@ -556,7 +556,7 @@ class FsPoints extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
-                        Text('Foodistaan Terms and Conditions.',style: TextStyle(
+                        Text('Streato Terms and Conditions.',style: TextStyle(
                           color: Colors.grey.shade500,
                         ),),
                       ],

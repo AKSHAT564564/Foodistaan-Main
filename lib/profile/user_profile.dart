@@ -152,7 +152,7 @@ class _UserProfileState extends State<UserProfile>
                     ),
                     Positioned(
                       right: 0,
-                      top: MediaQuery.of(context).size.height * 0.04,
+                      top: MediaQuery.of(context).size.height * 0.055,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -173,16 +173,16 @@ class _UserProfileState extends State<UserProfile>
                           const SizedBox(
                             height: 5,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: const [
-                              Text('Edit'),
-                              SizedBox(
-                                width: 37.5,
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.end,
+                          //   crossAxisAlignment: CrossAxisAlignment.end,
+                          //   children: const [
+                          //     Text('Edit'),
+                          //     SizedBox(
+                          //       width: 37.5,
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ),
                     ),
@@ -230,14 +230,50 @@ class _UserProfileState extends State<UserProfile>
                       ),
                     ),
                   ),
+                  // Expanded(
+                  //   flex: 1,
+                  //   child: GestureDetector(
+                  //     onTap: () {
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => const Offers()),
+                  //       );
+                  //     },
+                  //     child: Column(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       crossAxisAlignment: CrossAxisAlignment.center,
+                  //       children: [
+                  //         Icon(
+                  //           Icons.notifications_none_outlined,
+                  //           color: Colors.black,
+                  //           size: 23,
+                  //         ),
+                  //         SizedBox(
+                  //           height: 10,
+                  //         ),
+                  //         Text(
+                  //           'Notifications',
+                  //           textAlign: TextAlign.center,
+                  //           style: TextStyle(
+                  //             fontSize:
+                  //                 MediaQuery.of(context).size.width * 0.033,
+                  //             color: Colors.black,
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   Expanded(
                     flex: 1,
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const Offers()),
+                          MaterialPageRoute(builder: (_) {
+                            return const Orders();
+                          }),
                         );
                       },
                       child: Column(
@@ -245,7 +281,7 @@ class _UserProfileState extends State<UserProfile>
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.notifications_none_outlined,
+                            Icons.history,
                             color: Colors.black,
                             size: 23,
                           ),
@@ -253,7 +289,7 @@ class _UserProfileState extends State<UserProfile>
                             height: 10,
                           ),
                           Text(
-                            'Notifications',
+                            'Order History',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize:
@@ -290,42 +326,6 @@ class _UserProfileState extends State<UserProfile>
                           ),
                           Text(
                             'Settings',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.033,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) {
-                            return const Orders();
-                          }),
-                        );
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.history,
-                            color: Colors.black,
-                            size: 23,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Order History',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize:
@@ -468,7 +468,7 @@ class _UserProfileState extends State<UserProfile>
                       width: 10,
                     ),
                     Text(
-                      'About Foodistaan Pro',
+                      'About Streato Pro',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: MediaQuery.of(context).size.width * 0.044,

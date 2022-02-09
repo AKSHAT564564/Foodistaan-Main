@@ -7,7 +7,7 @@ import 'package:foodistan/functions/cart_functions.dart';
 import 'package:foodistan/auth/autentication.dart';
 
 Future<List> fetchMenu(vendor_id) async {
-  List menu_items = [];
+  List menuItems = [];
   final CollectionReference MenuItemsList = await FirebaseFirestore.instance
       .collection('DummyData')
       .doc(vendor_id)
@@ -15,14 +15,14 @@ Future<List> fetchMenu(vendor_id) async {
   try {
     await MenuItemsList.get().then((querySnapshot) => {
           querySnapshot.docs.forEach((element) {
-            menu_items.add(element.data());
+            menuItems.add(element.data());
           })
         });
   } catch (e) {
     print(e.toString());
   }
 
-  return menu_items;
+  return menuItems;
 }
 
 class RestuarantDeliveryMenu extends StatefulWidget {
@@ -34,19 +34,18 @@ class RestuarantDeliveryMenu extends StatefulWidget {
 }
 
 class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
-  List menu_items = [];
+  List menuItems = [];
   String? userNumber;
   String cartId = '';
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     userNumber = AuthMethod().checkUserLogin();
     _asyncMethod(userNumber).then((value) {
       setState(() {
         cartId = value[0];
-        menu_items = value[1];
+        menuItems = value[1];
       });
     });
   }
@@ -80,7 +79,7 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
       body: Column(
         children: [
           Container(
-              child: (menu_items.isEmpty && cartId == '')
+              child: (menuItems.isEmpty && cartId == '')
                   ? spinkit
                   : GridView.count(
                       padding: EdgeInsets.zero,
@@ -90,9 +89,9 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
                       crossAxisSpacing: 5,
                       crossAxisCount: 2,
                       mainAxisSpacing: 10,
-                      children: List.generate(menu_items.length, (index) {
+                      children: List.generate(menuItems.length, (index) {
                         return MyFoodItemWidget(
-                            menuItem: menu_items[index],
+                            menuItem: menuItems[index],
                             vendor_id: widget.vendor_id,
                             cartId: cartId,
                             vendorName: widget.vendorName);

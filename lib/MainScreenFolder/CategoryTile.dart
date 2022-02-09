@@ -51,7 +51,7 @@ class FoodCategories extends StatelessWidget {
               Text(
                 Caption,
                 style: TextStyle(
-                  color: Colors.black, fontSize: 8,
+                  color: Colors.black, fontSize: 5,
                   // color: Color(0xFF1E2019),
                 ),
               ),

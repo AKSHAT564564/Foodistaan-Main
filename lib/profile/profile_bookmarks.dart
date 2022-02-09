@@ -46,7 +46,25 @@ class _BookmarksState extends State<Bookmarks> {
           bookMarkRestaurantData.add(value.data());
         });
       }
+      bookMarkRestaurantData.reversed;
     }
+  }
+
+  final _searchController = TextEditingController();
+
+  ValueNotifier<List> searchResults = ValueNotifier([]);
+
+  searchQuery(String query, List items) {
+    List searchResultsTemp = [];
+    for (var item in items) {
+      RegExp regExp = new RegExp(query, caseSensitive: false);
+      bool containe = regExp.hasMatch(item['Name']);
+      if (containe) {
+        searchResultsTemp.add(item);
+      }
+    }
+
+    searchResults.value = searchResultsTemp;
   }
 
   @override
@@ -88,121 +106,166 @@ class _BookmarksState extends State<Bookmarks> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(11),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(11),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        spreadRadius: 0.4,
-                      ),
-                    ],
-                  ),
-                  width: double.infinity,
-                  height: 33,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      SizedBox(
-                        width: 11,
-                      ),
-                      Icon(
-                        Icons.search,
-                        color: Color.fromRGBO(255, 206, 69, 0.69),
-                      ),
-                      SizedBox(
-                        width: 11,
-                      ),
-                      Text('Search within bookmarks'),
-                    ],
-                  ),
-                ),
+              SizedBox(
+                height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 10, right: 10, top: 10, bottom: 15),
-                child: hasBookMarks == false
-                    ? Text('No Restaurants BookMarked')
-                    : ListView.builder(
-                        itemCount: bookMarkRestaurantData.length,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RestaurantDelivery(
-                                            items:
-                                                bookMarkRestaurantData[index],
-                                            vendor_id:
+              // Padding(
+              //   padding: const EdgeInsets.all(11),
+              //   child: Container(
+              //       decoration: const BoxDecoration(
+              //         color: Colors.white,
+              //         borderRadius: BorderRadius.all(
+              //           Radius.circular(11),
+              //         ),
+              //         boxShadow: [
+              //           BoxShadow(
+              //             color: Colors.grey,
+              //             spreadRadius: 0.4,
+              //           ),
+              //         ],
+              //       ),
+              //       width: double.infinity,
+              //       height: 40,
+              //       child: TextFormField(
+              //         controller: _searchController,
+              //         onChanged: (v) async {
+              //           searchQuery(
+              //               _searchController.text, bookMarkRestaurantData);
+              //           setState(() {}); //for cross icon in searchbar
+              //         },
+              //         textAlign: TextAlign.start,
+              //         obscureText: false,
+              //         decoration: InputDecoration(
+              //             contentPadding: EdgeInsets.all(0),
+              //             hintText: 'Search Within Bookmarks',
+              //             hintStyle: TextStyle(
+              //               color: Colors.grey,
+              //             ),
+              //             suffixIcon: IconButton(
+              //                 alignment: Alignment.center,
+              //                 onPressed: () {
+              //                   _searchController.text = '';
+              //                   searchResults.value = [];
+              //                   setState(() {}); //for cross icon in searchbar
+              //                 },
+              //                 icon: Icon(
+              //                   Icons.clear_rounded,
+              //                   color: _searchController.text.isNotEmpty
+              //                       ? Colors.grey
+              //                       : Colors.transparent,
+              //                 )),
+              //             prefixIcon: Icon(
+              //               Icons.search,
+              //               color: Color(0xFFFAB84C),
+              //             ),
+              //             focusedBorder: const OutlineInputBorder(
+              //                 borderSide: BorderSide(
+              //                     color: Color(0xFFFAB84C), width: 1),
+              //                 borderRadius:
+              //                     BorderRadius.all(Radius.circular(8))),
+              //             enabledBorder: const OutlineInputBorder(
+              //               borderRadius: BorderRadius.all(
+              //                 Radius.circular(8),
+              //               ),
+              //               borderSide: BorderSide(
+              //                 color: Color(0xFFFAB84C),
+              //                 width: 1,
+              //               ),
+              //             )),
+              //       )),
+              // ),
+              ValueListenableBuilder<List>(
+                  valueListenable: searchResults,
+                  builder: (_, value, __) {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10, right: 10, top: 10, bottom: 15),
+                      child: hasBookMarks == false
+                          ? Text('No Restaurants BookMarked')
+                          : ListView.builder(
+                              itemCount: bookMarkRestaurantData.length,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RestaurantDelivery(
+                                                  items: bookMarkRestaurantData[
+                                                      index],
+                                                  vendor_id:
+                                                      bookMarkRestaurantData[
+                                                          index]['id'],
+                                                  vendorName:
+                                                      bookMarkRestaurantData[
+                                                          index]['Name'],
+                                                )));
+                                  },
+                                  child: Container(
+                                    // height: MediaQuery.of(context).size.height * 0.5,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          spreadRadius: 7,
+                                          blurRadius: 3,
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(11),
+                                    ),
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          LeftSide(
+                                            foodImage:
                                                 bookMarkRestaurantData[index]
-                                                    ['id'],
-                                            vendorName:
+                                                    ['FoodImage'],
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          RightSide(
+                                            name: bookMarkRestaurantData[index]
+                                                ['Name'],
+                                            address:
                                                 bookMarkRestaurantData[index]
-                                                    ['Name'],
-                                          )));
-                            },
-                            child: Container(
-                              // height: MediaQuery.of(context).size.height * 0.5,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.shade300,
-                                    spreadRadius: 7,
-                                    blurRadius: 3,
+                                                    ['Address'],
+                                            cuisines:
+                                                bookMarkRestaurantData[index]
+                                                    ['Cuisines'],
+                                            stars: bookMarkRestaurantData[index]
+                                                ['Stars'],
+                                            cost: bookMarkRestaurantData[index]
+                                                ['Cost'],
+                                            delivery:
+                                                bookMarkRestaurantData[index]
+                                                    ['Delivery'],
+                                            takeaway:
+                                                bookMarkRestaurantData[index]
+                                                    ['Takeaway'],
+                                            foodistaanCertified:
+                                                bookMarkRestaurantData[index]
+                                                    ['FoodistaanCertified'],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ],
-                                borderRadius: BorderRadius.circular(11),
-                              ),
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    LeftSide(
-                                      foodImage: bookMarkRestaurantData[index]
-                                          ['FoodImage'],
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    RightSide(
-                                      name: bookMarkRestaurantData[index]
-                                          ['Name'],
-                                      address: bookMarkRestaurantData[index]
-                                          ['Address'],
-                                      cuisines: bookMarkRestaurantData[index]
-                                          ['Cuisines'],
-                                      stars: bookMarkRestaurantData[index]
-                                          ['Stars'],
-                                      cost: bookMarkRestaurantData[index]
-                                          ['Cost'],
-                                      delivery: bookMarkRestaurantData[index]
-                                          ['Delivery'],
-                                      takeaway: bookMarkRestaurantData[index]
-                                          ['Takeaway'],
-                                      foodistaanCertified:
-                                          bookMarkRestaurantData[index]
-                                              ['FoodistaanCertified'],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        }),
-              )
+                                );
+                              }),
+                    );
+                  })
+
               // Padding(
               //   padding: const EdgeInsets.all(10),
               //   child: Container(

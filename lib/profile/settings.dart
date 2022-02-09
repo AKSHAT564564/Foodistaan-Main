@@ -33,10 +33,7 @@ class ProfileSettings extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width * 0.01,
-            right: MediaQuery.of(context).size.width * 0.01,
-          ),
+          padding: EdgeInsets.only(top: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,8 +47,8 @@ class ProfileSettings extends StatelessWidget {
                       builder: (context) => AddPlaceScreen()));
                 },
                 child: Container(
-                  margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.05),
+                  // margin: EdgeInsets.only(
+                  //     left: MediaQuery.of(context).size.width * 0.05),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,8 +82,8 @@ class ProfileSettings extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
                 child: Container(
-                  margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.05),
+                  // margin: EdgeInsets.only(
+                  //     left: MediaQuery.of(context).size.width * 0.05),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,8 +117,7 @@ class ProfileSettings extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
                 child: Container(
-                  margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.05),
+                  // s
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,41 +139,41 @@ class ProfileSettings extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              const SizedBox(
-                height: 5,
-              ),
-              GestureDetector(
-                onTap: () {
-                  final snackBar = SnackBar(
-                    content: const Text('Feature coming up soon....'),
-                  );
+              // const SizedBox(
+              //   height: 5,
+              // ),
+              // GestureDetector(
+              //   onTap: () {
+              //     final snackBar = SnackBar(
+              //       content: const Text('Feature coming up soon....'),
+              //     );
 
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.05),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      SizedBox(
-                        width: 22,
-                      ),
-                      Text('App Permissions'),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 11),
-                child: Divider(
-                  color: Colors.grey,
-                ),
-              ),
+              //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              //   },
+              //   child: Container(
+              //     margin: EdgeInsets.only(
+              //         left: MediaQuery.of(context).size.width * 0.05),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.start,
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: const [
+              //         SizedBox(
+              //           width: 22,
+              //         ),
+              //         Text('App Permissions'),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 5,
+              // ),
+              // const Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 11),
+              //   child: Divider(
+              //     color: Colors.grey,
+              //   ),
+              // ),
               const SizedBox(
                 height: 5,
               ),
@@ -192,8 +188,8 @@ class ProfileSettings extends StatelessWidget {
                       });
                 },
                 child: Container(
-                  margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.05),
+                  // margin: EdgeInsets.only(
+                  //     left: MediaQuery.of(context).size.width * 0.05),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,

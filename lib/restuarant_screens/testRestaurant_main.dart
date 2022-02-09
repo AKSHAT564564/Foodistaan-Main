@@ -944,14 +944,14 @@ class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.32,
                             ),
-                            GestureDetector(
-                              child: Row(
-                                children: [
-                                  Text("Search"),
-                                  Icon(Icons.search),
-                                ],
-                              ),
-                            )
+                            // GestureDetector(
+                            //   child: Row(
+                            //     children: [
+                            //       Text("Search"),
+                            //       Icon(Icons.search),
+                            //     ],
+                            //   ),
+                            // )
                           ]),
                     ),
                     Container(

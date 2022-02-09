@@ -1,15 +1,10 @@
-import 'dart:ffi';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:foodistan/MainScreenFolder/AppBar/points.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/address_from_placeId_model.dart';
-import 'package:foodistan/functions/location_functions.dart';
 import 'package:foodistan/providers/restaurant_list_provider.dart';
 import 'package:foodistan/providers/user_location_provider.dart';
 import 'package:foodistan/restuarant_screens/restaurant_delivery.dart';
-import 'package:foodistan/restuarant_screens/restaurant_main.dart';
 import 'package:provider/provider.dart';
 
 class Location extends StatefulWidget {
@@ -104,11 +99,9 @@ class _PointsState extends State<Points> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                    height: 45,
-                    child: Image.asset(
-                      'assets/images/token 1.png',
-                    )),
+                Image.asset(
+                  'assets/images/token 1.png',
+                ),
                 Text(
                   '0',
                   style: TextStyle(
@@ -116,22 +109,8 @@ class _PointsState extends State<Points> {
                     fontSize: h1 * 0.033,
                   ),
                 ),
-                Text(
-                  'Points',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: h1 * 0.033,
-                  ),
-                ),
               ],
             ),
-            // SizedBox(
-            //   width: 11,
-            // ),
-            // SvgPicture.asset(
-            //   'Images/fs_points.svg',
-            //   height: h1 * 0.055,
-            // ),
           ],
         ),
       ),
@@ -174,7 +153,7 @@ class _SearchState extends State<Search> {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 15,
+                horizontal: 12,
               ),
               child: SizedBox(
                 height: h1 * 0.05,
@@ -207,12 +186,12 @@ class _SearchState extends State<Search> {
                           )),
                       prefixIcon: Icon(
                         Icons.search,
-                        color: Color(0xFFFAB84C),
+                        color: kgrey,
                       ),
                       focusedBorder: const OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Color(0xFFFAB84C), width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
                       enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(8),
@@ -300,27 +279,6 @@ class _SearchItemListState extends State<SearchItemList> {
             )
           ],
         ),
-        trailing: Container(
-          padding: EdgeInsets.all(3),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.shade300,
-                // blurRadius: 6.0,
-              ),
-            ],
-          ),
-          // color: Colors.grey.shade300,
-          child: Text(
-            'Promoted',
-            style: TextStyle(
-              fontSize: 8,
-              color: Colors.grey.shade700,
-              // fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
       ),
     );
   }
@@ -335,109 +293,109 @@ class _SearchItemListState extends State<SearchItemList> {
         controller: _scrollController,
         child: Column(
           children: [
-            Container(
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.width * 0.08,
-              ),
-              height: MediaQuery.of(context).size.height * 0.06,
-              // color: Colors.grey.shade300,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade200,
-                    // color: Colors.red,
-                    // blurRadius: 6.0,
-                  ),
-                ],
-                color: Colors.transparent,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isSelected = 'DELIVERY';
-                        print(isSelected);
-                      });
-                    },
-                    child: Container(
-                      // height: MediaQuery.of(context).size.height * 0.005,
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      alignment: Alignment.center,
-                      // margin: EdgeInsets.only(left: 3, right: 3),
-                      // padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: isSelected == 'DELIVERY'
-                                ? Colors.grey
-                                : Colors.grey.shade200,
-                            // blurRadius: 6.0,
-                          ),
-                        ],
-                        color: isSelected == 'DELIVERY'
-                            ? Colors.black
-                            : Colors.transparent,
-                      ),
-                      child: Text(
-                        'DELIVERY',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: isSelected == 'DELIVERY'
-                              ? Colors.white
-                              : Colors.grey.shade700,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isSelected = 'DINING';
-                        print(isSelected);
-                      });
-                    },
-                    child: Container(
-                      // height: MediaQuery.of(context).size.height * 0.005,
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      alignment: Alignment.center,
-                      // margin: EdgeInsets.only(left: 3, right: 3),
-                      // padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: isSelected == 'DINING'
-                                ? Colors.grey
-                                : Colors.grey.shade200,
-                            // blurRadius: 6.0,
-                          ),
-                        ],
-                        color: isSelected == 'DINING'
-                            ? Colors.black
-                            : Colors.transparent,
-                      ),
-                      child: Text(
-                        'DINING',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: isSelected == 'DINING'
-                              ? Colors.white
-                              : Colors.grey.shade700,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Container(
+            //   margin: EdgeInsets.only(
+            //     top: MediaQuery.of(context).size.width * 0.08,
+            //   ),
+            //   height: MediaQuery.of(context).size.height * 0.06,
+            //   // color: Colors.grey.shade300,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.all(Radius.circular(8)),
+            //     boxShadow: [
+            //       BoxShadow(
+            //         color: Colors.grey.shade200,
+            //         // color: Colors.red,
+            //         // blurRadius: 6.0,
+            //       ),
+            //     ],
+            //     color: Colors.transparent,
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       // GestureDetector(
+            //       //   onTap: () {
+            //       //     setState(() {
+            //       //       isSelected = 'DELIVERY';
+            //       //       print(isSelected);
+            //       //     });
+            //       //   },
+            //       //   child: Container(
+            //       //     // height: MediaQuery.of(context).size.height * 0.005,
+            //       //     width: MediaQuery.of(context).size.width * 0.45,
+            //       //     alignment: Alignment.center,
+            //       //     // margin: EdgeInsets.only(left: 3, right: 3),
+            //       //     // padding: EdgeInsets.all(8.0),
+            //       //     decoration: BoxDecoration(
+            //       //       borderRadius: BorderRadius.all(Radius.circular(8)),
+            //       //       boxShadow: [
+            //       //         BoxShadow(
+            //       //           color: isSelected == 'DELIVERY'
+            //       //               ? Colors.grey
+            //       //               : Colors.grey.shade200,
+            //       //           // blurRadius: 6.0,
+            //       //         ),
+            //       //       ],
+            //       //       color: isSelected == 'DELIVERY'
+            //       //           ? Colors.black
+            //       //           : Colors.transparent,
+            //       //     ),
+            //       //     child: Text(
+            //       //       'DELIVERY',
+            //       //       textAlign: TextAlign.center,
+            //       //       style: TextStyle(
+            //       //         fontSize: 12,
+            //       //         color: isSelected == 'DELIVERY'
+            //       //             ? Colors.white
+            //       //             : Colors.grey.shade700,
+            //       //         fontWeight: FontWeight.bold,
+            //       //       ),
+            //       //     ),
+            //       //   ),
+            //       // ),
+            //       // GestureDetector(
+            //       //   onTap: () {
+            //       //     setState(() {
+            //       //       isSelected = 'DINING';
+            //       //       print(isSelected);
+            //       //     });
+            //       //   },
+            //       //   child: Container(
+            //       //     // height: MediaQuery.of(context).size.height * 0.005,
+            //       //     width: MediaQuery.of(context).size.width * 0.45,
+            //       //     alignment: Alignment.center,
+            //       //     // margin: EdgeInsets.only(left: 3, right: 3),
+            //       //     // padding: EdgeInsets.all(8.0),
+            //       //     decoration: BoxDecoration(
+            //       //       borderRadius: BorderRadius.all(Radius.circular(8)),
+            //       //       boxShadow: [
+            //       //         BoxShadow(
+            //       //           color: isSelected == 'DINING'
+            //       //               ? Colors.grey
+            //       //               : Colors.grey.shade200,
+            //       //           // blurRadius: 6.0,
+            //       //         ),
+            //       //       ],
+            //       //       color: isSelected == 'DINING'
+            //       //           ? Colors.black
+            //       //           : Colors.transparent,
+            //       //     ),
+            //       //     child: Text(
+            //       //       'DINING',
+            //       //       textAlign: TextAlign.center,
+            //       //       style: TextStyle(
+            //       //         fontSize: 12,
+            //       //         color: isSelected == 'DINING'
+            //       //             ? Colors.white
+            //       //             : Colors.grey.shade700,
+            //       //         fontWeight: FontWeight.bold,
+            //       //       ),
+            //       //     ),
+            //       //   ),
+            //       // ),
+            //     ],
+            //   ),
+            // ),
             Container(
                 height: 400,
                 margin: EdgeInsets.only(top: 10),
