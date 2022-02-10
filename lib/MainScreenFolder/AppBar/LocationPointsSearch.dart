@@ -186,7 +186,7 @@ class _SearchState extends State<Search> {
                           )),
                       prefixIcon: Icon(
                         Icons.search,
-                        color: kgrey,
+                        color: kGrey,
                       ),
                       focusedBorder: const OutlineInputBorder(
                           borderSide:
