@@ -53,55 +53,49 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
           appBar: PreferredSize(
             preferredSize:
                 Size.fromHeight(MediaQuery.of(context).size.height * 0.06),
-            child: AppBar(
-                elevation: 0,
-                backgroundColor: Colors.white,
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back_ios, color: Colors.black),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                actions: <Widget>[
-                  // Container(
-                  //     padding: EdgeInsets.all(7.5),
-                  //     child: GestureDetector(
-                  //       onTap: () {
-                  //         // print(widget.vendorName);
-                  //       },
-                  //       child: Icon(
-                  //         Icons.share,
-                  //         color: Colors.black,
-                  //         size: 25,
-                  //       ),
-                  //     )),
-                  Container(
-                      padding: EdgeInsets.all(7.5),
-                      child: GestureDetector(
-                        onTap: () async {
-                          //function for bookmarking the current restaurant
-                          //simply adds the vendor id to the bookmarks array in the user data base
-                          //and then fetches restaurant id from the bookmarks array
-                          //using the vendor id in the bookmarks page
-                          if (isBookMarked) return;
+            child: SizedBox(
+              height: 40,
+              child: AppBar(
+                  elevation: 0,
+                  backgroundColor: Colors.white,
+                  leading: IconButton(
+                    icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  actions: <Widget>[
+                    Container(
+                        padding: EdgeInsets.all(7.5),
+                        child: GestureDetector(
+                          onTap: () async {
+                            //function for bookmarking the current restaurant
+                            //simply adds the vendor id to the bookmarks array in the user data base
+                            //and then fetches restaurant id from the bookmarks array
+                            //using the vendor id in the bookmarks page
+                            if (isBookMarked) return;
 
-                          await UserDataProvider()
-                              .addBookmark(widget.vendor_id)
-                              .then((v) {
-                            setState(() {
-                              isBookMarked = true;
+                            await UserDataProvider()
+                                .addBookmark(widget.vendor_id)
+                                .then((v) {
+                              setState(() {
+                                isBookMarked = true;
+                              });
                             });
-                          });
-                        },
-                        child: isBookMarked == true
-                            ? Icon(
-                                Icons.bookmark_added_outlined,
-                                color: Colors.black,
-                              )
-                            : Icon(
-                                Icons.bookmark_outline,
-                                color: Colors.black,
-                              ),
-                      )),
-                ]),
+                          },
+                          child: isBookMarked == true
+                              ? Icon(
+                                  Icons.bookmark_added_outlined,
+                                  color: Colors.black,
+                                )
+                              : Icon(
+                                  Icons.bookmark_outline,
+                                  color: Colors.black,
+                                ),
+                        )),
+                    SizedBox(
+                      width: 7,
+                    )
+                  ]),
+            ),
           ),
           body: Stack(
             children: [
@@ -112,7 +106,7 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                     Stack(
                       children: [
                         Container(
-                            padding: EdgeInsets.all(11),
+                            padding: EdgeInsets.only(left: 8, right: 8, top: 5),
                             color: Colors.white,
                             width: MediaQuery.of(context).size.width * 1,
                             height: MediaQuery.of(context).size.height * 0.35,
@@ -124,12 +118,8 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                               ),
                             )),
                         Container(
-                          padding: EdgeInsets.all(11),
+                          padding: EdgeInsets.all(8),
                           child: Center(
-                            // child: RestaurantMain(
-                            //   restaurant_details: widget.items,
-                            // ),
-
                             // For testing
                             child: TestRestaurantMain(
                                 restaurant_details: widget.items,

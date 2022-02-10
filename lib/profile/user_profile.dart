@@ -215,7 +215,7 @@ class _UserProfileState extends State<UserProfile>
                             size: 23,
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           Text(
                             'Bookmarks',
@@ -286,7 +286,7 @@ class _UserProfileState extends State<UserProfile>
                             size: 23,
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           Text(
                             'Order History',
@@ -322,7 +322,7 @@ class _UserProfileState extends State<UserProfile>
                             size: 23,
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           Text(
                             'Settings',

@@ -55,10 +55,10 @@ class _TestRestaurantMainState extends State<TestRestaurantMain> {
 
     return Column(children: [
       Container(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(5),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(8),
           color: Colors.white,
         ),
         margin: EdgeInsets.only(

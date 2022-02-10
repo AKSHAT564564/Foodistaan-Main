@@ -96,41 +96,37 @@ class _RestaurantMainState extends State<RestaurantMain> {
                   ),
                   height: MediaQuery.of(context).size.height * 0.05,
                   width: MediaQuery.of(context).size.width * 0.2,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${widget.restaurant_details['Stars']}",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.044,
-                              ),
-                            ),
-                            Icon(
-                              Icons.star,
-                              size: MediaQuery.of(context).size.width * 0.05,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                        Center(
-                          child: Text(
-                            "10+ Ratings",
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "${widget.restaurant_details['Stars']}",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize:
-                                  MediaQuery.of(context).size.width * 0.022,
+                                  MediaQuery.of(context).size.width * 0.044,
                             ),
                           ),
+                          Icon(
+                            Icons.star,
+                            size: MediaQuery.of(context).size.width * 0.05,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "10+ Ratings",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize:
+                              MediaQuery.of(context).size.width * 0.022,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ))
             ],
           ),

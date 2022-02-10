@@ -5,10 +5,16 @@ class OfferSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var h1 = MediaQuery.of(context).size.height;
+    // return Padding(
+    //   padding: const EdgeInsets.only(left: 20, right: 20),
+    //   child: Container(
+    //     height: 90,
+    //     decoration: BoxDecoration(borderRadius: BorderRadius),
+    //     color: Colors.black,
+    //   ),
+    // );
     return CarouselSlider(
       items: [
-        Offers(offerImagePath: 'Images/banner.png'),
-        Offers(offerImagePath: 'Images/banner.png'),
         Offers(offerImagePath: 'Images/banner.png'),
       ],
       options: CarouselOptions(
@@ -18,7 +24,7 @@ class OfferSlider extends StatelessWidget {
         viewportFraction: 0.8,
         aspectRatio: 16 / 9,
         autoPlayCurve: Curves.fastOutSlowIn,
-        enableInfiniteScroll: true,
+        enableInfiniteScroll: false,
         autoPlayAnimationDuration: Duration(milliseconds: 777),
       ),
     );

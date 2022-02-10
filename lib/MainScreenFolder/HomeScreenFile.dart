@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/AppBar/AppBarFile.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/location_functions.dart';
 import 'Crousel.dart';
 import 'CategoryTile.dart';
@@ -105,85 +106,118 @@ class _HomeScreenState extends State<HomeScreen>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Search(), //search widget moved down here
-            SizedBox(
-              height: 10,
-            ),
-            OfferSlider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 11,
-                      right: 5.5,
-                      top: 15,
-                      bottom: 15,
-                    ),
-                    child: GestureDetector(
-                      onTap: () async {
-                        selectStreetStyle = true;
-                        selectTiffinServices = false;
-                        setState(() {});
-                      },
-                      child: FoodCategories(
-                        ImagePath: 'Images/food-trolley.svg',
-                        Caption: 'Street Style',
-                        isSelected: selectStreetStyle,
-                      ),
-                    ),
-                  ),
+            Search(),
+            Padding(
+              padding: EdgeInsets.all(12),
+              child: Container(
+                height: 80,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.black),
+                child: Row(
+                  children: [
+                    Expanded(flex: 1, child: Container()),
+                    Expanded(
+                        flex: 9,
+                        child: Container(
+                          padding: EdgeInsets.only(top: 20, left: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '13 Minutes Delivery...',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Text(
+                                'Checkout >>',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              )
+                            ],
+                          ),
+                        ))
+                  ],
                 ),
-                Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 5.5,
-                      right: 11,
-                      top: 15,
-                      bottom: 15,
-                    ),
-                    child: GestureDetector(
-                      onTap: () async {
-                        selectStreetStyle = false;
-                        selectTiffinServices = true;
-                        setState(() {});
-                      },
-                      child: FoodCategories(
-                        ImagePath: 'Images/tiffin.svg',
-                        Caption: 'Tiffin Services',
-                        isSelected: selectTiffinServices,
-                      ),
+              ),
+            ), //search widget moved down here
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 11,
+                    left: 11,
+                  ),
+                  child: Text(
+                    'Order by Cuisines',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: h1 / 33,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ],
             ),
+            CuisineTileList(),
+            // OfferSlider(),
             // Row(
-            //   mainAxisAlignment: MainAxisAlignment.start,
-            //   crossAxisAlignment: CrossAxisAlignment.end,
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   mainAxisSize: MainAxisSize.max,
             //   children: [
-            //     Padding(
-            //       padding: const EdgeInsets.only(
-            //         top: 11,
-            //         left: 11,
+            //     Expanded(
+            //       flex: 1,
+            //       child: Padding(
+            //         padding: EdgeInsets.only(
+            //           left: 11,
+            //           right: 5.5,
+            //           top: 15,
+            //           bottom: 15,
+            //         ),
+            //         child: GestureDetector(
+            //           onTap: () async {
+            //             selectStreetStyle = true;
+            //             selectTiffinServices = false;
+            //             setState(() {});
+            //           },
+            //           child: FoodCategories(
+            //             ImagePath: 'Images/food-trolley.svg',
+            //             Caption: 'Street Style',
+            //             isSelected: selectStreetStyle,
+            //           ),
+            //         ),
             //       ),
-            //       child: Text(
-            //         'Order by Cuisines',
-            //         textAlign: TextAlign.left,
-            //         style: TextStyle(
-            //           color: Colors.black,
-            //           fontSize: h1 / 33,
-            //           fontWeight: FontWeight.bold,
+            //     ),
+            //     Expanded(
+            //       flex: 1,
+            //       child: Padding(
+            //         padding: EdgeInsets.only(
+            //           left: 5.5,
+            //           right: 11,
+            //           top: 15,
+            //           bottom: 15,
+            //         ),
+            //         child: GestureDetector(
+            //           onTap: () async {
+            //             selectStreetStyle = false;
+            //             selectTiffinServices = true;
+            //             setState(() {});
+            //           },
+            //           child: FoodCategories(
+            //             ImagePath: 'Images/tiffin.svg',
+            //             Caption: 'Tiffin Services',
+            //             isSelected: selectTiffinServices,
+            //           ),
             //         ),
             //       ),
             //     ),
             //   ],
             // ),
-            // CuisineTileList(),
+            OfferSlider(),
 
             //builds the list of all the in the database
             //takes user location as a reuired parameter
