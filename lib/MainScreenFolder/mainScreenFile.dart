@@ -22,8 +22,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   String? userNumber = FirebaseAuth.instance.currentUser!.phoneNumber;
 
-  PageController _pageController = PageController();
-  TabController? tabController;
+  // PageController _pageController = PageController();
+  // TabController? tabController;
 
   @override
   void initState() {
@@ -31,13 +31,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
 
     Provider.of<UserDataProvider>(context, listen: false).getUserData();
 
-    _pageController = PageController(initialPage: widget.currentIndex);
-    tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    // _pageController = PageController(initialPage: widget.currentIndex);
+    // tabController = TabController(length: 4, vsync: this, initialIndex: 0);
   }
 
   @override
   void dispose() {
-    _pageController.dispose();
+    // _pageController.dispose();
     super.dispose();
   }
 
@@ -51,72 +51,99 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final Color selected = Color.fromRGBO(247, 193, 43, 1);
     final Color unselected = Colors.grey;
-    return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        notchMargin: 4,
-        shape: CircularNotchedRectangle(),
-        child: SizedBox(
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        bottomNavigationBar: SizedBox(
           height: 60,
-          child: TabBar(
-            labelColor: selected,
-            unselectedLabelColor: unselected,
-            isScrollable: false,
-            enableFeedback: true,
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorColor: Theme.of(context).primaryColor,
-            controller: tabController,
-            indicator: UnderlineTabIndicator(
-              insets: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 60.0),
-              borderSide: BorderSide(color: selected, width: 1.5),
+          child: BottomAppBar(
+            child: TabBar(
+              labelColor: selected,
+              unselectedLabelColor: unselected,
+              isScrollable: false,
+              enableFeedback: true,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorColor: Theme.of(context).primaryColor,
+              indicator: UnderlineTabIndicator(
+                insets: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 60.0),
+                borderSide: BorderSide(color: selected, width: 1.5),
+              ),
+              tabs: [
+                Tab(
+                  icon: Icon(CupertinoIcons.home),
+                  iconMargin: EdgeInsets.only(bottom: 4),
+                  text: 'Home',
+                ),
+                Tab(
+                  icon: Icon(CupertinoIcons.cart),
+                  iconMargin: EdgeInsets.only(bottom: 4),
+                  text: 'Cart',
+                ),
+                Tab(
+                  icon: Icon(CupertinoIcons.qrcode_viewfinder),
+                  iconMargin: EdgeInsets.only(bottom: 4),
+                  text: 'Scan',
+                ),
+                Tab(
+                  icon: Icon(CupertinoIcons.profile_circled),
+                  iconMargin: EdgeInsets.only(bottom: 4),
+                  text: 'Profile',
+                ),
+              ],
             ),
-            onTap: (value) {
-              widget.currentIndex = value;
-              _pageController.jumpToPage(value);
-              
-            },
-            tabs: [
-              Tab(
-                icon: Icon(CupertinoIcons.home),
-                iconMargin: EdgeInsets.only(bottom: 4),
-                text: 'Home',
-              ),
-              Tab(
-                icon: Icon(CupertinoIcons.cart),
-                iconMargin: EdgeInsets.only(bottom: 4),
-                text: 'Cart',
-              ),
-              Tab(
-                icon: Icon(CupertinoIcons.qrcode_viewfinder),
-                iconMargin: EdgeInsets.only(bottom: 4),
-                text: 'Scan',
-              ),
-              Tab(
-                icon: Icon(CupertinoIcons.profile_circled),
-                iconMargin: EdgeInsets.only(bottom: 4),
-                text: 'Profile',
-              ),
-            ],
           ),
         ),
-      ),
-      body: Stack(
-        children: [
-          PageView(
-            controller: _pageController,
-            children: screens,
-          ),
-
-          //Checks if any current orders exists for the current user
-          //uses Stream Builder for live updates
-          //returns a widget like a bottom NAVBAR
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: OrderFunction().fetchCurrentOrder(userNumber),
+        body: Stack(
+          children: [
+            TabBarView(
+              children: screens,
             ),
-          )
-        ],
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: OrderFunction().fetchCurrentOrder(userNumber),
+              ),
+            )
+          ],
+        ),
       ),
+      //   child: BottomAppBar(
+      //     child: TabBar(
+      //       labelColor: selected,
+      //       unselectedLabelColor: unselected,
+      //       isScrollable: false,
+      //       enableFeedback: true,
+      //       indicatorSize: TabBarIndicatorSize.tab,
+      //       indicatorColor: Theme.of(context).primaryColor,
+      //       indicator: UnderlineTabIndicator(
+      //         insets: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 60.0),
+      //         borderSide: BorderSide(color: selected, width: 1.5),
+      //       ),
+      //       tabs: [
+      //         Tab(
+      //           icon: Icon(CupertinoIcons.home),
+      //           iconMargin: EdgeInsets.only(bottom: 4),
+      //           text: 'Home',
+      //         ),
+      //         Tab(
+      //           icon: Icon(CupertinoIcons.cart),
+      //           iconMargin: EdgeInsets.only(bottom: 4),
+      //           text: 'Cart',
+      //         ),
+      //         Tab(
+      //           icon: Icon(CupertinoIcons.qrcode_viewfinder),
+      //           iconMargin: EdgeInsets.only(bottom: 4),
+      //           text: 'Scan',
+      //         ),
+      //         Tab(
+      //           icon: Icon(CupertinoIcons.profile_circled),
+      //           iconMargin: EdgeInsets.only(bottom: 4),
+      //           text: 'Profile',
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
