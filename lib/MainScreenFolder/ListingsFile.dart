@@ -181,7 +181,7 @@ class LeftSide extends StatelessWidget {
       child: Stack(clipBehavior: Clip.none, children: [
         Container(
           width: w1 * 1,
-          height: h1 * 0.3,
+          height: h1 * 0.2,
           decoration: BoxDecoration(
             color: Colors.grey.shade300,
             borderRadius: BorderRadius.only(
@@ -196,8 +196,8 @@ class LeftSide extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: MediaQuery.of(context).size.height * (-0.04),
-          right: MediaQuery.of(context).size.width * 0.69,
+          top: MediaQuery.of(context).size.height * 0.015,
+          left: MediaQuery.of(context).size.width * (-0.085),
 
           // child: Container(
           //     width: MediaQuery.of(context).size.width * 0.25,
@@ -214,34 +214,39 @@ class LeftSide extends StatelessWidget {
           //         //   ],
           //         // ),
           //         borderRadius: BorderRadius.all(Radius.circular(4))),
-          child: Stack(
-            children: [
-              Container(
-                alignment: Alignment.center,
-                child: SvgPicture.asset(
-                  'Images/tag.svg',
-                  height: MediaQuery.of(context).size.width * 0.33,
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.04,
+            width: MediaQuery.of(context).size.width * 0.34,
+            child: Stack(
+              children: [
+                Container(
+                  // alignment: Alignment.topLeft,
+
+                  child: SvgPicture.asset(
+                    'Images/tag.svg',
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              Positioned(
-                  left: MediaQuery.of(context).size.width * 0.07,
-                  top: MediaQuery.of(context).size.width * 0.12,
-                  child: Row(children: [
-                    Image.asset(
-                      'Images/discount.png',
-                      height: 14,
-                      width: 14,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      " 20% OFF",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ]))
-            ],
+                Positioned(
+                    left: MediaQuery.of(context).size.width * 0.08,
+                    top: MediaQuery.of(context).size.height * 0.0018,
+                    child: Row(children: [
+                      Image.asset(
+                        'Images/discount.png',
+                        height: 14,
+                        width: 14,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        " 20% OFF",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ]))
+              ],
+            ),
           ),
         ),
         // Positioned(
@@ -355,7 +360,7 @@ class RightSide extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.18,
+                    width: MediaQuery.of(context).size.width * 0.2,
                     height: MediaQuery.of(context).size.height * 0.02,
                     child: foodistaanCertified == true
                         ? FittedBox(
@@ -418,7 +423,7 @@ class RightSide extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(5),
                 child: Text(
-                  'Cost for Two ₹ $cost',
+                  '₹ $cost for two',
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 10,
@@ -571,7 +576,7 @@ class RightSide extends StatelessWidget {
           ),
 
           SizedBox(
-            height: 10,
+            height: 5,
           ),
           // foodistaanCertified == true
           //     ? Row(
