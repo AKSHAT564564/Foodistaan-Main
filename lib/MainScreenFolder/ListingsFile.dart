@@ -485,7 +485,7 @@ class RightSide extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor: Colors.pink,
+                                    backgroundColor: kGrey,
                                     radius: 8,
                                     child: Center(
                                       child: Icon(
@@ -517,7 +517,7 @@ class RightSide extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   CircleAvatar(
-                                    backgroundColor: Colors.pink,
+                                    backgroundColor: kGrey,
                                     radius: 8,
                                     child: Center(
                                       child: Icon(
