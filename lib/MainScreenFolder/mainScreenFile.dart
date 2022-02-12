@@ -49,6 +49,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     UserProfile(),
   ];
 
+  bottomAppBarController(value) {
+    widget.currentIndex = value;
+    _pageController.jumpToPage(value);
+    tabController!.index = value;
+  }
+
   Widget build(BuildContext context) {
     final Color selected = Color.fromRGBO(247, 193, 43, 1);
     final Color unselected = Colors.grey;
@@ -65,8 +71,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorColor: Theme.of(context).primaryColor,
             onTap: (value) {
-              widget.currentIndex = value;
-              _pageController.jumpToPage(value);
+              bottomAppBarController(value);
             },
             indicator: UnderlineTabIndicator(
               insets: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 60.0),
@@ -74,12 +79,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             ),
             tabs: [
               Tab(
-                icon: Icon(CupertinoIcons.home),
+                icon: Icon(Icons.home),
                 iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Home',
               ),
               Tab(
-                icon: Icon(CupertinoIcons.cart),
+                icon: Icon(Icons.shopping_cart),
                 iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Cart',
               ),
@@ -100,11 +105,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       body: Stack(
         children: [
           PageView(
-            // scrollDirection: Axis.vertical,
             onPageChanged: (value) {
-              widget.currentIndex = value;
-              _pageController.jumpToPage(value);
-              tabController!.index = value;
+              bottomAppBarController(value);
             },
             controller: _pageController,
             children: screens,
