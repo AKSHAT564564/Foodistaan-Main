@@ -152,11 +152,25 @@ class _SearchState extends State<Search> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 12,
-              ),
-              child: SizedBox(
-                height: h1 * 0.05,
+              // padding: EdgeInsets.symmetric(
+              //   horizontal: 12,
+              // ),
+              padding: EdgeInsets.only(left: 12, right: 8),
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      // color: Colors.transparent,
+                      // spreadRadius: 10,
+                      blurRadius: 5,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  color: Colors.white60,
+                ),
+                height: h1 * 0.055,
                 child: TextFormField(
                   controller: _searchController,
                   onChanged: (v) async {
@@ -166,38 +180,62 @@ class _SearchState extends State<Search> {
                   textAlign: TextAlign.start,
                   obscureText: false,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(0),
-                      hintText: 'Search Cuisines',
+                      contentPadding: EdgeInsets.only(
+                        left: 8,
+                      ),
+                      // hintText: 'Search Cuisines',
+                      hintText: 'Search your favourite food',
                       hintStyle: TextStyle(
                         color: Colors.grey,
+                        fontSize: 15,
                       ),
-                      suffixIcon: IconButton(
-                          alignment: Alignment.center,
-                          onPressed: () {
-                            _searchController.text = '';
-                            searchResults.value = [];
-                            setState(() {}); //for cross icon in searchbar
-                          },
-                          icon: Icon(
-                            Icons.clear_rounded,
-                            color: _searchController.text.isNotEmpty
-                                ? Colors.grey
-                                : Colors.transparent,
-                          )),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: kGrey,
+                      // suffixIcon: IconButton(
+                      //     alignment: Alignment.center,
+                      //     onPressed: () {
+                      //       _searchController.text = '';
+                      //       searchResults.value = [];
+                      //       setState(() {}); //for cross icon in searchbar
+                      //     },
+                      //     icon: Icon(
+                      //       Icons.clear_rounded,
+                      //       color: _searchController.text.isNotEmpty
+                      //           ? Colors.grey
+                      //           : Colors.transparent,
+                      //     )),
+                      suffixIcon: Padding(
+                        padding: EdgeInsets.all(0.0),
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            top: 1.5,
+                            bottom: 1.5,
+                            left: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFAB84C),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.search,
+                            // size: 22,
+                            // color: kGrey,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                       focusedBorder: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xFFFAB84C), width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                          borderSide: BorderSide(
+                            // color: Color(0xFFFAB84C),
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
                       enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(8),
+                          Radius.circular(30),
                         ),
                         borderSide: BorderSide(
-                          color: Color(0xFFFAB84C),
+                          // color: Color(0xFFFAB84C),
+                          color: Colors.transparent,
                           width: 1,
                         ),
                       )),
