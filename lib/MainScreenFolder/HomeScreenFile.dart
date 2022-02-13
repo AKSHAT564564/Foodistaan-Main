@@ -130,14 +130,20 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             CuisineTileList(),
             Padding(
-              padding: EdgeInsets.all(12),
+              padding: EdgeInsets.only(top: 1, left: 11, right: 11, bottom: 11),
               child: GestureDetector(
                 onTap: () {},
                 child: Container(
                   height: 70,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Color.fromRGBO(67, 73, 101, 1)),
+                    borderRadius: BorderRadius.circular(50),
+                    color: Color.fromRGBO(67, 73, 101, 1),
+                    // gradient: LinearGradient(colors: [
+                    //   // Color.fromRGBO(117, 14, 14, 0.2),
+                    //   Color.fromRGBO(67, 73, 101, 0.8),
+                    //   Color.fromRGBO(67, 73, 101, 1),
+                    // ]),
+                  ),
                   child: Row(
                     children: [
                       // Expanded(flex: 1, child: Container()),
@@ -156,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen>
                               Text(
                                 '12 Minutes Delivery...',
                                 style: TextStyle(
-                                    color: Color.fromRGBO(252, 225, 158, 1),
+                                    color: Color.fromRGBO(251, 225, 158, 1),
                                     fontSize: 20),
                               ),
                               Text(
