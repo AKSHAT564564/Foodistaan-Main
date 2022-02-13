@@ -107,41 +107,6 @@ class _HomeScreenState extends State<HomeScreen>
           mainAxisSize: MainAxisSize.min,
           children: [
             Search(),
-            Padding(
-              padding: EdgeInsets.all(12),
-              child: Container(
-                height: 80,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.black),
-                child: Row(
-                  children: [
-                    Expanded(flex: 1, child: Container()),
-                    Expanded(
-                        flex: 9,
-                        child: Container(
-                          padding: EdgeInsets.only(top: 20, left: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '13 Minutes Delivery...',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                'Checkout >>',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
-                              )
-                            ],
-                          ),
-                        ))
-                  ],
-                ),
-              ),
-            ), //search widget moved down here
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -164,6 +129,73 @@ class _HomeScreenState extends State<HomeScreen>
               ],
             ),
             CuisineTileList(),
+            Padding(
+              padding: EdgeInsets.all(12),
+              child: GestureDetector(
+                onTap: () {},
+                child: Container(
+                  height: 70,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Color.fromRGBO(67, 73, 101, 1)),
+                  child: Row(
+                    children: [
+                      // Expanded(flex: 1, child: Container()),
+
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                        flex: 8,
+                        child: Container(
+                          padding: EdgeInsets.only(top: 15, left: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '12 Minutes Delivery...',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(252, 225, 158, 1),
+                                    fontSize: 20),
+                              ),
+                              Text(
+                                'See restaurants',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          child: Row(
+                            children: [
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.065,
+                                child: Image.asset('assets/images/logotp.png'),
+                              ),
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.022,
+                                child: Image.asset('assets/images/+.png'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ), //search widget moved down here
+
             // OfferSlider(),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.center,
@@ -217,13 +249,30 @@ class _HomeScreenState extends State<HomeScreen>
             //     ),
             //   ],
             // ),
-            OfferSlider(),
+            // OfferSlider(),
 
             //builds the list of all the in the database
             //takes user location as a reuired parameter
             //to sort the rest. Data according to user location
-            Listings(
-              userLocation: userLocation,
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    'Restaurants near you',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+                Listings(
+                  userLocation: userLocation,
+                ),
+              ],
             ),
             SizedBox(
               height: 33,
