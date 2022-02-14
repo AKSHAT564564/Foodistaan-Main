@@ -149,12 +149,12 @@ class _HomeScreenState extends State<HomeScreen>
                       // Expanded(flex: 1, child: Container()),
 
                       SizedBox(
-                        width: 5,
+                        width: 4,
                       ),
                       Expanded(
                         flex: 8,
                         child: Container(
-                          padding: EdgeInsets.only(top: 15, left: 10),
+                          padding: EdgeInsets.only(top: 14, left: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       SizedBox(
-                        width: 5,
+                        width: 4,
                       )
                     ],
                   ),
@@ -265,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10, bottom: 8),
                   child: Text(
                     'Restaurants near you',
                     style: TextStyle(
@@ -275,8 +275,10 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ),
                 ),
-                Listings(
-                  userLocation: userLocation,
+                Center(
+                  child: Listings(
+                    userLocation: userLocation,
+                  ),
                 ),
               ],
             ),

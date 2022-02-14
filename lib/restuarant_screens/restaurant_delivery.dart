@@ -7,7 +7,7 @@ import 'package:foodistan/restuarant_screens/restaurant_delivery_review.dart';
 import 'package:foodistan/restuarant_screens/restaurant_main.dart';
 import 'package:foodistan/restuarant_screens/restaurant_overview.dart';
 import 'package:foodistan/restuarant_screens/restuarant_delivery_menu.dart';
-import 'package:foodistan/restuarant_screens/testRestaurant_main.dart';
+import 'package:foodistan/restuarant_screens/restaurantDetailScreen.dart';
 
 import 'package:foodistan/widgets/total_bill_bottam_widget.dart';
 import 'package:provider/provider.dart';
@@ -121,7 +121,7 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                           padding: EdgeInsets.all(8),
                           child: Center(
                             // For testing
-                            child: TestRestaurantMain(
+                            child: RestaurantDetailScreen(
                                 restaurant_details: widget.items,
                                 vendorId: widget.vendor_id,
                                 vendorName: widget.vendorName),

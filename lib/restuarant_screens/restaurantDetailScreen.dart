@@ -3,22 +3,22 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/restuarant_screens/restaurant_delivery_review.dart';
-import 'package:foodistan/restuarant_screens/restaurant_overview.dart';
 import 'package:foodistan/restuarant_screens/restuarant_delivery_menu.dart';
-import 'package:foodistan/restuarant_screens/testRestaurantOverview.dart';
+import 'package:foodistan/restuarant_screens/restaurantOverviewCard.dart';
 import 'package:foodistan/widgets/options.dart';
 
-class TestRestaurantMain extends StatefulWidget {
+class RestaurantDetailScreen extends StatefulWidget {
   final restaurant_details;
   final vendorId;
   final vendorName;
-  TestRestaurantMain({this.restaurant_details, this.vendorId, this.vendorName});
+  RestaurantDetailScreen(
+      {this.restaurant_details, this.vendorId, this.vendorName});
 
   @override
-  _TestRestaurantMainState createState() => _TestRestaurantMainState();
+  _RestaurantDetailScreenState createState() => _RestaurantDetailScreenState();
 }
 
-class _TestRestaurantMainState extends State<TestRestaurantMain> {
+class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   bool isDeliverySelected = false;
   bool isPickupSelected = false;
   bool isOverviewSelected = false;
@@ -1142,7 +1142,7 @@ class _OverviewSelectedWidgetState extends State<OverviewSelectedWidget> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 1.5,
-      child: TestRestaurantOverview(),
+      child: RestaurantOverviewCard(),
       // RestaurantOverview(),
     );
   }

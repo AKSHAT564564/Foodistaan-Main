@@ -82,9 +82,12 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Streato',
             theme: ThemeData(
-              textTheme: GoogleFonts.montserratTextTheme(
+              textTheme: GoogleFonts.quicksandTextTheme(
                 Theme.of(context).textTheme,
               ),
+              // textTheme: GoogleFonts.montserratTextTheme(
+              //   Theme.of(context).textTheme,
+              // ),
               primaryColor: Colors.yellow.shade700,
             ),
           );
