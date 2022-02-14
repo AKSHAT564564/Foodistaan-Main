@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:foodistan/restuarant_screens/restaurant_delivery_review.dart';
 
-class TestRestaurantOverview extends StatefulWidget {
+class RestaurantOverviewCard extends StatefulWidget {
   static String id = 'restaurant_overview';
 
   @override
-  _TestRestaurantOverviewState createState() => _TestRestaurantOverviewState();
+  _RestaurantOverviewCardState createState() => _RestaurantOverviewCardState();
 }
 
-class _TestRestaurantOverviewState extends State<TestRestaurantOverview> {
+class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
   bool isMenuSelected = true;
   bool isReviewSelected = false;
 

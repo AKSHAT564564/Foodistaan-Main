@@ -92,7 +92,7 @@ class _ListingsState extends State<Listings> {
               },
             )
           : CircularProgressIndicator(
-              color: Colors.yellow,
+              color: Colors.yellow.shade700,
             );
     });
   }
@@ -190,14 +190,14 @@ class LeftSide extends StatelessWidget {
               image: NetworkImage(
                 foodImage,
               ),
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               alignment: FractionalOffset.center,
             ),
           ),
         ),
         Positioned(
-          top: MediaQuery.of(context).size.height * 0.015,
-          left: MediaQuery.of(context).size.width * (-0.085),
+          top: MediaQuery.of(context).size.height * 0.017,
+          left: MediaQuery.of(context).size.width * (-0.084),
 
           // child: Container(
           //     width: MediaQuery.of(context).size.width * 0.25,
@@ -215,8 +215,8 @@ class LeftSide extends StatelessWidget {
           //         // ),
           //         borderRadius: BorderRadius.all(Radius.circular(4))),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.04,
-            width: MediaQuery.of(context).size.width * 0.34,
+            height: MediaQuery.of(context).size.height * 0.054,
+            width: MediaQuery.of(context).size.width * 0.33,
             child: Stack(
               children: [
                 Container(
@@ -228,13 +228,13 @@ class LeftSide extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    left: MediaQuery.of(context).size.width * 0.08,
-                    top: MediaQuery.of(context).size.height * 0.0018,
+                    top: MediaQuery.of(context).size.height * 0.0068,
+                    left: MediaQuery.of(context).size.width * 0.085,
                     child: Row(children: [
                       Image.asset(
                         'Images/discount.png',
-                        height: 14,
-                        width: 14,
+                        height: 15,
+                        width: 15,
                         color: Colors.white,
                       ),
                       Text(
@@ -342,66 +342,70 @@ class RightSide extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Container(
-              width: w1 * 0.7,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    name.length > 20 ? name.substring(0, 19) + '...' : name,
-                    textAlign: TextAlign.start,
-                    maxLines: 1,
-                    overflow: TextOverflow.clip,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: w1 * 0.7,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        name.length > 20 ? name.substring(0, 19) + '...' : name,
+                        textAlign: TextAlign.start,
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.1,
+                        height: MediaQuery.of(context).size.height * 0.014,
+                        // margin: EdgeInsets.only(bottom: 3),
+                        child: foodistaanCertified == true
+                            ? FittedBox(
+                                fit: BoxFit.fill,
+                                child: Image.asset(
+                                    'assets/images/Streato plus tag.png'),
+                                // child: SvgPicture.asset(
+                                //   'Images/streatoplus.svg',
+                                //   // width: MediaQuery.of(context).size.width * 0.15,
+                                //   // height: MediaQuery.of(context).size.height * 0.1,
+                                // ),
+                              )
+                            : SizedBox(),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 5,
+                ),
+                Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: kGreen,
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.1,
-                    height: MediaQuery.of(context).size.height * 0.028,
-                    child: foodistaanCertified == true
-                        ? FittedBox(
-                            fit: BoxFit.fill,
-                            child: Image.asset(
-                                'assets/images/Streato plus tag.png'),
-                            // child: SvgPicture.asset(
-                            //   'Images/streatoplus.svg',
-                            //   // width: MediaQuery.of(context).size.width * 0.15,
-                            //   // height: MediaQuery.of(context).size.height * 0.1,
-                            // ),
-                          )
-                        : SizedBox(),
+                  child: Row(
+                    children: [
+                      Text(
+                        "4.7",
+                        style: TextStyle(fontSize: 10, color: Colors.white),
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 12,
+                        color: Colors.white,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: kGreen,
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    "4.7",
-                    style: TextStyle(fontSize: 10, color: Colors.white),
-                  ),
-                  Icon(
-                    Icons.star,
-                    size: 12,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            )
-          ]),
+                )
+              ]),
           SizedBox(
             height: 5,
           ),
@@ -426,7 +430,7 @@ class RightSide extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(5),
+                // padding: EdgeInsets.all(5),
                 child: Text(
                   '₹ $cost for two',
                   style: TextStyle(
