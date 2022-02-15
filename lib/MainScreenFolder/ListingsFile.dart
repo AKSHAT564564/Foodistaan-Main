@@ -344,12 +344,12 @@ class RightSide extends StatelessWidget {
         children: [
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Container(
                   width: w1 * 0.7,
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
                         name.length > 20 ? name.substring(0, 19) + '...' : name,
@@ -358,7 +358,7 @@ class RightSide extends StatelessWidget {
                         overflow: TextOverflow.clip,
                         style: TextStyle(
                           color: Colors.black,
-                          fontWeight: FontWeight.bold,
+                          // fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
                       ),
@@ -366,12 +366,12 @@ class RightSide extends StatelessWidget {
                         width: 5,
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.1,
-                        height: MediaQuery.of(context).size.height * 0.014,
+                        width: 64,
+                        height: 16,
                         // margin: EdgeInsets.only(bottom: 3),
                         child: foodistaanCertified == true
                             ? FittedBox(
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                                 child: Image.asset(
                                     'assets/images/Streato plus tag.png'),
                                 // child: SvgPicture.asset(

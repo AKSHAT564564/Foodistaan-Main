@@ -55,7 +55,7 @@ class _ReviewerWidgetState extends State<ReviewerWidget> {
             ),
             Text(
               "Great place must visit. I ordered few Masala Dosa and it came within a minute. They were crispy and delicious, i would definitely recommend it to you.",
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.justify,
               style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width * 0.035,
               ),
