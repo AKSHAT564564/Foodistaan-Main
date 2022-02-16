@@ -44,7 +44,8 @@ dependencies:
   sizer: ^2.0.15
   solid_bottom_sheet: ^0.1.10
   uuid: ^3.0.5
-
+  #URL Launcher for Scanner
+  url_launcher: ^6.0.20
   # For Cached Network Image
   # cached_network_image: ^3.2.0
 

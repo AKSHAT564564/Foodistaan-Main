@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodistan/constants.dart';
 
 class CuisineTileList extends StatelessWidget {
   List CuisineTiles = [
@@ -105,10 +106,12 @@ class Cuisines extends StatelessWidget {
           width: w1 / 4.65,
           height: h1 / 9.5,
           decoration: BoxDecoration(
-            color: BgColor,
+            // color: BgColor,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: BorderColor, // red as border color
+              // color: kYellow,
+              // color: Colors.black,
               width: 1.5,
             ),
           ),
@@ -122,19 +125,19 @@ class Cuisines extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(Text2,
-                            style: TextStyle(
-                              color: BorderColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: w1 / 25,
-                            ),
-                            textAlign: TextAlign.left),
-                      ],
-                    ),
+                    // Column(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     Text(Text2,
+                    //         style: TextStyle(
+                    //           color: BorderColor,
+                    //           fontWeight: FontWeight.bold,
+                    //           fontSize: w1 / 25,
+                    //         ),
+                    //         textAlign: TextAlign.left),
+                    //   ],
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       mainAxisSize: MainAxisSize.max,
