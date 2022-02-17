@@ -174,33 +174,20 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                       ),
-                      Spacer(),
                       Expanded(
                         flex: 2,
                         child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
                             children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.061,
-                                    child:
-                                        Image.asset('assets/images/logotp.png'),
-                                  ),
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.019,
-                                    child: Image.asset('assets/images/+.png'),
-                                  ),
-                                ],
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.065,
+                                child: Image.asset('assets/images/logotp.png'),
                               ),
-                              Text(
-                                'Streatoplus',
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 8),
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.022,
+                                child: Image.asset('assets/images/+.png'),
                               ),
                             ],
                           ),

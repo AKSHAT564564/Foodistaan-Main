@@ -1445,7 +1445,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                   width: 10,
                                 ),
                                 Text(
-                                  'If you choose to cancel your order , 60 seconds will be granted. \npost 60 second, cancellation fee will be charged',
+                                  'If you choose to cancel your oredr , 60 seconds will be granted. \npost 60 second, cancellation fee will be charged',
                                   style: TextStyle(
                                     color: Color.fromRGBO(153, 153, 153, 1),
                                     fontWeight: FontWeight.w400,
