@@ -21,11 +21,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:foodistan/UserLogin/LoginScreen.dart';
 
 void main() async {
-  // SystemChrome.setPreferredOrientations(
-  //   [
-  //     DeviceOrientation.portraitUp,
-  //   ],
-  // );
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
