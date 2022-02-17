@@ -155,7 +155,7 @@ class _SearchState extends State<Search> {
               // padding: EdgeInsets.symmetric(
               //   horizontal: 12,
               // ),
-              padding: EdgeInsets.only(left: 12, right: 8),
+              padding: EdgeInsets.only(left: 8, right: 8),
               child: Container(
                 decoration: BoxDecoration(
                   boxShadow: <BoxShadow>[
@@ -181,7 +181,7 @@ class _SearchState extends State<Search> {
                   obscureText: false,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(
-                        left: 8,
+                        left: 3,
                       ),
                       // hintText: 'Search Cuisines',
                       hintText: 'Search your favourite food',

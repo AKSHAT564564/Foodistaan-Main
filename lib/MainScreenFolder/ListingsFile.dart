@@ -349,7 +349,7 @@ class RightSide extends StatelessWidget {
                 Container(
                   width: w1 * 0.7,
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         name.length > 20 ? name.substring(0, 19) + '...' : name,
@@ -366,9 +366,10 @@ class RightSide extends StatelessWidget {
                         width: 5,
                       ),
                       Container(
-                        width: 64,
-                        height: 16,
+                        width: 32,
+                        height: 8,
                         // margin: EdgeInsets.only(bottom: 3),
+                        // padding: EdgeInsets.all(5),
                         child: foodistaanCertified == true
                             ? FittedBox(
                                 fit: BoxFit.cover,
