@@ -28,13 +28,7 @@ void main() async {
   // );
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    // DeviceOrientation.portraitDown,
-  ]).then((_) {
-    runApp(MyApp());
-  });
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
