@@ -181,7 +181,7 @@ class _SearchState extends State<Search> {
                   obscureText: false,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(
-                        left: 3,
+                        left: 8,
                       ),
                       // hintText: 'Search Cuisines',
                       hintText: 'Search your favourite food',

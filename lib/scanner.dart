@@ -141,27 +141,6 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 ),
               ],
             );
-
-            // return AlertDialog(
-            //   title: Text('Not a verified streato member'),
-            //   content: SingleChildScrollView(
-            //     child: ListBody(
-            //       children: <Widget>[
-            //         Text(
-            //             'Code Type: ${describeEnum(scanData.format).toUpperCase()}'),
-            //         Text('Data: ${scanData.code}'),
-            //       ],
-            //     ),
-            //   ),
-            //   actions: <Widget>[
-            //     TextButton(
-            //       child: Text('Ok'),
-            //       onPressed: () {
-            //         Navigator.of(context).pop();
-            //       },
-            //     ),
-            //   ],
-            // );
           },
         ).then((value) => controller.resumeCamera());
       }

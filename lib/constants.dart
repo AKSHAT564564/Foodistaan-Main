@@ -12,3 +12,4 @@ const Blue = Color(0xFF0078D1);
 const darkBlue = Color(0xFF005492);
 const kBlue = Colors.blue;
 const kGrey = Color.fromRGBO(153, 153, 153, 1);
+const kGreyLight = Color.fromRGBO(239, 238, 238, 1);

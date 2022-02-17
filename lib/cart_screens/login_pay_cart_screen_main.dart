@@ -131,22 +131,33 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
                     Navigator.pushNamed(context, 'H');
                   },
                   child: Container(
-                    height: 35,
+                    height: 45,
                     width: double.infinity,
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                    // decoration: BoxDecoration(
+                    //   color: Colors.white,
+                    //   border: Border.all(
+                    //     color: Colors.yellow.shade700,
+                    //     width: 1.5,
+                    //   ),
+                    //   borderRadius: BorderRadius.circular(7),
+                    // ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      // color: Colors.white,
+                      color: Color.fromRGBO(247, 193, 43, 1),
                       border: Border.all(
                         color: Colors.yellow.shade700,
                         width: 1.5,
                       ),
-                      borderRadius: BorderRadius.circular(7),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: Center(
                       child: Text(
                         'Add Items to Cart',
                         style: TextStyle(
-                          color: Colors.yellow.shade700,
+                          // color: Colors.yellow.shade700,
                           fontSize: 15,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -162,21 +173,32 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
                   Navigator.pushNamed(context, 'H');
                 },
                 child: Container(
-                  height: 35,
+                  height: 45,
                   width: double.infinity,
+                  margin: EdgeInsets.only(left: 10, right: 10),
+                  // decoration: BoxDecoration(
+                  //   color: Colors.white,
+                  //   border: Border.all(
+                  //     color: Colors.yellow.shade700,
+                  //     width: 1.5,
+                  //   ),
+                  //   borderRadius: BorderRadius.circular(7),
+                  // ),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    // color: Colors.white,
+                    color: Color.fromRGBO(247, 193, 43, 1),
                     border: Border.all(
                       color: Colors.yellow.shade700,
                       width: 1.5,
                     ),
-                    borderRadius: BorderRadius.circular(7),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   child: Center(
                     child: Text(
                       'Add Items to Cart',
                       style: TextStyle(
-                        color: Colors.yellow.shade700,
+                        // color: Colors.yellow.shade700,
+                        fontWeight: FontWeight.w600,
                         fontSize: 15,
                       ),
                     ),
@@ -628,7 +650,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                           )
                         : hasCoupon == true && minCouponValue > totalPrice
                             ? Text(
-                                'Add More To cart',
+                                'Add More To Cart',
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 16),
                               )
@@ -777,11 +799,11 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                 ? Container(
                                     height: MediaQuery.of(context).size.height *
                                         0.1,
-                                    color: Color.fromRGBO(255, 252, 222, 1),
-                                    padding: EdgeInsets.only(
-                                        left: 11, right: 11, top: 15),
+                                    // color: Color.fromRGBO(255, 252, 222, 1),
+                                    // padding: EdgeInsets.only(
+                                    //     left: 11, right: 11, top: 15),
                                     child: Container(
-                                      padding: EdgeInsets.all(8),
+                                      padding: EdgeInsets.all(11),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(8),

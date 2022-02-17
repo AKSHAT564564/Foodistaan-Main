@@ -80,7 +80,12 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
         children: [
           Container(
               child: (menuItems.isEmpty && cartId == '')
-                  ? spinkit
+                  // ? spinkit
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: kYellow,
+                      ),
+                    )
                   : GridView.count(
                       padding: EdgeInsets.zero,
                       physics: NeverScrollableScrollPhysics(),

@@ -113,6 +113,21 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                             fontWeight: FontWeight.normal,
                             color: Colors.grey),
                       ),
+                      SizedBox(
+                        height: 2.5,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          return null;
+                        },
+                        child: Text(
+                          "know more",
+                          style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.grey),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -247,55 +262,55 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      // padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            maxRadius: 10,
-                            backgroundColor: kGreen,
-                            child: Icon(
-                              Icons.attach_money,
-                              size: 10,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            " Sanitisation check",
-                            style: TextStyle(color: Colors.grey, fontSize: 8),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      // padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            maxRadius: 10,
-                            backgroundColor: Colors.blue,
-                            child: Icon(
-                              Icons.attach_money,
-                              size: 10,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            " Hygiene check",
-                            style: TextStyle(color: Colors.grey, fontSize: 8),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                )
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     Container(
+                //       // padding: EdgeInsets.all(10),
+                //       child: Row(
+                //         children: [
+                //           CircleAvatar(
+                //             maxRadius: 10,
+                //             backgroundColor: kGreen,
+                //             child: Icon(
+                //               Icons.attach_money,
+                //               size: 10,
+                //               color: Colors.white,
+                //             ),
+                //           ),
+                //           Text(
+                //             " Sanitisation check",
+                //             style: TextStyle(color: Colors.grey, fontSize: 8),
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //     SizedBox(
+                //       width: 20,
+                //     ),
+                //     Container(
+                //       // padding: EdgeInsets.all(10),
+                //       child: Row(
+                //         children: [
+                //           CircleAvatar(
+                //             maxRadius: 10,
+                //             backgroundColor: Colors.blue,
+                //             child: Icon(
+                //               Icons.attach_money,
+                //               size: 10,
+                //               color: Colors.white,
+                //             ),
+                //           ),
+                //           Text(
+                //             " Hygiene check",
+                //             style: TextStyle(color: Colors.grey, fontSize: 8),
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //   ],
+                // )
               ]),
             ),
             Container(
@@ -506,7 +521,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
             //     ],
             //   ),
             // ),
-            // OfferTagsWidget(),
+            OfferTagsWidget(),
           ],
         ),
       ),
