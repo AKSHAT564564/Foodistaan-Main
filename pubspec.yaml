@@ -58,3 +58,8 @@ flutter:
   assets:
     - assets/images/
     - Images/
+  fonts:
+    - family: Metropolis
+      fonts:
+        - asset: assets/fonts/Metropolis-Regular.otf
+    

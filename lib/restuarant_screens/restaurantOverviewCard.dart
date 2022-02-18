@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/restuarant_screens/restaurant_delivery_review.dart';
 
 class RestaurantOverviewCard extends StatefulWidget {
@@ -27,10 +28,10 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
           Column(
             children: [
               Container(
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.018,
-                  right: MediaQuery.of(context).size.width * 0.018,
-                ),
+                // margin: EdgeInsets.only(
+                //   left: MediaQuery.of(context).size.width * 0.014,
+                //   right: MediaQuery.of(context).size.width * 0.014,
+                // ),
                 height: MediaQuery.of(context).size.height * 0.1,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -39,32 +40,35 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                       Icon(
                         Icons.pin_drop,
                         size: 32,
+                        color: kBlack,
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Location",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.53,
-                              ),
-                              Text("Direction",
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.855,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Location",
                                   style: TextStyle(
-                                    color: Color.fromRGBO(240, 54, 54, 1),
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 12,
-                                  )),
-                            ],
+                                    // color: Colors.black87,
+                                    color: kBlack,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                Text("Direction",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(240, 54, 54, 1),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12,
+                                    )),
+                              ],
+                            ),
                           ),
                           Text(
                             "Sector 12, House No. 14, Rohni, Delhi",
@@ -84,7 +88,11 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                                     fontWeight: FontWeight.w600,
                                     fontSize: 10,
                                   )),
-                              Icon(Icons.arrow_drop_down_sharp),
+                              Icon(
+                                Icons.arrow_drop_down_sharp,
+                                // color: Colors.black87,
+                                color: kBlack,
+                              ),
                             ],
                           ),
                         ],
@@ -92,9 +100,9 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                     ]),
               ),
               Container(
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.018,
-                ),
+                // margin: EdgeInsets.only(
+                //   left: MediaQuery.of(context).size.width * 0.014,
+                // ),
                 height: MediaQuery.of(context).size.height * 0.08,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -102,6 +110,8 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                     children: [
                       Icon(
                         Icons.lock_clock,
+                        // color: Colors.black87,
+                        color: kBlack,
                         size: 32,
                       ),
                       Column(
@@ -112,6 +122,7 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                             "Timings",
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
+                              color: kBlack,
                               fontSize: 14,
                             ),
                           ),
@@ -124,7 +135,10 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                                     fontSize: 12,
                                     color: Color.fromRGBO(107, 107, 107, 1)),
                               ),
-                              Icon(Icons.arrow_drop_down_sharp),
+                              Icon(
+                                Icons.arrow_drop_down_sharp,
+                                color: kBlack,
+                              ),
                             ],
                           ),
                         ],
@@ -132,9 +146,9 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                     ]),
               ),
               Container(
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.018,
-                ),
+                // margin: EdgeInsets.only(
+                //   left: MediaQuery.of(context).size.width * 0.014,
+                // ),
                 height: MediaQuery.of(context).size.height * 0.08,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -143,6 +157,7 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                       Icon(
                         Icons.monetization_on_rounded,
                         size: 32,
+                        color: kBlack,
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -153,6 +168,7 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
+                              color: kBlack,
                             ),
                           ),
                           Text(
@@ -167,9 +183,9 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                     ]),
               ),
               Container(
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.018,
-                ),
+                // margin: EdgeInsets.only(
+                //   left: MediaQuery.of(context).size.width * 0.014,
+                // ),
                 height: MediaQuery.of(context).size.height * 0.05,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -178,6 +194,7 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                       Icon(
                         Icons.star_border,
                         size: 32,
+                        color: kBlack,
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -187,6 +204,7 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                             "Reviews",
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
+                              color: kBlack,
                               fontSize: 14,
                             ),
                           ),
@@ -204,29 +222,31 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
               Container(
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.width * 0.015,
-                  left: MediaQuery.of(context).size.width * 0.018,
-                  right: MediaQuery.of(context).size.width * 0.018,
+                  // left: MediaQuery.of(context).size.width * 0.014,
+                  // right: MediaQuery.of(context).size.width * 0.014,
                 ),
                 height: MediaQuery.of(context).size.height * 0.35,
                 child: RestuarantDeliveryReview(),
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.018,
-                  // right: MediaQuery.of(context).size.width * 0.018,
-                ),
+                width: MediaQuery.of(context).size.width * 1,
+                // margin: EdgeInsets.only(
+                //     // left: MediaQuery.of(context).size.width * 0.018,
+                //     // right: MediaQuery.of(context).size.width * 0.018,
+                //     ),
                 child: Center(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             "Menu",
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 24,
+                              color: kBlack,
                             ),
                           ),
                           SizedBox(
@@ -241,14 +261,16 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
-                      ),
+                      // SizedBox(
+                      //   height: MediaQuery.of(context).size.height * 0.01,
+                      // ),
                       Container(
                         // width: MediaQuery.of(context).size.width * 0.9,
+                        margin: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.02),
                         height: MediaQuery.of(context).size.height * 0.17,
                         child: ListView(
-                            padding: EdgeInsets.all(0),
+                            // padding: EdgeInsets.all(0),
                             scrollDirection: Axis.horizontal,
                             children: [
                               Image.asset('assets/images/menu.png'),
@@ -260,7 +282,7 @@ class _RestaurantOverviewCardState extends State<RestaurantOverviewCard> {
                       ),
                       Container(
                         margin: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.width * 0.05),
+                            top: MediaQuery.of(context).size.height * 0.03),
                         width: MediaQuery.of(context).size.width * 0.845,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -310,10 +332,11 @@ class overviewBottomWidget extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.only(
-            top: MediaQuery.of(context).size.width * 0.125,
+            top: MediaQuery.of(context).size.height * 0.055,
+            // left: MediaQuery.of(context).size.width * 0.0185,
+            // right: MediaQuery.of(context).size.width * 0.018,
           ),
-          padding: EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 1,
           height: MediaQuery.of(context).size.height * 0.201,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,6 +345,7 @@ class overviewBottomWidget extends StatelessWidget {
                 "Other Info",
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
+                  color: kBlack,
                   fontSize: 13,
                 ),
               ),
@@ -438,28 +462,28 @@ class overViewBottomWidgetSecond extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery.of(context).size.width * 1,
       height: MediaQuery.of(context).size.height * 0.12,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Container(
+          //   margin: EdgeInsets.only(
+          //     left: MediaQuery.of(context).size.width * 0.04,
+          //     // top: MediaQuery.of(context).size.width * 0.04,
+          //   ),
+          //   child: Image.asset(
+          //     'assets/images/Group 13.png',
+          //     // scale: 4,
+          //     alignment: Alignment.bottomLeft,
+          //     height: MediaQuery.of(context).size.height * 0.06,
+          //     width: MediaQuery.of(context).size.height * 0.4,
+          //   ),
+          // ),
           Container(
             margin: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.04,
-              // top: MediaQuery.of(context).size.width * 0.04,
-            ),
-            child: Image.asset(
-              'assets/images/Group 13.png',
-              // scale: 4,
-              alignment: Alignment.bottomLeft,
-              height: MediaQuery.of(context).size.height * 0.06,
-              width: MediaQuery.of(context).size.height * 0.4,
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.04,
-              // top: MediaQuery.of(context).size.width * 0.04,
+              // left: MediaQuery.of(context).size.width * 0.025,
+              top: MediaQuery.of(context).size.height * 0.04,
             ),
             child: Wrap(
               children: [

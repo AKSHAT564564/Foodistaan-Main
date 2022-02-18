@@ -86,9 +86,11 @@ class MyApp extends StatelessWidget {
               // textTheme: GoogleFonts.quicksandTextTheme(
               //   Theme.of(context).textTheme,
               // ),
-              textTheme: GoogleFonts.montserratTextTheme(
-                Theme.of(context).textTheme,
-              ),
+              // textTheme: GoogleFonts.montserratTextTheme(
+              //   Theme.of(context).textTheme,
+              // ),
+              fontFamily: 'Metropolis',
+
               primaryColor: Colors.yellow.shade700,
             ),
           );

@@ -356,21 +356,20 @@ class RightSide extends StatelessWidget {
                         name.length > 20
                             ? name.substring(0, 19).trimRight() + '...'
                             : name.trimRight(),
-                        textAlign: TextAlign.start,
                         maxLines: 1,
                         overflow: TextOverflow.clip,
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
-                          fontSize: 16.5,
+                          fontSize: 17,
                         ),
                       ),
                       SizedBox(
                         width: 5,
                       ),
                       Container(
-                        width: 36,
-                        height: 9,
+                        width: 41,
+                        height: 10.25,
                         // margin: EdgeInsets.only(bottom: 3),
                         // padding: EdgeInsets.all(5),
                         child: foodistaanCertified == true
@@ -390,13 +389,14 @@ class RightSide extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(
-                      top: 0.8, bottom: 0.8, left: 1.8, right: 1.8),
+                  padding:
+                      EdgeInsets.only(top: 3, bottom: 3, left: 3, right: 3),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3),
                     color: kGreen,
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "4.7",
