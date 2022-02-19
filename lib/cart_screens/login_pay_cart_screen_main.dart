@@ -715,6 +715,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                   Provider.of<CartDataProvider>(context,
                                           listen: false)
                                       .removeCoupon(cartId);
+                                  discountApplied.value = 0;
                                 },
                                 child: Text(
                                   'Remove Coupon',
@@ -1528,31 +1529,31 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                           SizedBox(
                             height: 5,
                           ),
-                          Container(
-                            // padding: EdgeInsets.all(10),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 25,
-                                  child: Image.asset(
-                                    'assets/images/la_praying-hands.png',
-                                    // fit: BoxFit.cover,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Help us avoiding food wastage.',
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(153, 153, 153, 1),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          // Container(
+                          //   // padding: EdgeInsets.all(10),
+                          //   child: Row(
+                          //     children: [
+                          //       // Container(
+                          //       //   height: 25,
+                          //       //   child: Image.asset(
+                          //       //     'assets/images/la_praying-hands.png',
+                          //       //     // fit: BoxFit.cover,
+                          //       //   ),
+                          //       // ),
+                          //       SizedBox(
+                          //         width: 10,
+                          //       ),
+                          //       Text(
+                          //         'Help us avoiding food wastage.',
+                          //         style: TextStyle(
+                          //           // color: Color.fromRGBO(153, 153, 153, 1),
+                          //           fontWeight: FontWeight.w400,
+                          //           fontSize: 10,
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                         ],
                       ),
                     )
