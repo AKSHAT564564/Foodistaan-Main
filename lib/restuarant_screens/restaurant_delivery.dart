@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/providers/user_data_provider.dart';
 
 import 'package:foodistan/restuarant_screens/restaurant_delivery_review.dart';
@@ -62,9 +63,19 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                   backgroundColor: Colors.white,
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back_ios_new_rounded,
-                        color: Colors.black),
+                        color: kBlackLight),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
+                  title: Text(
+                    "${widget.vendorName.length >= 20 ? widget.vendorName.substring(0, 20).trimRight() + "..." : widget.vendorName}",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      // color: Colors.black87,
+                      color: kBlackLight,
+                    ),
+                  ),
+                  centerTitle: true,
                   actions: <Widget>[
                     Container(
                         padding: EdgeInsets.all(7.5),
@@ -87,11 +98,11 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                           child: isBookMarked == true
                               ? Icon(
                                   Icons.bookmark_added,
-                                  color: Colors.black,
+                                  color: kBlackLight,
                                 )
                               : Icon(
                                   Icons.bookmark_outline,
-                                  color: Colors.black,
+                                  color: kBlackLight,
                                 ),
                         )),
                     // SizedBox(
@@ -105,7 +116,7 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Container(
-                  padding: EdgeInsets.only(left: 10, right: 10),
+                  padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: RestaurantDetailScreen(
                       restaurant_details: widget.items,
                       vendorId: widget.vendor_id,

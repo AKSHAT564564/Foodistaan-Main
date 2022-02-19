@@ -55,17 +55,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
 
     return Column(children: [
       Container(
-        // padding: EdgeInsets.only(left: 5, right: 5),
-        // alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.white,
-        ),
-        // margin: EdgeInsets.only(
-        //   top: MediaQuery.of(context).size.height * 0.2,
-        // ),
-        // width: MediaQuery.of(context).size.width * 0.97,
-        // height: MediaQuery.of(context).size.height * 9,
         child: Column(
           children: [
             Row(
@@ -73,38 +62,18 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  // color: Colors.red,
-                  // margin: EdgeInsets.only(
-                  //   left: MediaQuery.of(context).size.width * 0.018,
-                  //   top: MediaQuery.of(context).size.height * 0.015,
-                  // ),
                   width: MediaQuery.of(context).size.width * 0.60,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 2.5,
-                      ),
-                      Text(
-                        "${widget.restaurant_details['Name']}",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          // color: Colors.black87,
-                          color: kBlack,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 2.5,
-                      ),
                       Text(
                         "${widget.restaurant_details['Cuisines']}",
                         style: TextStyle(
-                          fontSize: 12.5,
+                          fontSize: 14,
                           fontWeight: FontWeight.normal,
                           // color: Colors.black87,
-                          color: kBlack,
+                          color: kBlackLight,
                         ),
                       ),
                       SizedBox(
@@ -113,12 +82,12 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                       Text(
                         "${widget.restaurant_details['Address']}",
                         style: TextStyle(
-                            fontSize: 11,
+                            fontSize: 12,
                             fontWeight: FontWeight.normal,
                             color: Colors.grey),
                       ),
                       SizedBox(
-                        height: 3,
+                        height: 8,
                       ),
                       InkWell(
                         onTap: () {
@@ -128,35 +97,87 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                           child: Row(
                             children: [
                               Container(
-                                height: 16,
-                                width: 58,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                  // fit: BoxFit.fill,
-                                  image: AssetImage(
-                                      'assets/images/Streato plus tag (2).png'),
-                                )),
-                              ),
+                                  decoration: BoxDecoration(
+                                    color: kGreenDark,
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  padding: EdgeInsets.only(
+                                    left: 6,
+                                    right: 6,
+                                    top: 2,
+                                    bottom: 2,
+                                  ),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "${widget.restaurant_details['Stars']}",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.04,
+                                              ),
+                                            ),
+                                            Icon(
+                                              Icons.star,
+                                              size: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.028,
+                                              color: Colors.white,
+                                            ),
+                                          ],
+                                        ),
+                                        // Center(
+                                        //   child: Text(
+                                        //     "10+ Ratings",
+                                        //     style: TextStyle(
+                                        //       color: Colors.white,
+                                        //       fontSize: MediaQuery.of(context)
+                                        //               .size
+                                        //               .width *
+                                        //           0.022,
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                      ],
+                                    ),
+                                  )),
+
                               SizedBox(
                                 width: 3,
                               ),
                               Container(
-                                // decoration: BoxDecoration(
-                                //   border: Border(
-                                //     bottom: BorderSide(
-                                //         color: Colors.grey,
-                                //         width: 0.5,
-                                //         style: BorderStyle.solid),
-                                //   ),
-                                // ),
-                                child: Text(
-                                  "know more",
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.normal,
-                                      color: Colors.grey),
-                                ),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                  // fit: BoxFit.fill,
+                                  image: AssetImage(
+                                      'assets/images/image-gallery.png'),
+                                )),
+                                // child: Icon(Icons.photo_library),
                               ),
+                              // Container(
+                              //   child: Text(
+                              //     "know more",
+                              //     style: TextStyle(
+                              //         fontSize: 10,
+                              //         fontWeight: FontWeight.normal,
+                              //         color: Colors.grey),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -164,60 +185,69 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     ],
                   ),
                 ),
+                Container(
+                  height: 16,
+                  width: 69,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    // fit: BoxFit.fill,
+                    image: AssetImage('assets/images/Streato plus tag (2).png'),
+                  )),
+                ),
                 // SizedBox(
                 //   width: MediaQuery.of(context).size.width * 0.17,
                 // ),
-                Container(
-                    decoration: BoxDecoration(
-                      // color: Colors.green,
-                      color: kGreen,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        bottomLeft: Radius.circular(15),
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                        // top: MediaQuery.of(context).size.height * 0.022,
-                        // right: MediaQuery.of(context).size.width * 0.014,
-                        ),
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "${widget.restaurant_details['Stars']}",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.044,
-                                ),
-                              ),
-                              Icon(
-                                Icons.star,
-                                size: MediaQuery.of(context).size.width * 0.05,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                          Center(
-                            child: Text(
-                              "10+ Ratings",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.022,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ))
+                // Container(
+                //     decoration: BoxDecoration(
+                //       // color: Colors.green,
+                //       color: kGreen,
+                //       borderRadius: BorderRadius.only(
+                //         topLeft: Radius.circular(15),
+                //         bottomLeft: Radius.circular(15),
+                //       ),
+                //     ),
+                //     margin: EdgeInsets.only(
+                //         // top: MediaQuery.of(context).size.height * 0.022,
+                //         // right: MediaQuery.of(context).size.width * 0.014,
+                //         ),
+                //     height: MediaQuery.of(context).size.height * 0.05,
+                //     width: MediaQuery.of(context).size.width * 0.2,
+                //     child: Center(
+                //       child: Column(
+                //         mainAxisAlignment: MainAxisAlignment.center,
+                //         crossAxisAlignment: CrossAxisAlignment.center,
+                //         children: [
+                //           Row(
+                //             mainAxisAlignment: MainAxisAlignment.center,
+                //             children: [
+                //               Text(
+                //                 "${widget.restaurant_details['Stars']}",
+                //                 style: TextStyle(
+                //                   color: Colors.white,
+                //                   fontSize:
+                //                       MediaQuery.of(context).size.width * 0.044,
+                //                 ),
+                //               ),
+                //               Icon(
+                //                 Icons.star,
+                //                 size: MediaQuery.of(context).size.width * 0.05,
+                //                 color: Colors.white,
+                //               ),
+                //             ],
+                //           ),
+                //           Center(
+                //             child: Text(
+                //               "10+ Ratings",
+                //               style: TextStyle(
+                //                 color: Colors.white,
+                //                 fontSize:
+                //                     MediaQuery.of(context).size.width * 0.022,
+                //               ),
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ))
               ],
             ),
             Container(
@@ -230,74 +260,74 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               // padding: EdgeInsets.all(8),
 
               child: Column(children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      // padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            maxRadius: 10,
-                            backgroundColor: Colors.red,
-                            child: Icon(
-                              Icons.attach_money,
-                              size: 10,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            " Cost for Two ${widget.restaurant_details['Cost']}",
-                            style: TextStyle(color: Colors.grey, fontSize: 8),
-                          )
-                        ],
-                      ),
-                    ),
-                    Spacer(),
-                    Container(
-                      // padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            maxRadius: 10,
-                            backgroundColor: Color.fromRGBO(140, 200, 255, 1),
-                            child: Icon(
-                              Icons.delivery_dining_rounded,
-                              size: 10,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            " Delivery Available",
-                            style: TextStyle(color: Colors.grey, fontSize: 8),
-                          )
-                        ],
-                      ),
-                    ),
-                    Spacer(),
-                    Container(
-                      // padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            maxRadius: 10,
-                            backgroundColor: kGreen,
-                            child: Icon(
-                              Icons.table_chart,
-                              size: 10,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            " Seating Available",
-                            style: TextStyle(color: Colors.grey, fontSize: 8),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     Container(
+                //       // padding: EdgeInsets.all(10),
+                //       child: Row(
+                //         children: [
+                //           CircleAvatar(
+                //             maxRadius: 10,
+                //             backgroundColor: Colors.red,
+                //             child: Icon(
+                //               Icons.attach_money,
+                //               size: 10,
+                //               color: Colors.white,
+                //             ),
+                //           ),
+                //           Text(
+                //             " Cost for Two ${widget.restaurant_details['Cost']}",
+                //             style: TextStyle(color: Colors.grey, fontSize: 8),
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //     Spacer(),
+                //     Container(
+                //       // padding: EdgeInsets.all(10),
+                //       child: Row(
+                //         children: [
+                //           CircleAvatar(
+                //             maxRadius: 10,
+                //             backgroundColor: Color.fromRGBO(140, 200, 255, 1),
+                //             child: Icon(
+                //               Icons.delivery_dining_rounded,
+                //               size: 10,
+                //               color: Colors.white,
+                //             ),
+                //           ),
+                //           Text(
+                //             " Delivery Available",
+                //             style: TextStyle(color: Colors.grey, fontSize: 8),
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //     Spacer(),
+                //     Container(
+                //       // padding: EdgeInsets.all(10),
+                //       child: Row(
+                //         children: [
+                //           CircleAvatar(
+                //             maxRadius: 10,
+                //             backgroundColor: kGreen,
+                //             child: Icon(
+                //               Icons.table_chart,
+                //               size: 10,
+                //               color: Colors.white,
+                //             ),
+                //           ),
+                //           Text(
+                //             " Seating Available",
+                //             style: TextStyle(color: Colors.grey, fontSize: 8),
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.center,
                 //   crossAxisAlignment: CrossAxisAlignment.center,
@@ -353,11 +383,19 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               height: MediaQuery.of(context).size.height * 0.058,
               // width: MediaQuery.of(context).size.width * 0.92,
               // margin: EdgeInsets.only(left: 5, right: 5),
-              // padding: EdgeInsets.all(7),
+
               decoration: BoxDecoration(
+                color: Colors.white,
                 border: Border.all(
                   color: Colors.grey.shade300,
                 ),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    blurRadius: 5,
+                    offset: Offset(0, 5),
+                  ),
+                ],
                 borderRadius: BorderRadius.circular(25),
               ),
               // decoration: BoxDecoration(
@@ -899,31 +937,31 @@ class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
-          Container(
-            // padding: EdgeInsets.symmetric(horizontal: 6.6),
-            margin: EdgeInsets.only(top: 20),
-            height: MediaQuery.of(context).size.height * 0.058,
-            child: TextFormField(
-                textAlignVertical: TextAlignVertical.bottom,
-                decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.all(7.5),
-                      child: Icon(Icons.search),
-                    ),
-                    hintText: "Search within the menu",
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.amber,
-                          width: 2.0,
-                        )),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.amber,
-                          width: 2.0,
-                        )))),
-          ),
+          // Container(
+          //   // padding: EdgeInsets.symmetric(horizontal: 6.6),
+          //   margin: EdgeInsets.only(top: 20),
+          //   height: MediaQuery.of(context).size.height * 0.058,
+          //   child: TextFormField(
+          //       textAlignVertical: TextAlignVertical.bottom,
+          //       decoration: InputDecoration(
+          //           prefixIcon: Padding(
+          //             padding: EdgeInsets.all(7.5),
+          //             child: Icon(Icons.search),
+          //           ),
+          //           hintText: "Search within the menu",
+          //           focusedBorder: OutlineInputBorder(
+          //               borderRadius: BorderRadius.circular(8),
+          //               borderSide: BorderSide(
+          //                 color: Colors.amber,
+          //                 width: 2.0,
+          //               )),
+          //           enabledBorder: OutlineInputBorder(
+          //               borderRadius: BorderRadius.circular(8),
+          //               borderSide: BorderSide(
+          //                 color: Colors.amber,
+          //                 width: 2.0,
+          //               )))),
+          // ),
           SizedBox(
             height: 15,
           ),
@@ -1009,8 +1047,8 @@ class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 15),
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.65,
+                      // width: MediaQuery.of(context).size.width * 0.9,
                       child: isReviewSelected
                           ? Center(child: RestuarantDeliveryReview())
                           : Center(
@@ -1058,31 +1096,6 @@ class _PickupSelectedWidgetState extends State<PickupSelectedWidget> {
       // padding: EdgeInsets.only(left: 5, right: 5),
       child: Column(
         children: [
-          Container(
-            // padding: EdgeInsets.symmetric(horizontal: 6.6),
-            margin: EdgeInsets.only(top: 20),
-            height: MediaQuery.of(context).size.height * 0.058,
-            child: TextFormField(
-                textAlignVertical: TextAlignVertical.bottom,
-                decoration: InputDecoration(
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.all(7.5),
-                      child: Icon(Icons.search),
-                    ),
-                    hintText: "Search within the menu",
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.amber,
-                          width: 2.0,
-                        )),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          color: Colors.amber,
-                          width: 2.0,
-                        )))),
-          ),
           SizedBox(
             height: 15,
           ),
@@ -1156,8 +1169,7 @@ class _PickupSelectedWidgetState extends State<PickupSelectedWidget> {
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 15),
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.65,
                       child: isReviewSelected
                           ? Center(child: RestuarantDeliveryReview())
                           : Center(

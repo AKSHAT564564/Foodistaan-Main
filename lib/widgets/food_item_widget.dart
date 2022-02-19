@@ -112,7 +112,7 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
                   ),
 
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         child: Text("₹ ${widget.menuItem['price']}",
@@ -120,7 +120,7 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w700)),
                       ),
-                      Spacer(),
+                      // Spacer(),
                       Container(
                         child: CartFunctions().quantityWidgetInRestaurant(
                             widget.cartId,
