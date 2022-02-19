@@ -3,7 +3,7 @@ description: A new Flutter application. Foodistaan.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -43,9 +43,9 @@ dependencies:
   rflutter_alert: ^2.0.4
   sizer: ^2.0.15
   solid_bottom_sheet: ^0.1.10
-  uuid: ^3.0.5
-  #URL Launcher for Scanner
   url_launcher: ^6.0.20
+  uuid: ^3.0.5
+
   # For Cached Network Image
   # cached_network_image: ^3.2.0
 
