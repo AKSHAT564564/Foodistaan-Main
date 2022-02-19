@@ -344,30 +344,32 @@ class RightSide extends StatelessWidget {
         children: [
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: w1 * 0.7,
+                  width: w1 * 0.70,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        name.length > 20 ? name.substring(0, 19) + '...' : name,
-                        textAlign: TextAlign.start,
+                        name.length > 20
+                            ? name.substring(0, 19).trimRight() + '...'
+                            : name.trimRight(),
                         maxLines: 1,
                         overflow: TextOverflow.clip,
                         style: TextStyle(
                           color: Colors.black,
-                          // fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 17,
                         ),
                       ),
                       SizedBox(
                         width: 5,
                       ),
                       Container(
-                        width: 32,
-                        height: 8,
+                        width: 41,
+                        height: 10.25,
                         // margin: EdgeInsets.only(bottom: 3),
                         // padding: EdgeInsets.all(5),
                         child: foodistaanCertified == true
@@ -387,12 +389,14 @@ class RightSide extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(5),
+                  padding:
+                      EdgeInsets.only(top: 3, bottom: 3, left: 3, right: 3),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(3),
                     color: kGreen,
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "4.7",
@@ -400,7 +404,7 @@ class RightSide extends StatelessWidget {
                       ),
                       Icon(
                         Icons.star,
-                        size: 12,
+                        size: 8,
                         color: Colors.white,
                       ),
                     ],

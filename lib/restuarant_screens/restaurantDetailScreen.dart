@@ -55,16 +55,16 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
 
     return Column(children: [
       Container(
-        padding: EdgeInsets.all(5),
-        alignment: Alignment.center,
+        // padding: EdgeInsets.only(left: 5, right: 5),
+        // alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,
         ),
-        margin: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.2,
-        ),
-        width: MediaQuery.of(context).size.width * 0.97,
+        // margin: EdgeInsets.only(
+        //   top: MediaQuery.of(context).size.height * 0.2,
+        // ),
+        // width: MediaQuery.of(context).size.width * 0.97,
         // height: MediaQuery.of(context).size.height * 9,
         child: Column(
           children: [
@@ -74,11 +74,11 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               children: [
                 Container(
                   // color: Colors.red,
-                  margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.018,
-                    top: MediaQuery.of(context).size.height * 0.015,
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.50,
+                  // margin: EdgeInsets.only(
+                  //   left: MediaQuery.of(context).size.width * 0.018,
+                  //   top: MediaQuery.of(context).size.height * 0.015,
+                  // ),
+                  width: MediaQuery.of(context).size.width * 0.60,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,9 +89,11 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                       Text(
                         "${widget.restaurant_details['Name']}",
                         style: TextStyle(
-                            fontSize: 17.5,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          // color: Colors.black87,
+                          color: kBlack,
+                        ),
                       ),
                       SizedBox(
                         height: 2.5,
@@ -99,9 +101,11 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                       Text(
                         "${widget.restaurant_details['Cuisines']}",
                         style: TextStyle(
-                            fontSize: 12.5,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.normal,
+                          // color: Colors.black87,
+                          color: kBlack,
+                        ),
                       ),
                       SizedBox(
                         height: 2.5,
@@ -113,12 +117,56 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                             fontWeight: FontWeight.normal,
                             color: Colors.grey),
                       ),
+                      SizedBox(
+                        height: 3,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          return null;
+                        },
+                        child: Container(
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 16,
+                                width: 58,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                  // fit: BoxFit.fill,
+                                  image: AssetImage(
+                                      'assets/images/Streato plus tag (2).png'),
+                                )),
+                              ),
+                              SizedBox(
+                                width: 3,
+                              ),
+                              Container(
+                                // decoration: BoxDecoration(
+                                //   border: Border(
+                                //     bottom: BorderSide(
+                                //         color: Colors.grey,
+                                //         width: 0.5,
+                                //         style: BorderStyle.solid),
+                                //   ),
+                                // ),
+                                child: Text(
+                                  "know more",
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.grey),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.17,
-                ),
+                // SizedBox(
+                //   width: MediaQuery.of(context).size.width * 0.17,
+                // ),
                 Container(
                     decoration: BoxDecoration(
                       // color: Colors.green,
@@ -129,8 +177,9 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                       ),
                     ),
                     margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.022,
-                    ),
+                        // top: MediaQuery.of(context).size.height * 0.022,
+                        // right: MediaQuery.of(context).size.width * 0.014,
+                        ),
                     height: MediaQuery.of(context).size.height * 0.05,
                     width: MediaQuery.of(context).size.width * 0.2,
                     child: Center(
@@ -175,8 +224,8 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               margin: EdgeInsets.only(
                 top: 8,
                 bottom: 8,
-                right: MediaQuery.of(context).size.width * 0.018,
-                left: MediaQuery.of(context).size.width * 0.018,
+                // right: MediaQuery.of(context).size.width * 0.018,
+                // left: MediaQuery.of(context).size.width * 0.018,
               ),
               // padding: EdgeInsets.all(8),
 
@@ -205,6 +254,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                         ],
                       ),
                     ),
+                    Spacer(),
                     Container(
                       // padding: EdgeInsets.all(10),
                       child: Row(
@@ -225,8 +275,9 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                         ],
                       ),
                     ),
+                    Spacer(),
                     Container(
-                      padding: EdgeInsets.all(10),
+                      // padding: EdgeInsets.all(10),
                       child: Row(
                         children: [
                           CircleAvatar(
@@ -247,60 +298,61 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      // padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            maxRadius: 10,
-                            backgroundColor: kGreen,
-                            child: Icon(
-                              Icons.attach_money,
-                              size: 10,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            " Sanitisation check",
-                            style: TextStyle(color: Colors.grey, fontSize: 8),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      // padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            maxRadius: 10,
-                            backgroundColor: Colors.blue,
-                            child: Icon(
-                              Icons.attach_money,
-                              size: 10,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            " Hygiene check",
-                            style: TextStyle(color: Colors.grey, fontSize: 8),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                )
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     Container(
+                //       // padding: EdgeInsets.all(10),
+                //       child: Row(
+                //         children: [
+                //           CircleAvatar(
+                //             maxRadius: 10,
+                //             backgroundColor: kGreen,
+                //             child: Icon(
+                //               Icons.attach_money,
+                //               size: 10,
+                //               color: Colors.white,
+                //             ),
+                //           ),
+                //           Text(
+                //             " Sanitisation check",
+                //             style: TextStyle(color: Colors.grey, fontSize: 8),
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //     SizedBox(
+                //       width: 20,
+                //     ),
+                //     Container(
+                //       // padding: EdgeInsets.all(10),
+                //       child: Row(
+                //         children: [
+                //           CircleAvatar(
+                //             maxRadius: 10,
+                //             backgroundColor: Colors.blue,
+                //             child: Icon(
+                //               Icons.attach_money,
+                //               size: 10,
+                //               color: Colors.white,
+                //             ),
+                //           ),
+                //           Text(
+                //             " Hygiene check",
+                //             style: TextStyle(color: Colors.grey, fontSize: 8),
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //   ],
+                // )
               ]),
             ),
             Container(
               height: MediaQuery.of(context).size.height * 0.058,
-              width: MediaQuery.of(context).size.width * 0.9,
+              // width: MediaQuery.of(context).size.width * 0.92,
+              // margin: EdgeInsets.only(left: 5, right: 5),
               // padding: EdgeInsets.all(7),
               decoration: BoxDecoration(
                 border: Border.all(
@@ -322,9 +374,9 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                           isPickupSelected = false;
                           isOverviewSelected = false;
                         });
-                        print(widget.restaurant_details);
-                        print(widget.vendorId);
-                        print(widget.vendorName);
+                        // print(widget.restaurant_details);
+                        // print(widget.vendorId);
+                        // print(widget.vendorName);
                         onTabTapped(0);
                       },
                       child: Container(
@@ -506,7 +558,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
             //     ],
             //   ),
             // ),
-            // OfferTagsWidget(),
+            OfferTagsWidget(),
           ],
         ),
       ),
@@ -573,8 +625,8 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget>
     return Container(
       margin: EdgeInsets.only(
         top: 15,
-        right: MediaQuery.of(context).size.width * 0.018,
-        left: MediaQuery.of(context).size.width * 0.018,
+        // right: MediaQuery.of(context).size.width * 0.018,
+        // left: MediaQuery.of(context).size.width * 0.018,
       ),
       height: MediaQuery.of(context).size.height * 0.069,
       child: Row(
@@ -847,34 +899,31 @@ class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
-          // Container(
-          //   padding: EdgeInsets.symmetric(horizontal: 6.6),
-          //   margin: EdgeInsets.only(top: 20),
-          //   height: MediaQuery.of(context).size.height * 0.058,
-          //   // color: Colors.blue,
-          //   child: TextFormField(
-          //       textAlignVertical: TextAlignVertical.bottom,
-          //       decoration: InputDecoration(
-          //           prefixIcon: Padding(
-          //             padding: EdgeInsets.all(7.5),
-          //             child: Icon(
-          //               Icons.search,
-          //             ),
-          //           ),
-          //           hintText: "Search within the menu",
-          //           focusedBorder: OutlineInputBorder(
-          //               borderRadius: BorderRadius.circular(8),
-          //               borderSide: BorderSide(
-          //                 color: Colors.amber,
-          //                 width: 2.0,
-          //               )),
-          //           enabledBorder: OutlineInputBorder(
-          //               borderRadius: BorderRadius.circular(8),
-          //               borderSide: BorderSide(
-          //                 color: Colors.amber,
-          //                 width: 2.0,
-          //               )))),
-          // ),
+          Container(
+            // padding: EdgeInsets.symmetric(horizontal: 6.6),
+            margin: EdgeInsets.only(top: 20),
+            height: MediaQuery.of(context).size.height * 0.058,
+            child: TextFormField(
+                textAlignVertical: TextAlignVertical.bottom,
+                decoration: InputDecoration(
+                    prefixIcon: Padding(
+                      padding: EdgeInsets.all(7.5),
+                      child: Icon(Icons.search),
+                    ),
+                    hintText: "Search within the menu",
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(
+                          color: Colors.amber,
+                          width: 2.0,
+                        )),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(
+                          color: Colors.amber,
+                          width: 2.0,
+                        )))),
+          ),
           SizedBox(
             height: 15,
           ),
@@ -887,13 +936,17 @@ class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.014,
-                      ),
+                      // margin: EdgeInsets.only(
+                      //   left: MediaQuery.of(context).size.width * 0.014,
+                      // ),
+
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            // SizedBox(
+                            //   width: MediaQuery.of(context).size.width * 0.032,
+                            // ),
                             GestureDetector(
                               onTap: () {
                                 print("Menu selected");
@@ -1002,10 +1055,11 @@ class _PickupSelectedWidgetState extends State<PickupSelectedWidget> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height,
+      // padding: EdgeInsets.only(left: 5, right: 5),
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 6.6),
+            // padding: EdgeInsets.symmetric(horizontal: 6.6),
             margin: EdgeInsets.only(top: 20),
             height: MediaQuery.of(context).size.height * 0.058,
             child: TextFormField(
@@ -1035,19 +1089,22 @@ class _PickupSelectedWidgetState extends State<PickupSelectedWidget> {
           Center(
             child: Container(
               // height: MediaQuery.of(context).size.height * 0.57,
-              // width: MediaQuery.of(context).size.width * 0.9,
+              // width: MediaQuery.of(context).size.width * 1,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.014,
-                      ),
+                      // margin: EdgeInsets.only(
+                      //   left: MediaQuery.of(context).size.width * 0.014,
+                      // ),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            // SizedBox(
+                            //   width: MediaQuery.of(context).size.width * 0.018,
+                            // ),
                             GestureDetector(
                               onTap: () {
                                 print("Menu selected");

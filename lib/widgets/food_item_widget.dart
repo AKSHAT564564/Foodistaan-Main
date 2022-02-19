@@ -120,6 +120,7 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w700)),
                       ),
+                      Spacer(),
                       Container(
                         child: CartFunctions().quantityWidgetInRestaurant(
                             widget.cartId,

@@ -100,72 +100,81 @@ class Cuisines extends StatelessWidget {
   Widget build(BuildContext context) {
     var h1 = MediaQuery.of(context).size.height;
     var w1 = MediaQuery.of(context).size.width;
-    return Column(
-      children: [
-        Container(
-          width: w1 / 4.65,
-          height: h1 / 9.5,
-          decoration: BoxDecoration(
-            // color: BgColor,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: BorderColor, // red as border color
-              // color: kYellow,
-              // color: Colors.black,
-              width: 1.5,
+    return Container(
+      decoration: BoxDecoration(
+        // color: BgColor,
+        color: kGreyLight,
+
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        children: [
+          Container(
+            width: w1 / 4.65,
+            height: h1 / 9.5,
+            decoration: BoxDecoration(
+              // color: BgColor,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                // color: BorderColor, // red as border color
+                // color: kYellow,
+                // color: Colors.black,
+                color: Colors.transparent,
+                width: 1.5,
+              ),
             ),
-          ),
-          child: GestureDetector(
-            onTap: () {},
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Padding(
-                padding: const EdgeInsets.all(2),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    // Column(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   crossAxisAlignment: CrossAxisAlignment.start,
-                    //   children: [
-                    //     Text(Text2,
-                    //         style: TextStyle(
-                    //           color: BorderColor,
-                    //           fontWeight: FontWeight.bold,
-                    //           fontSize: w1 / 25,
-                    //         ),
-                    //         textAlign: TextAlign.left),
-                    //   ],
-                    // ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Image.asset(
-                          FoodImage,
-                          width: w1 * 0.07,
-                        ),
-                      ],
-                    ),
-                  ],
+            child: GestureDetector(
+              onTap: () {},
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      // Column(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     Text(Text2,
+                      //         style: TextStyle(
+                      //           color: BorderColor,
+                      //           fontWeight: FontWeight.bold,
+                      //           fontSize: w1 / 25,
+                      //         ),
+                      //         textAlign: TextAlign.left),
+                      //   ],
+                      // ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Image.asset(
+                            FoodImage,
+                            width: w1 * 0.07,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        SizedBox(
-          height: 2,
-        ),
-        Text(
-          Text1,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: h1 / 60,
+          SizedBox(
+            height: 2,
           ),
-          textAlign: TextAlign.left,
-        ),
-      ],
+          Text(
+            Text1,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: h1 / 60,
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ],
+      ),
     );
     // return Container(
     //   width: w1 / 4,

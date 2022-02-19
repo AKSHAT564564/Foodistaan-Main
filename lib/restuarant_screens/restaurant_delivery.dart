@@ -57,9 +57,12 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
               height: 40,
               child: AppBar(
                   elevation: 0,
+                  titleSpacing: 0,
+                  leadingWidth: 40,
                   backgroundColor: Colors.white,
                   leading: IconButton(
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                    icon: Icon(Icons.arrow_back_ios_new_rounded,
+                        color: Colors.black),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                   actions: <Widget>[
@@ -91,9 +94,9 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                                   color: Colors.black,
                                 ),
                         )),
-                    SizedBox(
-                      width: 7,
-                    )
+                    // SizedBox(
+                    //   width: 7,
+                    // )
                   ]),
             ),
           ),
@@ -101,36 +104,47 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
             children: [
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                            padding: EdgeInsets.only(left: 8, right: 8, top: 5),
-                            color: Colors.white,
-                            width: MediaQuery.of(context).size.width * 1,
-                            height: MediaQuery.of(context).size.height * 0.35,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Image.network(
-                                '${widget.items['FoodImage']}',
-                                fit: BoxFit.cover,
-                              ),
-                            )),
-                        Container(
-                          padding: EdgeInsets.all(8),
-                          child: Center(
-                            // For testing
-                            child: RestaurantDetailScreen(
-                                restaurant_details: widget.items,
-                                vendorId: widget.vendor_id,
-                                vendorName: widget.vendorName),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+                child: Container(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: RestaurantDetailScreen(
+                      restaurant_details: widget.items,
+                      vendorId: widget.vendor_id,
+                      vendorName: widget.vendorName),
                 ),
+                // child: Column(
+                //   children: [
+                // Stack(
+                //   children: [
+                //     Container(
+                //         padding: EdgeInsets.only(left: 0, right: 0, top: 5),
+                //         color: Colors.white,
+                //         width: MediaQuery.of(context).size.width * 1,
+                //         height: MediaQuery.of(context).size.height * 0.35,
+                //         child: ClipRRect(
+                //           // borderRadius:BorderRadius.circular(15),
+                //           borderRadius: BorderRadius.only(
+                //               topLeft: Radius.circular(15),
+                //               topRight: Radius.circular(15)),
+                //           child: Image.network(
+                //             '${widget.items['FoodImage']}',
+                //             fit: BoxFit.cover,
+                //           ),
+                //         )),
+                //     Container(
+                //       padding: EdgeInsets.all(8),
+                //       child: Center(
+                //         // For testing
+                //         child: RestaurantDetailScreen(
+                //             restaurant_details: widget.items,
+                //             vendorId: widget.vendor_id,
+                //             vendorName: widget.vendorName),
+                //       ),
+                //     )
+                //   ],
+                // ),
+
+                //   ],
+                // ),
               ),
               Align(
                   alignment: Alignment.bottomCenter,
