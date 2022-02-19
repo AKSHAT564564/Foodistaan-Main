@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
 import 'package:foodistan/functions/order_functions.dart';
 import 'package:foodistan/profile/your_orders.dart';
@@ -107,24 +108,29 @@ class _RazorPayScreenState extends State<RazorPayScreen> {
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             onPressed: () async {
-              // Navigator.pushReplacement(context,
-              //     MaterialPageRoute(builder: (c) => CartScreenMainLogin()));
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MainScreen(
+                            currentIndex: 1,
+                          )),
+                  (route) => false);
             },
             color: Color.fromRGBO(0, 179, 134, 1.0),
           ),
-          DialogButton(
-            child: Text(
-              "NO",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            onPressed: () async {
-              Navigator.pop(context);
-            },
-            gradient: LinearGradient(colors: [
-              Color.fromRGBO(116, 116, 191, 1.0),
-              Color.fromRGBO(52, 138, 199, 1.0)
-            ]),
-          )
+          // DialogButton(
+          //   child: Text(
+          //     "NO",
+          //     style: TextStyle(color: Colors.white, fontSize: 20),
+          //   ),
+          //   onPressed: () async {
+          //     Navigator.pop(context);
+          //   },
+          //   gradient: LinearGradient(colors: [
+          //     Color.fromRGBO(116, 116, 191, 1.0),
+          //     Color.fromRGBO(52, 138, 199, 1.0)
+          //   ]),
+          // )
         ],
       ).show();
     }

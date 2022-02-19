@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/coupon_screen.dart';
+import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -93,7 +94,12 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, 'H');
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainScreen(
+                                      currentIndex: 0,
+                                    )));
                       },
                       child: Container(
                         height: 45,
