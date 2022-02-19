@@ -197,7 +197,7 @@ class LeftSide extends StatelessWidget {
         ),
         Positioned(
           top: MediaQuery.of(context).size.height * 0.017,
-          left: MediaQuery.of(context).size.width * (-0.084),
+          left: MediaQuery.of(context).size.width * (-0.045),
 
           // child: Container(
           //     width: MediaQuery.of(context).size.width * 0.25,
@@ -215,38 +215,44 @@ class LeftSide extends StatelessWidget {
           //         // ),
           //         borderRadius: BorderRadius.all(Radius.circular(4))),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.054,
-            width: MediaQuery.of(context).size.width * 0.33,
-            child: Stack(
-              children: [
-                Container(
-                  // alignment: Alignment.topLeft,
+            height: MediaQuery.of(context).size.height * 0.034,
+            width: MediaQuery.of(context).size.width * 0.22,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              // fit: BoxFit.fill,
+              image: AssetImage('assets/images/Mask Group.png'),
+            )),
 
-                  child: SvgPicture.asset(
-                    'Images/tag.svg',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                    top: MediaQuery.of(context).size.height * 0.0068,
-                    left: MediaQuery.of(context).size.width * 0.085,
-                    child: Row(children: [
-                      Image.asset(
-                        'Images/discount.png',
-                        height: 15,
-                        width: 15,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        " 20% OFF",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ]))
-              ],
-            ),
+            // child: Stack(
+            //   children: [
+            //     Container(
+            //       // alignment: Alignment.topLeft,
+
+            //       child: SvgPicture.asset(
+            //         'Images/tag.svg',
+            //         fit: BoxFit.cover,
+            //       ),
+            //     ),
+            //     Positioned(
+            //         top: MediaQuery.of(context).size.height * 0.0068,
+            //         left: MediaQuery.of(context).size.width * 0.085,
+            //         child: Row(children: [
+            //           Image.asset(
+            //             'Images/discount.png',
+            //             height: 15,
+            //             width: 15,
+            //             color: Colors.white,
+            //           ),
+            //           Text(
+            //             " 20% OFF",
+            //             style: TextStyle(
+            //                 color: Colors.white,
+            //                 fontSize: 10,
+            //                 fontWeight: FontWeight.bold),
+            //           ),
+            //         ]))
+            //   ],
+            // ),
           ),
         ),
         // Positioned(
@@ -359,7 +365,7 @@ class RightSide extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.clip,
                         style: TextStyle(
-                          color: Colors.black,
+                          color: kBlackL,
                           fontWeight: FontWeight.w700,
                           fontSize: 17,
                         ),
@@ -368,48 +374,93 @@ class RightSide extends StatelessWidget {
                         width: 5,
                       ),
                       Container(
-                        width: 41,
-                        height: 10.25,
-                        // margin: EdgeInsets.only(bottom: 3),
-                        // padding: EdgeInsets.all(5),
                         child: foodistaanCertified == true
-                            ? FittedBox(
-                                fit: BoxFit.cover,
-                                child: Image.asset(
-                                    'assets/images/Streato plus tag.png'),
-                                // child: SvgPicture.asset(
-                                //   'Images/streatoplus.svg',
-                                //   // width: MediaQuery.of(context).size.width * 0.15,
-                                //   // height: MediaQuery.of(context).size.height * 0.1,
-                                // ),
+                            ? Container(
+                                height: 16,
+                                width: 69,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                  // fit: BoxFit.fill,
+                                  image: AssetImage(
+                                      'assets/images/Streato plus tag (2).png'),
+                                )),
                               )
                             : SizedBox(),
                       ),
                     ],
                   ),
                 ),
+                // Container(
+                //   padding:
+                //       EdgeInsets.only(top: 3, bottom: 3, left: 3, right: 3),
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(3),
+                //     color: kGreen,
+                //   ),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       Text(
+                //         "4.7",
+                //         style: TextStyle(fontSize: 10, color: Colors.white),
+                //       ),
+                //       Icon(
+                //         Icons.star,
+                //         size: 8,
+                //         color: Colors.white,
+                //       ),
+                //     ],
+                //   ),
+                // )
                 Container(
-                  padding:
-                      EdgeInsets.only(top: 3, bottom: 3, left: 3, right: 3),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    color: kGreen,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "4.7",
-                        style: TextStyle(fontSize: 10, color: Colors.white),
+                    decoration: BoxDecoration(
+                      color: kGreenDark,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    padding: EdgeInsets.only(
+                      left: 6,
+                      right: 6,
+                      top: 2,
+                      bottom: 2,
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "4.7",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Icon(
+                                Icons.star,
+                                size: MediaQuery.of(context).size.width * 0.028,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          // Center(
+                          //   child: Text(
+                          //     "10+ Ratings",
+                          //     style: TextStyle(
+                          //       color: Colors.white,
+                          //       fontSize: MediaQuery.of(context)
+                          //               .size
+                          //               .width *
+                          //           0.022,
+                          //     ),
+                          //   ),
+                          // ),
+                        ],
                       ),
-                      Icon(
-                        Icons.star,
-                        size: 8,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                )
+                    )),
               ]),
           SizedBox(
             height: 5,
