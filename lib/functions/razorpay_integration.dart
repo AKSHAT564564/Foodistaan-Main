@@ -108,8 +108,6 @@ class _RazorPayScreenState extends State<RazorPayScreen> {
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             onPressed: () async {
-              // Navigator.pushReplacement(context,
-              //     MaterialPageRoute(builder: (c) => CartScreenMainLogin()));
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
