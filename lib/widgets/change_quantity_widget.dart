@@ -16,30 +16,40 @@ class _ChangeQuantityWidgetState extends State<ChangeQuantityWidget> {
     return Container(
       alignment: Alignment.center,
       height: MediaQuery.of(context).size.height * 0.04,
+      // width: MediaQuery.of(context).size.height * 0.04,
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        IconButton(
-            onPressed: () async {
-              await CartFunctions().increaseQuantity(widget.cartId,
-                  widget.data['id'], widget.data['quantity'], false);
-            },
-            icon: Icon(
-              widget.data['quantity'].toString() == '1'
-                  ? FontAwesomeIcons.trashAlt
-                  : FontAwesomeIcons.minusCircle,
-              color: Colors.amber,
-              size: 18,
-            )),
+        Spacer(),
+        InkWell(
+          onTap: () async {
+            await CartFunctions().increaseQuantity(widget.cartId,
+                widget.data['id'], widget.data['quantity'], false);
+          },
+          child: Icon(
+            widget.data['quantity'].toString() == '1'
+                ? FontAwesomeIcons.trashAlt
+                : FontAwesomeIcons.minusCircle,
+            color: Colors.amber,
+            size: 18,
+          ),
+        ),
+        SizedBox(
+          width: 6,
+        ),
         Text(widget.data['quantity']),
-        IconButton(
-            onPressed: () async {
-              await CartFunctions().increaseQuantity(widget.cartId,
-                  widget.data['id'], widget.data['quantity'], true);
-            },
-            icon: Icon(
-              FontAwesomeIcons.plusCircle,
-              color: Colors.amber,
-              size: 18,
-            ))
+        SizedBox(
+          width: 6,
+        ),
+        InkWell(
+          onTap: () async {
+            await CartFunctions().increaseQuantity(widget.cartId,
+                widget.data['id'], widget.data['quantity'], true);
+          },
+          child: Icon(
+            FontAwesomeIcons.plusCircle,
+            color: Colors.amber,
+            size: 18,
+          ),
+        ),
       ]),
     );
   }

@@ -126,41 +126,62 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
             else
               return Padding(
                 padding: const EdgeInsets.all(11),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, 'H');
-                  },
-                  child: Container(
-                    height: 45,
-                    width: double.infinity,
-                    margin: EdgeInsets.only(left: 10, right: 10),
-                    // decoration: BoxDecoration(
-                    //   color: Colors.white,
-                    //   border: Border.all(
-                    //     color: Colors.yellow.shade700,
-                    //     width: 1.5,
-                    //   ),
-                    //   borderRadius: BorderRadius.circular(7),
-                    // ),
-                    decoration: BoxDecoration(
-                      // color: Colors.white,
-                      color: Color.fromRGBO(247, 193, 43, 1),
-                      border: Border.all(
-                        color: Colors.yellow.shade700,
-                        width: 1.5,
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 200,
+                        // width: double.maxFinite,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                          // fit: BoxFit.fill,
+                          image: AssetImage('assets/images/Empty Cart.jpeg'),
+                        )),
                       ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Add Items to Cart',
-                        style: TextStyle(
-                          // color: Colors.yellow.shade700,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
+                      SizedBox(
+                        height: 30,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'H');
+                        },
+                        child: Container(
+                          height: 45,
+                          width: double.infinity,
+                          margin: EdgeInsets.only(left: 10, right: 10),
+                          // decoration: BoxDecoration(
+                          //   color: Colors.white,
+                          //   border: Border.all(
+                          //     color: Colors.yellow.shade700,
+                          //     width: 1.5,
+                          //   ),
+                          //   borderRadius: BorderRadius.circular(7),
+                          // ),
+                          decoration: BoxDecoration(
+                            // color: Colors.white,
+                            color: Color.fromRGBO(247, 193, 43, 1),
+                            border: Border.all(
+                              color: Colors.yellow.shade700,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Add Items to Cart',
+                              style: TextStyle(
+                                color: kBlack,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               );
@@ -168,41 +189,62 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
           return Center(
             child: Padding(
               padding: const EdgeInsets.all(11),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, 'H');
-                },
-                child: Container(
-                  height: 45,
-                  width: double.infinity,
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                  // decoration: BoxDecoration(
-                  //   color: Colors.white,
-                  //   border: Border.all(
-                  //     color: Colors.yellow.shade700,
-                  //     width: 1.5,
-                  //   ),
-                  //   borderRadius: BorderRadius.circular(7),
-                  // ),
-                  decoration: BoxDecoration(
-                    // color: Colors.white,
-                    color: Color.fromRGBO(247, 193, 43, 1),
-                    border: Border.all(
-                      color: Colors.yellow.shade700,
-                      width: 1.5,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.7,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 200,
+                      // width: double.maxFinite,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        // fit: BoxFit.fill,
+                        image: AssetImage('assets/images/Empty Cart.jpeg'),
+                      )),
                     ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Add Items to Cart',
-                      style: TextStyle(
-                        // color: Colors.yellow.shade700,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
+                    SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'H');
+                      },
+                      child: Container(
+                        height: 45,
+                        width: double.infinity,
+                        margin: EdgeInsets.only(left: 10, right: 10),
+                        // decoration: BoxDecoration(
+                        //   color: Colors.white,
+                        //   border: Border.all(
+                        //     color: Colors.yellow.shade700,
+                        //     width: 1.5,
+                        //   ),
+                        //   borderRadius: BorderRadius.circular(7),
+                        // ),
+                        decoration: BoxDecoration(
+                          // color: Colors.white,
+                          color: Color.fromRGBO(247, 193, 43, 1),
+                          border: Border.all(
+                            color: Colors.yellow.shade700,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Add Items to Cart',
+                            style: TextStyle(
+                              // color: Colors.yellow.shade700,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
