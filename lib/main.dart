@@ -13,6 +13,7 @@ import 'package:foodistan/providers/user_data_provider.dart';
 import 'package:foodistan/providers/user_location_provider.dart';
 
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'scanner.dart';
 import 'MainScreenFolder/mainScreenFile.dart';
 import 'optionScreenFile.dart';
@@ -67,33 +68,36 @@ class MyApp extends StatelessWidget {
                   UserLocationProvider()) // provides a GEOPOINT of user location from firebase
         ],
         builder: (context, child) {
-          return MaterialApp(
-            // check if the user has already logged in
+          return Sizer(builder: (context, orientation, deviceType) {
+            return MaterialApp(
+              // check if the user has already logged in
 
-            // if not redirects to login screen
-            initialRoute: FirebaseAuth.instance.currentUser != null ? 'H' : 'L',
-            routes: {
-              'S': (context) => ScannerScreen(),
-              'L': (context) => LoginScreen(), //login Screen
-              'H': (context) => MainScreen(), // Welcome Screen
-              'O': (context) => OptionScreen(),
-              CartScreenMainLogin().routeName: (context) =>
-                  CartScreenMainLogin(), // main Cart screen on home page
-            },
-            debugShowCheckedModeBanner: false,
-            title: 'Streato',
-            theme: ThemeData(
-              // textTheme: GoogleFonts.quicksandTextTheme(
-              //   Theme.of(context).textTheme,
-              // ),
-              // textTheme: GoogleFonts.montserratTextTheme(
-              //   Theme.of(context).textTheme,
-              // ),
-              fontFamily: 'Metropolis',
+              // if not redirects to login screen
+              initialRoute:
+                  FirebaseAuth.instance.currentUser != null ? 'H' : 'L',
+              routes: {
+                'S': (context) => ScannerScreen(),
+                'L': (context) => LoginScreen(), //login Screen
+                'H': (context) => MainScreen(), // Welcome Screen
+                'O': (context) => OptionScreen(),
+                CartScreenMainLogin().routeName: (context) =>
+                    CartScreenMainLogin(), // main Cart screen on home page
+              },
+              debugShowCheckedModeBanner: false,
+              title: 'Streato',
+              theme: ThemeData(
+                // textTheme: GoogleFonts.quicksandTextTheme(
+                //   Theme.of(context).textTheme,
+                // ),
+                // textTheme: GoogleFonts.montserratTextTheme(
+                //   Theme.of(context).textTheme,
+                // ),
+                fontFamily: 'Metropolis',
 
-              primaryColor: Colors.yellow.shade700,
-            ),
-          );
+                primaryColor: Colors.yellow.shade700,
+              ),
+            );
+          });
         });
   }
 }

@@ -6,6 +6,7 @@ import 'package:foodistan/restuarant_screens/restaurant_delivery_review.dart';
 import 'package:foodistan/restuarant_screens/restuarant_delivery_menu.dart';
 import 'package:foodistan/restuarant_screens/restaurantOverviewCard.dart';
 import 'package:foodistan/widgets/options.dart';
+import 'package:sizer/sizer.dart';
 
 class RestaurantDetailScreen extends StatefulWidget {
   final restaurant_details;
@@ -625,39 +626,7 @@ class OfferTagsWidget extends StatefulWidget {
   State<OfferTagsWidget> createState() => _OfferTagsWidgetState();
 }
 
-class _OfferTagsWidgetState extends State<OfferTagsWidget>
-    with TickerProviderStateMixin {
-  late AnimationController _controller1;
-  late Animation _animation1;
-  AnimationStatus _status1 = AnimationStatus.dismissed;
-  late AnimationController _controller2;
-  late Animation _animation2;
-  AnimationStatus _status2 = AnimationStatus.dismissed;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller1 =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
-
-    _controller2 =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
-    _animation1 = Tween(end: 1.0, begin: 0.0).animate(_controller1)
-      ..addListener(() {
-        setState(() {});
-      })
-      ..addStatusListener((status) {
-        _status1 = status;
-      });
-    _animation2 = Tween(end: 1.0, begin: 0.0).animate(_controller2)
-      ..addListener(() {
-        setState(() {});
-      })
-      ..addStatusListener((status) {
-        _status2 = status;
-      });
-  }
-
+class _OfferTagsWidgetState extends State<OfferTagsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -671,354 +640,582 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget>
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Transform(
-            alignment: FractionalOffset.center,
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.0015)
-              ..rotateX(pi * _animation1.value),
-            child: GestureDetector(
-              onTap: () {
-                if (_status1 == AnimationStatus.dismissed) {
-                  _controller1.forward();
-                } else {
-                  _controller1.reverse();
-                }
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.4,
-                height: MediaQuery.of(context).size.height * 0.069,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: _animation1.value <= 0.5
-                    ? Container(
-                        // padding: EdgeInsets.all(5),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.069,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        bottomLeft: Radius.circular(5)),
-                                    color: Color.fromRGBO(226, 55, 68, 1),
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 7, right: 5, top: 5, bottom: 5),
-                                  child: RotatedBox(
-                                    quarterTurns: 3,
-                                    child: Text(
-                                      "OFFER",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.027,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 6,
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.069,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(5),
-                                        bottomRight: Radius.circular(5)),
-                                    color: kGreyOf,
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 5, right: 5, top: 5, bottom: 5),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "20% OFF \nUPTO ₹300",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.03,
-                                            color: kBlackO,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ]),
-                      )
-                    : Transform(
-                        alignment: FractionalOffset.center,
-                        transform: Matrix4.identity()
-                          ..setEntry(3, 2, 0.0015)
-                          ..rotateX(pi * _animation1.value),
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.069,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        bottomLeft: Radius.circular(5)),
-                                    color: Color.fromRGBO(226, 55, 68, 1),
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 7, right: 5, top: 5, bottom: 5),
-                                  child: RotatedBox(
-                                    quarterTurns: 3,
-                                    child: Text(
-                                      "OFFER",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.027,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 6,
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.069,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(5),
-                                        bottomRight: Radius.circular(5)),
-                                    color: kGreyOf,
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 5, right: 5, top: 5, bottom: 5),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "USE MASTERCARD100 | ABOVE ₹100",
-                                        style: TextStyle(
-                                            fontSize: 6,
-                                            color: kBlackO,
-                                            fontWeight: FontWeight.normal),
-                                      ),
-                                      Text(
-                                        "Terms and Condition Applies",
-                                        style: TextStyle(
-                                            fontSize: 6,
-                                            color: kBlackO,
-                                            fontWeight: FontWeight.normal),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
+          Container(
+            width: MediaQuery.of(context).size.width * 0.4,
+            height: MediaQuery.of(context).size.height * 0.069,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.069,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            bottomLeft: Radius.circular(5)),
+                        color: kRed,
+                      ),
+                      padding:
+                          EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
+                      child: RotatedBox(
+                        quarterTurns: 3,
+                        child: Text(
+                          "OFFER",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 8.5.sp,
                           ),
                         ),
                       ),
-              ),
-            ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 6,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.069,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5)),
+                        color: kGreyOf,
+                      ),
+                      padding:
+                          EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "20% OFF UPTO ₹300",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 8.5.sp,
+                                color: kBlackO,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "USE MASTERCARD100 | ABOVE ₹100",
+                                style: TextStyle(
+                                    fontSize: 4.5.sp,
+                                    color: kBlackO,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              Text(
+                                "Terms and Condition Applies",
+                                style: TextStyle(
+                                    fontSize: 4.5.sp,
+                                    color: kBlackO,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ]),
           ),
-          Transform(
-            alignment: FractionalOffset.center,
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.0015)
-              ..rotateX(pi * _animation2.value),
-            child: GestureDetector(
-              onTap: () {
-                if (_status2 == AnimationStatus.dismissed) {
-                  _controller2.forward();
-                } else {
-                  _controller2.reverse();
-                }
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.4,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: _animation2.value <= 0.5
-                    ? Container(
-                        // padding: EdgeInsets.all(5),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.069,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        bottomLeft: Radius.circular(5)),
-                                    color: kGreenDark,
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 7, right: 5, top: 5, bottom: 5),
-                                  child: RotatedBox(
-                                    quarterTurns: 3,
-                                    child: Text(
-                                      "OFFER",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.027,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 6,
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.069,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(5),
-                                        bottomRight: Radius.circular(5)),
-                                    color: kGreyOf,
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 5, right: 5, top: 5, bottom: 5),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "20% OFF \nUPTO ₹300",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.03,
-                                            color: kBlackO,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ]),
-                      )
-                    : Transform(
-                        alignment: FractionalOffset.center,
-                        transform: Matrix4.identity()
-                          ..setEntry(3, 2, 0.0015)
-                          ..rotateX(pi * _animation2.value),
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.069,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(5),
-                                        bottomLeft: Radius.circular(5)),
-                                    color: kGreenDark,
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 7, right: 5, top: 5, bottom: 5),
-                                  child: RotatedBox(
-                                    quarterTurns: 3,
-                                    child: Text(
-                                      "OFFER",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.027,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 6,
-                                child: Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.069,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(5),
-                                        bottomRight: Radius.circular(5)),
-                                    color: kGreyOf,
-                                  ),
-                                  padding: EdgeInsets.only(
-                                      left: 5, right: 5, top: 5, bottom: 5),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "USE MASTERCARD100 | ABOVE ₹100",
-                                        style: TextStyle(
-                                            fontSize: 6,
-                                            color: kBlackO,
-                                            fontWeight: FontWeight.normal),
-                                      ),
-                                      Text(
-                                        "Terms and Condition Applies",
-                                        style: TextStyle(
-                                            fontSize: 6,
-                                            color: kBlackO,
-                                            fontWeight: FontWeight.normal),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
+          Container(
+            // padding: EdgeInsets.all(5),
+            width: MediaQuery.of(context).size.width * 0.4,
+            height: MediaQuery.of(context).size.height * 0.069,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.069,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            bottomLeft: Radius.circular(5)),
+                        color: kBlue,
+                      ),
+                      padding:
+                          EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
+                      child: RotatedBox(
+                        quarterTurns: 3,
+                        child: Text(
+                          "OFFER",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 8.5.sp,
                           ),
                         ),
                       ),
-              ),
-            ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 6,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.069,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5)),
+                        color: kGreyOf,
+                      ),
+                      padding:
+                          EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "20% OFF UPTO ₹300",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 8.5.sp,
+                                color: kBlackO,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "USE MASTERCARD100 | ABOVE ₹100",
+                                style: TextStyle(
+                                    fontSize: 4.5.sp,
+                                    color: kBlackO,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              Text(
+                                "Terms and Condition Applies",
+                                style: TextStyle(
+                                    fontSize: 4.5.sp,
+                                    color: kBlackO,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ]),
           ),
         ],
       ),
     );
   }
 }
+
+// class OfferTagsWidget extends StatefulWidget {
+//   const OfferTagsWidget({
+//     Key? key,
+//   }) : super(key: key);
+
+//   @override
+//   State<OfferTagsWidget> createState() => _OfferTagsWidgetState();
+// }
+
+// class _OfferTagsWidgetState extends State<OfferTagsWidget>
+//     with TickerProviderStateMixin {
+//   late AnimationController _controller1;
+//   late Animation _animation1;
+//   AnimationStatus _status1 = AnimationStatus.dismissed;
+//   late AnimationController _controller2;
+//   late Animation _animation2;
+//   AnimationStatus _status2 = AnimationStatus.dismissed;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _controller1 =
+//         AnimationController(vsync: this, duration: Duration(seconds: 1));
+
+//     _controller2 =
+//         AnimationController(vsync: this, duration: Duration(seconds: 1));
+//     _animation1 = Tween(end: 1.0, begin: 0.0).animate(_controller1)
+//       ..addListener(() {
+//         setState(() {});
+//       })
+//       ..addStatusListener((status) {
+//         _status1 = status;
+//       });
+//     _animation2 = Tween(end: 1.0, begin: 0.0).animate(_controller2)
+//       ..addListener(() {
+//         setState(() {});
+//       })
+//       ..addStatusListener((status) {
+//         _status2 = status;
+//       });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: EdgeInsets.only(
+//         top: 15,
+//         // left: 10,
+//         // right: 10,
+//       ),
+//       height: MediaQuery.of(context).size.height * 0.069,
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           Transform(
+//             alignment: FractionalOffset.center,
+//             transform: Matrix4.identity()
+//               ..setEntry(3, 2, 0.0015)
+//               ..rotateX(pi * _animation1.value),
+//             child: GestureDetector(
+//               onTap: () {
+//                 if (_status1 == AnimationStatus.dismissed) {
+//                   _controller1.forward();
+//                 } else {
+//                   _controller1.reverse();
+//                 }
+//               },
+//               child: Container(
+//                 width: MediaQuery.of(context).size.width * 0.4,
+//                 height: MediaQuery.of(context).size.height * 0.069,
+//                 decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(5),
+//                 ),
+//                 child: _animation1.value <= 0.5
+//                     ? Container(
+//                         // padding: EdgeInsets.all(5),
+//                         child: Row(
+//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                             crossAxisAlignment: CrossAxisAlignment.center,
+//                             children: [
+//                               Expanded(
+//                                 flex: 1,
+//                                 child: Container(
+//                                   height: MediaQuery.of(context).size.height *
+//                                       0.069,
+//                                   decoration: BoxDecoration(
+//                                     borderRadius: BorderRadius.only(
+//                                         topLeft: Radius.circular(5),
+//                                         bottomLeft: Radius.circular(5)),
+//                                     color: kRed,
+//                                   ),
+//                                   padding: EdgeInsets.only(
+//                                       left: 7, right: 5, top: 5, bottom: 5),
+//                                   child: RotatedBox(
+//                                     quarterTurns: 3,
+//                                     child: Text(
+//                                       "OFFER",
+//                                       textAlign: TextAlign.center,
+//                                       style: TextStyle(
+//                                         color: Colors.white,
+//                                         fontWeight: FontWeight.bold,
+//                                         fontSize:
+//                                             MediaQuery.of(context).size.width *
+//                                                 0.027,
+//                                       ),
+//                                     ),
+//                                   ),
+//                                 ),
+//                               ),
+//                               Expanded(
+//                                 flex: 6,
+//                                 child: Container(
+//                                   height: MediaQuery.of(context).size.height *
+//                                       0.069,
+//                                   decoration: BoxDecoration(
+//                                     borderRadius: BorderRadius.only(
+//                                         topRight: Radius.circular(5),
+//                                         bottomRight: Radius.circular(5)),
+//                                     color: kGreyOf,
+//                                   ),
+//                                   padding: EdgeInsets.only(
+//                                       left: 5, right: 5, top: 5, bottom: 5),
+//                                   child: Column(
+//                                     mainAxisAlignment: MainAxisAlignment.center,
+//                                     crossAxisAlignment:
+//                                         CrossAxisAlignment.center,
+//                                     children: [
+//                                       Text(
+//                                         "20% OFF \nUPTO ₹300",
+//                                         textAlign: TextAlign.center,
+//                                         style: TextStyle(
+//                                             fontSize: MediaQuery.of(context)
+//                                                     .size
+//                                                     .width *
+//                                                 0.03,
+//                                             color: kBlackO,
+//                                             fontWeight: FontWeight.bold),
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               )
+//                             ]),
+//                       )
+//                     : Transform(
+//                         alignment: FractionalOffset.center,
+//                         transform: Matrix4.identity()
+//                           ..setEntry(3, 2, 0.0015)
+//                           ..rotateX(pi * _animation1.value),
+//                         child: Container(
+//                           child: Row(
+//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                             crossAxisAlignment: CrossAxisAlignment.center,
+//                             children: [
+//                               Expanded(
+//                                 flex: 1,
+//                                 child: Container(
+//                                   height: MediaQuery.of(context).size.height *
+//                                       0.069,
+//                                   decoration: BoxDecoration(
+//                                     borderRadius: BorderRadius.only(
+//                                         topLeft: Radius.circular(5),
+//                                         bottomLeft: Radius.circular(5)),
+//                                     color: kRed,
+//                                   ),
+//                                   padding: EdgeInsets.only(
+//                                       left: 7, right: 5, top: 5, bottom: 5),
+//                                   child: RotatedBox(
+//                                     quarterTurns: 3,
+//                                     child: Text(
+//                                       "OFFER",
+//                                       textAlign: TextAlign.center,
+//                                       style: TextStyle(
+//                                         color: Colors.white,
+//                                         fontWeight: FontWeight.bold,
+//                                         fontSize:
+//                                             MediaQuery.of(context).size.width *
+//                                                 0.027,
+//                                       ),
+//                                     ),
+//                                   ),
+//                                 ),
+//                               ),
+//                               Expanded(
+//                                 flex: 6,
+//                                 child: Container(
+//                                   height: MediaQuery.of(context).size.height *
+//                                       0.069,
+//                                   decoration: BoxDecoration(
+//                                     borderRadius: BorderRadius.only(
+//                                         topRight: Radius.circular(5),
+//                                         bottomRight: Radius.circular(5)),
+//                                     color: kGreyOf,
+//                                   ),
+//                                   padding: EdgeInsets.only(
+//                                       left: 5, right: 5, top: 5, bottom: 5),
+//                                   child: Column(
+//                                     mainAxisAlignment: MainAxisAlignment.center,
+//                                     crossAxisAlignment:
+//                                         CrossAxisAlignment.center,
+//                                     children: [
+//                                       Text(
+//                                         "USE MASTERCARD100 | ABOVE ₹100",
+//                                         style: TextStyle(
+//                                             fontSize: 6,
+//                                             color: kBlackO,
+//                                             fontWeight: FontWeight.normal),
+//                                       ),
+//                                       Text(
+//                                         "Terms and Condition Applies",
+//                                         style: TextStyle(
+//                                             fontSize: 6,
+//                                             color: kBlackO,
+//                                             fontWeight: FontWeight.normal),
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               )
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//               ),
+//             ),
+//           ),
+//           Transform(
+//             alignment: FractionalOffset.center,
+//             transform: Matrix4.identity()
+//               ..setEntry(3, 2, 0.0015)
+//               ..rotateX(pi * _animation2.value),
+//             child: GestureDetector(
+//               onTap: () {
+//                 if (_status2 == AnimationStatus.dismissed) {
+//                   _controller2.forward();
+//                 } else {
+//                   _controller2.reverse();
+//                 }
+//               },
+//               child: Container(
+//                 width: MediaQuery.of(context).size.width * 0.4,
+//                 decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(5),
+//                 ),
+//                 child: _animation2.value <= 0.5
+//                     ? Container(
+//                         // padding: EdgeInsets.all(5),
+//                         child: Row(
+//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                             crossAxisAlignment: CrossAxisAlignment.center,
+//                             children: [
+//                               Expanded(
+//                                 flex: 1,
+//                                 child: Container(
+//                                   height: MediaQuery.of(context).size.height *
+//                                       0.069,
+//                                   decoration: BoxDecoration(
+//                                     borderRadius: BorderRadius.only(
+//                                         topLeft: Radius.circular(5),
+//                                         bottomLeft: Radius.circular(5)),
+//                                     color: kBlue,
+//                                   ),
+//                                   padding: EdgeInsets.only(
+//                                       left: 7, right: 5, top: 5, bottom: 5),
+//                                   child: RotatedBox(
+//                                     quarterTurns: 3,
+//                                     child: Text(
+//                                       "OFFER",
+//                                       textAlign: TextAlign.center,
+//                                       style: TextStyle(
+//                                         color: Colors.white,
+//                                         fontWeight: FontWeight.bold,
+//                                         fontSize:
+//                                             MediaQuery.of(context).size.width *
+//                                                 0.027,
+//                                       ),
+//                                     ),
+//                                   ),
+//                                 ),
+//                               ),
+//                               Expanded(
+//                                 flex: 6,
+//                                 child: Container(
+//                                   height: MediaQuery.of(context).size.height *
+//                                       0.069,
+//                                   decoration: BoxDecoration(
+//                                     borderRadius: BorderRadius.only(
+//                                         topRight: Radius.circular(5),
+//                                         bottomRight: Radius.circular(5)),
+//                                     color: kGreyOf,
+//                                   ),
+//                                   padding: EdgeInsets.only(
+//                                       left: 5, right: 5, top: 5, bottom: 5),
+//                                   child: Column(
+//                                     mainAxisAlignment: MainAxisAlignment.center,
+//                                     crossAxisAlignment:
+//                                         CrossAxisAlignment.center,
+//                                     children: [
+//                                       Text(
+//                                         "20% OFF \nUPTO ₹300",
+//                                         textAlign: TextAlign.center,
+//                                         style: TextStyle(
+//                                             fontSize: MediaQuery.of(context)
+//                                                     .size
+//                                                     .width *
+//                                                 0.03,
+//                                             color: kBlackO,
+//                                             fontWeight: FontWeight.bold),
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               )
+//                             ]),
+//                       )
+//                     : Transform(
+//                         alignment: FractionalOffset.center,
+//                         transform: Matrix4.identity()
+//                           ..setEntry(3, 2, 0.0015)
+//                           ..rotateX(pi * _animation2.value),
+//                         child: Container(
+//                           child: Row(
+//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                             crossAxisAlignment: CrossAxisAlignment.center,
+//                             children: [
+//                               Expanded(
+//                                 flex: 1,
+//                                 child: Container(
+//                                   height: MediaQuery.of(context).size.height *
+//                                       0.069,
+//                                   decoration: BoxDecoration(
+//                                     borderRadius: BorderRadius.only(
+//                                         topLeft: Radius.circular(5),
+//                                         bottomLeft: Radius.circular(5)),
+//                                     color: kBlue,
+//                                   ),
+//                                   padding: EdgeInsets.only(
+//                                       left: 7, right: 5, top: 5, bottom: 5),
+//                                   child: RotatedBox(
+//                                     quarterTurns: 3,
+//                                     child: Text(
+//                                       "OFFER",
+//                                       textAlign: TextAlign.center,
+//                                       style: TextStyle(
+//                                         color: Colors.white,
+//                                         fontWeight: FontWeight.bold,
+//                                         fontSize:
+//                                             MediaQuery.of(context).size.width *
+//                                                 0.027,
+//                                       ),
+//                                     ),
+//                                   ),
+//                                 ),
+//                               ),
+//                               Expanded(
+//                                 flex: 6,
+//                                 child: Container(
+//                                   height: MediaQuery.of(context).size.height *
+//                                       0.069,
+//                                   decoration: BoxDecoration(
+//                                     borderRadius: BorderRadius.only(
+//                                         topRight: Radius.circular(5),
+//                                         bottomRight: Radius.circular(5)),
+//                                     color: kGreyOf,
+//                                   ),
+//                                   padding: EdgeInsets.only(
+//                                       left: 5, right: 5, top: 5, bottom: 5),
+//                                   child: Column(
+//                                     mainAxisAlignment: MainAxisAlignment.center,
+//                                     crossAxisAlignment:
+//                                         CrossAxisAlignment.center,
+//                                     children: [
+//                                       Text(
+//                                         "USE MASTERCARD100 | ABOVE ₹100",
+//                                         style: TextStyle(
+//                                             fontSize: 6,
+//                                             color: kBlackO,
+//                                             fontWeight: FontWeight.normal),
+//                                       ),
+//                                       Text(
+//                                         "Terms and Condition Applies",
+//                                         style: TextStyle(
+//                                             fontSize: 6,
+//                                             color: kBlackO,
+//                                             fontWeight: FontWeight.normal),
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               )
+//                             ],
+//                           ),
+//                         ),
+//                       ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class DeliverySelectedWidget extends StatefulWidget {
   final restaurant_detail;

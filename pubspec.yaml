@@ -45,6 +45,7 @@ dependencies:
   solid_bottom_sheet: ^0.1.10
   url_launcher: ^6.0.20
   uuid: ^3.0.5
+ 
 
   # For Cached Network Image
   # cached_network_image: ^3.2.0

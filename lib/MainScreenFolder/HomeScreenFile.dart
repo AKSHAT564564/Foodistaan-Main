@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/AppBar/AppBarFile.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/location_functions.dart';
+import 'package:sizer/sizer.dart';
 import 'Crousel.dart';
 import 'CategoryTile.dart';
 import 'CuisineTile.dart';
@@ -134,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen>
               child: GestureDetector(
                 onTap: () {},
                 child: Container(
-                  height: 70,
+                  height: 10.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color: Color.fromRGBO(67, 73, 101, 1),
@@ -145,31 +146,36 @@ class _HomeScreenState extends State<HomeScreen>
                     // ]),
                   ),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // Expanded(flex: 1, child: Container()),
 
                       SizedBox(
-                        width: 4,
+                        width: 1.5.w,
                       ),
                       Expanded(
                         flex: 8,
                         child: Container(
                           padding: EdgeInsets.only(top: 14, left: 10),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 '12 Minutes Delivery...',
                                 style: TextStyle(
                                     color: Color.fromRGBO(251, 225, 158, 1),
-                                    fontSize: 20),
+                                    fontSize: 16.sp),
                               ),
                               Text(
                                 'See restaurants',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
-                              )
+                                    color: Colors.white, fontSize: 12.sp),
+                              ),
+                              SizedBox(
+                                height: 1.5.h,
+                              ),
                             ],
                           ),
                         ),
@@ -185,30 +191,32 @@ class _HomeScreenState extends State<HomeScreen>
                               Row(
                                 children: [
                                   Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.061,
+                                    height: 5.h,
+                                    // height: MediaQuery.of(context).size.height *
+                                    //     0.061,
                                     child:
                                         Image.asset('assets/images/logotp.png'),
                                   ),
                                   Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.019,
+                                    height: 2.h,
+                                    // height: MediaQuery.of(context).size.height *
+                                    //     0.019,
                                     child: Image.asset('assets/images/+.png'),
                                   ),
                                 ],
                               ),
                               Text(
                                 'Streatoplus',
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 8),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 7.sp),
                               ),
                             ],
                           ),
                         ),
                       ),
                       SizedBox(
-                        width: 4,
-                      )
+                        width: 1.5.w,
+                      ),
                     ],
                   ),
                 ),
