@@ -229,7 +229,7 @@ class LeftSide extends StatelessWidget {
                 ),
                 Positioned(
                     top: MediaQuery.of(context).size.height * 0.0068,
-                    left: MediaQuery.of(context).size.width * 0.075,
+                    left: MediaQuery.of(context).size.width * 0.085,
                     child: Row(children: [
                       Image.asset(
                         'Images/discount.png',
@@ -353,16 +353,15 @@ class RightSide extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        // name.length > 20
-                        //     ? name.substring(0, 19).trimRight() + '...'
-                        //     : name.trimRight(),
-                        name,
+                        name.length > 20
+                            ? name.substring(0, 19).trimRight() + '...'
+                            : name.trimRight(),
                         maxLines: 1,
                         overflow: TextOverflow.clip,
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
-                          fontSize: 14,
+                          fontSize: 17,
                         ),
                       ),
                       SizedBox(
@@ -377,7 +376,7 @@ class RightSide extends StatelessWidget {
                             ? FittedBox(
                                 fit: BoxFit.cover,
                                 child: Image.asset(
-                                    'assets/images/Streato plus tag (2).png'),
+                                    'assets/images/Streato plus tag.png'),
                                 // child: SvgPicture.asset(
                                 //   'Images/streatoplus.svg',
                                 //   // width: MediaQuery.of(context).size.width * 0.15,
