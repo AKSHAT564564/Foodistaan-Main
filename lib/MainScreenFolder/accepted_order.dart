@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/sizeConfig.dart';
 
 class AcceptedOrder extends StatefulWidget {
   var orderData;
+  var restaurantData;
   AcceptedOrder({required this.orderData});
 
   @override
@@ -12,11 +14,48 @@ class AcceptedOrder extends StatefulWidget {
 }
 
 class _AcceptedOrderState extends State<AcceptedOrder> {
+  Map<String, dynamic> _restaurantData = {};
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    print(widget.orderData['vendor-name']);
+    fetchRestaurantData(widget.orderData['vendor-id']).then((v) {
+      setState(() {
+        _restaurantData = v;
+      });
+    });
+  }
+
+  Widget itemsList(Map orderItems) {
+    List itemList = [];
+    for (var item in orderItems.keys) {
+      itemList.add(orderItems[item]);
+    }
+
+    if (itemList.length != 0) {
+      return ListView.builder(
+          shrinkWrap: true,
+          itemCount: itemList.length,
+          scrollDirection: Axis.vertical,
+          itemBuilder: (BuildContext context, int index) {
+            var itemDetails = itemList[index];
+            return Text(itemDetails['quantity'].toString() +
+                ' X ' +
+                itemDetails['name'].toString().toUpperCase());
+          });
+    } else
+      return Text('Some Error');
+  }
+
+  fetchRestaurantData(String vendorId) async {
+    Map<String, dynamic> restaurantData = {};
+    await FirebaseFirestore.instance
+        .collection('DummyData')
+        .doc(vendorId)
+        .get()
+        .then((value) {
+      restaurantData = value.data()!;
+    });
+    return restaurantData;
   }
 
   @override
@@ -422,23 +461,33 @@ class _AcceptedOrderState extends State<AcceptedOrder> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ListTile(
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 5.0),
-                            leading: Image.asset('Images/burger.png'),
-                            title: Text(
-                              'Anna’s hut',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 16),
-                            ),
-                            subtitle: Text(
-                              'Rohini, Delhi',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12),
-                            ),
-                          ),
+                          _restaurantData.isEmpty
+                              ? CircularProgressIndicator()
+                              : ListTile(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 5.0),
+                                  leading: FadeInImage(
+                                      height: SizeConfig.screenHeight * 0.1,
+                                      width: SizeConfig.screenWidth * 0.15,
+                                      fit: BoxFit.scaleDown,
+                                      placeholder:
+                                          AssetImage('assets/images/dosa.png'),
+                                      image: NetworkImage(
+                                          _restaurantData['FoodImage'])),
+                                  title: Text(
+                                    _restaurantData['Name'],
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16),
+                                  ),
+                                  subtitle: Text(
+                                    _restaurantData['Address'],
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12),
+                                  ),
+                                ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -461,28 +510,10 @@ class _AcceptedOrderState extends State<AcceptedOrder> {
                                   SizedBox(
                                     width: 11,
                                   ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Garlic mix munchao',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      Text(
-                                        'vegies, less spice, 3 mayo',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w400,
-                                          color:
-                                              Color.fromRGBO(153, 153, 153, 1),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  SizedBox(
+                                      width: SizeConfig.screenWidth * 0.9,
+                                      child:
+                                          itemsList(widget.orderData['items'])),
                                 ],
                               ),
                               Text(

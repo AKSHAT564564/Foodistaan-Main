@@ -104,7 +104,8 @@ class OrderFunction {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => AcceptedOrder(
-                                      orderData: snapshot.data!.docs[index]))),
+                                      orderData:
+                                          snapshot.data!.docs[index].data()))),
                           child: OrderHistoryWidget(
                               orderData: snapshot.data!.docs[index].data()),
                         );

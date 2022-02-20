@@ -118,7 +118,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    widget.orderData['vendor-name'],
+                                    _restaurantData['Name'],
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 14,
@@ -128,7 +128,7 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                     height: 2,
                                   ),
                                   Text(
-                                    'Rohini, New Delhi',
+                                    _restaurantData['Address'],
                                     style: TextStyle(
                                       color: Colors.grey,
                                       fontSize: 12,
