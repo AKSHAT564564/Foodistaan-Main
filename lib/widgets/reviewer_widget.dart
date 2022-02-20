@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class ReviewerWidget extends StatefulWidget {
   ReviewerWidget({Key? key}) : super(key: key);
@@ -21,7 +22,8 @@ class _ReviewerWidgetState extends State<ReviewerWidget> {
       ),
       padding: EdgeInsets.all(11),
       alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height * 0.25,
+      // height: MediaQuery.of(context).size.height * 0.25,
+      height: 25.h,
       width: double.infinity,
       child: Center(
         child: Column(
@@ -36,14 +38,15 @@ class _ReviewerWidgetState extends State<ReviewerWidget> {
                   'assets/images/reviewer.png',
                 ),
                 SizedBox(
-                  width: 11,
+                  width: 3.w,
                 ),
                 Column(
-                  children: const [
+                  children: [
                     Text(
                       "Tanish Kumar",
                       style: TextStyle(
-                        fontSize: 22,
+                        // fontSize: 22,
+                        fontSize: 18.5.sp,
                       ),
                     ),
                   ],
@@ -51,17 +54,18 @@ class _ReviewerWidgetState extends State<ReviewerWidget> {
               ],
             ),
             SizedBox(
-              height: 7,
+              height: 1.5.h,
             ),
             Text(
               "Great place must visit. I ordered few Masala Dosa and it came within a minute. They were crispy and delicious, i would definitely recommend it to you.",
               textAlign: TextAlign.justify,
               style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.035,
+                // fontSize: MediaQuery.of(context).size.width * 0.035,
+                fontSize: 10.5.sp,
               ),
             ),
             SizedBox(
-              height: 7,
+              height: 1.5.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

@@ -63,7 +63,8 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.60,
+                  // width: MediaQuery.of(context).size.width * 0.60,
+                  width: 60.w,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,24 +72,24 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                       Text(
                         "${widget.restaurant_details['Cuisines']}",
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.normal,
                           // color: Colors.black87,
                           color: kBlackLight,
                         ),
                       ),
                       SizedBox(
-                        height: 2.5,
+                        height: 0.3.h,
                       ),
                       Text(
                         "${widget.restaurant_details['Address']}",
                         style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 10.sp,
                             fontWeight: FontWeight.normal,
                             color: Colors.grey),
                       ),
                       SizedBox(
-                        height: 8,
+                        height: 1.5.h,
                       ),
                       InkWell(
                         onTap: () {
@@ -124,18 +125,20 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w700,
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.04,
+                                                // fontSize: MediaQuery.of(context)
+                                                //         .size
+                                                //         .width *
+                                                //     0.04,
+                                                fontSize: 10.sp,
                                               ),
                                             ),
                                             Icon(
                                               Icons.star,
-                                              size: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.028,
+                                              // size: MediaQuery.of(context)
+                                              //         .size
+                                              //         .width *
+                                              //     0.028,
+                                              size: 8.5.sp,
                                               color: Colors.white,
                                             ),
                                           ],
@@ -157,14 +160,14 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                   )),
 
                               SizedBox(
-                                width: 3,
+                                width: 1.5.w,
                               ),
                               Container(
-                                height: 20,
-                                width: 20,
+                                height: 2.5.h,
+                                width: 5.25.w,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
-                                  // fit: BoxFit.fill,
+                                  fit: BoxFit.fill,
                                   image: AssetImage(
                                       'assets/images/image-gallery.png'),
                                 )),
@@ -187,11 +190,11 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                   ),
                 ),
                 Container(
-                  height: 16,
-                  width: 69,
+                  height: 2.5.h,
+                  width: 16.w,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                    // fit: BoxFit.fill,
+                    fit: BoxFit.fill,
                     image: AssetImage('assets/images/Streato plus tag (2).png'),
                   )),
                 ),
@@ -381,9 +384,10 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               ]),
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.058,
+              // height: MediaQuery.of(context).size.height * 0.058,
               // width: MediaQuery.of(context).size.width * 0.92,
               // margin: EdgeInsets.only(left: 5, right: 5),
+              height: 5.8.h,
 
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -432,14 +436,17 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                 : BorderRadius.only(
                                     topLeft: Radius.circular(25),
                                     bottomLeft: Radius.circular(25))),
-                        width: MediaQuery.of(context).size.width * 0.27,
-                        height: MediaQuery.of(context).size.height * 0.1,
+                        // width: MediaQuery.of(context).size.width * 0.27,
+                        // height: MediaQuery.of(context).size.height * 0.1,
+                        height: 5.8.h,
+                        width: 30.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(Icons.two_wheeler,
-                                size: MediaQuery.of(context).size.width * 0.035,
+                                // size: MediaQuery.of(context).size.width * 0.035,
+                                size: 10.5.sp,
                                 color: isDeliverySelected == true
                                     ? Colors.black
                                     : Colors.grey),
@@ -447,14 +454,20 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                 style: isDeliverySelected == true
                                     ? TextStyle(
                                         color: Colors.black,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.035)
+                                        // fontSize:
+                                        //     MediaQuery.of(context).size.width *
+                                        //         0.035,
+
+                                        fontSize: 10.5.sp,
+                                        fontWeight: FontWeight.w600,
+                                      )
                                     : TextStyle(
                                         color: Colors.grey,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.033))
+                                        // fontSize:
+                                        //     MediaQuery.of(context).size.width *
+                                        //         0.033,
+                                        fontSize: 10.sp,
+                                      ))
                           ],
                         ),
                       ),
@@ -480,14 +493,17 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                             borderRadius: isPickupSelected == true
                                 ? BorderRadius.circular(25)
                                 : BorderRadius.circular(0)),
-                        width: MediaQuery.of(context).size.width * 0.27,
-                        height: MediaQuery.of(context).size.height * 0.1,
+                        // width: MediaQuery.of(context).size.width * 0.27,
+                        // height: MediaQuery.of(context).size.height * 0.1,
+                        height: 5.8.h,
+                        width: 30.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(Icons.food_bank,
-                                size: MediaQuery.of(context).size.width * 0.035,
+                                // size: MediaQuery.of(context).size.width * 0.035,
+                                size: 10.5.sp,
                                 color: isPickupSelected == true
                                     ? Colors.black
                                     : Colors.grey),
@@ -496,16 +512,21 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                     style: isPickupSelected == true
                                         ? TextStyle(
                                             color: Colors.black,
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.035)
+                                            // fontSize: MediaQuery.of(context)
+                                            //         .size
+                                            //         .width *
+                                            //     0.035,
+                                            fontSize: 10.5.sp,
+                                            fontWeight: FontWeight.w600,
+                                          )
                                         : TextStyle(
                                             color: Colors.grey,
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.033))
+                                            // fontSize: MediaQuery.of(context)
+                                            //         .size
+                                            //         .width *
+                                            //     0.033,
+                                            fontSize: 10.sp,
+                                          ))
                                 : SizedBox()
                           ],
                         ),
@@ -534,14 +555,17 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                 : BorderRadius.only(
                                     topRight: Radius.circular(25),
                                     bottomRight: Radius.circular(25))),
-                        width: MediaQuery.of(context).size.width * 0.27,
-                        height: MediaQuery.of(context).size.height * 0.07,
+                        // width: MediaQuery.of(context).size.width * 0.27,
+                        // height: MediaQuery.of(context).size.height * 0.07,
+                        height: 5.8.h,
+                        width: 30.w,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(Icons.note_add_outlined,
-                                size: MediaQuery.of(context).size.width * 0.035,
+                                // size: MediaQuery.of(context).size.width * 0.035,
+                                size: 10.5.sp,
                                 color: isOverviewSelected == true
                                     ? Colors.black
                                     : Colors.grey),
@@ -549,14 +573,18 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                 style: isOverviewSelected == true
                                     ? TextStyle(
                                         color: Colors.black,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.035)
+                                        // fontSize:
+                                        //     MediaQuery.of(context).size.width *
+                                        //         0.035,
+                                        fontSize: 10.5.sp,
+                                        fontWeight: FontWeight.w600)
                                     : TextStyle(
                                         color: Colors.grey,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.033))
+                                        // fontSize:
+                                        //     MediaQuery.of(context).size.width *
+                                        //         0.033,
+                                        fontSize: 10.sp,
+                                      ))
                           ],
                         ),
                       ),
@@ -631,18 +659,21 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        top: 15,
-        // left: 10,
-        // right: 10,
+        top: 2.h,
+        left: 4.w,
+        right: 4.w,
       ),
-      height: MediaQuery.of(context).size.height * 0.069,
+      // height: MediaQuery.of(context).size.height * 0.069,
+      height: 6.9.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: MediaQuery.of(context).size.width * 0.4,
-            height: MediaQuery.of(context).size.height * 0.069,
+            // width: MediaQuery.of(context).size.width * 0.4,
+            // height: MediaQuery.of(context).size.height * 0.069,
+            width: 40.w,
+            height: 6.9.h,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -650,7 +681,9 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.069,
+                      // height: MediaQuery.of(context).size.height * 0.069,
+
+                      height: 6.9.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(5),
@@ -676,7 +709,9 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget> {
                   Expanded(
                     flex: 6,
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.069,
+                      // height: MediaQuery.of(context).size.height * 0.069,
+
+                      height: 6.9.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(5),
@@ -725,8 +760,10 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget> {
           ),
           Container(
             // padding: EdgeInsets.all(5),
-            width: MediaQuery.of(context).size.width * 0.4,
-            height: MediaQuery.of(context).size.height * 0.069,
+            // width: MediaQuery.of(context).size.width * 0.4,
+            // height: MediaQuery.of(context).size.height * 0.069,
+            width: 40.w,
+            height: 6.9.h,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -734,7 +771,9 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.069,
+                      // height: MediaQuery.of(context).size.height * 0.069,
+
+                      height: 6.9.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(5),
@@ -760,7 +799,8 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget> {
                   Expanded(
                     flex: 6,
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.069,
+                      // height: MediaQuery.of(context).size.height * 0.069,
+                      height: 6.9.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(5),
@@ -812,6 +852,292 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget> {
     );
   }
 }
+
+class DeliverySelectedWidget extends StatefulWidget {
+  final restaurant_detail;
+  final vendorId;
+  final vendorName;
+  DeliverySelectedWidget(
+      {Key? key,
+      required this.restaurant_detail,
+      required this.vendorId,
+      required this.vendorName})
+      : super(key: key);
+
+  @override
+  State<DeliverySelectedWidget> createState() => _DeliverySelectedWidgetState();
+}
+
+class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
+  var isMenuSelected = true;
+  var isReviewSelected = false;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 2.h,
+          ),
+          Center(
+            child: Container(
+              // height: MediaQuery.of(context).size.height * 0.57,
+              // width: MediaQuery.of(context).size.width * 0.9,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      // margin: EdgeInsets.only(
+                      //   left: MediaQuery.of(context).size.width * 0.014,
+                      // ),
+
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // SizedBox(
+                            //   width: MediaQuery.of(context).size.width * 0.032,
+                            // ),
+                            GestureDetector(
+                              onTap: () {
+                                print("Menu selected");
+                                setState(() {
+                                  isReviewSelected = !isReviewSelected;
+                                  isMenuSelected = !isMenuSelected;
+                                });
+                              },
+                              child: Text(
+                                "Menu",
+                                style: isMenuSelected == true
+                                    ? TextStyle(
+                                        fontSize: 14.sp,
+                                        color: Colors.amber,
+                                        fontWeight: FontWeight.w700,
+                                      )
+                                    : TextStyle(
+                                        fontSize: 13.5.sp,
+                                        color: Colors.grey,
+                                      ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 3.w,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                print("Reviews selected");
+                                setState(() {
+                                  isReviewSelected = !isReviewSelected;
+                                  isMenuSelected = !isMenuSelected;
+                                });
+                              },
+                              child: Text(
+                                "Reviews",
+                                style: isReviewSelected == true
+                                    ? TextStyle(
+                                        fontSize: 14.sp,
+                                        color: Colors.amber,
+                                        fontWeight: FontWeight.w700,
+                                      )
+                                    : TextStyle(
+                                        fontSize: 13.5.sp,
+                                        color: Colors.grey,
+                                      ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 2.5.w,
+                            ),
+                            // GestureDetector(
+                            //   child: Row(
+                            //     children: [
+                            //       Text("Search"),
+                            //       Icon(Icons.search),
+                            //     ],
+                            //   ),
+                            // )
+                          ]),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 1.5.h,
+                      ),
+                      height: 65.h,
+                      child: isReviewSelected
+                          ? Center(child: RestuarantDeliveryReview())
+                          : Center(
+                              child: RestuarantDeliveryMenu(
+                                  vendor_id: widget.vendorId,
+                                  vendorName: widget.vendorName),
+                            ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PickupSelectedWidget extends StatefulWidget {
+  final bool isPickupSelected;
+
+  final restaurant_detail;
+  final vendorName;
+  final vendorId;
+
+  PickupSelectedWidget({
+    Key? key,
+    required this.isPickupSelected,
+    required this.restaurant_detail,
+    required this.vendorId,
+    required this.vendorName,
+  }) : super(key: key);
+  @override
+  State<PickupSelectedWidget> createState() => _PickupSelectedWidgetState();
+}
+
+class _PickupSelectedWidgetState extends State<PickupSelectedWidget> {
+  var isMenuSelected = true;
+  var isReviewSelected = false;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      // padding: EdgeInsets.only(left: 5, right: 5),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 2.h,
+          ),
+          Center(
+            child: Container(
+              // height: MediaQuery.of(context).size.height * 0.57,
+              // width: MediaQuery.of(context).size.width * 1,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      // margin: EdgeInsets.only(
+                      //   left: MediaQuery.of(context).size.width * 0.014,
+                      // ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // SizedBox(
+                            //   width: MediaQuery.of(context).size.width * 0.018,
+                            // ),
+                            GestureDetector(
+                              onTap: () {
+                                print("Menu selected");
+                                setState(() {
+                                  isReviewSelected = !isReviewSelected;
+                                  isMenuSelected = !isMenuSelected;
+                                });
+                              },
+                              child: Text(
+                                "Menu",
+                                style: isMenuSelected == true
+                                    ? TextStyle(
+                                        fontSize: 14.sp,
+                                        color: Colors.amber,
+                                        fontWeight: FontWeight.w700,
+                                      )
+                                    : TextStyle(
+                                        fontSize: 13.5.sp,
+                                        color: Colors.grey,
+                                      ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 3.w,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                print("Reviews selected");
+                                setState(() {
+                                  isReviewSelected = !isReviewSelected;
+                                  isMenuSelected = !isMenuSelected;
+                                });
+                              },
+                              child: Text(
+                                "Reviews",
+                                style: isReviewSelected == true
+                                    ? TextStyle(
+                                        fontSize: 14.sp,
+                                        color: Colors.amber,
+                                        fontWeight: FontWeight.w700,
+                                      )
+                                    : TextStyle(
+                                        fontSize: 13.5.sp,
+                                        color: Colors.grey,
+                                      ),
+                              ),
+                            ),
+                          ]),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        top: 1.5.h,
+                      ),
+                      height: 65.h,
+                      child: isReviewSelected
+                          ? Center(child: RestuarantDeliveryReview())
+                          : Center(
+                              child: RestuarantDeliveryMenu(
+                                  vendor_id: widget.vendorId,
+                                  vendorName: widget.vendorName),
+                            ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class OverviewSelectedWidget extends StatefulWidget {
+  final bool isOverviewSelected;
+  final restaurant_detail;
+  final vendorId;
+  final vendorName;
+  OverviewSelectedWidget({
+    Key? key,
+    required this.isOverviewSelected,
+    required this.restaurant_detail,
+    required this.vendorId,
+    required this.vendorName,
+  }) : super(key: key);
+
+  @override
+  State<OverviewSelectedWidget> createState() => _OverviewSelectedWidgetState();
+}
+
+class _OverviewSelectedWidgetState extends State<OverviewSelectedWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 1.5,
+      child: RestaurantOverviewCard(),
+      // RestaurantOverview(),
+    );
+  }
+}
+
+
+
+
 
 // class OfferTagsWidget extends StatefulWidget {
 //   const OfferTagsWidget({
@@ -1217,306 +1543,3 @@ class _OfferTagsWidgetState extends State<OfferTagsWidget> {
 //   }
 // }
 
-class DeliverySelectedWidget extends StatefulWidget {
-  final restaurant_detail;
-  final vendorId;
-  final vendorName;
-  DeliverySelectedWidget(
-      {Key? key,
-      required this.restaurant_detail,
-      required this.vendorId,
-      required this.vendorName})
-      : super(key: key);
-
-  @override
-  State<DeliverySelectedWidget> createState() => _DeliverySelectedWidgetState();
-}
-
-class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
-  var isMenuSelected = true;
-  var isReviewSelected = false;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      child: Column(
-        children: [
-          // Container(
-          //   // padding: EdgeInsets.symmetric(horizontal: 6.6),
-          //   margin: EdgeInsets.only(top: 20),
-          //   height: MediaQuery.of(context).size.height * 0.058,
-          //   child: TextFormField(
-          //       textAlignVertical: TextAlignVertical.bottom,
-          //       decoration: InputDecoration(
-          //           prefixIcon: Padding(
-          //             padding: EdgeInsets.all(7.5),
-          //             child: Icon(Icons.search),
-          //           ),
-          //           hintText: "Search within the menu",
-          //           focusedBorder: OutlineInputBorder(
-          //               borderRadius: BorderRadius.circular(8),
-          //               borderSide: BorderSide(
-          //                 color: Colors.amber,
-          //                 width: 2.0,
-          //               )),
-          //           enabledBorder: OutlineInputBorder(
-          //               borderRadius: BorderRadius.circular(8),
-          //               borderSide: BorderSide(
-          //                 color: Colors.amber,
-          //                 width: 2.0,
-          //               )))),
-          // ),
-          SizedBox(
-            height: 15,
-          ),
-          Center(
-            child: Container(
-              // height: MediaQuery.of(context).size.height * 0.57,
-              // width: MediaQuery.of(context).size.width * 0.9,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      // margin: EdgeInsets.only(
-                      //   left: MediaQuery.of(context).size.width * 0.014,
-                      // ),
-
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // SizedBox(
-                            //   width: MediaQuery.of(context).size.width * 0.032,
-                            // ),
-                            GestureDetector(
-                              onTap: () {
-                                print("Menu selected");
-                                setState(() {
-                                  isReviewSelected = !isReviewSelected;
-                                  isMenuSelected = !isMenuSelected;
-                                });
-                              },
-                              child: Text(
-                                "Menu",
-                                style: isMenuSelected == true
-                                    ? TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.amber,
-                                        fontWeight: FontWeight.w700,
-                                      )
-                                    : TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey,
-                                      ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.04,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print("Reviews selected");
-                                setState(() {
-                                  isReviewSelected = !isReviewSelected;
-                                  isMenuSelected = !isMenuSelected;
-                                });
-                              },
-                              child: Text(
-                                "Reviews",
-                                style: isReviewSelected == true
-                                    ? TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.amber,
-                                        fontWeight: FontWeight.w700,
-                                      )
-                                    : TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey,
-                                      ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.32,
-                            ),
-                            // GestureDetector(
-                            //   child: Row(
-                            //     children: [
-                            //       Text("Search"),
-                            //       Icon(Icons.search),
-                            //     ],
-                            //   ),
-                            // )
-                          ]),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 15),
-                      height: MediaQuery.of(context).size.height * 0.65,
-                      // width: MediaQuery.of(context).size.width * 0.9,
-                      child: isReviewSelected
-                          ? Center(child: RestuarantDeliveryReview())
-                          : Center(
-                              child: RestuarantDeliveryMenu(
-                                  vendor_id: widget.vendorId,
-                                  vendorName: widget.vendorName),
-                            ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class PickupSelectedWidget extends StatefulWidget {
-  final bool isPickupSelected;
-
-  final restaurant_detail;
-  final vendorName;
-  final vendorId;
-
-  PickupSelectedWidget({
-    Key? key,
-    required this.isPickupSelected,
-    required this.restaurant_detail,
-    required this.vendorId,
-    required this.vendorName,
-  }) : super(key: key);
-  @override
-  State<PickupSelectedWidget> createState() => _PickupSelectedWidgetState();
-}
-
-class _PickupSelectedWidgetState extends State<PickupSelectedWidget> {
-  var isMenuSelected = true;
-  var isReviewSelected = false;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      // padding: EdgeInsets.only(left: 5, right: 5),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 15,
-          ),
-          Center(
-            child: Container(
-              // height: MediaQuery.of(context).size.height * 0.57,
-              // width: MediaQuery.of(context).size.width * 1,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      // margin: EdgeInsets.only(
-                      //   left: MediaQuery.of(context).size.width * 0.014,
-                      // ),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // SizedBox(
-                            //   width: MediaQuery.of(context).size.width * 0.018,
-                            // ),
-                            GestureDetector(
-                              onTap: () {
-                                print("Menu selected");
-                                setState(() {
-                                  isReviewSelected = !isReviewSelected;
-                                  isMenuSelected = !isMenuSelected;
-                                });
-                              },
-                              child: Text(
-                                "Menu",
-                                style: isMenuSelected == true
-                                    ? TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.amber,
-                                        fontWeight: FontWeight.w700,
-                                      )
-                                    : TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey,
-                                      ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.04,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print("Reviews selected");
-                                setState(() {
-                                  isReviewSelected = !isReviewSelected;
-                                  isMenuSelected = !isMenuSelected;
-                                });
-                              },
-                              child: Text(
-                                "Reviews",
-                                style: isReviewSelected == true
-                                    ? TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.amber,
-                                        fontWeight: FontWeight.w700,
-                                      )
-                                    : TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.grey,
-                                      ),
-                              ),
-                            ),
-                          ]),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 15),
-                      height: MediaQuery.of(context).size.height * 0.65,
-                      child: isReviewSelected
-                          ? Center(child: RestuarantDeliveryReview())
-                          : Center(
-                              child: RestuarantDeliveryMenu(
-                                  vendor_id: widget.vendorId,
-                                  vendorName: widget.vendorName),
-                            ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class OverviewSelectedWidget extends StatefulWidget {
-  final bool isOverviewSelected;
-  final restaurant_detail;
-  final vendorId;
-  final vendorName;
-  OverviewSelectedWidget({
-    Key? key,
-    required this.isOverviewSelected,
-    required this.restaurant_detail,
-    required this.vendorId,
-    required this.vendorName,
-  }) : super(key: key);
-
-  @override
-  State<OverviewSelectedWidget> createState() => _OverviewSelectedWidgetState();
-}
-
-class _OverviewSelectedWidgetState extends State<OverviewSelectedWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 1.5,
-      child: RestaurantOverviewCard(),
-      // RestaurantOverview(),
-    );
-  }
-}
