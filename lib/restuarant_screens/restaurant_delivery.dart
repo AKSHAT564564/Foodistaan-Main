@@ -67,7 +67,8 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                   title: Text(
-                    "${widget.vendorName.length >= 20 ? widget.vendorName.substring(0, 20).trimRight() + "..." : widget.vendorName}",
+                    // "${widget.vendorName.length >= 20 ? widget.vendorName.substring(0, 20).trimRight() + "..." : widget.vendorName}",
+                    '${widget.vendorName}',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
