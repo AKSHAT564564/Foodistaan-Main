@@ -155,9 +155,10 @@ class _HomeScreenState extends State<HomeScreen>
                         width: 1.5.w,
                       ),
                       Expanded(
-                        flex: 8,
+                        flex: 10,
                         child: Container(
-                          padding: EdgeInsets.only(top: 14, left: 10),
+                          // color: Colors.red,
+                          padding: EdgeInsets.only(top: 10, left: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                       ),
-                      Spacer(),
+                      // Spacer(),
                       Expanded(
                         flex: 2,
                         child: Container(

@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 import 'package:foodistan/auth/autentication.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 Future<List> fetchMenu(vendor_id) async {
   List menuItems = [];
@@ -82,7 +83,7 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
         children: [
           SearchMenu(),
           SizedBox(
-            height: 20,
+            height: 3.h,
           ),
           Container(
               child: (menuItems.isEmpty && cartId == '')

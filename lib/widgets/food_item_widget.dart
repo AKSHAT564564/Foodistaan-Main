@@ -4,6 +4,7 @@ import 'package:foodistan/auth/autentication.dart';
 import 'package:foodistan/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:foodistan/functions/cart_functions.dart';
+import 'package:sizer/sizer.dart';
 
 class MyFoodItemWidget extends StatefulWidget {
   static String id = 'my_food_widget';
@@ -111,25 +112,28 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
                     height: 5,
                   ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Text("₹ ${widget.menuItem['price']}",
-                            maxLines: 3,
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w700)),
-                      ),
-                      // Spacer(),
-                      Container(
-                        child: CartFunctions().quantityWidgetInRestaurant(
-                            widget.cartId,
-                            widget.menuItem['id'],
-                            widget.vendor_id,
-                            widget.menuItem,
-                            widget.vendorName),
-                      ),
-                    ],
+                  Container(
+                    height: 6.h,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Text("₹ ${widget.menuItem['price']}",
+                              maxLines: 3,
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w700)),
+                        ),
+                        // Spacer(),
+                        Container(
+                          child: CartFunctions().quantityWidgetInRestaurant(
+                              widget.cartId,
+                              widget.menuItem['id'],
+                              widget.vendor_id,
+                              widget.menuItem,
+                              widget.vendorName),
+                        ),
+                      ],
+                    ),
                   )
                   // SizedBox(
                   //   height: 3,
