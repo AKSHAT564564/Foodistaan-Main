@@ -175,7 +175,8 @@ class _SearchState extends State<Search> {
                   controller: _searchController,
                   onChanged: (v) async {
                     searchQuery(_searchController.text, value.items);
-                    setState(() {}); //for cross icon in searchbar
+                    setState(() {});
+                    //for cross icon in searchbar
                   },
                   textAlign: TextAlign.start,
                   obscureText: false,

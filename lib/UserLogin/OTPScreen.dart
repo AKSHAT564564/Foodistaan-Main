@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 import 'package:foodistan/UserLogin/user_detail_form.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -145,7 +146,8 @@ class _OTPScreenState extends State<OTPScreen> {
     color: Color(0xffFFEEC0),
     borderRadius: BorderRadius.circular(5.0),
     border: Border.all(
-      color: Color(0xffF7C12B),
+      // color: Color(0xffF7C12B),
+      color: kYellowL,
     ),
   );
 
@@ -179,7 +181,10 @@ class _OTPScreenState extends State<OTPScreen> {
             Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: PinCodeTextField(
-                  pastedTextStyle: TextStyle(color: Colors.yellow),
+                  pastedTextStyle: TextStyle(
+                    // color: Colors.yellow,
+                    color: kYellowL,
+                  ),
                   appContext: context,
                   length: 6,
                   onChanged: (v) {},
@@ -257,11 +262,16 @@ class _OTPScreenState extends State<OTPScreen> {
                   cursorColor: Colors.black,
                   keyboardType: TextInputType.number,
                   pinTheme: PinTheme(
-                      inactiveColor: Color(0xFFF7C12B),
+                      inactiveColor: kYellowL,
+                      //  Color(0xFFF7C12B),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
+                      ),
                       activeColor: Colors.black,
-                      selectedColor: Color(0xFFF7C12B),
+                      selectedColor: kYellowL,
+                      // Color(0xFFF7C12B),
                       shape: PinCodeFieldShape.box,
-                      fieldWidth: MediaQuery.of(context).size.width * 0.1,
+                      fieldWidth: MediaQuery.of(context).size.width * 0.12,
                       fieldHeight: MediaQuery.of(context).size.height * 0.05),
                 )),
             Padding(
@@ -314,32 +324,32 @@ class _OTPScreenState extends State<OTPScreen> {
         child: Scaffold(
           body: Stack(
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SvgPicture.asset(
-                    'Images/welcometopleft.svg',
-                    width: MediaQuery.of(context).size.width * 0.44,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SvgPicture.asset(
-                        'Images/welcomebottomright.svg',
-                        width: MediaQuery.of(context).size.width * 0.44,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     SvgPicture.asset(
+              //       'Images/welcometopleft.svg',
+              //       width: MediaQuery.of(context).size.width * 0.44,
+              //     ),
+              //   ],
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   crossAxisAlignment: CrossAxisAlignment.end,
+              //   children: [
+              //     Column(
+              //       mainAxisAlignment: MainAxisAlignment.end,
+              //       crossAxisAlignment: CrossAxisAlignment.end,
+              //       children: [
+              //         SvgPicture.asset(
+              //           'Images/welcomebottomright.svg',
+              //           width: MediaQuery.of(context).size.width * 0.44,
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
