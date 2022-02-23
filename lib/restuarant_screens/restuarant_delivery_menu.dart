@@ -249,7 +249,7 @@ class _SearchMenuItemListState extends State<SearchMenuItemList> {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      color: Colors.amber,
+      color: Colors.white,
     );
   }
 }
