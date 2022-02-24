@@ -46,6 +46,7 @@ dependencies:
   solid_bottom_sheet: ^0.1.10
   url_launcher: ^6.0.20
   uuid: ^3.0.5
+  flutter_sticky_header: ^0.6.0
  
 
   # For Cached Network Image
