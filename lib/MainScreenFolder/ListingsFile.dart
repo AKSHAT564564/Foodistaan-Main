@@ -216,6 +216,28 @@ class LeftSide extends StatelessWidget {
             )),
           ),
         ),
+        Positioned(
+          top: 1.8.h,
+          right: 1.w,
+          child: Container(
+            child: foodistaanCertified == true
+                ? Container(
+                    height: 3.h,
+                    width: 19.5.w,
+                    // height: 16,
+                    // width: 69,
+                    // height: 2.5.h,
+                    // width: 16.w,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image:
+                          AssetImage('assets/images/Streato plus tag (2).png'),
+                    )),
+                  )
+                : SizedBox(),
+          ),
+        ),
       ]),
     );
   }
@@ -265,8 +287,8 @@ class RightSide extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        name.length > 17
-                            ? name.substring(0, 17).trimRight() + '...'
+                        name.length > 20
+                            ? name.substring(0, 20).trimRight() + '...'
                             : name.trimRight(),
                         maxLines: 1,
                         overflow: TextOverflow.clip,
@@ -279,22 +301,22 @@ class RightSide extends StatelessWidget {
                       SizedBox(
                         width: 2.w,
                       ),
-                      Container(
-                        child: foodistaanCertified == true
-                            ? Container(
-                                // height: 16,
-                                // width: 69,
-                                height: 2.5.h,
-                                width: 16.w,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage(
-                                      'assets/images/Streato plus tag (2).png'),
-                                )),
-                              )
-                            : SizedBox(),
-                      ),
+                      // Container(
+                      //   child: foodistaanCertified == true
+                      //       ? Container(
+                      //           // height: 16,
+                      //           // width: 69,
+                      //           height: 2.5.h,
+                      //           width: 16.w,
+                      //           decoration: BoxDecoration(
+                      //               image: DecorationImage(
+                      //             fit: BoxFit.fill,
+                      //             image: AssetImage(
+                      //                 'assets/images/Streato plus tag (2).png'),
+                      //           )),
+                      //         )
+                      //       : SizedBox(),
+                      // ),
                     ],
                   ),
                 ),
