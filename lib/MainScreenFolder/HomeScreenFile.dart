@@ -169,7 +169,7 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
         ),
         SliverStickyHeader(
           header: Container(
-            padding: EdgeInsets.only(top: 1.h),
+            padding: EdgeInsets.only(top: 0.8.h, bottom: 0.8.h),
             color: Colors.white,
             child: Search(),
           ),
