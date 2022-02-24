@@ -132,6 +132,10 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             Expanded(
               child: SingleChildScrollView(
+                physics: ScrollPhysics(
+                    parent: BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                )),
                 controller: _scrollController,
                 scrollDirection: Axis.vertical,
                 child: Column(
@@ -327,7 +331,7 @@ class _HomeScreenState extends State<HomeScreen>
                             'Restaurants near you',
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 18,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
