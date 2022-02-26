@@ -231,7 +231,8 @@ class PaymentErrorWidget extends StatelessWidget {
                   margin: EdgeInsets.only(left: 10, right: 10, bottom: 8.5.h),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: kRedPure,
+                    // color: kRedPure,
+                    color: kYellowL,
                     border: Border.all(
                       // color: kRedPure,
                       color: kYellowL,
