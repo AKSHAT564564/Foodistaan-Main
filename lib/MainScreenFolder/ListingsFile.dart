@@ -217,12 +217,13 @@ class LeftSide extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 1.8.h,
+          top: 1.9.h,
           right: 1.w,
+          // left: (-1.3).w,
           child: Container(
             child: foodistaanCertified == true
                 ? Container(
-                    height: 3.h,
+                    height: 2.7.h,
                     width: 21.w,
                     // height: 16,
                     // width: 69,

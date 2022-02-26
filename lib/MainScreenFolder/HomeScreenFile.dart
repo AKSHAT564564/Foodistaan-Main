@@ -307,7 +307,7 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
                         'Restaurants near you',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 18,
+                          fontSize: 16.5.sp,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
