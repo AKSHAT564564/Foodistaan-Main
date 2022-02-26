@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodistan/constants.dart';
+import 'package:sizer/sizer.dart';
 import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
 import 'package:foodistan/functions/order_functions.dart';
@@ -96,43 +98,46 @@ class _RazorPayScreenState extends State<RazorPayScreen> {
     if (response.code != null) {
       var error = json.decode(response.message.toString());
       print('Error Message $error');
-      Alert(
-        context: context,
-        type: AlertType.info,
-        title: 'Payment failed',
-        desc: error['error']['description'],
-        buttons: [
-          DialogButton(
-            child: Text(
-              "Try Again",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            onPressed: () async {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MainScreen(
-                            currentIndex: 1,
-                          )),
-                  (route) => false);
-            },
-            color: Color.fromRGBO(0, 179, 134, 1.0),
-          ),
-          // DialogButton(
-          //   child: Text(
-          //     "NO",
-          //     style: TextStyle(color: Colors.white, fontSize: 20),
-          //   ),
-          //   onPressed: () async {
-          //     Navigator.pop(context);
-          //   },
-          //   gradient: LinearGradient(colors: [
-          //     Color.fromRGBO(116, 116, 191, 1.0),
-          //     Color.fromRGBO(52, 138, 199, 1.0)
-          //   ]),
-          // )
-        ],
-      ).show();
+      Navigator.push(
+          context,
+          PageTransition(
+              type: PageTransitionType.topToBottom,
+              child: PaymentErrorWidget()));
+
+      // Alert(
+      //   context: context,
+      //   type: AlertType.info,
+      //   title: 'Payment failed',
+      //   desc: error['error']['description'],
+      //   // closeFunction: () async {
+      //   //   Navigator.pushAndRemoveUntil(
+      //   //       context,
+      //   //       MaterialPageRoute(
+      //   //         builder: (context) => MainScreen(
+      //   //           currentIndex: 1,
+      //   //         ),
+      //   //       ),
+      //   //       (route) => false);
+      //   // },
+      //   buttons: [
+      //     DialogButton(
+      //       child: Text(
+      //         "Try Again",
+      //         style: TextStyle(color: Colors.white, fontSize: 20),
+      //       ),
+      //       onPressed: () async {
+      //         Navigator.pushAndRemoveUntil(
+      //             context,
+      //             MaterialPageRoute(
+      //                 builder: (context) => MainScreen(
+      //                       currentIndex: 1,
+      //                     )),
+      //             (route) => false);
+      //       },
+      //       color: Color.fromRGBO(0, 179, 134, 1.0),
+      //     ),
+      //   ],
+      // ).show();
     }
 
     Fluttertoast.showToast(
@@ -152,6 +157,105 @@ class _RazorPayScreenState extends State<RazorPayScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(),
+    );
+  }
+}
+
+class PaymentErrorWidget extends StatelessWidget {
+  const PaymentErrorWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        // height: 100.h,
+        // width: double.infinity,
+        color: Colors.white,
+        child: Stack(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 11,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/emojione_sad-but-relieved-face.png',
+                    height: 15.h,
+                    width: 15.h,
+                  ),
+                  SizedBox(height: 4.5.h),
+                  Text(
+                    'Opps Payment Failed',
+                    style: TextStyle(
+                      // color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18.5.sp,
+                    ),
+                  ),
+                  SizedBox(height: 2.5.h),
+                  Text(
+                    'Don’t worry if something debited from your account, rest assured it’ll be back in your account within 48 hours.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: kGreyDark2,
+                      fontSize: 10.5.sp,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: GestureDetector(
+                onTap: () async {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MainScreen(
+                                currentIndex: 1,
+                              )),
+                      (route) => false);
+                },
+                child: Container(
+                  height: 45,
+                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 8.5.h),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    // color: kRedPure,
+                    color: kYellowL,
+                    border: Border.all(
+                      // color: kRedPure,
+                      color: kYellowL,
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Try again',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
