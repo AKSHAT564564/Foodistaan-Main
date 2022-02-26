@@ -233,7 +233,8 @@ class PaymentErrorWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: kRedPure,
                     border: Border.all(
-                      color: kRedPure,
+                      // color: kRedPure,
+                      color: kYellowL,
                       width: 1.5,
                     ),
                     borderRadius: BorderRadius.circular(8),
