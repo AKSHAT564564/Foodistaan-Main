@@ -223,7 +223,7 @@ class LeftSide extends StatelessWidget {
             child: foodistaanCertified == true
                 ? Container(
                     height: 3.h,
-                    width: 19.5.w,
+                    width: 21.w,
                     // height: 16,
                     // width: 69,
                     // height: 2.5.h,
@@ -332,7 +332,7 @@ class RightSide extends StatelessWidget {
                     //   bottom: 2,
                     // ),
                     height: 2.5.h,
-                    width: 11.w,
+                    width: 12.w,
                     padding: EdgeInsets.all(0.1.sp),
                     child: Center(
                       child: Column(
@@ -347,7 +347,7 @@ class RightSide extends StatelessWidget {
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 8.5.sp,
+                                  fontSize: 10.sp,
                                 ),
                               ),
                               Icon(
@@ -412,9 +412,10 @@ class RightSide extends StatelessWidget {
                 Container(
                   // width: w1 * 0.4,
                   width: 40.w,
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
+                  height: 2.5.h,
+                  child: Container(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         delivery == true
                             ? Row(
@@ -423,7 +424,7 @@ class RightSide extends StatelessWidget {
                                 children: [
                                   CircleAvatar(
                                     backgroundColor: kGrey,
-                                    radius: 6.sp,
+                                    radius: 8.sp,
                                     child: Center(
                                       child: Icon(
                                         Icons.two_wheeler,
@@ -442,12 +443,12 @@ class RightSide extends StatelessWidget {
                                       fontSize: 8.5.sp,
                                     ),
                                   ),
+                                  SizedBox(
+                                    width: 1.5.w,
+                                  ),
                                 ],
                               )
                             : SizedBox(),
-                        SizedBox(
-                          width: 1.5.w,
-                        ),
                         takeaway == true
                             ? Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -455,7 +456,7 @@ class RightSide extends StatelessWidget {
                                 children: [
                                   CircleAvatar(
                                     backgroundColor: kGrey,
-                                    radius: 6.sp,
+                                    radius: 8.sp,
                                     child: Center(
                                       child: Icon(
                                         Icons.shopping_bag_outlined,

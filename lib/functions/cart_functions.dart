@@ -260,18 +260,18 @@ class CartFunctions {
                             .addItemToCart(
                                 vendorId, cartId, menuItem, vendorName)
                             .then((value) {
-                          final snackBar = SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            content: Text(value),
-                            action: SnackBarAction(
-                              label: '',
-                              onPressed: () {
-                                // Some code to undo the change.
-                              },
-                            ),
-                          );
+                          // final snackBar = SnackBar(
+                          //   behavior: SnackBarBehavior.floating,
+                          //   content: Text(value),
+                          //   action: SnackBarAction(
+                          //     label: '',
+                          //     onPressed: () {
+                          //       // Some code to undo the change.
+                          //     },
+                          //   ),
+                          // );
 
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         });
                       }
                     },
