@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
+import 'package:foodistan/customSplashScreen.dart';
 import 'package:foodistan/profile/profile_address.dart';
 import 'package:foodistan/providers/cart_id_provider.dart';
 import 'package:foodistan/providers/restaurant_data_provider.dart';
@@ -33,11 +34,29 @@ void main() async {
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // bool _isAuth = false;
+  // bool _isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+
+    // setState(() {
+    //   _isAuth = FirebaseAuth.instance.currentUser != null;
+    //   _isLoading = false;
+    // });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // var _isAuth = FirebaseAuth.instance.currentUser != null;
     return MultiProvider(
         // list of all the providers
         providers: [
@@ -73,8 +92,8 @@ class MyApp extends StatelessWidget {
               // check if the user has already logged in
 
               // if not redirects to login screen
-              initialRoute:
-                  FirebaseAuth.instance.currentUser != null ? 'H' : 'L',
+              initialRoute: 'CS',
+              // FirebaseAuth.instance.currentUser != null ? 'H' : 'L',
               routes: {
                 'S': (context) => ScannerScreen(),
                 'L': (context) => LoginScreen(), //login Screen
@@ -82,6 +101,12 @@ class MyApp extends StatelessWidget {
                 'O': (context) => OptionScreen(),
                 CartScreenMainLogin().routeName: (context) =>
                     CartScreenMainLogin(), // main Cart screen on home page
+
+                'CS': (context) => CustomSplashScreen(
+                      childScreen: FirebaseAuth.instance.currentUser != null
+                          ? MainScreen()
+                          : LoginScreen(),
+                    ), //CustomSplashScreen
               },
               debugShowCheckedModeBanner: false,
               title: 'Streato',
