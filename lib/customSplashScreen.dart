@@ -57,7 +57,7 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
       });
     });
 
-    Timer(Duration(seconds: 6), () {
+    Timer(Duration(seconds: 5), () {
       setState(() {
         Navigator.of(context)
             .pushReplacement(SplashScreenTransition(widget.childScreen));
