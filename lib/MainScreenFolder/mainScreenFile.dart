@@ -7,6 +7,7 @@ import 'package:foodistan/functions/order_functions.dart';
 import 'package:foodistan/profile/user_profile.dart';
 import 'package:foodistan/providers/user_data_provider.dart';
 import 'package:foodistan/sizeConfig.dart';
+import 'package:sizer/sizer.dart';
 import '../scanner.dart';
 import 'HomeScreenFile.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,11 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     Provider.of<UserDataProvider>(context, listen: false).getUserData();
 
     _pageController = PageController(initialPage: widget.currentIndex);
-    tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    // tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+
+    //  bottom navbar fix
+    tabController = TabController(
+        length: 4, vsync: this, initialIndex: widget.currentIndex);
   }
 
   @override
@@ -54,6 +59,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     widget.currentIndex = value;
     _pageController.jumpToPage(value);
     tabController!.index = value;
+    setState(() {
+      print(value);
+    });
   }
 
   Widget build(BuildContext context) {
@@ -82,22 +90,46 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             ),
             tabs: [
               Tab(
-                icon: Icon(Icons.home),
+                // icon: Icon(Icons.home),
+                icon: Container(
+                  height: 2.8.h,
+                  child: widget.currentIndex == 0
+                      ? Image.asset('assets/images/home-selectedIcon.png')
+                      : Image.asset('assets/images/home-icon.png'),
+                ),
                 iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Home',
               ),
               Tab(
-                icon: Icon(Icons.shopping_cart),
+                // icon: Icon(Icons.shopping_cart),
+                icon: Container(
+                  height: 2.8.h,
+                  child: widget.currentIndex == 1
+                      ? Image.asset('assets/images/cart-selectedIcon.png')
+                      : Image.asset('assets/images/cart-icon.png'),
+                ),
                 iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Cart',
               ),
               Tab(
-                icon: Icon(CupertinoIcons.qrcode_viewfinder),
+                // icon: Icon(CupertinoIcons.qrcode_viewfinder),
+                icon: Container(
+                  height: 2.8.h,
+                  child: widget.currentIndex == 2
+                      ? Image.asset('assets/images/scanner-selectedIcon.png')
+                      : Image.asset('assets/images/scanner-icon.png'),
+                ),
                 iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Scan',
               ),
               Tab(
-                icon: Icon(CupertinoIcons.profile_circled),
+                // icon: Icon(CupertinoIcons.profile_circled),
+                icon: Container(
+                  height: 2.8.h,
+                  child: widget.currentIndex == 3
+                      ? Image.asset('assets/images/profile-selectedIcon.png')
+                      : Image.asset('assets/images/profile-icon.png'),
+                ),
                 iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Profile',
               ),
