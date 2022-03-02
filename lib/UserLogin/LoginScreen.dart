@@ -33,89 +33,73 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   getMobileFormWidget(context) {
-    return Positioned.fill(
-      bottom: focusNode.hasFocus ? 30.h : 8.h,
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return AnimatedPositioned(
+      duration: Duration(milliseconds: 1000),
+      top: focusNode.hasFocus ? 30.h : 51.h,
+      child: Column(mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            AnimatedContainer(
+              duration: Duration(milliseconds: 1000),
+              curve: Curves.fastOutSlowIn,
               margin: EdgeInsets.only(bottom: focusNode.hasFocus ? 2.h : 3.h),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 1.h,
+                  Text(
+                    "Hello FOODIES",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      // color: Color(0xFFF7C12B),
+                      color: kYellowL,
+                      fontSize: 26.sp,
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 11,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Hello..",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF0F1B2B),
-                              fontSize: 25.sp,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 0.5.h,
-                          ),
-                          Text(
-                            "FOODIES",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              // color: Color(0xFFF7C12B),
-                              color: kYellowL,
-                              fontSize: 40.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  Text(
+                    "Let’s get Started",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w600,
+                      color: kYellowL,
+                      // Color(0xFF0F1B2B),
+                      fontSize: 12.sp,
+                    ),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: focusNode.hasFocus ? 15.h : 1.h,
+              height: focusNode.hasFocus ? 1.h : 3.h,
             ),
-            AnimatedContainer(
-              alignment: Alignment.center,
-              duration: Duration(
-                seconds: 1,
-              ),
-              curve: Curves.fastOutSlowIn,
-              height: !focusNode.hasFocus ? 45.h : 0.h,
-              width: 100.h,
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/images/cartgif.gif',
-                    height: 35.h,
-                    fit: BoxFit.fill,
-                  ),
-                  Text(
-                    "Jump the Queue - Enjoy Your Favourite \nStreet Food Delivered to you in Minutes",
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  )
-                ],
-              ),
-            ),
+            // AnimatedContainer(
+            //   alignment: Alignment.center,
+            //   duration: Duration(
+            //     seconds: 1,
+            //   ),
+            //   curve: Curves.fastOutSlowIn,
+            //   height: !focusNode.hasFocus ? 45.h : 0.h,
+            //   width: 100.h,
+            //   child: Column(
+            //     children: [
+            //       Image.asset(
+            //         'assets/images/cartgif.gif',
+            //         height: 35.h,
+            //         fit: BoxFit.fill,
+            //       ),
+            //       Text(
+            //         "Jump the Queue - Enjoy Your Favourite \nStreet Food Delivered to you in Minutes",
+            //         style: TextStyle(fontWeight: FontWeight.w600),
+            //       )
+            //     ],
+            //   ),
+            // ),
             Container(
               // height: MediaQuery.of(context).size.height * 0.07,
-
-              width: MediaQuery.of(context).size.height * 0.55,
+              width: 100.w,
               padding: EdgeInsets.symmetric(
                 horizontal: 11,
               ),
@@ -135,6 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // focusColor: Color(0xFFF7C12B),
                     focusColor: kYellowL,
                     hintText: 'Phone Number',
+
                     prefix: Text(
                       '+91',
                       // textAlign: TextAlign.end,
@@ -164,12 +149,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 1.5.h,
             ),
             Center(
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.07,
-                width: MediaQuery.of(context).size.height * 0.55,
+                width: 100.w,
                 padding: EdgeInsets.symmetric(
                   horizontal: 11,
                 ),
@@ -222,18 +207,25 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        // resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             Container(
               height: 100.h,
-              width: 100.w,
-              color: Colors.white,
-              // decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //   fit: BoxFit.fill,
-              //   image: AssetImage('assets/images/Login Screen BGImage.png'),
-              // )),
+            ),
+            AnimatedContainer(
+              curve: Curves.easeInOut,
+              duration: Duration(milliseconds: 1000),
+              height: focusNode.hasFocus ? 55.h : 90.h,
+              // width: 100.w,
+              // color: Colors.white,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/images/loginBG.png'),
+                ),
+                color: Colors.white,
+              ),
             ),
             // Column(
             //   mainAxisAlignment: MainAxisAlignment.start,
@@ -295,7 +287,9 @@ class _LoginScreenState extends State<LoginScreen> {
             // ),
             // getMobileFormWidget(context),
 
-            Container(
+            AnimatedContainer(
+              duration: Duration(milliseconds: 1000),
+              curve: Curves.easeInOut,
               child: getMobileFormWidget(context),
             ),
           ],
