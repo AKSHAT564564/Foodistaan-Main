@@ -92,7 +92,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               Tab(
                 // icon: Icon(Icons.home),
                 icon: Container(
-                  height: 3.5.h,
+                  height: 2.8.h,
                   child: widget.currentIndex == 0
                       ? Image.asset('assets/images/home-selectedIcon.png')
                       : Image.asset('assets/images/home-icon.png'),
@@ -103,7 +103,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               Tab(
                 // icon: Icon(Icons.shopping_cart),
                 icon: Container(
-                  height: 3.5.h,
+                  height: 2.8.h,
                   child: widget.currentIndex == 1
                       ? Image.asset('assets/images/cart-selectedIcon.png')
                       : Image.asset('assets/images/cart-icon.png'),
@@ -114,7 +114,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               Tab(
                 // icon: Icon(CupertinoIcons.qrcode_viewfinder),
                 icon: Container(
-                  height: 3.5.h,
+                  height: 2.8.h,
                   child: widget.currentIndex == 2
                       ? Image.asset('assets/images/scanner-selectedIcon.png')
                       : Image.asset('assets/images/scanner-icon.png'),
@@ -125,7 +125,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               Tab(
                 // icon: Icon(CupertinoIcons.profile_circled),
                 icon: Container(
-                  height: 3.5.h,
+                  height: 2.8.h,
                   child: widget.currentIndex == 3
                       ? Image.asset('assets/images/profile-selectedIcon.png')
                       : Image.asset('assets/images/profile-icon.png'),
