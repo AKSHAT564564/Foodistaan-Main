@@ -108,6 +108,37 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                       ? Image.asset('assets/images/cart-selectedIcon.png')
                       : Image.asset('assets/images/cart-icon.png'),
                 ),
+                // Stack(
+                //   children: [
+                //     Container(
+                //       height: 2.8.h,
+                //       child: widget.currentIndex == 1
+                //           ? Container(
+                //               child: Image.asset(
+                //                   'assets/images/cart-selectedIcon.png'))
+                //           : Container(
+                //               child:
+                //                   Image.asset('assets/images/cart-icon.png')),
+                //     ),
+                //     Positioned(
+                //       right: -0.3.h,
+                //       top: -0.6.h,
+                //       child: Container(
+                //         alignment: Alignment.center,
+                //         padding: EdgeInsets.all(0.1.h),
+                //         height: 2.h,
+                //         // width: 1.8.h,
+                //         decoration: BoxDecoration(
+                //             shape: BoxShape.circle, color: Colors.white),
+                //         child: Text(
+                //           '0',
+                //           style: TextStyle(
+                //               fontWeight: FontWeight.w700, fontSize: 7.5.sp),
+                //         ),
+                //       ),
+                //     )
+                //   ],
+                // ),
                 iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Cart',
               ),

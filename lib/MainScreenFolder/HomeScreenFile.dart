@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:foodistan/MainScreenFolder/AppBar/AppBarFile.dart';
+import 'package:foodistan/MainScreenFolder/SeeRestaurantsScreen.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/location_functions.dart';
 import 'package:sizer/sizer.dart';
@@ -202,7 +203,10 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
                   padding:
                       EdgeInsets.only(top: 1, left: 11, right: 11, bottom: 11),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => SeeRestaurantsScreen()));
+                    },
                     child: Container(
                       height: 10.h,
                       decoration: BoxDecoration(
