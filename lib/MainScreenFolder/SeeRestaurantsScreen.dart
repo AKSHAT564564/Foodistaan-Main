@@ -352,7 +352,7 @@ class _SeeCardItemState extends State<SeeCardItem> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  itemDetail[' delivery'] == true
+                                  itemDetail['delivery'] == true
                                       ? Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
