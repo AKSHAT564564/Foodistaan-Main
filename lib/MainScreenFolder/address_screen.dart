@@ -239,6 +239,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 height: 15,
               ),
               Form(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: _formKey,
                 child: Column(
                   children: [
@@ -260,10 +261,11 @@ class _AddressScreenState extends State<AddressScreen> {
                               vertical: 5,
                             ),
                             child: TextFormField(
+                              // onChanged: (value) =>
+                              //     houseFeildController.text = value,
                               validator: (value) {
                                 if (value == null || value.isEmpty)
                                   return 'Please Enter House';
-                                return '';
                               },
                               controller: houseFeildController,
                               keyboardType: TextInputType.text,
@@ -294,10 +296,11 @@ class _AddressScreenState extends State<AddressScreen> {
                               vertical: 5,
                             ),
                             child: TextFormField(
+                              // onChanged: (value) =>
+                              //     streetFeildController.text = value,
                               validator: (value) {
                                 if (value == null || value.isEmpty)
                                   return 'Please Enter Street';
-                                return '';
                               },
                               controller: streetFeildController,
                               keyboardType: TextInputType.text,

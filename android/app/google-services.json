@@ -29,6 +29,13 @@
             {
               "client_id": "201527710402-epeq8m4952k6samd6q48lfmimj0s3qk8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "201527710402-uvvt7t27c9nuc3f65b919d56s9n0960d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodistaan"
+              }
             }
           ]
         }
@@ -114,6 +121,13 @@
             {
               "client_id": "201527710402-epeq8m4952k6samd6q48lfmimj0s3qk8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "201527710402-uvvt7t27c9nuc3f65b919d56s9n0960d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodistaan"
+              }
             }
           ]
         }
@@ -143,6 +157,13 @@
             {
               "client_id": "201527710402-epeq8m4952k6samd6q48lfmimj0s3qk8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "201527710402-uvvt7t27c9nuc3f65b919d56s9n0960d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodistaan"
+              }
             }
           ]
         }
@@ -156,6 +177,38 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "201527710402-a1rios1ev8e49745pv2qe5vgsc3lasmo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.foodistanPvtLtd.Streato",
+            "certificate_hash": "1d9ef571329a63afa78651ffee90cc47518881bb"
+          }
+        },
+        {
+          "client_id": "201527710402-dv307ogd55g69l5qpe8i0oj4tgq5dm96.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.foodistanPvtLtd.Streato",
+            "certificate_hash": "6e64a5f7b3b7082f1aed9f507240f4424fa02538"
+          }
+        },
+        {
+          "client_id": "201527710402-f8i92k2s48tecggs4i60qa3vqd5eti1b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.foodistanPvtLtd.Streato",
+            "certificate_hash": "f446274b71538eae6874149ca1ac680a4014bf41"
+          }
+        },
+        {
+          "client_id": "201527710402-rp8gprt7l6lr26cdlghkbrpschltr47v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.foodistanPvtLtd.Streato",
+            "certificate_hash": "1ecc0f90a1ef7c9b803dfc6c7b4eb12a2f3035a8"
+          }
+        },
         {
           "client_id": "201527710402-epeq8m4952k6samd6q48lfmimj0s3qk8.apps.googleusercontent.com",
           "client_type": 3
@@ -172,6 +225,13 @@
             {
               "client_id": "201527710402-epeq8m4952k6samd6q48lfmimj0s3qk8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "201527710402-uvvt7t27c9nuc3f65b919d56s9n0960d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodistaan"
+              }
             }
           ]
         }
