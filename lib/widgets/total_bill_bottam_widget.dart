@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 import 'package:foodistan/global/global_variables.dart';
+import 'package:sizer/sizer.dart';
 
 class TotalBillBottomWidget extends StatefulWidget {
   const TotalBillBottomWidget({Key? key}) : super(key: key);
@@ -110,11 +112,73 @@ class _TotalBillBottomWidgetState extends State<TotalBillBottomWidget> {
                                     children: [
                                       GestureDetector(
                                         onTap: () async {
-                                          Navigator.pushReplacement(
+                                          Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (c) =>
-                                                      CartScreenMainLogin()));
+                                                  builder: (c) => Scaffold(
+                                                        // appBar: PreferredSize(
+                                                        //     preferredSize:
+                                                        //         Size.fromHeight(
+                                                        //             4.8.h),
+                                                        //     child: AppBar(
+                                                        //       backgroundColor:
+                                                        //           Colors.white,
+                                                        //       elevation: 0,
+                                                        //       titleSpacing: 0,
+                                                        //       leadingWidth: 40,
+                                                        //       iconTheme:
+                                                        //           IconThemeData(
+                                                        //               color: Colors
+                                                        //                   .black,
+                                                        //               size: 25),
+
+                                                        //     )),
+                                                        appBar: PreferredSize(
+                                                          preferredSize:
+                                                              Size.fromHeight(
+                                                                  4.8.h),
+                                                          child: AppBar(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            elevation: 0,
+                                                            titleSpacing: 0,
+                                                            leadingWidth: 40,
+                                                            titleTextStyle:
+                                                                TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontSize:
+                                                                        20),
+                                                            leading: IconButton(
+                                                              onPressed: () {
+                                                                Navigator.popUntil(
+                                                                    context,
+                                                                    (Route<dynamic>
+                                                                            route) =>
+                                                                        route
+                                                                            .isFirst);
+                                                                // Navigator.pushNamedAndRemoveUntil(
+                                                                //     context,
+                                                                //     'H',
+                                                                //     (route) =>
+                                                                //         false);
+                                                              },
+                                                              icon: const Icon(
+                                                                Icons
+                                                                    .arrow_back_ios,
+                                                                color: Colors
+                                                                    .black,
+                                                                size: 25,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        body:
+                                                            CartScreenMainLogin(),
+                                                      )));
                                         },
                                         child: Container(
                                           height: MediaQuery.of(context)

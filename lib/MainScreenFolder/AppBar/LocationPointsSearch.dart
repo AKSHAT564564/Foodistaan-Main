@@ -283,16 +283,20 @@ class _SearchItemListState extends State<SearchItemList> {
         contentPadding: EdgeInsets.all(2),
         // minVerticalPadding: 2,
         // tileColor: Colors.white,
-        leading: Container(
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
             height: 40,
             width: 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Image.asset(
-              'assets/images/icecream.png',
+            child: Image.network(
+              data['FoodImage'],
               fit: BoxFit.fill,
-            )),
+            ),
+          ),
+        ),
         title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
