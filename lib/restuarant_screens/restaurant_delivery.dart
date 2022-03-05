@@ -44,6 +44,7 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
       }
     });
     super.initState();
+    print(widget.items);
   }
 
   @override

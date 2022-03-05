@@ -109,45 +109,59 @@ class _SeeCardItemState extends State<SeeCardItem> {
   String vendorID = 'StreetFood1';
 
   Map<dynamic, dynamic> itemDetail = {
-    'id': 'StreetFood1',
-    'search': 'pizza junction fast food',
-    'name': 'Pizza Junction',
-    'address': 'Rohini, Delhi',
-    'cuisines': 'Fast Food',
-    'stars': '4.7',
-    'cost': '300',
-    'delivery': true,
-    'takeaway': true,
-    'foodistaanCertified': true,
-    'foodImage':
-        'https://i.pinimg.com/originals/e7/71/0a/e7710a3fe5cc3721c1ff630f3f90bd17.jpg'
+    "search": "pizza junction fast food",
+    "Address": "Rohini, Delhi",
+    "Cuisines": "Fast Food",
+    "FoodImage":
+        "https://i.pinimg.com/originals/e7/71/0a/e7710a3fe5cc3721c1ff630f3f90bd17.jpg",
+    "Stars": 4,
+    "Takeaway": true,
+    "Delivery": true,
+    "FoodistaanCertified": true,
+    "id": "StreetFood1",
+    "Cost": 300,
+    "Name": "Pizza Junction",
+    "Location": "Instance of GeoPoint",
+    "Distance": 0.03456669999999207
   };
 
-  // String name = 'Pizza Junction';
-  // String address = 'Rohini, Delhi';
-  // String cuisines = 'Fast Food';
-  // var stars = 4.7;
-  // var cost = 300;
-  // bool delivery = true;
-  // bool takeaway = true;
-  // var foodistaanCertified = true;
-  // var foodImage =
-  //     'https://i.pinimg.com/originals/e7/71/0a/e7710a3fe5cc3721c1ff630f3f90bd17.jpg';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(itemDetail);
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => RestaurantDelivery(
-        //       items: itemDetail,
-        //       vendor_id: vendorID,
-        //       vendorName: vendorName,
-        //     ),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RestaurantDelivery(
+              // items: itemDetail,
+              items: {
+                "search": "pizza junction fast food",
+                "Address": "Rohini, Delhi",
+                "Cuisines": "Fast Food",
+                "FoodImage":
+                    "https://i.pinimg.com/originals/e7/71/0a/e7710a3fe5cc3721c1ff630f3f90bd17.jpg",
+                "Stars": 4,
+                "Takeaway": true,
+                "Delivery": true,
+                "FoodistaanCertified": true,
+                "id": "StreetFood1",
+                "Cost": 300,
+                "Name": "Pizza Junction",
+                "Location": "Instance of GeoPoint",
+                "Distance": 0.03456669999999207
+              },
+              vendor_id: vendorID,
+              vendorName: vendorName,
+            ),
+          ),
+        );
       },
       child: Container(
         width: double.infinity,
