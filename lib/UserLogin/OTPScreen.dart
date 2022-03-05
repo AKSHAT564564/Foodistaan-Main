@@ -40,7 +40,7 @@ class _OTPScreenState extends State<OTPScreen> {
     _streamController.add(60);
     //calling startTimer method to start the timer as soon as the initState is called
     _startTimer();
-    verifyPhoneNumber();
+    // verifyPhoneNumber();
   }
 
   //timer variable
@@ -70,7 +70,7 @@ class _OTPScreenState extends State<OTPScreen> {
     );
   }
 
-  verifyPhoneNumber() async {
+  verifyPhoneNumber(context) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: widget.phone,
         verificationCompleted: (PhoneAuthCredential credential) async {
@@ -80,11 +80,6 @@ class _OTPScreenState extends State<OTPScreen> {
               .then((value) {
             if (value.user != null) {
               user = value.user;
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) =>
-              //             UserDetail(phone_number: widget.phone)));
             }
           });
           if (user != null) {
@@ -96,6 +91,7 @@ class _OTPScreenState extends State<OTPScreen> {
               if (value.exists) {
                 if (value.data()!.containsKey('cart-id')) {
                   //check if cart-id exixts for a user or not
+
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => MainScreen()),
@@ -214,7 +210,13 @@ class _OTPScreenState extends State<OTPScreen> {
                               setState(() {
                                 showSpinner = false;
                               });
-                              Navigator.pushNamed(context, 'H');
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MainScreen(
+                                            currentIndex: 0,
+                                          )),
+                                  (route) => false);
                             } else {
                               String uId = user!.uid;
                               CartFunctions()
@@ -223,7 +225,13 @@ class _OTPScreenState extends State<OTPScreen> {
                                 setState(() {
                                   showSpinner = false;
                                 });
-                                Navigator.pushNamed(context, 'H');
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MainScreen(
+                                              currentIndex: 0,
+                                            )),
+                                    (route) => false);
                               });
                             }
                           } else {
@@ -298,7 +306,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       TextButton(
                           onPressed: () async {
                             _startTimer();
-                            verifyPhoneNumber();
+                            verifyPhoneNumber(context);
                             snackBar('Otp Resent!');
                           },
                           child: Text(
@@ -318,6 +326,7 @@ class _OTPScreenState extends State<OTPScreen> {
 
   @override
   Widget build(BuildContext context) {
+    verifyPhoneNumber(context);
     return ModalProgressHUD(
       inAsyncCall: showSpinner,
       child: SafeArea(
