@@ -954,7 +954,12 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                         setState(() {});
                                       });
                                     },
-                                    child: Text('Add Address'));
+                                    child: Text(
+                                      'Add Address',
+                                      style: TextStyle(
+                                          color: kOrange,
+                                          fontWeight: FontWeight.w500),
+                                    ));
                           }),
                           Divider(
                             height: 8,

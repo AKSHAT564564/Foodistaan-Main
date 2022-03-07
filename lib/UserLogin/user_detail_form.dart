@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/HomeScreenFile.dart';
 import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/cart_functions.dart';
+import 'package:sizer/sizer.dart';
 import 'LoginScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -32,6 +34,8 @@ addUser(_userData) async {
 class _UserDetailState extends State<UserDetail> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
+  late FocusNode nameFocusNode;
+  late FocusNode emailFocusNode;
 
   Map<String, dynamic> _userData = {
     'name': '',
@@ -42,113 +46,180 @@ class _UserDetailState extends State<UserDetail> {
   };
 
   @override
+  void initState() {
+    super.initState();
+
+    nameFocusNode = FocusNode();
+    emailFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    nameFocusNode.dispose();
+    emailFocusNode.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // var h1 = MediaQuery.of(context).size.height;
     // var w1 = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xff0F1B2B),
-        ),
-        body: ListView(
+        // appBar: AppBar(
+        //   backgroundColor: Color(0xff0F1B2B),
+        // ),
+        body: Stack(
+          alignment: Alignment.center,
           children: [
             Container(
-                width: MediaQuery.of(context).size.width * 1,
-                height: MediaQuery.of(context).size.height * 0.3,
-                child: Image.asset('Images/top.jpeg',
-                    height: 20, fit: BoxFit.fill)),
-            Container(
-              width: MediaQuery.of(context).size.width * 1,
-              height: MediaQuery.of(context).size.height * 0.15,
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.02,
-              ),
-              child: Image.asset('Images/pic4.png'),
+              height: 100.h,
             ),
-            Align(
-              alignment: Alignment.center,
+            AnimatedPositioned(
+              duration: Duration(milliseconds: 1000),
+              curve: Curves.fastOutSlowIn,
+              top:
+                  nameFocusNode.hasFocus || emailFocusNode.hasFocus ? -30.h : 0,
               child: Container(
-                margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.01,
-                ),
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.09,
-                child: TextFormField(
-                  textAlign: TextAlign.center,
-                  controller: nameController,
-                  //keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    focusColor: Colors.yellow,
-                    hintText: 'Name',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color(0xFFF7C12B), width: 3.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color(0xFFF7C12B), width: 3.0),
-                    ),
-                  ),
-                ),
-              ),
+                  width: MediaQuery.of(context).size.width * 1,
+                  // height: MediaQuery.of(context).size.height * 0.65,
+                  height: 90.h,
+                  child: Image.asset('assets/images/loginBG.png',
+                      // height: 20,
+                      fit: BoxFit.fill)),
             ),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.01,
-                ),
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.09,
-                child: TextFormField(
-                  textAlign: TextAlign.center,
-                  controller: emailController,
-                  //keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    focusColor: Colors.yellow,
-                    hintText: 'Email-id',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color(0xFFF7C12B), width: 3.0),
+            AnimatedPositioned(
+              duration: Duration(milliseconds: 1000),
+              curve: Curves.fastOutSlowIn,
+              top: nameFocusNode.hasFocus || emailFocusNode.hasFocus
+                  ? 25.h
+                  : 55.h,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.01,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color(0xFFF7C12B), width: 3.0),
+                    width: 100.w,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 11,
                     ),
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.03,
-                ),
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.height * 0.06,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    _userData['name'] = nameController.text;
-                    _userData['email'] = emailController.text;
-                    _userData['phoneNumber'] = widget.phone_number;
-                    _userData['dateAndTime'] = DateTime.now().toString();
-                    addUser(_userData).then((v) {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          'H', (Route<dynamic> route) => false);
-                    });
-                  },
-                  child: Text(
-                    'Submit',
-                    style: TextStyle(
-                      color: Colors.white,
+                    child: TextFormField(
+                      focusNode: nameFocusNode,
+                      textAlign: TextAlign.center,
+                      controller: nameController,
+                      //keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        focusColor: Colors.yellow,
+                        hintText: 'Name',
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
+                          borderSide: BorderSide(
+                            color: kYellowL,
+                            width: 3,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
+                          borderSide: BorderSide(
+                            color: kYellowL,
+                            width: 3,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFF7C12B),
-                    fixedSize: Size(100, 48),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.01,
+                    ),
+                    width: 100.w,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 11,
+                    ),
+                    child: TextFormField(
+                      focusNode: emailFocusNode,
+                      textAlign: TextAlign.center,
+                      controller: emailController,
+                      //keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        focusColor: Colors.yellow,
+                        hintText: 'Email-id',
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
+                          borderSide: BorderSide(
+                            color: kYellowL,
+                            width: 3,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
+                          borderSide: BorderSide(
+                            color: kYellowL,
+                            width: 3,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.03,
+                    ),
+                    width: 100.w,
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 11,
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        _userData['name'] = nameController.text;
+                        _userData['email'] = emailController.text;
+                        _userData['phoneNumber'] = widget.phone_number;
+                        _userData['dateAndTime'] = DateTime.now().toString();
+                        addUser(_userData).then((v) {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              'H', (Route<dynamic> route) => false);
+                        });
+                      },
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontSize: 17.5,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                            kYellowL,
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            kYellowL,
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(30),
+                              ),
+                            ),
+                          ),
+                          elevation: MaterialStateProperty.all(4.sp)),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
