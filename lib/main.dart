@@ -29,16 +29,20 @@ int? onBoarding;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  onBoarding = await prefs.getInt("onBoarding");
-  await prefs.setInt("onBoarding", 1);
-  print(' onBoarding ${onBoarding}');
+  await onBoardingScreenPref();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     // DeviceOrientation.portraitDown,
   ]).then((_) {
     runApp(MyApp());
   });
+}
+
+Future<void> onBoardingScreenPref() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  onBoarding = await prefs.getInt("onBoarding");
+  await prefs.setInt("onBoarding", 1);
+  print(' onBoarding $onBoarding');
 }
 
 class MyApp extends StatefulWidget {

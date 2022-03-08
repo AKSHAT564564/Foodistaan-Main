@@ -49,14 +49,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void pageChangeAutomation() {
-    Timer(Duration(seconds: 5), () {
-      setState(() {
-        _pageController.nextPage(
-          duration: Duration(milliseconds: 500),
-          curve: Curves.ease,
-        );
+    if (_currentPage != _numPages - 1 && _currentPage < 2) {
+      Timer(Duration(seconds: 5), () {
+        setState(() {
+          _pageController.nextPage(
+            duration: Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
+        });
       });
-    });
+    }
   }
 
   @override
@@ -84,6 +86,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               //   duration: Duration(milliseconds: 500),
                               //   curve: Curves.ease,
                               // );
+
                               _pageController.animateToPage(
                                 2,
                                 curve: Curves.ease,
@@ -116,8 +119,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       setState(() {
                         _currentPage = page;
                       });
-                      if (_currentPage != _numPages - 1 && _currentPage != 2)
-                        pageChangeAutomation();
+                      pageChangeAutomation();
+                      print(page);
                     },
                     children: <Widget>[
                       Padding(
