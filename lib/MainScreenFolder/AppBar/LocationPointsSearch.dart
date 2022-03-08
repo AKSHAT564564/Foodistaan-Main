@@ -197,12 +197,12 @@ class _SearchState extends State<Search> {
                       //       searchResults.value = [];
                       //       setState(() {}); //for cross icon in searchbar
                       //     },
-                      //     icon: Icon(
-                      //       Icons.clear_rounded,
-                      //       color: _searchController.text.isNotEmpty
-                      //           ? Colors.grey
-                      //           : Colors.transparent,
-                      //     )),
+                      // icon: Icon(
+                      //   Icons.clear_rounded,
+                      //   color: _searchController.text.isNotEmpty
+                      //       ? Colors.grey
+                      //       : Colors.transparent,
+                      // )),
                       suffixIcon: Padding(
                         padding: EdgeInsets.all(0.0),
                         child: Container(
@@ -215,12 +215,25 @@ class _SearchState extends State<Search> {
                             color: Color(0xFFFAB84C),
                             shape: BoxShape.circle,
                           ),
-                          child: Icon(
-                            Icons.search,
-                            // size: 22,
-                            // color: kGrey,
-                            color: Colors.white,
-                          ),
+                          child: _searchController.text.isNotEmpty
+                              ? InkWell(
+                                  child: Icon(
+                                    Icons.clear_rounded,
+                                    color: Colors.white,
+                                  ),
+                                  onTap: () {
+                                    _searchController.text = '';
+                                    searchResults.value = [];
+                                    setState(
+                                        () {}); //for cross icon in searchbar
+                                  },
+                                )
+                              : Icon(
+                                  Icons.search,
+                                  // size: 22,
+                                  // color: kGrey,
+                                  color: Colors.white,
+                                ),
                         ),
                       ),
                       focusedBorder: const OutlineInputBorder(
