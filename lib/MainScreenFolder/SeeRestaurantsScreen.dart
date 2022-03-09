@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:foodistan/constants.dart';
@@ -192,23 +193,46 @@ class _SeeCardItemState extends State<SeeCardItem> {
               Padding(
                 padding: const EdgeInsets.all(0),
                 child: Stack(clipBehavior: Clip.none, children: [
+                  // Container(
+                  //   width: 100.w,
+                  //   height: 20.h,
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.grey.shade300,
+                  //     borderRadius: BorderRadius.only(
+                  //         topLeft: Radius.circular(11),
+                  //         topRight: Radius.circular(11)),
+                  //     image: DecorationImage(
+                  //       image: NetworkImage(
+                  //         itemDetail['foodImage'].toString(),
+                  //       ),
+                  //       fit: BoxFit.fill,
+                  //       alignment: FractionalOffset.center,
+                  //     ),
+                  //   ),
+                  // ),
                   Container(
                     width: 100.w,
                     height: 20.h,
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(11),
                           topRight: Radius.circular(11)),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          itemDetail['foodImage'].toString(),
-                        ),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(11),
+                          topRight: Radius.circular(11)),
+                      child: CachedNetworkImage(
                         fit: BoxFit.fill,
-                        alignment: FractionalOffset.center,
+                        imageUrl: itemDetail['foodImage'],
+                        placeholder: (context, url) =>
+                            Image.asset('assets/images/thumbnail (2).png'),
+                        errorWidget: (context, url, error) =>
+                            Image.asset('assets/images/thumbnail (2).png'),
                       ),
                     ),
                   ),
+
                   Positioned(
                     top: 1.4.h,
                     left: (-1.3).w,
@@ -641,15 +665,27 @@ class _SearchItemListState extends State<SearchItemList> {
         // minVerticalPadding: 2,
         // tileColor: Colors.white,
         leading: Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Image.asset(
-              'assets/images/icecream.png',
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          // child: Image.asset(
+          //   'assets/images/icecream.png',
+          //   fit: BoxFit.fill,
+          // ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: CachedNetworkImage(
               fit: BoxFit.fill,
-            )),
+              imageUrl: data['FoodImage'],
+              placeholder: (context, url) =>
+                  Image.asset('assets/images/thumbnail (2).png'),
+              errorWidget: (context, url, error) =>
+                  Image.asset('assets/images/thumbnail (2).png'),
+            ),
+          ),
+        ),
         title: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

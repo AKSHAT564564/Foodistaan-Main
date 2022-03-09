@@ -51,7 +51,7 @@ dependencies:
  
 
   # For Cached Network Image
-  # cached_network_image: ^3.2.0
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:

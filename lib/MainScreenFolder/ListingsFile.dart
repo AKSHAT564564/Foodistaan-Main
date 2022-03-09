@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foodistan/constants.dart';
@@ -181,21 +182,41 @@ class LeftSide extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(0),
       child: Stack(clipBehavior: Clip.none, children: [
+        // Container(
+        //   // width: w1 * 1,
+        //   // height: h1 * 0.2,
+        //   width: 100.w,
+        //   height: 20.h,
+        //   decoration: BoxDecoration(
+        //     color: Colors.grey.shade300,
+        //     borderRadius: BorderRadius.only(
+        //         topLeft: Radius.circular(11), topRight: Radius.circular(11)),
+        //     image: DecorationImage(
+        //       image: NetworkImage(
+        //         foodImage,
+        //       ),
+        //       fit: BoxFit.fill,
+        //       alignment: FractionalOffset.center,
+        //     ),
+        //   ),
+        // ),
         Container(
-          // width: w1 * 1,
-          // height: h1 * 0.2,
           width: 100.w,
           height: 20.h,
           decoration: BoxDecoration(
-            color: Colors.grey.shade300,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(11), topRight: Radius.circular(11)),
-            image: DecorationImage(
-              image: NetworkImage(
-                foodImage,
-              ),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(11), topRight: Radius.circular(11)),
+            child: CachedNetworkImage(
               fit: BoxFit.fill,
-              alignment: FractionalOffset.center,
+              imageUrl: foodImage,
+              placeholder: (context, url) =>
+                  Image.asset('assets/images/thumbnail (2).png'),
+              errorWidget: (context, url, error) =>
+                  Image.asset('assets/images/thumbnail (2).png'),
             ),
           ),
         ),

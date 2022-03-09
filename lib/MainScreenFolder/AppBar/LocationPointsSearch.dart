@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/AppBar/points.dart';
 import 'package:foodistan/constants.dart';
@@ -304,9 +305,17 @@ class _SearchItemListState extends State<SearchItemList> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Image.network(
-              data['FoodImage'],
+            // child: Image.network(
+            //   data['FoodImage'],
+            //   fit: BoxFit.fill,
+            // ),
+            child: CachedNetworkImage(
               fit: BoxFit.fill,
+              imageUrl: data['FoodImage'],
+              placeholder: (context, url) =>
+                  Image.asset('assets/images/thumbnail (2).png'),
+              errorWidget: (context, url, error) =>
+                  Image.asset('assets/images/thumbnail (2).png'),
             ),
           ),
         ),
