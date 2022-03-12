@@ -81,34 +81,36 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
     return Scaffold(
       body: Column(
         children: [
-          SearchMenu(),
+          Container(color: Colors.white, child: SearchMenu()),
           SizedBox(
             height: 3.h,
           ),
-          Container(
-              child: (menuItems.isEmpty && cartId == '')
-                  // ? spinkit
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        color: kYellow,
-                      ),
-                    )
-                  : GridView.count(
-                      padding: EdgeInsets.zero,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      childAspectRatio: (itemWidth / itemHeight),
-                      crossAxisSpacing: 5,
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      children: List.generate(menuItems.length, (index) {
-                        return MyFoodItemWidget(
-                            menuItem: menuItems[index],
-                            vendor_id: widget.vendor_id,
-                            cartId: cartId,
-                            vendorName: widget.vendorName);
-                      }),
-                    )),
+          Expanded(
+            child: Container(
+                child: (menuItems.isEmpty && cartId == '')
+                    // ? spinkit
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: kYellow,
+                        ),
+                      )
+                    : GridView.count(
+                        padding: EdgeInsets.zero,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        childAspectRatio: (itemWidth / itemHeight),
+                        crossAxisSpacing: 5,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        children: List.generate(menuItems.length, (index) {
+                          return MyFoodItemWidget(
+                              menuItem: menuItems[index],
+                              vendor_id: widget.vendor_id,
+                              cartId: cartId,
+                              vendorName: widget.vendorName);
+                        }),
+                      )),
+          ),
         ],
       ),
     );

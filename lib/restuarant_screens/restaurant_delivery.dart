@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/providers/user_data_provider.dart';
+import 'package:foodistan/providers/user_location_provider.dart';
 
 import 'package:foodistan/restuarant_screens/restaurant_delivery_review.dart';
 import 'package:foodistan/restuarant_screens/restaurant_main.dart';
@@ -12,6 +13,7 @@ import 'package:foodistan/restuarant_screens/restaurantDetailScreen.dart';
 
 import 'package:foodistan/widgets/total_bill_bottam_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class RestaurantDelivery extends StatefulWidget {
   static String id = 'restaurant_delivery';
@@ -31,6 +33,9 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
   bool isDeliverySelected = false;
   bool isOverviewSelected = false;
   bool isBookMarked = false;
+  ScrollController scrollController = ScrollController();
+
+  bool showTitle = false;
 
   @override
   void initState() {
@@ -43,8 +48,34 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
         });
       }
     });
+// User Distance Calculator
+    userLocationCalculate();
+
     super.initState();
     print(widget.items);
+    // print(widget.items["Location"]);
+    print(
+        "${widget.items["Location"].latitude} --- ${widget.items["Location"].longitude}");
+    scrollController.addListener(() {
+      showTitle = scrollController.offset <= 8.h ? false : true;
+      // print(showTitle);
+      // print(scrollController.offset);
+      setState(() {});
+    });
+  }
+
+  void userLocationCalculate() {
+    var userLocationProvider =
+        Provider.of<UserLocationProvider>(context, listen: false);
+    var userLocation = userLocationProvider.userLocation;
+    var userLatitude = userLocation?.latitude;
+    var userLongitude = userLocation?.longitude;
+
+    if (userLocationProvider.hasUserLocation) {
+      //  calling Get Distance Between() function for user distance from resturant
+      UserLocationProvider().getDistanceBtw(widget.items["Location"].latitude,
+          widget.items["Location"].longitude, userLatitude, userLongitude);
+    }
   }
 
   @override
@@ -67,16 +98,31 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                         color: kBlackLight),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
-                  title: Text(
-                    // "${widget.vendorName.length >= 20 ? widget.vendorName.substring(0, 20).trimRight() + "..." : widget.vendorName}",
-                    '${widget.vendorName}',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      // color: Colors.black87,
-                      color: kBlackLight,
-                    ),
-                  ),
+                  title: Visibility(
+                      visible: showTitle,
+                      child: Text(
+                        // "${widget.vendorName.length >= 20 ? widget.vendorName.substring(0, 20).trimRight() + "..." : widget.vendorName}",
+                        '${widget.vendorName}',
+                        style: TextStyle(
+                          letterSpacing: 0.6.sp,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          // color: Colors.black87,
+                          color: kBlackLight,
+                        ),
+                      )),
+                  // title: showTitle
+                  // ? Text(
+                  //     // "${widget.vendorName.length >= 20 ? widget.vendorName.substring(0, 20).trimRight() + "..." : widget.vendorName}",
+                  //     '${widget.vendorName}',
+                  //     style: TextStyle(
+                  //       fontSize: 20,
+                  //       fontWeight: FontWeight.bold,
+                  //       // color: Colors.black87,
+                  //       color: kBlackLight,
+                  //     ),
+                  //   )
+                  //     : Text(''),
                   centerTitle: true,
                   actions: <Widget>[
                     Container(
@@ -116,10 +162,13 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
           body: Stack(
             children: [
               SingleChildScrollView(
+                controller: scrollController,
                 scrollDirection: Axis.vertical,
                 child: Container(
+                  color: Colors.white,
                   padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: RestaurantDetailScreen(
+                      showTitle: showTitle,
                       restaurant_details: widget.items,
                       vendorId: widget.vendor_id,
                       vendorName: widget.vendorName),
