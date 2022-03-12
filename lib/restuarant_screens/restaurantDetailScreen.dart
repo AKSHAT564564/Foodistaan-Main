@@ -12,8 +12,12 @@ class RestaurantDetailScreen extends StatefulWidget {
   final restaurant_details;
   final vendorId;
   final vendorName;
+  var showTitle;
   RestaurantDetailScreen(
-      {this.restaurant_details, this.vendorId, this.vendorName});
+      {this.restaurant_details,
+      this.vendorId,
+      this.vendorName,
+      this.showTitle});
 
   @override
   _RestaurantDetailScreenState createState() => _RestaurantDetailScreenState();
@@ -69,6 +73,35 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // !widget.showTitle
+                      //     ? Column(
+                      //         children: [
+                      //           Text(
+                      //             '${widget.vendorName}',
+                      //             style: TextStyle(
+                      //               fontSize: 16.sp,
+                      //               fontWeight: FontWeight.bold,
+                      //               color: kBlackLight,
+                      //             ),
+                      //           ),
+                      //           SizedBox(
+                      //             height: 1.5.h,
+                      //           ),
+                      //         ],
+                      //       )
+                      //     : Text(''),
+                      Text(
+                        '${widget.vendorName}',
+                        style: TextStyle(
+                          letterSpacing: 0.6.sp,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                          color: kBlackLight,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 1.5.h,
+                      ),
                       Text(
                         "${widget.restaurant_details['Cuisines']}",
                         style: TextStyle(
@@ -191,7 +224,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                 ),
                 Container(
                   height: 2.5.h,
-                  width: 16.w,
+                  width: 17.75.w,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                     fit: BoxFit.fill,
@@ -874,7 +907,7 @@ class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
+      // height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
           SizedBox(
@@ -964,7 +997,7 @@ class _DeliverySelectedWidgetState extends State<DeliverySelectedWidget> {
                       margin: EdgeInsets.only(
                         top: 1.5.h,
                       ),
-                      height: 65.h,
+                      height: 90.h,
                       child: isReviewSelected
                           ? Center(child: RestuarantDeliveryReview())
                           : Center(
@@ -1008,7 +1041,7 @@ class _PickupSelectedWidgetState extends State<PickupSelectedWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
+      // height: MediaQuery.of(context).size.height,
       // padding: EdgeInsets.only(left: 5, right: 5),
       child: Column(
         children: [
@@ -1087,7 +1120,7 @@ class _PickupSelectedWidgetState extends State<PickupSelectedWidget> {
                       margin: EdgeInsets.only(
                         top: 1.5.h,
                       ),
-                      height: 65.h,
+                      height: 90.h,
                       child: isReviewSelected
                           ? Center(child: RestuarantDeliveryReview())
                           : Center(
