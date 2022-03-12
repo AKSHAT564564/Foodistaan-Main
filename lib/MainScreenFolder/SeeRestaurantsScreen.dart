@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:foodistan/constants.dart';
@@ -163,7 +164,7 @@ class _SeeCardItemState extends State<SeeCardItem> {
                 "id": "StreetFood1",
                 "Cost": 300,
                 "Name": "Pizza Junction",
-                "Location": "Instance of GeoPoint",
+                "Location": GeoPoint(28.7361778, 77.123112),
                 "Distance": 0.03456669999999207
               },
               vendor_id: vendorID,

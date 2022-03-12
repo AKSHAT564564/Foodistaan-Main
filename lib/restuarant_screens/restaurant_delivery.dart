@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/providers/user_data_provider.dart';
+import 'package:foodistan/providers/user_location_provider.dart';
 
 import 'package:foodistan/restuarant_screens/restaurant_delivery_review.dart';
 import 'package:foodistan/restuarant_screens/restaurant_main.dart';
@@ -47,14 +48,34 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
         });
       }
     });
+// User Distance Calculator
+    userLocationCalculate();
+
     super.initState();
     print(widget.items);
+    // print(widget.items["Location"]);
+    print(
+        "${widget.items["Location"].latitude} --- ${widget.items["Location"].longitude}");
     scrollController.addListener(() {
       showTitle = scrollController.offset <= 8.h ? false : true;
       // print(showTitle);
       // print(scrollController.offset);
       setState(() {});
     });
+  }
+
+  void userLocationCalculate() {
+    var userLocationProvider =
+        Provider.of<UserLocationProvider>(context, listen: false);
+    var userLocation = userLocationProvider.userLocation;
+    var userLatitude = userLocation?.latitude;
+    var userLongitude = userLocation?.longitude;
+
+    if (userLocationProvider.hasUserLocation) {
+      //  calling Get Distance Between() function for user distance from resturant
+      UserLocationProvider().getDistanceBtw(widget.items["Location"].latitude,
+          widget.items["Location"].longitude, userLatitude, userLongitude);
+    }
   }
 
   @override
