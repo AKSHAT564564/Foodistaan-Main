@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/auth/autentication.dart';
@@ -43,9 +44,17 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
             width: double.infinity,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                '${widget.menuItem['image']}',
-                fit: BoxFit.cover,
+              // child: Image.network(
+              //   '${widget.menuItem['image']}',
+              //   fit: BoxFit.cover,
+              // ),
+              child: CachedNetworkImage(
+                fit: BoxFit.fill,
+                imageUrl: '${widget.menuItem['image']}',
+                placeholder: (context, url) =>
+                    Image.asset('assets/images/thumbnail (2).png'),
+                errorWidget: (context, url, error) =>
+                    Image.asset('assets/images/thumbnail (2).png'),
               ),
             ),
           ),

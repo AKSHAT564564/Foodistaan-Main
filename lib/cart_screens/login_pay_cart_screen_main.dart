@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/coupon_screen.dart';
@@ -807,7 +808,15 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ListTile(
-                      leading: Image.network(value.restaurantData['FoodImage']),
+                      leading: CachedNetworkImage(
+                        // fit: BoxFit.fill,
+                        imageUrl: value.restaurantData['FoodImage'],
+                        placeholder: (context, url) =>
+                            Image.asset('assets/images/thumbnail (2).png'),
+                        errorWidget: (context, url, error) =>
+                            Image.asset('assets/images/thumbnail (2).png'),
+                      ),
+                      // leading: Image.network(value.restaurantData['FoodImage']),
                       title: Text(
                         value.restaurantData['Name'],
                         style: TextStyle(

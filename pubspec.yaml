@@ -47,10 +47,11 @@ dependencies:
   url_launcher: ^6.0.20
   uuid: ^3.0.5
   flutter_sticky_header: ^0.6.0
+  shared_preferences: ^2.0.13
  
 
   # For Cached Network Image
-  # cached_network_image: ^3.2.0
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:

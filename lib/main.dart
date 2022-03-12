@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:foodistan/UserLogin/user_detail_form.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
 import 'package:foodistan/customSplashScreen.dart';
+import 'package:foodistan/onBoardingScreen.dart';
 import 'package:foodistan/profile/profile_address.dart';
 import 'package:foodistan/providers/cart_id_provider.dart';
 import 'package:foodistan/providers/restaurant_data_provider.dart';
@@ -21,18 +22,27 @@ import 'MainScreenFolder/mainScreenFile.dart';
 import 'optionScreenFile.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:foodistan/UserLogin/LoginScreen.dart';
 
+int? onBoarding;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  await onBoardingScreenPref();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     // DeviceOrientation.portraitDown,
   ]).then((_) {
     runApp(MyApp());
   });
+}
+
+Future<void> onBoardingScreenPref() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  onBoarding = await prefs.getInt("onBoarding");
+  await prefs.setInt("onBoarding", 1);
+  print(' onBoarding $onBoarding');
 }
 
 class MyApp extends StatefulWidget {
@@ -106,7 +116,10 @@ class _MyAppState extends State<MyApp> {
                 'CS': (context) => CustomSplashScreen(
                       childScreen: FirebaseAuth.instance.currentUser != null
                           ? MainScreen()
-                          : LoginScreen(),
+                          // : OnboardingScreen()
+                          : (onBoarding == 0 || onBoarding == null)
+                              ? OnboardingScreen()
+                              : LoginScreen(),
                     ), //CustomSplashScreen
               },
               debugShowCheckedModeBanner: false,
