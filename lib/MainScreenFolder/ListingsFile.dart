@@ -245,7 +245,7 @@ class LeftSide extends StatelessWidget {
             child: foodistaanCertified == true
                 ? Container(
                     height: 2.7.h,
-                    width: 21.w,
+                    width: 21.75.w,
                     // height: 16,
                     // width: 69,
                     // height: 2.5.h,

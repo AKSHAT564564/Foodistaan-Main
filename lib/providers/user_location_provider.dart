@@ -98,17 +98,23 @@ class UserLocationProvider extends ChangeNotifier {
       return dist.toStringAsFixed(2);
     }
 
-    print("Distance : " +
-        distance(
-            vendorLatitude, vendorLongitude, userLatitude, userLongitude, 'M') +
-        " Miles\n");
+    // print("Distance : " +
+    //     distance(
+    //         vendorLatitude, vendorLongitude, userLatitude, userLongitude, 'M') +
+    //     " Miles\n");
     print("Distance : " +
         distance(
             vendorLatitude, vendorLongitude, userLatitude, userLongitude, 'K') +
         " Kilometers\n");
-    print("Distance : " +
-        distance(
-            vendorLatitude, vendorLongitude, userLatitude, userLongitude, 'N') +
-        " Nautical Miles\n");
+    // print("Distance : " +
+    //     distance(
+    //         vendorLatitude, vendorLongitude, userLatitude, userLongitude, 'N') +
+    //     " Nautical Miles\n");
+
+    String ofRange = distance(
+        vendorLatitude, vendorLongitude, userLatitude, userLongitude, 'K');
+    notifyListeners();
+    // print(test);
+    return double.parse(ofRange);
   }
 }

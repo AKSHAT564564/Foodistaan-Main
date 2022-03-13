@@ -36,6 +36,7 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
   ScrollController scrollController = ScrollController();
 
   bool showTitle = false;
+  bool isOutOfRange = false;
 
   @override
   void initState() {
@@ -49,13 +50,24 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
       }
     });
 // User Distance Calculator
-    userLocationCalculate();
+    double ofRange = userLocationCalculate();
+    if (ofRange <= 12) {
+      setState(() {
+        isOutOfRange = true;
+      });
+      // print(ofRange);
+    } else {
+      setState(() {
+        isOutOfRange = false;
+      });
+      // print(ofRange);
+    }
 
     super.initState();
     print(widget.items);
     // print(widget.items["Location"]);
-    print(
-        "${widget.items["Location"].latitude} --- ${widget.items["Location"].longitude}");
+    // print(
+    //     "${widget.items["Location"].latitude} --- ${widget.items["Location"].longitude}");
     scrollController.addListener(() {
       showTitle = scrollController.offset <= 8.h ? false : true;
       // print(showTitle);
@@ -64,7 +76,7 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
     });
   }
 
-  void userLocationCalculate() {
+  userLocationCalculate() {
     var userLocationProvider =
         Provider.of<UserLocationProvider>(context, listen: false);
     var userLocation = userLocationProvider.userLocation;
@@ -73,8 +85,11 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
 
     if (userLocationProvider.hasUserLocation) {
       //  calling Get Distance Between() function for user distance from resturant
-      UserLocationProvider().getDistanceBtw(widget.items["Location"].latitude,
-          widget.items["Location"].longitude, userLatitude, userLongitude);
+      return UserLocationProvider().getDistanceBtw(
+          widget.items["Location"].latitude,
+          widget.items["Location"].longitude,
+          userLatitude,
+          userLongitude);
     }
   }
 
@@ -168,7 +183,7 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                   color: Colors.white,
                   padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                   child: RestaurantDetailScreen(
-                      showTitle: showTitle,
+                      isOutOfRange: isOutOfRange,
                       restaurant_details: widget.items,
                       vendorId: widget.vendor_id,
                       vendorName: widget.vendorName),
