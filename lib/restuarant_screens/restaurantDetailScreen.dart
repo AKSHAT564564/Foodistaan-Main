@@ -2,22 +2,25 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/providers/user_location_provider.dart';
 import 'package:foodistan/restuarant_screens/restaurant_delivery_review.dart';
 import 'package:foodistan/restuarant_screens/restuarant_delivery_menu.dart';
 import 'package:foodistan/restuarant_screens/restaurantOverviewCard.dart';
 import 'package:foodistan/widgets/options.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class RestaurantDetailScreen extends StatefulWidget {
   final restaurant_details;
   final vendorId;
   final vendorName;
-  var showTitle;
+
+  bool isOutOfRange;
   RestaurantDetailScreen(
       {this.restaurant_details,
       this.vendorId,
       this.vendorName,
-      this.showTitle});
+      required this.isOutOfRange});
 
   @override
   _RestaurantDetailScreenState createState() => _RestaurantDetailScreenState();
@@ -27,13 +30,22 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   bool isDeliverySelected = false;
   bool isPickupSelected = false;
   bool isOverviewSelected = false;
+  late bool isOutOfRange;
 
-  int _currentIndex = 0;
+  // int _currentIndex = 0;
+  late int _currentIndex;
 
   @override
   void initState() {
     super.initState();
-    isDeliverySelected = true;
+
+    isOutOfRange = widget.isOutOfRange;
+
+    isDeliverySelected = isOutOfRange ? false : true;
+    isPickupSelected = isOutOfRange ? true : false;
+    _currentIndex = isOutOfRange ? 1 : 0;
+
+    // print(_currentIndex);
   }
 
   Widget build(BuildContext context) {
@@ -416,215 +428,250 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                 // )
               ]),
             ),
-            Container(
-              // height: MediaQuery.of(context).size.height * 0.058,
-              // width: MediaQuery.of(context).size.width * 0.92,
-              // margin: EdgeInsets.only(left: 5, right: 5),
-              height: 5.8.h,
-
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.grey.shade300,
-                ),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    blurRadius: 5,
-                    offset: Offset(0, 5),
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(25),
-              ),
-              // decoration: BoxDecoration(
-              //     border: Border.all(color: Colors.grey, width: 1),
-              //     borderRadius: BorderRadius.circular(50)),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isDeliverySelected = true;
-                          isPickupSelected = false;
-                          isOverviewSelected = false;
-                        });
-                        // print(widget.restaurant_details);
-                        // print(widget.vendorId);
-                        // print(widget.vendorName);
-                        onTabTapped(0);
-                      },
-                      child: Container(
-                        // padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            color: isDeliverySelected == true
-                                ? Colors.amber[100]
-                                : Colors.white,
-                            border: isDeliverySelected == true
-                                ? Border.all(color: Colors.amber, width: 1)
-                                : Border.all(color: Colors.white, width: 1),
-                            borderRadius: isDeliverySelected == true
-                                ? BorderRadius.circular(25)
-                                : BorderRadius.only(
-                                    topLeft: Radius.circular(25),
-                                    bottomLeft: Radius.circular(25))),
-                        // width: MediaQuery.of(context).size.width * 0.27,
-                        // height: MediaQuery.of(context).size.height * 0.1,
-                        height: 5.8.h,
-                        width: 30.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(Icons.two_wheeler,
-                                // size: MediaQuery.of(context).size.width * 0.035,
-                                size: 10.5.sp,
-                                color: isDeliverySelected == true
-                                    ? Colors.black
-                                    : Colors.grey),
-                            Text(" Delivery",
-                                style: isDeliverySelected == true
-                                    ? TextStyle(
-                                        color: Colors.black,
-                                        // fontSize:
-                                        //     MediaQuery.of(context).size.width *
-                                        //         0.035,
-
-                                        fontSize: 10.5.sp,
-                                        fontWeight: FontWeight.w600,
-                                      )
-                                    : TextStyle(
-                                        color: Colors.grey,
-                                        // fontSize:
-                                        //     MediaQuery.of(context).size.width *
-                                        //         0.033,
-                                        fontSize: 10.sp,
-                                      ))
-                          ],
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Visibility(
+                    visible: isOutOfRange,
+                    child: Column(
+                      children: [
+                        Text(
+                          "Delivery not available",
+                          style: TextStyle(
+                            letterSpacing: 0.6.sp,
+                            color: kDarkRed,
+                            fontSize: 7.5.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          height: 0.5.h,
+                        )
+                      ],
+                    )),
+                Container(
+                  // height: MediaQuery.of(context).size.height * 0.058,
+                  // width: MediaQuery.of(context).size.width * 0.92,
+                  // margin: EdgeInsets.only(left: 5, right: 5),
+                  height: 5.8.h,
+
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.grey.shade300,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isDeliverySelected = false;
-                          isPickupSelected = true;
-                          isOverviewSelected = false;
-                        });
-                        onTabTapped(1);
-                      },
-                      child: Container(
-                        // padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            color: isPickupSelected == true
-                                ? Colors.amber[100]
-                                : Colors.white,
-                            border: isPickupSelected == true
-                                ? Border.all(color: Colors.amber, width: 1)
-                                : Border.all(color: Colors.white, width: 1),
-                            borderRadius: isPickupSelected == true
-                                ? BorderRadius.circular(25)
-                                : BorderRadius.circular(0)),
-                        // width: MediaQuery.of(context).size.width * 0.27,
-                        // height: MediaQuery.of(context).size.height * 0.1,
-                        height: 5.8.h,
-                        width: 30.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(Icons.food_bank,
-                                // size: MediaQuery.of(context).size.width * 0.035,
-                                size: 10.5.sp,
-                                color: isPickupSelected == true
-                                    ? Colors.black
-                                    : Colors.grey),
-                            widget.restaurant_details["Takeaway"]
-                                ? Text(" Pickup",
-                                    style: isPickupSelected == true
-                                        ? TextStyle(
-                                            color: Colors.black,
-                                            // fontSize: MediaQuery.of(context)
-                                            //         .size
-                                            //         .width *
-                                            //     0.035,
-                                            fontSize: 10.5.sp,
-                                            fontWeight: FontWeight.w600,
-                                          )
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        blurRadius: 5,
+                        offset: Offset(0, 5),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  // decoration: BoxDecoration(
+                  //     border: Border.all(color: Colors.grey, width: 1),
+                  //     borderRadius: BorderRadius.circular(50)),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            if (!isOutOfRange) {
+                              setState(() {
+                                isDeliverySelected = true;
+                                isPickupSelected = false;
+                                isOverviewSelected = false;
+                              });
+                              // print(widget.restaurant_details);
+                              // print(widget.vendorId);
+                              // print(widget.vendorName);
+                              onTabTapped(0);
+                            }
+                          },
+                          child: Container(
+                            // padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: !isOutOfRange
+                                  ? isDeliverySelected == true
+                                      ? Colors.amber[100]
+                                      : Colors.white
+                                  : kGreyOf,
+                              border: !isOutOfRange
+                                  ? isDeliverySelected == true
+                                      ? Border.all(
+                                          color: Colors.amber, width: 1)
+                                      : Border.all(
+                                          color: Colors.white, width: 1)
+                                  : Border.all(color: Colors.white, width: 1),
+                              borderRadius: !isOutOfRange
+                                  ? isDeliverySelected == true
+                                      ? BorderRadius.circular(25)
+                                      : BorderRadius.only(
+                                          topLeft: Radius.circular(25),
+                                          bottomLeft: Radius.circular(25))
+                                  : BorderRadius.circular(25),
+                            ),
+                            // width: MediaQuery.of(context).size.width * 0.27,
+                            // height: MediaQuery.of(context).size.height * 0.1,
+                            height: 5.8.h,
+                            width: 30.w,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.two_wheeler,
+                                    // size: MediaQuery.of(context).size.width * 0.035,
+                                    size: 10.5.sp,
+                                    color: !isOutOfRange
+                                        ? isDeliverySelected == true
+                                            ? Colors.black
+                                            : Colors.grey
+                                        : Colors.white),
+                                Text(" Delivery",
+                                    style: !isOutOfRange
+                                        ? isDeliverySelected == true
+                                            ? TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 10.5.sp,
+                                                fontWeight: FontWeight.w600,
+                                              )
+                                            : TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 10.sp,
+                                              )
                                         : TextStyle(
-                                            color: Colors.grey,
-                                            // fontSize: MediaQuery.of(context)
-                                            //         .size
-                                            //         .width *
-                                            //     0.033,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
                                             fontSize: 10.sp,
                                           ))
-                                : SizedBox()
-                          ],
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isDeliverySelected = false;
-                          isPickupSelected = false;
-                          isOverviewSelected = true;
-                        });
-                        onTabTapped(2);
-                      },
-                      child: Container(
-                        // padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            color: isOverviewSelected == true
-                                ? Colors.amber[100]
-                                : Colors.white,
-                            border: isOverviewSelected == true
-                                ? Border.all(color: Colors.amber, width: 1)
-                                : Border.all(color: Colors.white, width: 1),
-                            borderRadius: isOverviewSelected == true
-                                ? BorderRadius.circular(25)
-                                : BorderRadius.only(
-                                    topRight: Radius.circular(25),
-                                    bottomRight: Radius.circular(25))),
-                        // width: MediaQuery.of(context).size.width * 0.27,
-                        // height: MediaQuery.of(context).size.height * 0.07,
-                        height: 5.8.h,
-                        width: 30.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(Icons.note_add_outlined,
-                                // size: MediaQuery.of(context).size.width * 0.035,
-                                size: 10.5.sp,
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isDeliverySelected = false;
+                              isPickupSelected = true;
+                              isOverviewSelected = false;
+                            });
+                            onTabTapped(1);
+                          },
+                          child: Container(
+                            // padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                                color: isPickupSelected == true
+                                    ? Colors.amber[100]
+                                    : Colors.white,
+                                border: isPickupSelected == true
+                                    ? Border.all(color: Colors.amber, width: 1)
+                                    : Border.all(color: Colors.white, width: 1),
+                                borderRadius: isPickupSelected == true
+                                    ? BorderRadius.circular(25)
+                                    : BorderRadius.circular(0)),
+                            // width: MediaQuery.of(context).size.width * 0.27,
+                            // height: MediaQuery.of(context).size.height * 0.1,
+                            height: 5.8.h,
+                            width: 30.w,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.food_bank,
+                                    // size: MediaQuery.of(context).size.width * 0.035,
+                                    size: 10.5.sp,
+                                    color: isPickupSelected == true
+                                        ? Colors.black
+                                        : Colors.grey),
+                                widget.restaurant_details["Takeaway"]
+                                    ? Text(" Pickup",
+                                        style: isPickupSelected == true
+                                            ? TextStyle(
+                                                color: Colors.black,
+                                                // fontSize: MediaQuery.of(context)
+                                                //         .size
+                                                //         .width *
+                                                //     0.035,
+                                                fontSize: 10.5.sp,
+                                                fontWeight: FontWeight.w600,
+                                              )
+                                            : TextStyle(
+                                                color: Colors.grey,
+                                                // fontSize: MediaQuery.of(context)
+                                                //         .size
+                                                //         .width *
+                                                //     0.033,
+                                                fontSize: 10.sp,
+                                              ))
+                                    : SizedBox()
+                              ],
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isDeliverySelected = false;
+                              isPickupSelected = false;
+                              isOverviewSelected = true;
+                            });
+                            onTabTapped(2);
+                          },
+                          child: Container(
+                            // padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
                                 color: isOverviewSelected == true
-                                    ? Colors.black
-                                    : Colors.grey),
-                            Text(" Overview",
-                                style: isOverviewSelected == true
-                                    ? TextStyle(
-                                        color: Colors.black,
-                                        // fontSize:
-                                        //     MediaQuery.of(context).size.width *
-                                        //         0.035,
-                                        fontSize: 10.5.sp,
-                                        fontWeight: FontWeight.w600)
-                                    : TextStyle(
-                                        color: Colors.grey,
-                                        // fontSize:
-                                        //     MediaQuery.of(context).size.width *
-                                        //         0.033,
-                                        fontSize: 10.sp,
-                                      ))
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
+                                    ? Colors.amber[100]
+                                    : Colors.white,
+                                border: isOverviewSelected == true
+                                    ? Border.all(color: Colors.amber, width: 1)
+                                    : Border.all(color: Colors.white, width: 1),
+                                borderRadius: isOverviewSelected == true
+                                    ? BorderRadius.circular(25)
+                                    : BorderRadius.only(
+                                        topRight: Radius.circular(25),
+                                        bottomRight: Radius.circular(25))),
+                            // width: MediaQuery.of(context).size.width * 0.27,
+                            // height: MediaQuery.of(context).size.height * 0.07,
+                            height: 5.8.h,
+                            width: 30.w,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(Icons.note_add_outlined,
+                                    // size: MediaQuery.of(context).size.width * 0.035,
+                                    size: 10.5.sp,
+                                    color: isOverviewSelected == true
+                                        ? Colors.black
+                                        : Colors.grey),
+                                Text(" Overview",
+                                    style: isOverviewSelected == true
+                                        ? TextStyle(
+                                            color: Colors.black,
+                                            // fontSize:
+                                            //     MediaQuery.of(context).size.width *
+                                            //         0.035,
+                                            fontSize: 10.5.sp,
+                                            fontWeight: FontWeight.w600)
+                                        : TextStyle(
+                                            color: Colors.grey,
+                                            // fontSize:
+                                            //     MediaQuery.of(context).size.width *
+                                            //         0.033,
+                                            fontSize: 10.sp,
+                                          ))
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             // Container(
             //   color: Colors.white,

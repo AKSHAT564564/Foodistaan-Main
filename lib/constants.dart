@@ -8,6 +8,7 @@ const Red = Color(0xFFD10000);
 const darkRed = Color(0xFF920000);
 const kRedPure = Color.fromRGBO(253, 21, 21, 1);
 const kRed = Color.fromRGBO(226, 55, 68, 1);
+const kDarkRed = Color.fromRGBO(163, 25, 25, 0.85);
 const kOrange = Color(0xFFFAB84C);
 const kYellow = Color.fromRGBO(247, 193, 43, 1);
 const kYellowL = Color.fromRGBO(253, 172, 33, 1);
