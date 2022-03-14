@@ -9,7 +9,7 @@ import 'package:foodistan/widgets/order_history_widget.dart';
 class OrderFunction {
   final _firestore = FirebaseFirestore.instance;
   placeOrder(vendorId, vendorName, userNumber, items, totalPrice, paymentId,
-      cartId, deliveryAddress) async {
+      cartId, deliveryAddress, orderType) async {
     String id = _firestore.collection('live-orders').doc().id;
     DateTime time = DateTime.now();
     await _firestore.collection('live-orders').doc(id).set({
@@ -22,8 +22,8 @@ class OrderFunction {
       'customer-id': userNumber,
       'time': time,
       'payment-id': paymentId,
-      'order-type': 'Delivery',
-      'delivery-address': deliveryAddress
+      'order-type': orderType,
+      'delivery-address': deliveryAddress,
     }).then((value) {
       _firestore
           .collection('users')
@@ -40,7 +40,7 @@ class OrderFunction {
         'time': time,
         'payment-id': paymentId,
         'live-order': true,
-        'order-type': 'Delivery',
+        'order-type': orderType,
         'delivery-address': deliveryAddress
       });
     });

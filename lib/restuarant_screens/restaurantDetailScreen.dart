@@ -14,13 +14,13 @@ class RestaurantDetailScreen extends StatefulWidget {
   final restaurant_details;
   final vendorId;
   final vendorName;
-
   bool isOutOfRange;
-  RestaurantDetailScreen(
-      {this.restaurant_details,
-      this.vendorId,
-      this.vendorName,
-      required this.isOutOfRange});
+  RestaurantDetailScreen({
+    this.restaurant_details,
+    this.vendorId,
+    this.vendorName,
+    this.isOutOfRange =false
+  });
 
   @override
   _RestaurantDetailScreenState createState() => _RestaurantDetailScreenState();
@@ -30,24 +30,22 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   bool isDeliverySelected = false;
   bool isPickupSelected = false;
   bool isOverviewSelected = false;
-  late bool isOutOfRange;
-
-  // int _currentIndex = 0;
-  late int _currentIndex;
+ 
+  int _currentIndex = 0;
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
 
-    isOutOfRange = widget.isOutOfRange;
-
-    isDeliverySelected = isOutOfRange ? false : true;
-    isPickupSelected = isOutOfRange ? true : false;
-    _currentIndex = isOutOfRange ? 1 : 0;
-
-    // print(_currentIndex);
+    setState(() {
+        isDeliverySelected = widget.isOutOfRange ? false : true;
+      isPickupSelected = widget.isOutOfRange ? true : false;
+      _currentIndex = widget.isOutOfRange ? 1 : 0;
+    });
   }
 
+  @override
   Widget build(BuildContext context) {
     final List<Widget> _childern = [
       DeliverySelectedWidget(
@@ -85,23 +83,6 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // !widget.showTitle
-                      //     ? Column(
-                      //         children: [
-                      //           Text(
-                      //             '${widget.vendorName}',
-                      //             style: TextStyle(
-                      //               fontSize: 16.sp,
-                      //               fontWeight: FontWeight.bold,
-                      //               color: kBlackLight,
-                      //             ),
-                      //           ),
-                      //           SizedBox(
-                      //             height: 1.5.h,
-                      //           ),
-                      //         ],
-                      //       )
-                      //     : Text(''),
                       Text(
                         '${widget.vendorName}',
                         style: TextStyle(
@@ -432,7 +413,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Visibility(
-                    visible: isOutOfRange,
+                    visible:widget. isOutOfRange,
                     child: Column(
                       children: [
                         Text(
@@ -478,7 +459,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            if (!isOutOfRange) {
+                            if (!widget.isOutOfRange) {
                               setState(() {
                                 isDeliverySelected = true;
                                 isPickupSelected = false;
@@ -493,19 +474,19 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                           child: Container(
                             // padding: EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: !isOutOfRange
+                              color: !widget.isOutOfRange
                                   ? isDeliverySelected == true
                                       ? Colors.amber[100]
                                       : Colors.white
                                   : kGreyOf,
-                              border: !isOutOfRange
+                              border: !widget.isOutOfRange
                                   ? isDeliverySelected == true
                                       ? Border.all(
                                           color: Colors.amber, width: 1)
                                       : Border.all(
                                           color: Colors.white, width: 1)
                                   : Border.all(color: Colors.white, width: 1),
-                              borderRadius: !isOutOfRange
+                              borderRadius: !widget.isOutOfRange
                                   ? isDeliverySelected == true
                                       ? BorderRadius.circular(25)
                                       : BorderRadius.only(
@@ -524,13 +505,13 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                                 Icon(Icons.two_wheeler,
                                     // size: MediaQuery.of(context).size.width * 0.035,
                                     size: 10.5.sp,
-                                    color: !isOutOfRange
+                                    color: !widget.isOutOfRange
                                         ? isDeliverySelected == true
                                             ? Colors.black
                                             : Colors.grey
                                         : Colors.white),
                                 Text(" Delivery",
-                                    style: !isOutOfRange
+                                    style: !widget.isOutOfRange
                                         ? isDeliverySelected == true
                                             ? TextStyle(
                                                 color: Colors.black,

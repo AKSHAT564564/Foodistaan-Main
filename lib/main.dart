@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,28 +23,38 @@ import 'scanner.dart';
 import 'MainScreenFolder/mainScreenFile.dart';
 import 'optionScreenFile.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:foodistan/UserLogin/LoginScreen.dart';
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 int? onBoarding;
+
+//used for showing onboarding screen only on  first time install
+Future<void> onBoardingScreenPref() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  onBoarding = prefs.getInt("onBoarding");
+  await prefs.setInt("onBoarding", 1);
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await onBoardingScreenPref();
+  HttpOverrides.global = MyHttpOverrides();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     // DeviceOrientation.portraitDown,
   ]).then((_) {
     runApp(MyApp());
   });
-}
-
-Future<void> onBoardingScreenPref() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  onBoarding = await prefs.getInt("onBoarding");
-  await prefs.setInt("onBoarding", 1);
-  print(' onBoarding $onBoarding');
 }
 
 class MyApp extends StatefulWidget {

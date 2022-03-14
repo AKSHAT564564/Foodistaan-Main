@@ -50,18 +50,6 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
       }
     });
 // User Distance Calculator
-    double ofRange = userLocationCalculate();
-    if (ofRange <= 12) {
-      setState(() {
-        isOutOfRange = true;
-      });
-      // print(ofRange);
-    } else {
-      setState(() {
-        isOutOfRange = false;
-      });
-      // print(ofRange);
-    }
 
     super.initState();
     print(widget.items);
@@ -74,23 +62,6 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
       // print(scrollController.offset);
       setState(() {});
     });
-  }
-
-  userLocationCalculate() {
-    var userLocationProvider =
-        Provider.of<UserLocationProvider>(context, listen: false);
-    var userLocation = userLocationProvider.userLocation;
-    var userLatitude = userLocation?.latitude;
-    var userLongitude = userLocation?.longitude;
-
-    if (userLocationProvider.hasUserLocation) {
-      //  calling Get Distance Between() function for user distance from resturant
-      return UserLocationProvider().getDistanceBtw(
-          widget.items["Location"].latitude,
-          widget.items["Location"].longitude,
-          userLatitude,
-          userLongitude);
-    }
   }
 
   @override
@@ -176,53 +147,28 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
           ),
           body: Stack(
             children: [
-              SingleChildScrollView(
-                controller: scrollController,
-                scrollDirection: Axis.vertical,
-                child: Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: RestaurantDetailScreen(
-                      isOutOfRange: isOutOfRange,
-                      restaurant_details: widget.items,
-                      vendorId: widget.vendor_id,
-                      vendorName: widget.vendorName),
-                ),
-                // child: Column(
-                //   children: [
-                // Stack(
-                //   children: [
-                //     Container(
-                //         padding: EdgeInsets.only(left: 0, right: 0, top: 5),
-                //         color: Colors.white,
-                //         width: MediaQuery.of(context).size.width * 1,
-                //         height: MediaQuery.of(context).size.height * 0.35,
-                //         child: ClipRRect(
-                //           // borderRadius:BorderRadius.circular(15),
-                //           borderRadius: BorderRadius.only(
-                //               topLeft: Radius.circular(15),
-                //               topRight: Radius.circular(15)),
-                //           child: Image.network(
-                //             '${widget.items['FoodImage']}',
-                //             fit: BoxFit.cover,
-                //           ),
-                //         )),
-                //     Container(
-                //       padding: EdgeInsets.all(8),
-                //       child: Center(
-                //         // For testing
-                //         child: RestaurantDetailScreen(
-                //             restaurant_details: widget.items,
-                //             vendorId: widget.vendor_id,
-                //             vendorName: widget.vendorName),
-                //       ),
-                //     )
-                //   ],
-                // ),
-
-                //   ],
-                // ),
-              ),
+              Consumer<UserLocationProvider>(builder: (_, value, __) {
+                bool isOutOfRange = false;
+                if (value.hasUserLocation == true &&
+                    value.userLocationIsNull == false) {
+                  isOutOfRange = UserLocationProvider().userLocationCalculate(
+                      widget.items['Location'], value.userLocation);
+                  print('Range + ' + isOutOfRange.toString());
+                }
+                return SingleChildScrollView(
+                  controller: scrollController,
+                  scrollDirection: Axis.vertical,
+                  child: Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    child: RestaurantDetailScreen(
+                        isOutOfRange: isOutOfRange,
+                        restaurant_details: widget.items,
+                        vendorId: widget.vendor_id,
+                        vendorName: widget.vendorName),
+                  ),
+                );
+              }),
               Align(
                   alignment: Alignment.bottomCenter,
                   child: TotalBillBottomWidget()),

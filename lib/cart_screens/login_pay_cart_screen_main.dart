@@ -15,6 +15,7 @@ import 'package:foodistan/providers/cart_id_provider.dart';
 import 'package:foodistan/providers/restaurant_data_provider.dart';
 import 'package:foodistan/providers/total_price_provider.dart';
 import 'package:foodistan/providers/user_address_provider.dart';
+import 'package:foodistan/providers/user_location_provider.dart';
 import 'package:foodistan/widgets/location_bottam_sheet_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
@@ -851,124 +852,119 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                               value.minCouponValue,
                               totalPriceValue.totalPriceProvider,
                               widget.cartId),
-                          Consumer<UserAddressProvider>(
-                              builder: (_, userAddressValue, __) {
-                            return userAddressValue.hasDeafultAddress
-                                ? Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.1,
-                                    // color: Color.fromRGBO(255, 252, 222, 1),
-                                    // padding: EdgeInsets.only(
-                                    //     left: 11, right: 11, top: 15),
-                                    child: Container(
-                                      padding: EdgeInsets.all(11),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text.rich(TextSpan(
-                                            text: 'Deliver to ',
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400),
-                                            children: <InlineSpan>[
-                                              TextSpan(
-                                                text: userAddressValue
-                                                    .addressData['category']
-                                                    .toString(),
+                          Consumer<UserLocationProvider>(
+                              builder: (_, userLocationValue, __) {
+                            return Consumer<UserAddressProvider>(
+                                builder: (_, userAddressValue, __) {
+                              bool isOutOfRange = false;
+                              if (userLocationValue.hasUserLocation == true &&
+                                  userLocationValue.userLocationIsNull ==
+                                      false) {
+                                isOutOfRange = UserLocationProvider()
+                                    .userLocationCalculate(
+                                        value.restaurantData['Location'],
+                                        userLocationValue.userLocation);
+                                print('Range + ' + isOutOfRange.toString());
+                              }
+
+                              if (isOutOfRange) {
+                                return Text('Delivery Not Available');
+                              } else {
+                                return userAddressValue.hasDeafultAddress
+                                    ? Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.1,
+                                        child: Container(
+                                          padding: EdgeInsets.all(11),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text.rich(TextSpan(
+                                                text: 'Deliver to ',
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              TextSpan(text: '\n'),
-                                              TextSpan(
-                                                text: userAddressValue
-                                                        .addressData[
-                                                            'house-feild']
-                                                        .toString() +
-                                                    ' ' +
-                                                    userAddressValue
-                                                        .addressData[
-                                                            'street-feild']
+                                                        FontWeight.w400),
+                                                children: <InlineSpan>[
+                                                  TextSpan(
+                                                    text: userAddressValue
+                                                        .addressData['category']
                                                         .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Color.fromRGBO(
-                                                        130, 125, 125, 1)),
-                                              ),
-                                            ],
-                                          )),
-                                          TextButton(
-                                            onPressed: () async {
-                                              Navigator.push(
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  TextSpan(text: '\n'),
+                                                  TextSpan(
+                                                    text: userAddressValue
+                                                            .addressData[
+                                                                'house-feild']
+                                                            .toString() +
+                                                        ' ' +
+                                                        userAddressValue
+                                                            .addressData[
+                                                                'street-feild']
+                                                            .toString(),
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: Color.fromRGBO(
+                                                            130, 125, 125, 1)),
+                                                  ),
+                                                ],
+                                              )),
+                                              TextButton(
+                                                onPressed: () async {
+                                                  Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              Address()))
-                                                  .then((value) {
-                                                setState(() {});
-                                              });
-                                            },
-                                            child: Text(
-                                              'Change',
-                                              style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    247, 193, 43, 1),
+                                                              Address())).then(
+                                                      (value) {
+                                                    setState(() {});
+                                                  });
+                                                },
+                                                child: Text(
+                                                  'Change',
+                                                  style: TextStyle(
+                                                    color: Color.fromRGBO(
+                                                        247, 193, 43, 1),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                // ListTile(
-                                //     leading: Text(
-                                //         userAddressValue.addressData['category']),
-                                //     title: Text(
-                                //         userAddressValue.addressData['house-feild']),
-                                //     subtitle: Text(
-                                //         userAddressValue.addressData['street-feild']),
-                                //   trailing: TextButton(
-                                //       onPressed: () async {
-                                //         Navigator.push(
-                                //             context,
-                                //             MaterialPageRoute(
-                                //                 builder: (context) =>
-                                //                     Address())).then((value) {
-                                //           setState(() {});
-                                //         });
-                                //       },
-                                //       child: Text(
-                                //         'Change',
-                                //         style: TextStyle(
-                                //           color: Color.fromRGBO(247, 193, 43, 1),
-                                //         ),
-                                //       )),
-                                // )
-                                : TextButton(
-                                    onPressed: () async {
-                                      showModalBottomSheet(
-                                          context: context,
-                                          builder: (context) {
-                                            return LocationBottomSheetWidget(
-                                              isAddingAddress: true,
-                                            );
-                                          }).then((value) {
-                                        setState(() {});
-                                      });
-                                    },
-                                    child: Text(
-                                      'Add Address',
-                                      style: TextStyle(
-                                          color: kOrange,
-                                          fontWeight: FontWeight.w500),
-                                    ));
+                                        ),
+                                      )
+                                    : TextButton(
+                                        onPressed: () async {
+                                          showModalBottomSheet(
+                                              context: context,
+                                              builder: (context) {
+                                                return LocationBottomSheetWidget(
+                                                  isAddingAddress: true,
+                                                );
+                                              }).then((value) {
+                                            setState(() {});
+                                          });
+                                        },
+                                        child: Text(
+                                          'Add Address',
+                                          style: TextStyle(
+                                              color: kOrange,
+                                              fontWeight: FontWeight.w500),
+                                        ));
+                              }
+                            });
                           }),
                           Divider(
                             height: 8,
@@ -1392,18 +1388,28 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Consumer<UserAddressProvider>(
-                              builder: (_, userAddressValue, __) {
-                            return GestureDetector(
-                              onTap: () async {
-                                userAddressValue.hasDeafultAddress == true
-                                    ? Navigator.push(
+                          child: Consumer<UserLocationProvider>(
+                              builder: (_, userLocationValue, __) {
+                            bool isOutOfRange = false;
+                            if (userLocationValue.hasUserLocation == true &&
+                                userLocationValue.userLocationIsNull == false) {
+                              isOutOfRange = UserLocationProvider()
+                                  .userLocationCalculate(
+                                      value.restaurantData['Location'],
+                                      userLocationValue.userLocation);
+                            }
+
+                            return Consumer<UserAddressProvider>(
+                                builder: (_, userAddressValue, __) {
+                              return GestureDetector(
+                                onTap: () async {
+                                  if (isOutOfRange) {
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => RazorPayScreen(
-                                                deliveryAddress:
-                                                    userAddressValue
-                                                        .addressData,
+                                                orderType: 'pickup',
+                                                deliveryAddress: {},
                                                 finalPrice: calculateCouponDiscount(
                                                             totalPriceValue
                                                                 .totalPriceProvider,
@@ -1418,61 +1424,89 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                                 vednorId:
                                                     value.restaurantData['id'],
                                                 vendorName: value
-                                                    .restaurantData['Name'])))
-                                    : showModalBottomSheet(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return LocationBottomSheetWidget(
-                                            isAddingAddress: true,
-                                          );
-                                        }).then((value) {
-                                        setState(() {});
-                                      });
-                              },
-                              child: Center(
-                                child: value.hasCoupon &&
-                                        value.minCouponValue <=
-                                            totalPriceValue.totalPriceProvider
-                                    ? Text.rich(
-                                        TextSpan(
-                                          text: 'Proceed To Pay ₹ ',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
+                                                    .restaurantData['Name'])));
+                                  } else {
+                                    userAddressValue.hasDeafultAddress == true
+                                        ? Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => RazorPayScreen(
+                                                    orderType: 'delivery',
+                                                    deliveryAddress:
+                                                        userAddressValue
+                                                            .addressData,
+                                                    finalPrice: calculateCouponDiscount(
+                                                                totalPriceValue
+                                                                    .totalPriceProvider,
+                                                                value
+                                                                    .couponPercentage,
+                                                                value
+                                                                    .maxCouponDiscount)
+                                                            .toDouble() +
+                                                        deliveryTip.toDouble(),
+                                                    items: itemMap,
+                                                    cartId: widget.cartId,
+                                                    vednorId: value
+                                                        .restaurantData['id'],
+                                                    vendorName:
+                                                        value.restaurantData[
+                                                            'Name'])))
+                                        : showModalBottomSheet(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return LocationBottomSheetWidget(
+                                                isAddingAddress: true,
+                                              );
+                                            }).then((value) {
+                                            setState(() {});
+                                          });
+                                  }
+                                },
+                                child: Center(
+                                  child: value.hasCoupon &&
+                                          value.minCouponValue <=
+                                              totalPriceValue.totalPriceProvider
+                                      ? Text.rich(
+                                          TextSpan(
+                                            text: 'Proceed To Pay ₹ ',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                            children: <InlineSpan>[
+                                              TextSpan(
+                                                text:
+                                                    '${(calculateCouponDiscount(totalPriceValue.totalPriceProvider, value.couponPercentage, value.maxCouponDiscount) + deliveryTip).toString()}',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                          children: <InlineSpan>[
-                                            TextSpan(
-                                              text:
-                                                  '${(calculateCouponDiscount(totalPriceValue.totalPriceProvider, value.couponPercentage, value.maxCouponDiscount) + deliveryTip).toString()}',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    : Text.rich(
-                                        TextSpan(
-                                          text: 'Proceed To Pay ₹ ',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
+                                        )
+                                      : Text.rich(
+                                          TextSpan(
+                                            text: 'Proceed To Pay ₹ ',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                            children: <InlineSpan>[
+                                              TextSpan(
+                                                text:
+                                                    '${totalPriceValue.totalPriceProvider + deliveryTip}',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                          children: <InlineSpan>[
-                                            TextSpan(
-                                              text:
-                                                  '${totalPriceValue.totalPriceProvider + deliveryTip}',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                            )
-                                          ],
                                         ),
-                                      ),
-                              ),
-                            );
+                                ),
+                              );
+                            });
                           }));
                     }),
                     SizedBox(
