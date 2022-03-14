@@ -132,7 +132,8 @@ class _RestaurantDeliveryState extends State<RestaurantDelivery> {
                           child: isBookMarked == true
                               ? Icon(
                                   Icons.bookmark_added,
-                                  color: kBlackLight,
+                                  // color: kBlackLight,
+                                  color: kYellow,
                                 )
                               : Icon(
                                   Icons.bookmark_outline,
