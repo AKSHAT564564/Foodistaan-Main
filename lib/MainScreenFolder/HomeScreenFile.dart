@@ -6,6 +6,7 @@ import 'package:foodistan/MainScreenFolder/AppBar/AppBarFile.dart';
 import 'package:foodistan/MainScreenFolder/SeeRestaurantsScreen.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/location_functions.dart';
+import 'package:foodistan/providers/user_location_provider.dart';
 import 'package:sizer/sizer.dart';
 import 'Crousel.dart';
 import 'CategoryTile.dart';
@@ -199,104 +200,8 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
                   ],
                 ),
                 CuisineTileList(),
-                Padding(
-                  padding:
-                      EdgeInsets.only(top: 1, left: 11, right: 11, bottom: 11),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => SeeRestaurantsScreen()));
-                    },
-                    child: Container(
-                      height: 10.h,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Color.fromRGBO(67, 73, 101, 1),
-                        // gradient: LinearGradient(colors: [
-                        //   // Color.fromRGBO(117, 14, 14, 0.2),
-                        //   Color.fromRGBO(67, 73, 101, 0.8),
-                        //   Color.fromRGBO(67, 73, 101, 1),
-                        // ]),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Expanded(flex: 1, child: Container()),
-
-                          SizedBox(
-                            width: 1.5.w,
-                          ),
-                          Expanded(
-                            flex: 10,
-                            child: Container(
-                              // color: Colors.red,
-                              padding: EdgeInsets.only(top: 10, left: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '12 Minutes Delivery...',
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(251, 225, 158, 1),
-                                        fontSize: 16.sp),
-                                  ),
-                                  Text(
-                                    'See restaurants',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12.sp),
-                                  ),
-                                  SizedBox(
-                                    height: 1.5.h,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          // Spacer(),
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 5.h,
-                                        // height: MediaQuery.of(context).size.height *
-                                        //     0.061,
-                                        child: Image.asset(
-                                            'assets/images/logotp.png'),
-                                      ),
-                                      Container(
-                                        height: 2.h,
-                                        // height: MediaQuery.of(context).size.height *
-                                        //     0.019,
-                                        child:
-                                            Image.asset('assets/images/+.png'),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    'Streatoplus',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 7.sp),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 1.5.w,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ), //search widget moved down here
+                MinutesDelivery(),
+                //search widget moved down here
 
                 //builds the list of all the in the database
                 //takes user location as a reuired parameter
@@ -336,4 +241,231 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class MinutesDelivery extends StatefulWidget {
+  const MinutesDelivery({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<MinutesDelivery> createState() => _MinutesDeliveryState();
+}
+
+class _MinutesDeliveryState extends State<MinutesDelivery> {
+  late bool outOfUserLocation;
+  var distance = 19;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    outOfUserLocation = distance >= 20 ? true : false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return outOfUserLocation
+        ? GestureDetector(
+            onTap: (() {
+              return;
+            }),
+            child: Padding(
+              padding: EdgeInsets.only(top: 1, left: 11, right: 11, bottom: 11),
+              child: Container(
+                height: 22.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: kDarkGreen,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // SizedBox(
+                    //   width: 1.5.w,
+                    // ),
+                    Expanded(
+                      flex: 7,
+                      child: Container(
+                        // color: Colors.red,
+                        padding: EdgeInsets.only(top: 1.5.h, left: 4.5.w),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Unable to deliver at your location',
+                              style: TextStyle(
+                                  color: kCreamy,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14.5.sp),
+                            ),
+                            SizedBox(
+                              height: 0.6.h,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Change Location',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 8.5.sp),
+                                ),
+                                Container(
+                                    margin: EdgeInsets.only(left: 1.w),
+                                    padding: EdgeInsets.all(1.sp),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            width: 1.sp, color: kCreamy)),
+                                    child: Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      size: 5.sp,
+                                      color: kCreamy,
+                                    ))
+                              ],
+                            ),
+                            Spacer(),
+                            // Text(
+                            //   'Though you can try pickup anytime',
+                            //   style:
+                            //       TextStyle(color: Colors.white, fontSize: 14.sp),
+                            // ),
+                            Text.rich(TextSpan(
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                    fontSize: 14.sp),
+                                children: [
+                                  TextSpan(text: 'Though you can try'),
+                                  TextSpan(
+                                    text: ' pickup ',
+                                    style: TextStyle(
+                                        color: kCreamy, fontSize: 14.sp),
+                                  ),
+                                  TextSpan(text: 'anytime'),
+                                ])),
+                            SizedBox(
+                              height: 1.5.h,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    // Spacer(),
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            bottom: 1.h, top: 2.5.h, right: 4.w),
+                        height: 20.h,
+                        // height: MediaQuery.of(context).size.height *
+                        //     0.061,
+                        child: Image.asset(
+                          'assets/images/emoji.png',
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        : Padding(
+            padding: EdgeInsets.only(top: 1, left: 11, right: 11, bottom: 11),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SeeRestaurantsScreen()));
+              },
+              child: Container(
+                height: 10.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Color.fromRGBO(67, 73, 101, 1),
+                  // gradient: LinearGradient(colors: [
+                  //   // Color.fromRGBO(117, 14, 14, 0.2),
+                  //   Color.fromRGBO(67, 73, 101, 0.8),
+                  //   Color.fromRGBO(67, 73, 101, 1),
+                  // ]),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Expanded(flex: 1, child: Container()),
+
+                    SizedBox(
+                      width: 1.5.w,
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Container(
+                        // color: Colors.red,
+                        padding: EdgeInsets.only(top: 10, left: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '12 Minutes Delivery...',
+                              style: TextStyle(color: kCreamy, fontSize: 16.sp),
+                            ),
+                            Text(
+                              'See restaurants',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 12.sp),
+                            ),
+                            SizedBox(
+                              height: 1.5.h,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    // Spacer(),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  height: 5.h,
+                                  // height: MediaQuery.of(context).size.height *
+                                  //     0.061,
+                                  child:
+                                      Image.asset('assets/images/logotp.png'),
+                                ),
+                                Container(
+                                  height: 2.h,
+                                  // height: MediaQuery.of(context).size.height *
+                                  //     0.019,
+                                  child: Image.asset('assets/images/+.png'),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              'Streatoplus',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 7.sp),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 1.5.w,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+  }
 }
