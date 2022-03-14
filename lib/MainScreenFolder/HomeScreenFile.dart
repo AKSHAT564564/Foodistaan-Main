@@ -7,6 +7,7 @@ import 'package:foodistan/MainScreenFolder/SeeRestaurantsScreen.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/location_functions.dart';
 import 'package:foodistan/providers/user_location_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'Crousel.dart';
 import 'CategoryTile.dart';
@@ -43,7 +44,9 @@ class _HomeScreenState extends State<HomeScreen>
     //fetching user location from firebase...if exits then rebuilds the Home screen
     // with restaurants sorted according to the user location
 
-    LocationFunctions().getUserLocation().then((value) {
+   
+    UserLocationProvider().getUserLocation().then((value) {
+
       setState(() {
         userLocation = value;
       });
@@ -85,19 +88,6 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
   var userLocation;
 
   double expandedHeight = 0.5.h;
-  @override
-  void initState() {
-    super.initState();
-
-    //fetching user location from firebase...if exits then rebuilds the Home screen
-    // with restaurants sorted according to the user location
-
-    LocationFunctions().getUserLocation().then((value) {
-      setState(() {
-        userLocation = value;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

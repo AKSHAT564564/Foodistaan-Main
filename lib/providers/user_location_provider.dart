@@ -37,7 +37,10 @@ class UserLocationProvider extends ChangeNotifier {
       _userLocationIsNull = true;
     }
 
+    if (_userLocationIsNull == true) return null;
+
     notifyListeners();
+    return _userLocation;
   }
 
   getAddress(latitude, longitude) async {
@@ -57,6 +60,33 @@ class UserLocationProvider extends ChangeNotifier {
         name: places.name,
         subLocality: places.subLocality);
     return addressModel;
+  }
+
+  double _locationBetween = 0.0;
+  bool _outOfRange = false;
+
+  double get locationBetween => _locationBetween;
+  bool get outOfRange => _outOfRange;
+
+  userLocationCalculate(vendorLocation,userLocation) {
+  
+    print('Range');
+    var userLatitude = userLocation!.latitude;
+    var userLongitude = userLocation!.longitude;
+
+    _locationBetween = getDistanceBtw(vendorLocation.latitude,
+        vendorLocation.longitude, userLatitude, userLongitude);
+
+    print('Range $_locationBetween');
+
+    if (_locationBetween > 12) {
+      _outOfRange = true;
+    } else {
+      _outOfRange = false;
+    }
+
+    notifyListeners();
+    return _outOfRange;
   }
 
 // calculate distance between Restaurant and User
