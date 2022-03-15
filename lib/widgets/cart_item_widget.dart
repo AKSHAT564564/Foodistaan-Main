@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 
 Future<List> fetchItem(vendor_id, menu_item) async {
   List item_list = [];
@@ -94,6 +96,6 @@ class _CartItemState extends State<CartItem> {
               ),
             ),
           )
-        : CircularProgressIndicator();
+        : CustomLoadingSpinner();
   }
 }

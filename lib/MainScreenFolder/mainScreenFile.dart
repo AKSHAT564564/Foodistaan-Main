@@ -59,8 +59,11 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     widget.currentIndex = value;
     _pageController.jumpToPage(value);
     tabController!.index = value;
+
+    setState(() {});
   }
 
+  @override
   Widget build(BuildContext context) {
     //building context for SizeConfig
     SizeConfig().init(context);

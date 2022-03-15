@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/address_screen.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
+import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/functions/address_functions.dart';
 import 'package:foodistan/providers/user_address_provider.dart';
 
@@ -106,7 +108,7 @@ class _AddressState extends State<Address> {
               height: 5,
             ),
             hasData == false
-                ? CircularProgressIndicator()
+                ? CustomLoadingSpinner()
                 : hasData == true && addressList.isEmpty
                     ? Center(
                         child: Text('No Saved Address'),

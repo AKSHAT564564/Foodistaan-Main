@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:foodistan/MainScreenFolder/AppBar/AppBarFile.dart';
 import 'package:foodistan/MainScreenFolder/SeeRestaurantsScreen.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/functions/location_functions.dart';
 import 'package:foodistan/providers/user_location_provider.dart';
 import 'package:provider/provider.dart';
@@ -44,9 +45,7 @@ class _HomeScreenState extends State<HomeScreen>
     //fetching user location from firebase...if exits then rebuilds the Home screen
     // with restaurants sorted according to the user location
 
-   
     UserLocationProvider().getUserLocation().then((value) {
-
       setState(() {
         userLocation = value;
       });

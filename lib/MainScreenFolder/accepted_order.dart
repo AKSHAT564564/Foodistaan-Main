@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/sizeConfig.dart';
 
 class AcceptedOrder extends StatefulWidget {
@@ -462,7 +463,7 @@ class _AcceptedOrderState extends State<AcceptedOrder> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _restaurantData.isEmpty
-                              ? CircularProgressIndicator()
+                              ? CustomLoadingSpinner()
                               : ListTile(
                                   contentPadding:
                                       EdgeInsets.symmetric(horizontal: 5.0),

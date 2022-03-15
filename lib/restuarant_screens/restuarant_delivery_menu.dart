@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/providers/restaurant_list_provider.dart';
 import 'package:foodistan/widgets/food_item_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -90,9 +91,7 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
                 child: (menuItems.isEmpty && cartId == '')
                     // ? spinkit
                     ? Center(
-                        child: CircularProgressIndicator(
-                          color: kYellow,
-                        ),
+                        child: CustomLoadingSpinner(),
                       )
                     : GridView.count(
                         padding: EdgeInsets.zero,

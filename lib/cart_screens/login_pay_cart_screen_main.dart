@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/coupon_screen.dart';
 import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -801,9 +802,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
         child:
             Center(child: Consumer<CartDataProvider>(builder: (_, value, __) {
           return value.hasData == false
-              ? CircularProgressIndicator(
-                  color: Colors.yellow,
-                )
+              ? CustomLoadingSpinner()
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

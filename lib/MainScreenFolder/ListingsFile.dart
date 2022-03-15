@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/providers/restaurant_list_provider.dart';
 import 'package:foodistan/restuarant_screens/restaurant_delivery.dart';
 import 'package:provider/provider.dart';
@@ -94,9 +95,7 @@ class _ListingsState extends State<Listings> {
                 );
               },
             )
-          : CircularProgressIndicator(
-              color: Colors.yellow.shade700,
-            );
+          : CustomLoadingSpinner();
     });
   }
 }
