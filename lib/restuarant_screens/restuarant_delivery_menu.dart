@@ -82,34 +82,36 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
     return Scaffold(
       body: Column(
         children: [
-          Container(color: Colors.white, child: SearchMenu()),
+          Container(
+              color: Colors.white,
+              child: SearchMenu(widget.vendor_id, widget.vendorName)),
           SizedBox(
             height: 3.h,
           ),
-          Expanded(
-            child: Container(
-                child: (menuItems.isEmpty && cartId == '')
-                    // ? spinkit
-                    ? Center(
-                        child: CustomLoadingSpinner(),
-                      )
-                    : GridView.count(
-                        padding: EdgeInsets.zero,
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        childAspectRatio: (itemWidth / itemHeight),
-                        crossAxisSpacing: 5,
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        children: List.generate(menuItems.length, (index) {
-                          return MyFoodItemWidget(
-                              menuItem: menuItems[index],
-                              vendor_id: widget.vendor_id,
-                              cartId: cartId,
-                              vendorName: widget.vendorName);
-                        }),
-                      )),
-          ),
+          // Expanded(
+          //   child: Container(
+          //       child: (menuItems.isEmpty && cartId == '')
+          //           // ? spinkit
+          //           ? Center(
+          //               child: CustomLoadingSpinner(),
+          //             )
+          //           : GridView.count(
+          //               padding: EdgeInsets.zero,
+          //               physics: NeverScrollableScrollPhysics(),
+          //               shrinkWrap: true,
+          //               childAspectRatio: (itemWidth / itemHeight),
+          //               crossAxisSpacing: 5,
+          //               crossAxisCount: 2,
+          //               mainAxisSpacing: 10,
+          //               children: List.generate(menuItems.length, (index) {
+          //                 return MyFoodItemWidget(
+          //                     menuItem: menuItems[index],
+          //                     vendor_id: widget.vendor_id,
+          //                     cartId: cartId,
+          //                     vendorName: widget.vendorName);
+          //               }),
+          //             )),
+          // ),
         ],
       ),
     );
@@ -119,11 +121,19 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
 final _scrollController = ScrollController();
 
 class SearchMenu extends StatefulWidget {
+  final vendor_id;
+
+  final vendorName;
+  SearchMenu(this.vendor_id, this.vendorName);
+
   @override
   State<SearchMenu> createState() => _SearchMenuState();
 }
 
 class _SearchMenuState extends State<SearchMenu> {
+  List menuItems = [];
+  String? userNumber;
+  String cartId = '';
   final _searchController = TextEditingController();
 
   ValueNotifier<List> searchResults = ValueNotifier([]);
@@ -141,109 +151,146 @@ class _SearchMenuState extends State<SearchMenu> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    userNumber = AuthMethod().checkUserLogin();
+    _asyncMethod(userNumber).then((value) {
+      setState(() {
+        cartId = value[0];
+        menuItems = value[1];
+      });
+    });
+  }
+
+  _asyncMethod(userNumber) async {
+    List<dynamic> list = [];
+    await CartFunctions().getCartId(userNumber).then((value) {
+      list.add(value);
+    });
+    await fetchMenu(widget.vendor_id).then((value) => {list.add(value)});
+
+    return list;
+  }
+
+  @override
   Widget build(BuildContext context) {
     var h1 = MediaQuery.of(context).size.height;
     var w1 = MediaQuery.of(context).size.width;
     var itemWidth = MediaQuery.of(context).size.width * 0.4;
     var itemHeight = MediaQuery.of(context).size.height * 0.45;
     return Consumer<RestaurantListProvider>(builder: (_, value, __) {
-      return SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    blurRadius: 5,
-                    offset: Offset(0, 5),
+      return Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  blurRadius: 5,
+                  offset: Offset(0, 5),
+                ),
+              ],
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+              color: Colors.white60,
+            ),
+            height: h1 * 0.055,
+            width: w1 * 1,
+            child: TextFormField(
+              controller: _searchController,
+              onChanged: (v) async {
+                searchQuery(_searchController.text, value.items);
+                setState(() {}); //for cross icon in searchbar
+              },
+              textAlign: TextAlign.start,
+              obscureText: false,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(
+                    left: 8,
                   ),
-                ],
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                color: Colors.white60,
-              ),
-              height: h1 * 0.055,
-              width: w1 * 1,
-              child: TextFormField(
-                controller: _searchController,
-                onChanged: (v) async {
-                  searchQuery(_searchController.text, value.items);
-                  setState(() {}); //for cross icon in searchbar
-                },
-                textAlign: TextAlign.start,
-                obscureText: false,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(
-                      left: 8,
-                    ),
-                    hintText: 'Search your craving',
-                    hintStyle: TextStyle(
-                      color: kGreyDark,
-                      fontSize: 15,
-                    ),
-                    suffixIcon: Padding(
-                      padding: EdgeInsets.all(0.0),
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          top: 1.5,
-                          bottom: 1.5,
-                          left: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFFAB84C),
-                          shape: BoxShape.circle,
-                        ),
-                        child: _searchController.text.isNotEmpty
-                            ? InkWell(
-                                child: Icon(
-                                  Icons.clear_rounded,
-                                  color: Colors.white,
-                                ),
-                                onTap: () {
-                                  _searchController.text = '';
-                                  searchResults.value = [];
-                                  setState(() {}); //for cross icon in searchbar
-                                },
-                              )
-                            : Icon(
-                                Icons.search,
-                                // size: 22,
-                                // color: kGrey,
+                  hintText: 'Search your craving',
+                  hintStyle: TextStyle(
+                    color: kGreyDark,
+                    fontSize: 15,
+                  ),
+                  suffixIcon: Padding(
+                    padding: EdgeInsets.all(0.0),
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        top: 1.5,
+                        bottom: 1.5,
+                        left: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFAB84C),
+                        shape: BoxShape.circle,
+                      ),
+                      child: _searchController.text.isNotEmpty
+                          ? InkWell(
+                              child: Icon(
+                                Icons.clear_rounded,
                                 color: Colors.white,
                               ),
-                      ),
+                              onTap: () {
+                                _searchController.text = '';
+                                searchResults.value = [];
+                                setState(() {}); //for cross icon in searchbar
+                              },
+                            )
+                          : Icon(
+                              Icons.search,
+                              // size: 22,
+                              // color: kGrey,
+                              color: Colors.white,
+                            ),
                     ),
-                    focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          // color: Color(0xFFFAB84C),
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    enabledBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30),
-                      ),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                         // color: Color(0xFFFAB84C),
                         color: Colors.transparent,
                         width: 1,
                       ),
-                    )),
-              ),
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                  enabledBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(30),
+                    ),
+                    borderSide: BorderSide(
+                      // color: Color(0xFFFAB84C),
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                  )),
             ),
-            ValueListenableBuilder<List>(
-                valueListenable: searchResults,
-                builder: (_, value, __) {
-                  return value.isNotEmpty && _searchController.text.isNotEmpty
-                      ? SearchMenuItemList(
-                          searchResults: value,
-                        )
-                      : Container();
-                })
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 2.5.h,
+          ),
+          ValueListenableBuilder<List>(
+              valueListenable: searchResults,
+              builder: (_, value, __) {
+                return value.isNotEmpty && _searchController.text.isNotEmpty
+                    ? SearchMenuItemList(
+                        searchResults: value,
+                      )
+                    : GridView.count(
+                        padding: EdgeInsets.zero,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        childAspectRatio: (itemWidth / itemHeight),
+                        crossAxisSpacing: 5,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        children: List.generate(menuItems.length, (index) {
+                          return MyFoodItemWidget(
+                              menuItem: menuItems[index],
+                              vendor_id: widget.vendor_id,
+                              cartId: cartId,
+                              vendorName: widget.vendorName);
+                        }),
+                      );
+              })
+        ],
       );
     });
   }
