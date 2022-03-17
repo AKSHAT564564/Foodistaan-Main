@@ -95,7 +95,11 @@ class _ListingsState extends State<Listings> {
                 );
               },
             )
-          : CustomLoadingSpinner();
+          : Container(
+              height: 30.h,
+              width: double.infinity,
+              child: CustomLoadingSpinner(),
+            );
     });
   }
 }

@@ -20,6 +20,7 @@ import 'package:foodistan/providers/user_location_provider.dart';
 import 'package:foodistan/widgets/location_bottam_sheet_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 int maxCouponDiscount = 0;
 String couponCode = '';
@@ -802,7 +803,11 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
         child:
             Center(child: Consumer<CartDataProvider>(builder: (_, value, __) {
           return value.hasData == false
-              ? CustomLoadingSpinner()
+              ? Container(
+                  height: 80.h,
+                  width: double.infinity,
+                  child: CustomLoadingSpinner(),
+                )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

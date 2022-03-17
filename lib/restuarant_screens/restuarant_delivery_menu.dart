@@ -90,11 +90,11 @@ class _RestuarantDeliveryMenuState extends State<RestuarantDeliveryMenu> {
           ),
           // Expanded(
           //   child: Container(
-          //       child: (menuItems.isEmpty && cartId == '')
-          //           // ? spinkit
-          //           ? Center(
-          //               child: CustomLoadingSpinner(),
-          //             )
+          // child: (menuItems.isEmpty && cartId == '')
+          //     // ? spinkit
+          //     ? Center(
+          //         child: CustomLoadingSpinner(),
+          //       )
           //           : GridView.count(
           //               padding: EdgeInsets.zero,
           //               physics: NeverScrollableScrollPhysics(),
@@ -273,22 +273,29 @@ class _SearchMenuState extends State<SearchMenu> {
                     ? SearchMenuItemList(
                         searchResults: value,
                       )
-                    : GridView.count(
-                        padding: EdgeInsets.zero,
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        childAspectRatio: (itemWidth / itemHeight),
-                        crossAxisSpacing: 5,
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        children: List.generate(menuItems.length, (index) {
-                          return MyFoodItemWidget(
-                              menuItem: menuItems[index],
-                              vendor_id: widget.vendor_id,
-                              cartId: cartId,
-                              vendorName: widget.vendorName);
-                        }),
-                      );
+                    : (menuItems.isEmpty && cartId == '')
+                        ? Container(
+                            height: 30.h,
+                            child: Center(
+                              child: CustomLoadingSpinner(),
+                            ),
+                          )
+                        : GridView.count(
+                            padding: EdgeInsets.zero,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            childAspectRatio: (itemWidth / itemHeight),
+                            crossAxisSpacing: 5,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10,
+                            children: List.generate(menuItems.length, (index) {
+                              return MyFoodItemWidget(
+                                  menuItem: menuItems[index],
+                                  vendor_id: widget.vendor_id,
+                                  cartId: cartId,
+                                  vendorName: widget.vendorName);
+                            }),
+                          );
               })
         ],
       );
