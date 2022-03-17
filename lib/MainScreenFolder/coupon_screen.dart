@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
 import 'package:foodistan/cart_screens/total_price_screen.dart';
+import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/global/global_variables.dart';
 import 'package:foodistan/providers/cart_id_provider.dart';
 import 'package:foodistan/providers/restaurant_data_provider.dart';
@@ -71,9 +73,7 @@ class _CouponScreenState extends State<CouponScreen> {
       backgroundColor: Colors.grey.shade100,
       body: coupons.isEmpty
           ? Center(
-              child: CircularProgressIndicator(
-                color: Colors.yellow.shade700,
-              ),
+              child: CustomLoadingSpinner(),
             )
           : ListView.builder(
               itemCount: coupons.length,

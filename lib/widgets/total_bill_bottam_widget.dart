@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 import 'package:foodistan/global/global_variables.dart';
 import 'package:sizer/sizer.dart';
@@ -39,7 +40,7 @@ class _TotalBillBottomWidgetState extends State<TotalBillBottomWidget> {
   @override
   Widget build(BuildContext context) {
     return cartId == ''
-        ? CircularProgressIndicator()
+        ? CustomLoadingSpinner()
         : StreamBuilder(
             stream: stream,
             builder:

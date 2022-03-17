@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/functions/order_functions.dart';
+import 'package:sizer/sizer.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 
 class OrderHistoryWidget extends StatefulWidget {
@@ -60,13 +62,14 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
   @override
   Widget build(BuildContext context) {
     return _restaurantData.isEmpty
-        ? SizedBox(
-            height: 3,
-            child: LinearProgressIndicator(
-              color: Colors.yellowAccent,
-              backgroundColor: Colors.yellow,
-            ),
-          )
+        // ? SizedBox(
+        //     height: 3,
+        //     child: LinearProgressIndicator(
+        //       color: Colors.yellowAccent,
+        //       backgroundColor: Colors.yellow,
+        //     ),
+        // )
+        ? Container(height: 80.h, child: CustomLoadingSpinner())
         : Padding(
             padding: const EdgeInsets.all(10),
             child: Container(

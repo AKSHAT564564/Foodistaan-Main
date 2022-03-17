@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodistan/MainScreenFolder/Location/LocationMap.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
+import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/functions/address_functions.dart';
 import 'package:foodistan/functions/location_functions.dart';
 import 'package:foodistan/functions/places_search_model.dart';
@@ -345,7 +347,7 @@ class _SavedAddressWidgetState extends State<SavedAddressWidget> {
   @override
   Widget build(BuildContext context) {
     return hasData == false
-        ? CircularProgressIndicator()
+        ? CustomLoadingSpinner()
         : hasData == true && addressList.isEmpty
             ? Center(
                 child: Text('No Saved Address'),

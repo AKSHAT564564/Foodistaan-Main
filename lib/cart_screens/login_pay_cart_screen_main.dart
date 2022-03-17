@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/coupon_screen.dart';
 import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,6 +20,7 @@ import 'package:foodistan/providers/user_location_provider.dart';
 import 'package:foodistan/widgets/location_bottam_sheet_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 int maxCouponDiscount = 0;
 String couponCode = '';
@@ -801,8 +803,10 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
         child:
             Center(child: Consumer<CartDataProvider>(builder: (_, value, __) {
           return value.hasData == false
-              ? CircularProgressIndicator(
-                  color: Colors.yellow,
+              ? Container(
+                  height: 80.h,
+                  width: double.infinity,
+                  child: CustomLoadingSpinner(),
                 )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,

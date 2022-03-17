@@ -15,12 +15,11 @@ class RestaurantDetailScreen extends StatefulWidget {
   final vendorId;
   final vendorName;
   bool isOutOfRange;
-  RestaurantDetailScreen({
-    this.restaurant_details,
-    this.vendorId,
-    this.vendorName,
-    this.isOutOfRange =false
-  });
+  RestaurantDetailScreen(
+      {this.restaurant_details,
+      this.vendorId,
+      this.vendorName,
+      this.isOutOfRange = false});
 
   @override
   _RestaurantDetailScreenState createState() => _RestaurantDetailScreenState();
@@ -30,7 +29,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   bool isDeliverySelected = false;
   bool isPickupSelected = false;
   bool isOverviewSelected = false;
- 
+
   int _currentIndex = 0;
 
   @override
@@ -39,7 +38,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
     super.initState();
 
     setState(() {
-        isDeliverySelected = widget.isOutOfRange ? false : true;
+      isDeliverySelected = widget.isOutOfRange ? false : true;
       isPickupSelected = widget.isOutOfRange ? true : false;
       _currentIndex = widget.isOutOfRange ? 1 : 0;
     });
@@ -413,7 +412,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Visibility(
-                    visible:widget. isOutOfRange,
+                    visible: widget.isOutOfRange,
                     child: Column(
                       children: [
                         Text(
