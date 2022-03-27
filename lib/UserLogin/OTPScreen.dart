@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 import 'package:foodistan/UserLogin/user_detail_form.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -328,6 +329,7 @@ class _OTPScreenState extends State<OTPScreen> {
   Widget build(BuildContext context) {
     verifyPhoneNumber(context);
     return ModalProgressHUD(
+      progressIndicator: CustomLoadingSpinner(),
       inAsyncCall: showSpinner,
       child: SafeArea(
         child: Scaffold(
