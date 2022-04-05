@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/accepted_order.dart';
-import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
-import 'package:foodistan/global/global_variables.dart';
 import 'package:foodistan/profile/your_orders.dart';
 import 'package:foodistan/widgets/order_history_widget.dart';
 

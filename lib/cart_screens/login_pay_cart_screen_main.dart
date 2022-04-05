@@ -1465,6 +1465,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                             setState(() {});
                                           });
                                   }
+                                
                                 },
                                 child: Center(
                                   child: value.hasCoupon &&

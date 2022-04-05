@@ -93,6 +93,8 @@ class _RazorPayScreenState extends State<RazorPayScreen> {
             widget.deliveryAddress,
             widget.orderType)
         .then((value) {
+      itemMap = {};
+
       Navigator.push(
           context,
           PageTransition(
