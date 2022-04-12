@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:foodistan/MainScreenFolder/Posts/posts_screen.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
 import 'package:foodistan/functions/order_functions.dart';
 import 'package:foodistan/profile/user_profile.dart';
@@ -39,7 +40,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
 
     //  bottom navbar fix
     tabController = TabController(
-        length: 4, vsync: this, initialIndex: widget.currentIndex);
+        length: 5, vsync: this, initialIndex: widget.currentIndex);
   }
 
   @override
@@ -53,6 +54,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     CartScreenMainLogin(),
     ScannerScreen(),
     UserProfile(),
+    PostsScreen(),
   ];
 
   bottomAppBarController(value) {
@@ -132,6 +134,17 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                 ),
                 iconMargin: EdgeInsets.only(bottom: 4),
                 text: 'Profile',
+              ),
+              Tab(
+                // icon: Icon(CupertinoIcons.profile_circled),
+                icon: Container(
+                  height: 2.8.h,
+                  child: widget.currentIndex == 4
+                      ? Icon(Icons.person_pin_outlined)
+                      : Icon(Icons.person_pin_outlined),
+                ),
+                iconMargin: EdgeInsets.only(bottom: 4),
+                text: 'Posts',
               ),
             ],
           ),
