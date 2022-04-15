@@ -9,6 +9,7 @@ import 'package:foodistan/customSplashScreen.dart';
 import 'package:foodistan/onBoardingScreen.dart';
 import 'package:foodistan/profile/profile_address.dart';
 import 'package:foodistan/providers/cart_id_provider.dart';
+import 'package:foodistan/providers/posts_provider.dart';
 import 'package:foodistan/providers/restaurant_data_provider.dart';
 import 'package:foodistan/providers/restaurant_list_provider.dart';
 
@@ -85,6 +86,9 @@ class _MyAppState extends State<MyApp> {
         providers: [
           ChangeNotifierProvider<UserDataProvider>(
               create: (_) => UserDataProvider()), //provides user data
+
+          ChangeNotifierProvider<PostsProvider>(
+              create: (_) => PostsProvider()), //provides Post data
 
           ChangeNotifierProvider<CartIdProvider>(
               create: (_) => CartIdProvider()),
