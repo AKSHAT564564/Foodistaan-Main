@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:foodistan/MainScreenFolder/Posts/postUploadWidget.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/providers/posts_provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class PostsImageWidget extends StatefulWidget {
@@ -17,6 +20,7 @@ class PostsImageWidget extends StatefulWidget {
 class _PostsImageWidgetState extends State<PostsImageWidget> {
   /// Variables
   File? imageFile;
+
   final picker = ImagePicker();
   @override
   void initState() {
@@ -67,7 +71,21 @@ class _PostsImageWidgetState extends State<PostsImageWidget> {
                   onTap: () {
                     imageFile == null
                         ? pickImageFrom(widget.imageSource)
-                        : null;
+                        : Navigator.push(context,
+                            MaterialPageRoute(builder: (builder) {
+                            return PostUploadWidget();
+                          }));
+                    // : setState(() {
+                    //     var temp = Provider.of<PostsProvider>(context,
+                    //             listen: false)
+                    //         .fetchAndSetPosts();
+                    //     print(temp);
+                    // : setState(() {
+                    //     var temp = Provider.of<PostsProvider>(context,
+                    //             listen: false)
+                    //         .uploadPosts(imageFile!, imageFile!.path);
+                    //     print(temp);
+                    //   });
                   },
                   child: Container(
                     width: 35.w,
