@@ -112,7 +112,7 @@ class _MyFoodItemWidgetState extends State<MyFoodItemWidget> {
                         color: kGreen,
                       ),
                       Text(
-                        " Earn upto 200 FS points",
+                        " Earn upto 200 Streato points",
                         style: TextStyle(fontSize: 8),
                       )
                     ]),

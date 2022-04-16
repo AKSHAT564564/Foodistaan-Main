@@ -320,7 +320,7 @@ class RightSide extends StatelessWidget {
                         style: TextStyle(
                           color: kBlackL,
                           fontWeight: FontWeight.w700,
-                          fontSize: 14.sp,
+                          fontSize: 12.sp,
                         ),
                       ),
                       SizedBox(

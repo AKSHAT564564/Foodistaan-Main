@@ -71,15 +71,16 @@ class _PostsImageWidgetState extends State<PostsImageWidget> {
                   onTap: () {
                     imageFile == null
                         ? pickImageFrom(widget.imageSource)
-                        : Navigator.push(context,
-                            MaterialPageRoute(builder: (builder) {
-                            return PostUploadWidget();
-                          }));
-                    // : setState(() {
-                    //     var temp = Provider.of<PostsProvider>(context,
-                    //             listen: false)
-                    //         .fetchAndSetPosts();
-                    //     print(temp);
+                        // : Navigator.push(context,
+                        //     MaterialPageRoute(builder: (builder) {
+                        //     return PostUploadWidget();
+                        //   }));
+                        : setState(() {
+                            var temp = Provider.of<PostsProvider>(context,
+                                    listen: false)
+                                .fetchAndSetPosts();
+                            print(temp);
+                          });
                     // : setState(() {
                     //     var temp = Provider.of<PostsProvider>(context,
                     //             listen: false)

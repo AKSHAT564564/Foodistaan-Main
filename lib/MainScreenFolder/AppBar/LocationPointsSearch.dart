@@ -7,6 +7,7 @@ import 'package:foodistan/providers/restaurant_list_provider.dart';
 import 'package:foodistan/providers/user_location_provider.dart';
 import 'package:foodistan/restuarant_screens/restaurant_delivery.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class Location extends StatefulWidget {
   @override
@@ -52,21 +53,22 @@ class _LocationState extends State<Location> {
                         userLocationValue.userAddress!.name!,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: h1 * 0.033,
+                          fontSize: 16.sp,
                         ),
                       ),
                       Text(
                         userLocationValue.userAddress!.subLocality!,
                         style: TextStyle(
                           color: Colors.grey,
-                          fontSize: h1 * 0.03,
+                          fontSize: 16.sp,
                         ),
                       )
                     ],
                   )
                 : Text(
                     'Select Location',
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                    style:
+                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
                   );
           }),
         ],
@@ -169,7 +171,8 @@ class _SearchState extends State<Search> {
                     ),
                   ],
                   borderRadius: BorderRadius.all(Radius.circular(30)),
-                  color: Colors.white60,
+                  // color: Colors.white60,
+                  color: Colors.white,
                 ),
                 height: h1 * 0.055,
                 child: TextFormField(
@@ -189,7 +192,7 @@ class _SearchState extends State<Search> {
                       hintText: 'Search your favourite food',
                       hintStyle: TextStyle(
                         color: Colors.grey,
-                        fontSize: 15,
+                        fontSize: 10.sp,
                       ),
                       // suffixIcon: IconButton(
                       //     alignment: Alignment.center,
@@ -205,13 +208,15 @@ class _SearchState extends State<Search> {
                       //       : Colors.transparent,
                       // )),
                       suffixIcon: Padding(
-                        padding: EdgeInsets.all(0.0),
+                        padding: EdgeInsets.all(3.sp),
                         child: Container(
-                          margin: EdgeInsets.only(
-                            top: 1.5,
-                            bottom: 1.5,
-                            left: 6,
-                          ),
+                          // height: 3.h,
+                          // width: 3.h,
+                          // margin: EdgeInsets.only(
+                          //   top: 1.5,
+                          //   bottom: 1.5,
+                          //   left: 6,
+                          // ),
                           decoration: BoxDecoration(
                             color: Color(0xFFFAB84C),
                             shape: BoxShape.circle,
@@ -220,6 +225,7 @@ class _SearchState extends State<Search> {
                               ? InkWell(
                                   child: Icon(
                                     Icons.clear_rounded,
+                                    size: 16.sp,
                                     color: Colors.white,
                                   ),
                                   onTap: () {
@@ -233,6 +239,7 @@ class _SearchState extends State<Search> {
                                   Icons.search,
                                   // size: 22,
                                   // color: kGrey,
+                                  size: 16.sp,
                                   color: Colors.white,
                                 ),
                         ),
