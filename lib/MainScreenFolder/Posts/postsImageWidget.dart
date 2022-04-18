@@ -75,18 +75,26 @@ class _PostsImageWidgetState extends State<PostsImageWidget> {
                         //     MaterialPageRoute(builder: (builder) {
                         //     return PostUploadWidget();
                         //   }));
-                        : setState(() {
-                            var temp = Provider.of<PostsProvider>(context,
+                        // : setState(() {
+                        //     // var tempFile = Provider.of<PostsProvider>(context,
+                        //     //         listen: false)
+                        //     //     .fetchAndSetPosts();
+                        //     // imageFile = tempFile as File?;
+                        //     Provider.of<PostsProvider>(context, listen: false)
+                        //         .fetchAndSetPosts();
+                        //   });
+                        : setState(() async {
+                            var statusCode = await Provider.of<PostsProvider>(
+                                    context,
                                     listen: false)
-                                .fetchAndSetPosts();
-                            print(temp);
+                                .uploadPosts(imageFile!);
+                            if (statusCode == 200) {
+                              await Navigator.push(context,
+                                  MaterialPageRoute(builder: (builder) {
+                                return PostUploadWidget();
+                              }));
+                            }
                           });
-                    // : setState(() {
-                    //     var temp = Provider.of<PostsProvider>(context,
-                    //             listen: false)
-                    //         .uploadPosts(imageFile!, imageFile!.path);
-                    //     print(temp);
-                    //   });
                   },
                   child: Container(
                     width: 35.w,

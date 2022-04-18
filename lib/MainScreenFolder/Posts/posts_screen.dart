@@ -1,13 +1,14 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:foodistan/MainScreenFolder/Posts/postsImageWidget.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/providers/posts_provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class PostsScreen extends StatefulWidget {
+  static const String routeName = '/postScreen';
   const PostsScreen({Key? key}) : super(key: key);
 
   @override
@@ -44,47 +45,55 @@ class _PostsScreenState extends State<PostsScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            // MasonryGridView.builder(
-            //   gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-            //       crossAxisCount: 2),
+            MasonryGridView.builder(
+              gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2),
+              itemCount: postImages.length,
+              mainAxisSpacing: 1.h,
+              crossAxisSpacing: 1.h,
+              padding: EdgeInsets.only(bottom: 10.h),
+              itemBuilder: (context, index) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(10.sp),
+                  child: Card(
+                    // shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(20.sp)),
+                    // elevation: 0,
+                    margin: EdgeInsets.zero,
+                    child: Image(
+                      image: NetworkImage(postImages[index]),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                );
+              },
+            ),
+            // GridView.builder(
+            //   gridDelegate: SliverQuiltedGridDelegate(
+            //     crossAxisCount: 4,
+            //     mainAxisSpacing: 4,
+            //     crossAxisSpacing: 4,
+            //     repeatPattern: QuiltedGridRepeatPattern.inverted,
+            //     pattern: [
+            //       QuiltedGridTile(2, 2),
+            //       QuiltedGridTile(1, 1),
+            //       QuiltedGridTile(1, 1),
+            //       QuiltedGridTile(1, 2),
+            //     ],
+            //   ),
             //   itemCount: postImages.length,
-            //   mainAxisSpacing: 1.h,
-            //   crossAxisSpacing: 1.h,
-            //   padding: EdgeInsets.only(bottom: 10.h),
-            //   itemBuilder: (context, index) {
-            //     return Card(
+            //   itemBuilder: (context, index) => ClipRRect(
+            //     borderRadius: BorderRadius.circular(10.sp),
+            //     child: Card(
             //       // elevation: 0,
             //       margin: EdgeInsets.zero,
             //       child: Image(
             //         image: NetworkImage(postImages[index]),
             //         fit: BoxFit.fill,
             //       ),
-            //     );
-            //   },
+            //     ),
+            //   ),
             // ),
-            GridView.builder(
-              gridDelegate: SliverQuiltedGridDelegate(
-                crossAxisCount: 4,
-                mainAxisSpacing: 4,
-                crossAxisSpacing: 4,
-                repeatPattern: QuiltedGridRepeatPattern.inverted,
-                pattern: [
-                  QuiltedGridTile(2, 2),
-                  QuiltedGridTile(1, 1),
-                  QuiltedGridTile(1, 1),
-                  QuiltedGridTile(1, 2),
-                ],
-              ),
-              itemCount: postImages.length,
-              itemBuilder: (context, index) => Card(
-                // elevation: 0,
-                margin: EdgeInsets.zero,
-                child: Image(
-                  image: NetworkImage(postImages[index]),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
             Positioned(
               top: 10.h,
               right: 0.w,
@@ -132,6 +141,9 @@ class _PostsScreenState extends State<PostsScreen> {
                                         return PostsImageWidget(
                                             imageSource: ImageSource.gallery);
                                       }));
+                                      // Provider.of<PostsProvider>(context,
+                                      //         listen: false)
+                                      //     .fetchAndSetPosts();
                                     },
                                     child: Container(
                                       width: 40.w,
