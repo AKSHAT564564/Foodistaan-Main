@@ -218,7 +218,7 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
                   ],
                 ),
                 SizedBox(
-                  height: 33,
+                  height: 8.h,
                 ),
               ],
             ),

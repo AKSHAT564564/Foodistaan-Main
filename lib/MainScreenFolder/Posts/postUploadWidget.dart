@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodistan/MainScreenFolder/Posts/posts_screen.dart';
+import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/constants.dart';
 import 'package:sizer/sizer.dart';
 
@@ -223,7 +225,15 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                       width: MediaQuery.of(context).size.width * 0.4,
                       child: MaterialButton(
                         elevation: 5,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainScreen(
+                                        currentIndex: 4,
+                                      )),
+                              (route) => false);
+                        },
                         child: Text(
                           "Cancel",
                           style: TextStyle(
