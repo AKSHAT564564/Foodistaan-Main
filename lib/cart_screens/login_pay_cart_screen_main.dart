@@ -534,27 +534,31 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                   );
                                 });
                           },
-                          child: Text(
-                            'Customize',
-                            style: TextStyle(
-                              fontSize: 14.5,
-                              fontWeight: FontWeight.w300,
-                            ),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Customize',
+                                style: TextStyle(
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                              Container(
+                                  // height: 25,
+                                  // width: 25,
+                                  margin: EdgeInsets.only(left: 2),
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(247, 193, 43, 1),
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Icon(
+                                    Icons.keyboard_arrow_down_rounded,
+                                    size: 10,
+                                    color: Colors.white,
+                                  )),
+                            ],
                           ),
                         ),
-                        Container(
-                            // height: 25,
-                            // width: 25,
-                            margin: EdgeInsets.only(left: 2),
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(247, 193, 43, 1),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              size: 10,
-                              color: Colors.white,
-                            )),
                       ],
                     ),
                   ],
@@ -1465,7 +1469,6 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                             setState(() {});
                                           });
                                   }
-                                
                                 },
                                 child: Center(
                                   child: value.hasCoupon &&
