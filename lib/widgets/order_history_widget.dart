@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/functions/order_functions.dart';
 import 'package:sizer/sizer.dart';
@@ -26,9 +27,15 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
           itemCount: itemList.length,
           itemBuilder: (BuildContext context, int index) {
             var itemDetails = itemList[index];
-            return Text(itemDetails['quantity'].toString() +
-                ' X ' +
-                itemDetails['name'].toString().toUpperCase());
+            return Text(
+              itemDetails['quantity'].toString() +
+                  ' X ' +
+                  itemDetails['name'].toString().toUpperCase(),
+              style: TextStyle(
+                color: kBlackL,
+                fontSize: 12.sp,
+              ),
+            );
           });
     } else
       return Text('Some Error');
@@ -69,22 +76,23 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
         //       backgroundColor: Colors.yellow,
         //     ),
         // )
-        ? Container(height: 80.h, child: CustomLoadingSpinner())
+        // ? Container(height: 80.h, child: CustomLoadingSpinner())
+        ? Container()
         : Padding(
             padding: const EdgeInsets.all(10),
             child: Container(
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
               width: double.infinity,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey,
+                    color: kGrey,
                     spreadRadius: 0.5,
                   ),
                 ],
                 borderRadius: BorderRadius.all(
-                  Radius.circular(11),
+                  Radius.circular(8.sp),
                 ),
               ),
               child: Column(
@@ -101,17 +109,22 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                           width: MediaQuery.of(context).size.width * 0.6,
                           child: Row(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: FadeInImage(
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8.sp),
+                                child: Container(
+                                  // decoration: BoxDecoration(
+                                  //   borderRadius: BorderRadius.circular(8.sp),
+                                  // ),
+                                  child: FadeInImage(
                                     placeholder:
                                         AssetImage('assets/images/dosa.png'),
                                     image: NetworkImage(
-                                        _restaurantData['FoodImage'])),
-                                width: 75,
-                                height: 50,
+                                        _restaurantData['FoodImage']),
+                                    fit: BoxFit.fill,
+                                  ),
+                                  width: 75,
+                                  height: 50,
+                                ),
                               ),
                               const SizedBox(
                                 width: 10,
@@ -123,8 +136,9 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                   Text(
                                     _restaurantData['Name'],
                                     style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
+                                      color: kBlackL,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 12.sp,
                                     ),
                                   ),
                                   SizedBox(
@@ -133,8 +147,8 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                                   Text(
                                     _restaurantData['Address'],
                                     style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 12,
+                                      color: kGrey,
+                                      fontSize: 10.sp,
                                     ),
                                   ),
                                 ],
@@ -145,8 +159,9 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                         Text(
                           '\u{20B9} ${widget.orderData['total-bill'].toString()}',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: kBlackL,
+                            fontSize: 12.sp,
                           ),
                         ),
                       ],
@@ -177,8 +192,8 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                         Text(
                           'Items',
                           style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
+                            color: kGrey,
+                            fontSize: 12.sp,
                           ),
                         ),
                         SizedBox(
@@ -193,58 +208,60 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.07,
-                    child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Ordered On',
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                Text(
-                                  OrderFunction()
-                                      .orderTime(widget.orderData['time']),
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Status: ' +
-                                    widget.orderData['order-status']
-                                        .toString()
-                                        .toUpperCase(),
+                                'Ordered On',
                                 style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
+                                  color: kGrey,
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Text(
+                                OrderFunction()
+                                    .orderTime(widget.orderData['time']),
+                                style: TextStyle(
+                                  color: kBlackL,
+                                  fontSize: 12.sp,
                                 ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Status ',
+                              style: TextStyle(
+                                color: kGrey,
+                                fontSize: 12.sp,
+                              ),
+                            ),
+                            Text(
+                              widget.orderData['order-status']
+                                  .toString()
+                                  .toUpperCase(),
+                              style: TextStyle(
+                                color: kBlackL,
+                                fontSize: 12.sp,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
 
@@ -261,46 +278,44 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                         ),
                       ],
                     ),
-                    child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          RatingCardList(),
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                Container(
-                                  padding: EdgeInsets.all(
-                                    MediaQuery.of(context).size.width * 0.005,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Color.fromRGBO(247, 193, 43, 1),
-                                  ),
-                                  child: Icon(
-                                    Icons.refresh,
-                                    size: 15,
-                                    color: Colors.white,
-                                  ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        RatingCardList(),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width * 0.005,
                                 ),
-                                SizedBox(
-                                  width: 5,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Color.fromRGBO(247, 193, 43, 1),
                                 ),
-                                Text(
-                                  'Repeat Order',
-                                  style: TextStyle(fontSize: 12),
+                                child: Icon(
+                                  Icons.refresh,
+                                  size: 10.sp,
+                                  color: Colors.white,
                                 ),
-                                SizedBox(
-                                  width: 11,
-                                ),
-                              ],
-                            ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'Repeat Order',
+                                style:
+                                    TextStyle(fontSize: 10.sp, color: kBlackL),
+                              ),
+                              SizedBox(
+                                width: 11,
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -323,7 +338,9 @@ class _RatingCardListState extends State<RatingCardList> {
       child: Container(
         padding: EdgeInsets.all(4),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
+          border: Border.all(
+            color: kGrey,
+          ),
           borderRadius: BorderRadius.circular(5),
           color: Colors.transparent,
         ),
@@ -332,13 +349,13 @@ class _RatingCardListState extends State<RatingCardList> {
             Text(
               ratedValue.toString(),
               style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey,
+                fontSize: 12.sp,
+                color: kGrey,
               ),
             ),
             Icon(
               Icons.star,
-              size: 8,
+              size: 8.sp,
               color: Colors.grey,
             )
           ],
@@ -346,7 +363,7 @@ class _RatingCardListState extends State<RatingCardList> {
       ),
       onTap: () {
         setState(() {
-          rateValue = '1';
+          rateValue = ratedValue.toString();
         });
       },
     );
@@ -369,7 +386,7 @@ class _RatingCardListState extends State<RatingCardList> {
                 Text(
                   'Rate',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 10.sp,
                     color: Color.fromRGBO(240, 54, 54, 1),
                   ),
                 ),
@@ -393,9 +410,6 @@ class _RatingCardListState extends State<RatingCardList> {
                   width: 4,
                 ),
                 ratingPointWidget(5),
-                SizedBox(
-                  width: 10,
-                )
               ],
             ),
           )
@@ -407,22 +421,20 @@ class _RatingCardListState extends State<RatingCardList> {
                 ),
                 Text(
                   'You Rated',
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(
+                    fontSize: 10.sp,
+                    color: kBlackL,
+                  ),
                 ),
                 SizedBox(
                   width: 5,
                 ),
                 Container(
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width * 0.011,
-                    bottom: MediaQuery.of(context).size.width * 0.011,
-                    left: MediaQuery.of(context).size.width * 0.005,
-                    right: MediaQuery.of(context).size.width * 0.005,
-                  ),
+                  padding: EdgeInsets.all(4),
                   // height: 20,
-                  width: MediaQuery.of(context).size.width * 0.11,
+                  // width: MediaQuery.of(context).size.width * 0.11,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(5),
                     color: Color.fromRGBO(247, 193, 43, 1),
                   ),
                   child: Row(
@@ -432,13 +444,13 @@ class _RatingCardListState extends State<RatingCardList> {
                       Text(
                         rateValue,
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 12.sp,
                           color: Colors.white,
                         ),
                       ),
                       Icon(
                         Icons.star,
-                        size: 14,
+                        size: 8.sp,
                         color: Colors.white,
                       ),
                     ],

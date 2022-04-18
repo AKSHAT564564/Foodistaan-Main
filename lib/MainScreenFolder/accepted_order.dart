@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/sizeConfig.dart';
+import 'package:sizer/sizer.dart';
 
 class AcceptedOrder extends StatefulWidget {
   var orderData;
@@ -39,9 +40,31 @@ class _AcceptedOrderState extends State<AcceptedOrder> {
           scrollDirection: Axis.vertical,
           itemBuilder: (BuildContext context, int index) {
             var itemDetails = itemList[index];
-            return Text(itemDetails['quantity'].toString() +
-                ' X ' +
-                itemDetails['name'].toString().toUpperCase());
+            return Container(
+              child: Row(
+                children: [
+                  // Container(
+                  //     // margin: EdgeInsets.only(top: 5),
+                  //     width: 7,
+                  //     height: 7,
+                  //     child: Image.asset(
+                  //       itemDetails['veg']
+                  //           ? 'assets/images/red_sign.png'
+                  //           : 'assets/images/green_sign.png',
+                  //       fit: BoxFit.cover,
+                  //     )),
+
+                  SizedBox(
+                    width: 2.h,
+                  ),
+                  // Text(itemDetails['quantity'].toString() +
+                  //     ' X ' +
+                  //     itemDetails['name'].toString().toUpperCase()),
+                  Text(
+                      '${itemDetails['name'].toString().toUpperCase()} (${itemDetails['quantity'].toString()} pc)')
+                ],
+              ),
+            );
           });
     } else
       return Text('Some Error');
@@ -61,30 +84,31 @@ class _AcceptedOrderState extends State<AcceptedOrder> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey.shade100,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text(
-            'Order Status',
-          ),
-          elevation: 0,
-          titleSpacing: 0,
-          leadingWidth: 40,
-          titleTextStyle: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, 'H');
-            },
-            child: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
+    return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+      appBar: AppBar(
+        toolbarHeight: 7.h,
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Order Status',
+        ),
+        elevation: 0,
+        titleSpacing: 0,
+        leadingWidth: 40,
+        titleTextStyle: TextStyle(
+            color: kBlackL, fontWeight: FontWeight.w600, fontSize: 20),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, 'H');
+          },
+          child: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: kBlackL,
           ),
         ),
-        body: SingleChildScrollView(
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -398,10 +422,10 @@ class _AcceptedOrderState extends State<AcceptedOrder> {
                 width: double.infinity,
                 color: kGreen,
                 child: Center(
-                  child: Stack(
+                  child: Row(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: const [
                           SizedBox(
@@ -424,6 +448,7 @@ class _AcceptedOrderState extends State<AcceptedOrder> {
                           ),
                         ],
                       ),
+                      Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -497,31 +522,34 @@ class _AcceptedOrderState extends State<AcceptedOrder> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(
-                                    width: 11,
-                                  ),
+                                  // Container(
+                                  //     margin: EdgeInsets.only(top: 5),
+                                  //     width: 7,
+                                  //     height: 7,
+                                  //     child: Image.asset(
+                                  //       'assets/images/green_sign.png',
+                                  //       fit: BoxFit.cover,
+                                  //     )),
                                   Container(
-                                      margin: EdgeInsets.only(top: 5),
-                                      width: 7,
-                                      height: 7,
-                                      child: Image.asset(
-                                        'assets/images/green_sign.png',
-                                        fit: BoxFit.cover,
+                                      width: 90.w,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                              flex: 6,
+                                              child: itemsList(
+                                                  widget.orderData['items'])),
+                                          Spacer(),
+                                          Text(
+                                            '₹ ${widget.orderData['total-bill']}',
+                                            style: TextStyle(
+                                                color: kBlackL,
+                                                fontSize: 12.sp),
+                                          ),
+                                        ],
                                       )),
-                                  SizedBox(
-                                    width: 11,
-                                  ),
-                                  SizedBox(
-                                      width: SizeConfig.screenWidth * 0.9,
-                                      child:
-                                          itemsList(widget.orderData['items'])),
                                 ],
-                              ),
-                              Text(
-                                '₹ 150',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                ),
                               ),
                             ],
                           ),

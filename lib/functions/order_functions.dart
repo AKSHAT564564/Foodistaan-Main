@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/accepted_order.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/profile/your_orders.dart';
 import 'package:foodistan/widgets/order_history_widget.dart';
+import 'package:sizer/sizer.dart';
 
 class OrderFunction {
   final _firestore = FirebaseFirestore.instance;
@@ -81,7 +83,9 @@ class OrderFunction {
             case ConnectionState.none:
             case ConnectionState.waiting:
               return Center(
-                child: Text('Fetching Orders'),
+                // child: Text('Fetching Orders'),
+                child: Container(
+                    height: 15.h, width: 15.h, child: CustomLoadingSpinner()),
               );
             default:
               if (snapshot.hasData) {
@@ -92,7 +96,7 @@ class OrderFunction {
                 else {
                   return ListView.builder(
                       physics: ScrollPhysics(),
-                      scrollDirection: Axis.vertical,
+                      // scrollDirection: Axis.vertical,
                       controller: _controller,
                       shrinkWrap: true,
                       itemCount: snapshot.data!.docs.length,

@@ -181,7 +181,7 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: h1 / 33,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -205,8 +205,8 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
                         'Restaurants near you',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 16.5.sp,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),

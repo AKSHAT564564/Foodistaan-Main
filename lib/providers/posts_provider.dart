@@ -21,10 +21,16 @@ class PostsProvider with ChangeNotifier {
       //   // print(value);
       //    value;
       // });
-      final respStr = await response.stream.bytesToString();
-      // // print(await response.stream.bytesToString());
+      // print(response.contentLength);
+      // print(response.stream.listen((value) {
+      //   print(value);
+      // }));
+      print(response.headers);
+      print(response.stream.bytesToString());
+      // final respStr = await response.stream.bytesToString();
+      // print(await response.stream.bytesToString());
 
-      return respStr;
+      // return respStr;
     } else {
       print(response.reasonPhrase);
     }
@@ -36,7 +42,7 @@ class PostsProvider with ChangeNotifier {
         'PUT',
         Uri.parse(
             'https://gsmf1yi8o2.execute-api.us-east-1.amazonaws.com/postlist/s3?key=postlistbucket/${path.split('/').last}'));
-    request.body = r'<file contents here>';
+    request.body = file.readAsBytes().toString();
 
     request.headers.addAll(headers);
 
