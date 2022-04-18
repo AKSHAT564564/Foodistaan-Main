@@ -136,14 +136,14 @@ class _PostsScreenState extends State<PostsScreen> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      // Navigator.push(context,
-                                      //     MaterialPageRoute(builder: (builder) {
-                                      //   return PostsImageWidget(
-                                      //       imageSource: ImageSource.gallery);
-                                      // }));
-                                      Provider.of<PostsProvider>(context,
-                                              listen: false)
-                                          .fetchAndSetPosts();
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (builder) {
+                                        return PostsImageWidget(
+                                            imageSource: ImageSource.gallery);
+                                      }));
+                                      // Provider.of<PostsProvider>(context,
+                                      //         listen: false)
+                                      //     .fetchAndSetPosts();
                                     },
                                     child: Container(
                                       width: 40.w,
