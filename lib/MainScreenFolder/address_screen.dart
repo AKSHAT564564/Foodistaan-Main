@@ -13,6 +13,7 @@ import 'package:foodistan/providers/user_address_provider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:foodistan/global/global_variables.dart';
+import 'package:sizer/sizer.dart';
 
 class AddressScreen extends StatefulWidget {
   const AddressScreen({Key? key}) : super(key: key);
@@ -252,7 +253,7 @@ class _AddressScreenState extends State<AddressScreen> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadiusDirectional.circular(5),
+                          borderRadius: BorderRadius.circular(10.sp),
                         ),
                         child: Center(
                           child: Padding(
@@ -287,7 +288,7 @@ class _AddressScreenState extends State<AddressScreen> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadiusDirectional.circular(5),
+                          borderRadius: BorderRadius.circular(10.sp),
                         ),
                         child: Center(
                           child: Padding(
@@ -340,7 +341,7 @@ class _AddressScreenState extends State<AddressScreen> {
                           color: Theme.of(context).primaryColor,
                           width: 1,
                         ),
-                        borderRadius: BorderRadiusDirectional.circular(5),
+                        borderRadius: BorderRadius.circular(10.sp),
                       ),
                       child: Center(
                         child: Column(
@@ -389,7 +390,7 @@ class _AddressScreenState extends State<AddressScreen> {
                           color: Theme.of(context).primaryColor,
                           width: 1,
                         ),
-                        borderRadius: BorderRadiusDirectional.circular(5),
+                        borderRadius: BorderRadius.circular(10.sp),
                       ),
                       child: Center(
                         child: Column(
@@ -438,7 +439,7 @@ class _AddressScreenState extends State<AddressScreen> {
                           color: Theme.of(context).primaryColor,
                           width: 1,
                         ),
-                        borderRadius: BorderRadiusDirectional.circular(5),
+                        borderRadius: BorderRadius.circular(10.sp),
                       ),
                       child: Center(
                         child: Column(
@@ -503,7 +504,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       border: Border.all(
                         color: Theme.of(context).primaryColor,
                       ),
-                      borderRadius: BorderRadiusDirectional.circular(5),
+                      borderRadius: BorderRadius.circular(10.sp),
                     ),
                     child: Center(
                       child: Text(

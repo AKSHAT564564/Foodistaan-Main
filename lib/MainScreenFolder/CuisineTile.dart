@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodistan/constants.dart';
+import 'package:sizer/sizer.dart';
 
 class CuisineTileList extends StatelessWidget {
   List CuisineTiles = [
@@ -105,7 +106,7 @@ class Cuisines extends StatelessWidget {
         // color: BgColor,
         color: kGreyLight,
 
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10.sp),
       ),
       child: Column(
         children: [
@@ -114,7 +115,7 @@ class Cuisines extends StatelessWidget {
             height: h1 / 9.5,
             decoration: BoxDecoration(
               // color: BgColor,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(10.sp),
               border: Border.all(
                 // color: BorderColor, // red as border color
                 // color: kYellow,

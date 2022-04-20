@@ -77,31 +77,31 @@ class _BookmarksState extends State<Bookmarks> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text(
-            'Bookmarks',
-          ),
-          elevation: 0,
-          titleSpacing: 0,
-          leadingWidth: 40,
-          titleTextStyle: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-              size: 25,
-            ),
+        title: const Text(
+          'Bookmarks',
+        ),
+        elevation: 0,
+        titleSpacing: 0,
+        leadingWidth: 40,
+        titleTextStyle: TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+            size: 25,
           ),
         ),
-        body: SingleChildScrollView(
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

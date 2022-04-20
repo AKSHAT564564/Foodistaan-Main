@@ -212,7 +212,7 @@ class _UserDetailState extends State<UserDetail> {
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(30),
+                                Radius.circular(10.sp),
                               ),
                             ),
                           ),

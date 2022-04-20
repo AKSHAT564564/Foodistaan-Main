@@ -161,19 +161,19 @@ class _SearchState extends State<Search> {
               padding: EdgeInsets.only(left: 12, right: 8),
               child: Container(
                 decoration: BoxDecoration(
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      // color: Colors.transparent,
-                      // spreadRadius: 10,
-                      blurRadius: 5,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  // color: Colors.white60,
-                  color: Colors.white,
-                ),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        // color: Colors.transparent,
+                        // spreadRadius: 10,
+                        blurRadius: 5,
+                        offset: Offset(0, 5),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    // color: Colors.white60,
+                    color: Colors.white,
+                    border: Border.all(width: 1, color: kGreyOf)),
                 height: h1 * 0.055,
                 child: TextFormField(
                   controller: _searchController,
@@ -218,15 +218,17 @@ class _SearchState extends State<Search> {
                           //   left: 6,
                           // ),
                           decoration: BoxDecoration(
-                            color: Color(0xFFFAB84C),
+                            // color: Color(0xFFFAB84C),
+                            color: Colors.transparent,
                             shape: BoxShape.circle,
                           ),
                           child: _searchController.text.isNotEmpty
                               ? InkWell(
                                   child: Icon(
                                     Icons.clear_rounded,
-                                    size: 16.sp,
-                                    color: Colors.white,
+                                    size: 18.sp,
+                                    // color: Colors.white,
+                                    color: kYellow,
                                   ),
                                   onTap: () {
                                     _searchController.text = '';
@@ -239,8 +241,9 @@ class _SearchState extends State<Search> {
                                   Icons.search,
                                   // size: 22,
                                   // color: kGrey,
-                                  size: 16.sp,
-                                  color: Colors.white,
+                                  size: 18.sp,
+                                  color: kYellow,
+                                  // color: Colors.white,
                                 ),
                         ),
                       ),

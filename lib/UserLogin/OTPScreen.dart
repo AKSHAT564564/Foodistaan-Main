@@ -9,9 +9,11 @@ import 'package:foodistan/constants.dart';
 import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/functions/cart_functions.dart';
 import 'package:foodistan/UserLogin/user_detail_form.dart';
+import 'package:lottie/lottie.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:sizer/sizer.dart';
 
 class OTPScreen extends StatefulWidget {
   String phone;
@@ -158,12 +160,48 @@ class _OTPScreenState extends State<OTPScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              'Images/otpimage.svg',
-              height: MediaQuery.of(context).size.width * 0.33,
+            // Center(
+            //   child: Lottie.network(
+            //       "https://assets8.lottiefiles.com/packages/lf20_xxjvkrex.json",
+            //       animate: true),
+            // ),
+            // Center(
+            //   child: Lottie.network(
+            //       "https://assets7.lottiefiles.com/packages/lf20_lzqsu2yd.json",
+            //       animate: true),
+            // ),
+            // Center(
+            //   child: Lottie.network(
+            //       "https://assets2.lottiefiles.com/packages/lf20_gysrp57x.json",
+            //       animate: true),
+            // ),
+            // Container(
+            //   height: 35.h,
+            //   child: Lottie.network(
+            //       "https://assets7.lottiefiles.com/private_files/lf30_t6fy5r4g.json",
+            //       animate: true,
+            //       fit: BoxFit.fill),
+            // ),
+            // Container(
+            //   height: 30.h,
+            //   child: Lottie.network(
+            //       "https://assets2.lottiefiles.com/packages/lf20_gysrp57x.json",
+            //       animate: true,
+            //       fit: BoxFit.fill),
+            // ),
+            Container(
+              height: 25.h,
+              child: Lottie.network(
+                  "https://assets5.lottiefiles.com/packages/lf20_a6srtvrp.json",
+                  animate: true,
+                  fit: BoxFit.fill),
             ),
+            // SvgPicture.asset(
+            //   'Images/otpimage.svg',
+            //   height: MediaQuery.of(context).size.width * 0.33,
+            // ),
             SizedBox(
-              height: 15,
+              height: 2.5.h,
             ),
             Text(
               "OTP Sent to ${widget.phone}",
@@ -173,7 +211,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   fontSize: MediaQuery.of(context).size.width * 0.05),
             ),
             SizedBox(
-              height: 30,
+              height: 5.h,
             ),
             Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30),

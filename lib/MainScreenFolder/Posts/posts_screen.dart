@@ -147,7 +147,7 @@ class _PostsScreenState extends State<PostsScreen> {
                                     },
                                     child: Container(
                                       width: 40.w,
-                                      height: 15.h,
+                                      height: 14.h,
                                       padding: EdgeInsets.all(1.5.h),
                                       decoration: BoxDecoration(
                                           color: Colors.white,
@@ -187,7 +187,7 @@ class _PostsScreenState extends State<PostsScreen> {
                                     },
                                     child: Container(
                                       width: 40.w,
-                                      height: 15.h,
+                                      height: 14.h,
                                       padding: EdgeInsets.all(1.5.h),
                                       decoration: BoxDecoration(
                                           color: Colors.white,
@@ -225,13 +225,13 @@ class _PostsScreenState extends State<PostsScreen> {
                       });
                 }),
                 child: Container(
-                  width: 28.w,
+                  width: 26.w,
                   height: 7.h,
                   decoration: BoxDecoration(
                     color: kYellow,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.sp),
-                      bottomLeft: Radius.circular(20.sp),
+                      topLeft: Radius.circular(10.sp),
+                      bottomLeft: Radius.circular(10.sp),
                     ),
                   ),
                   child: Row(

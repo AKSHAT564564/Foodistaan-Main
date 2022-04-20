@@ -102,7 +102,7 @@ class _PostsImageWidgetState extends State<PostsImageWidget> {
                     decoration: BoxDecoration(
                       color: imageFile == null ? kRed : kYellow,
                       borderRadius: BorderRadius.all(
-                        Radius.circular(20.sp),
+                        Radius.circular(10.sp),
                       ),
                     ),
                     child: Row(

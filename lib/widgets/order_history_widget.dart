@@ -269,52 +269,59 @@ class _OrderHistoryWidgetState extends State<OrderHistoryWidget> {
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 0.05,
                     decoration: BoxDecoration(
-                      color: const Color.fromRGBO(255, 252, 222, 1),
+                      // color: const Color.fromRGBO(255, 252, 222, 1),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(11),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color.fromRGBO(223, 195, 11, 1),
-                          spreadRadius: 1,
-                        ),
-                      ],
+                      // boxShadow: const [
+                      //   BoxShadow(
+                      //       // color: Color.fromRGBO(223, 195, 11, 1),
+                      //       // // color:Colors.transparent,
+                      //       // spreadRadius: 1,
+
+                      //       ),
+                      // ],
+                      border: Border.all(
+                        width: 1,
+                        color: kYellow,
+                      ),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         RatingCardList(),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Container(
-                                padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.width * 0.005,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Color.fromRGBO(247, 193, 43, 1),
-                                ),
-                                child: Icon(
-                                  Icons.refresh,
-                                  size: 10.sp,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                'Repeat Order',
-                                style:
-                                    TextStyle(fontSize: 10.sp, color: kBlackL),
-                              ),
-                              SizedBox(
-                                width: 11,
-                              ),
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.end,
+                        //     children: <Widget>[
+                        //       Container(
+                        //         padding: EdgeInsets.all(
+                        //           MediaQuery.of(context).size.width * 0.005,
+                        //         ),
+                        //         decoration: BoxDecoration(
+                        //           borderRadius: BorderRadius.circular(50),
+                        //           color: Color.fromRGBO(247, 193, 43, 1),
+                        //         ),
+                        //         child: Icon(
+                        //           Icons.refresh,
+                        //           size: 10.sp,
+                        //           color: Colors.white,
+                        //         ),
+                        //       ),
+                        //       SizedBox(
+                        //         width: 5,
+                        //       ),
+                        //       Text(
+                        //         'Repeat Order',
+                        //         style:
+                        //             TextStyle(fontSize: 10.sp, color: kBlackL),
+                        //       ),
+                        //       SizedBox(
+                        //         width: 11,
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

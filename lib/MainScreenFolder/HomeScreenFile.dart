@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
@@ -95,65 +96,61 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
 
     return CustomScrollView(
       slivers: <Widget>[
-        PreferredSize(
-          preferredSize: Size.fromHeight(h1 * 0.085),
-          child: SliverAppBar(
-            // titleSpacing: 0,
-            elevation: 0,
-            backgroundColor: Colors.white,
-            leadingWidth: 0,
-            toolbarHeight: 0, expandedHeight: 10,
-            bottom: PreferredSize(
-              preferredSize:
-                  Size.fromHeight(h1 * 0.085), // here the desired height
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 15,
-                      ),
-                      child: Container(
-                        height: h1 / 25,
-                        width: w1,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                                flex: 3,
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    //modal bottom sheet for select location option on top left of the mains screen
-                                    //basicaly shows a pop-up for selecting user location
-                                    showBarModalBottomSheet(
-                                        duration: Duration(milliseconds: 300),
-                                        bounce: true,
-                                        backgroundColor: Colors.black,
-                                        context: context,
-                                        builder: (context) => Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.7,
-                                            child: LocationBottomSheetWidget(
-                                              //user is not adding a new address from the cart
-                                              //hence will ask user to only select the location
-                                              //if set true will ask the user to add address after confirm location screen
-                                              isAddingAddress: false,
-                                            )));
-                                  },
-                                  child: Location(), // Top Left Widget
-                                )),
-                            Expanded(flex: 1, child: Points()),
-                          ],
-                        ),
+        SliverAppBar(
+          // titleSpacing: 0,
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leadingWidth: 0,
+          toolbarHeight: 0, expandedHeight: 10,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(6.5.h), // here the desired height
+            child: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 1.h,
+                      horizontal: 15,
+                    ),
+                    child: Container(
+                      height: h1 / 25,
+                      width: w1,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                              flex: 3,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  //modal bottom sheet for select location option on top left of the mains screen
+                                  //basicaly shows a pop-up for selecting user location
+                                  showBarModalBottomSheet(
+                                      duration: Duration(milliseconds: 300),
+                                      bounce: true,
+                                      backgroundColor: Colors.black,
+                                      context: context,
+                                      builder: (context) => Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.7,
+                                          child: LocationBottomSheetWidget(
+                                            //user is not adding a new address from the cart
+                                            //hence will ask user to only select the location
+                                            //if set true will ask the user to add address after confirm location screen
+                                            isAddingAddress: false,
+                                          )));
+                                },
+                                child: Location(), // Top Left Widget
+                              )),
+                          Expanded(flex: 1, child: Points()),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -167,6 +164,31 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
           sliver: SliverList(
             delegate: SliverChildListDelegate(
               [
+                Container(
+                  height: 20.h,
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                      enableInfiniteScroll: true,
+                      autoPlay: true,
+                      initialPage: 1,
+                      reverse: false,
+                    ),
+                    items: [
+                      Image.asset(
+                        'Images/offerbanner.png',
+                        width: double.infinity,
+                      ),
+                      Image.asset(
+                        'Images/offerbanner.png',
+                        width: double.infinity,
+                      ),
+                      Image.asset(
+                        'Images/offerbanner.png',
+                        width: double.infinity,
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -189,7 +211,7 @@ class _CustomHomeScreenState extends State<CustomHomeScreen>
                   ],
                 ),
                 CuisineTileList(),
-                MinutesDelivery(),
+                // MinutesDelivery(),
                 //search widget moved down here
 
                 //builds the list of all the in the database
