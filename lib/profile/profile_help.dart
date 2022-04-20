@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:foodistan/constants.dart';
+import 'package:sizer/sizer.dart';
 
 class Help extends StatelessWidget {
   const Help({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -29,7 +30,9 @@ class Help extends StatelessWidget {
           ),
         ),
       ),
-      body: HelpDeskScreen(),
+      body: SafeArea(
+        child: HelpDeskScreen(),
+      ),
       //  Column(
       //   mainAxisAlignment: MainAxisAlignment.end,
       //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,7 +102,7 @@ class Help extends StatelessWidget {
       //     ),
       //   ],
       // ),
-    ));
+    );
   }
 }
 
@@ -157,7 +160,7 @@ class _HelpDeskScreenState extends State<HelpDeskScreen> {
                 padding: EdgeInsets.only(left: 10, right: 10),
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(0, 0, 0, 0.06),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextFormField(
                   keyboardType: TextInputType.multiline,
@@ -201,8 +204,9 @@ class _HelpDeskScreenState extends State<HelpDeskScreen> {
                       width: double.infinity,
                       margin: EdgeInsets.only(left: 55, right: 55, top: 10),
                       decoration: BoxDecoration(
-                        color: Color.fromRGBO(250, 184, 76, 1),
-                        borderRadius: BorderRadius.circular(8),
+                        // color: Color.fromRGBO(250, 184, 76, 1),
+                        color: kYellow,
+                        borderRadius: BorderRadius.circular(10.sp),
                       ),
                       child: const Text(
                         'Submit',

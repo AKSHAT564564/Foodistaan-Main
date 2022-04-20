@@ -216,8 +216,9 @@ class OrderFunction {
                                         width: 33,
                                         decoration: BoxDecoration(
                                           color: Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
+                                          shape: BoxShape.circle,
+                                          // borderRadius:
+                                          //     BorderRadius.circular(15),
                                           border: Border.all(
                                             color: Color(0xffFAC05E),
                                             width: 1,
@@ -272,7 +273,7 @@ class OrderFunction {
                                     Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: Container(
-                                        padding: EdgeInsets.all(10),
+                                        padding: EdgeInsets.all(8),
                                         // height:
                                         //     MediaQuery.of(context).size.height *
                                         //         0.05,
@@ -282,7 +283,7 @@ class OrderFunction {
                                         decoration: BoxDecoration(
                                           color: Colors.blue,
                                           borderRadius:
-                                              BorderRadius.circular(5),
+                                              BorderRadius.circular(5.sp),
                                         ),
                                         child: Center(
                                           child: onlyOneOrder

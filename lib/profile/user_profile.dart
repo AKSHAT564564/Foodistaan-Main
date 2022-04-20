@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/profile/settings.dart';
+import 'package:sizer/sizer.dart';
 import 'profile_bookmarks.dart';
 import 'payment_methods.dart';
 import 'profile_address.dart';
@@ -96,7 +98,7 @@ class _UserProfileState extends State<UserProfile>
                           child: Text(
                             items["name"],
                             style: const TextStyle(
-                              color: Colors.black,
+                              color: kBlack,
                               fontSize: 23,
                             ),
                           ),
@@ -107,11 +109,12 @@ class _UserProfileState extends State<UserProfile>
                         Container(
                           height: 60,
                           width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: Color.fromRGBO(255, 206, 69, 0.66),
+                          decoration: BoxDecoration(
+                            color: kYellow,
                             borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(22),
-                              bottomLeft: Radius.circular(22),
+                              topRight: Radius.circular(20.sp),
+                              // bottomRight: Radius.circular(10.sp),
+                              bottomLeft: Radius.circular(20.sp),
                             ),
                           ),
                           child: Row(
@@ -131,7 +134,7 @@ class _UserProfileState extends State<UserProfile>
                                   Text(
                                     items["email"],
                                     style: const TextStyle(
-                                      color: Colors.grey,
+                                      color: Colors.white,
                                     ),
                                   ),
                                   const SizedBox(
@@ -140,7 +143,7 @@ class _UserProfileState extends State<UserProfile>
                                   Text(
                                     items["number"],
                                     style: const TextStyle(
-                                      color: Colors.grey,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ],

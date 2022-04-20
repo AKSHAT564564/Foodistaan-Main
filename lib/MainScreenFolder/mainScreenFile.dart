@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/Posts/posts_screen.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
+import 'package:foodistan/constants.dart';
 import 'package:foodistan/functions/order_functions.dart';
 import 'package:foodistan/profile/user_profile.dart';
 import 'package:foodistan/providers/user_data_provider.dart';
@@ -69,7 +70,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     //building context for SizeConfig
     SizeConfig().init(context);
-    final Color selected = Color.fromRGBO(247, 193, 43, 1);
+    final Color selected = kYellow;
     final Color unselected = Colors.grey;
     return Scaffold(
       bottomNavigationBar: SizedBox(

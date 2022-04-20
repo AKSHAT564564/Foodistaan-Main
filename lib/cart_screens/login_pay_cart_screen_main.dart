@@ -77,9 +77,7 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(7),
-                          ),
+                          borderRadius: BorderRadius.circular(10.sp),
                         ),
                       ),
                     ),
@@ -116,7 +114,7 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
                             color: Colors.yellow.shade700,
                             width: 1.5,
                           ),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10.sp),
                         ),
                         child: Center(
                           child: Text(
@@ -177,7 +175,7 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
                               color: Colors.yellow.shade700,
                               width: 1.5,
                             ),
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(10.sp),
                           ),
                           child: Center(
                             child: Text(
@@ -240,7 +238,7 @@ class _CartScreenMainLoginState extends State<CartScreenMainLogin>
                             color: Colors.yellow.shade700,
                             width: 1.5,
                           ),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10.sp),
                         ),
                         child: Center(
                           child: Text(
@@ -363,7 +361,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(11),
+        borderRadius: BorderRadius.circular(10.sp),
       ),
       child: Center(
         child: Stack(
@@ -579,7 +577,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                         border: Border.all(
                           color: Color.fromRGBO(247, 193, 43, 1),
                         ),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(10.sp),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -668,7 +666,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
         // color: Colors.white,
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(10.sp),
       ),
       child: Center(
         child: Container(
@@ -888,7 +886,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
-                                                BorderRadius.circular(8),
+                                                BorderRadius.circular(10.sp),
                                           ),
                                           child: Row(
                                             mainAxisAlignment:
@@ -1394,7 +1392,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
                               color: Colors.yellow.shade700,
                               width: 1.5,
                             ),
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(10.sp),
                           ),
                           child: Consumer<UserLocationProvider>(
                               builder: (_, userLocationValue, __) {

@@ -5,28 +5,28 @@ class Pro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.grey.shade100,
-          elevation: 0,
-          titleSpacing: 0,
-          leadingWidth: 40,
-          titleTextStyle: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-              size: 25,
-            ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.grey.shade100,
+        elevation: 0,
+        titleSpacing: 0,
+        leadingWidth: 40,
+        titleTextStyle: TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+            size: 25,
           ),
         ),
-        body: Column(
+      ),
+      body: SafeArea(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -91,7 +91,7 @@ class Pro extends StatelessWidget {
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Color.fromRGBO(38, 50, 56, 1),
-                  borderRadius: BorderRadius.all(Radius.circular(11)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

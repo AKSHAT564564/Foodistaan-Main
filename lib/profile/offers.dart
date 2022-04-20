@@ -11,31 +11,31 @@ class Offers extends StatefulWidget {
 class _OffersState extends State<Offers> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text(
-            'Offers & Deals of the Day',
-          ),
-          elevation: 0,
-          titleSpacing: 0,
-          leadingWidth: 40,
-          titleTextStyle: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-              size: 25,
-            ),
+        title: const Text(
+          'Offers & Deals of the Day',
+        ),
+        elevation: 0,
+        titleSpacing: 0,
+        leadingWidth: 40,
+        titleTextStyle: TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+            size: 25,
           ),
         ),
-        body: Column(
+      ),
+      body: SafeArea(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

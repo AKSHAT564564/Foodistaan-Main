@@ -142,7 +142,7 @@ class _ListedTileState extends State<ListedTile> {
               blurRadius: 3,
             ),
           ],
-          borderRadius: BorderRadius.circular(11),
+          borderRadius: BorderRadius.circular(10.sp),
         ),
         child: Center(
           child: Column(
@@ -208,11 +208,13 @@ class LeftSide extends StatelessWidget {
           height: 20.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(11), topRight: Radius.circular(11)),
+                topLeft: Radius.circular(10.sp),
+                topRight: Radius.circular(10.sp)),
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(11), topRight: Radius.circular(11)),
+                topLeft: Radius.circular(10.sp),
+                topRight: Radius.circular(10.sp)),
             child: CachedNetworkImage(
               fit: BoxFit.fill,
               imageUrl: foodImage,

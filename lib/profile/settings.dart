@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodistan/UserLogin/LoginScreen.dart';
+import 'package:foodistan/constants.dart';
 
 class ProfileSettings extends StatelessWidget {
   const ProfileSettings({Key? key}) : super(key: key);
@@ -56,7 +57,7 @@ class ProfileSettings extends StatelessWidget {
                       SizedBox(
                         width: 22,
                       ),
-                      Text('Add a Place'),
+                      Text('Add a place'),
                     ],
                   ),
                 ),
@@ -64,10 +65,10 @@ class ProfileSettings extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 11),
                 child: Divider(
-                  color: Colors.grey,
+                  color: Colors.grey.shade200,
                 ),
               ),
               const SizedBox(
@@ -99,10 +100,10 @@ class ProfileSettings extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 11),
                 child: Divider(
-                  color: Colors.grey,
+                  color: Colors.grey.shade200,
                 ),
               ),
               const SizedBox(
@@ -133,10 +134,10 @@ class ProfileSettings extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 11),
                 child: Divider(
-                  color: Colors.grey,
+                  color: Colors.grey.shade200,
                 ),
               ),
               // const SizedBox(
@@ -206,10 +207,10 @@ class ProfileSettings extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 11),
                 child: Divider(
-                  color: Colors.grey,
+                  color: Colors.grey.shade200,
                 ),
               ),
               const SizedBox(
@@ -256,7 +257,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             );
           },
         ),
-        title: Text('Add a Place'),
+        title: Text('Add a place'),
         titleTextStyle: TextStyle(
             color: Colors.black, fontWeight: FontWeight.w600, fontSize: 20),
       ),
@@ -281,7 +282,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                 child: TextFormField(
                   maxLines: 2,
                   decoration: const InputDecoration(
-                    hintText: 'Name 0f the place',
+                    hintText: 'Name of the place',
                     hintStyle: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -388,8 +389,9 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       width: double.infinity,
                       margin: EdgeInsets.only(left: 55, right: 55, top: 40),
                       decoration: BoxDecoration(
-                        color: Color.fromRGBO(250, 184, 76, 1),
-                        borderRadius: BorderRadius.circular(8),
+                        // color: Color.fromRGBO(250, 184, 76, 1),
+                        color: kYellow,
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Text(
                         'Submit for review',

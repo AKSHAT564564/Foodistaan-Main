@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
@@ -24,8 +25,7 @@ class PostsProvider with ChangeNotifier {
     var request = http.Request(
         'GET',
         Uri.parse(
-            'https://gsmf1yi8o2.execute-api.us-east-1.amazonaws.com/postlist/s3?key=postlistbucket/image_picker4254202086462698876.jpg'));
-    // request.body = r'<file contents here>';
+            'https://gsmf1yi8o2.execute-api.us-east-1.amazonaws.com/postlist/s3?key=postlistbucket/Empty Cart.jpeg'));
 
     request.headers.addAll(headers);
 
@@ -35,31 +35,17 @@ class PostsProvider with ChangeNotifier {
       Directory tempDir = await getTemporaryDirectory();
       String tempPath = tempDir.path;
       var filePath = tempPath +
-          '/file_01.tmp'; // file_01.tmp is dump file, can be anything
+          '/${request.url.query.split('/').last}'; // file_01.tmp is dump file, can be anything
+      // print('${filePath}');
+      var streamString = await http.Response.fromStream(response);
 
-      final decodedBytes = base64Decode(response.stream.toString());
-      File(filePath).writeAsBytesSync(decodedBytes);
-      // final file = File(filePath);
-      // var decode = base64Decode(response.stream.toString());
-      // // file.open();
-      // file.writeAsBytesSync(decode);
-      // final file = File(filePath);
-      // // var decode = base64Decode(response.stream.toString());
-      // // file.open();
-      // var len = await response.stream.length;
-      // print(len);
-      // file.writeAsBytesSync(utf8.encode(response.stream.toString()));
+      // final decodedBytes = base64Encode(streamString.bodyBytes);
+      // log(decodedBytes);
+      // log(streamString.bodyBytes.toString());
+      final file = File(filePath);
+      file.writeAsBytesSync(streamString.bodyBytes);
 
-      // print(response.reasonPhrase);
-      // print(response.headers);
-      // print(file.path.toString());
-
-      // return imageFile;
-
-      // var length = await file.length();
-      // print(length);
-      print(filePath);
-      return filePath;
+      return file;
     } else {
       print(response.reasonPhrase);
     }
