@@ -84,16 +84,11 @@ class _PostsImageWidgetState extends State<PostsImageWidget> {
                         //         .fetchAndSetPosts();
                         //   });
                         : setState(() async {
-                            var statusCode = await Provider.of<PostsProvider>(
-                                    context,
-                                    listen: false)
-                                .uploadPosts(imageFile!);
-                            if (statusCode == 200) {
-                              await Navigator.push(context,
-                                  MaterialPageRoute(builder: (builder) {
-                                return PostUploadWidget();
-                              }));
-                            }
+                            await Navigator.push(context,
+                                MaterialPageRoute(builder: (builder) {
+                              return PostUploadWidget(
+                                  postImageFile: imageFile!);
+                            }));
                           });
                   },
                   child: Container(

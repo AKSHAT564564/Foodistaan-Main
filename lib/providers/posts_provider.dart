@@ -124,4 +124,49 @@ class PostsProvider with ChangeNotifier {
       return response.statusCode;
     }
   }
+
+  //Function to add a new Post in firebase
+  Future<void> addPosts(Post post) async {
+    // final timestamp = DateTime.now();
+    // timestamp.toIso8601String();
+    // log(post.postedDateTime.toString());
+    // log(post.postTagFoods.toString());
+    // log(post.isNewVendor.toString());
+    // log(post.postHashtags.toString());
+    // log(post.postId.toString());
+    // log(post.postTitle.toString());
+    // log(post.userId.toString());
+    // log(post.vendorId.toString());
+    // log(post.vendorName.toString());
+    // log(post.vendorLocation.toString());
+    log(post.vendorPhoneNumber.toString());
+
+    // try {
+    // //   return _firestoreInstance.collection('post-data').add({
+    // //     'vendorPhoneNumber': '6565656556',
+    // //     'postHashtags': ['tasty', 'fastfood'],
+    // //     'postTagFoods': [
+    // //       {'foodId': 'zza'},
+    // //       {'foodId': 'izza'}
+    // //     ],
+    // //     'vendorId': 'Food1',
+    // //     'postedDateTime': Timestamp.now(),
+    // //     'isNewVendor': false,
+    // //     'postTitle': 'The Best',
+    // //     'postId': 'image_picker5511817622945604141.jpg',
+    // //     'vendorName': 'Hub',
+    // //     'userId': '1ty',
+    // //     'vendorLocation': GeoPoint(21, 32),
+    // //   }).then((value) {
+    // //     print("Post data Added$value");
+    // //   }).catchError((error) {
+    // //     print("Post couldn't be added.:- $error");
+    // //   });
+
+    //   notifyListeners();
+    // } catch (error) {
+    //   print(error);
+    //   throw (error);
+    // }
+  }
 }
