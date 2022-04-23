@@ -11,12 +11,18 @@ import 'package:http/http.dart' as http;
 
 class PostsProvider with ChangeNotifier {
   final _firestoreInstance = FirebaseFirestore.instance;
+
   List<Post>? postItem = [];
 
   PostsProvider({this.postItem});
 
   List<Post> get postItems {
     return [...postItem!];
+  }
+
+  List vendorData = [];
+  List get vendors {
+    return [...vendorData];
   }
 
   Future<void> fetchAndSetPosts() async {
@@ -123,5 +129,89 @@ class PostsProvider with ChangeNotifier {
       print(response.reasonPhrase);
       return response.statusCode;
     }
+  }
+
+  //Function to add a new Post in firebase
+  Future<void> addPosts(Post post) async {
+    // final timestamp = DateTime.now();
+    // timestamp.toIso8601String();
+    // log(post.postedDateTime.toString());
+    // log(post.postTagFoods.toString());
+    // log(post.isNewVendor.toString());
+    // log(post.postHashtags.toString());
+    // log(post.postId.toString());
+    // log(post.postTitle.toString());
+    // log(post.userId.toString());
+    // log(post.vendorId.toString());
+    // log(post.vendorName.toString());
+    // log(post.vendorLocation.toString());
+    // log(post.vendorPhoneNumber.toString());
+
+    try {
+      _firestoreInstance
+          .collection('post-data')
+          .add(post.toMap())
+          .then((value) {
+        print("Post data Added:- $value");
+      });
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw (error);
+    }
+
+    // try {
+    //   _firestoreInstance.collection('post-data').add({
+    //     'vendorPhoneNumber': post.vendorPhoneNumber,
+    //     'postHashtags': post.postHashtags,
+    //     'postTagFoods': post.postTagFoods,
+    //     'vendorId': post.vendorId,
+    //     'postedDateTime': post.postedDateTime,
+    //     'isNewVendor': post.isNewVendor,
+    //     'postTitle': post.postTitle,
+    //     'postId': post.postId,
+    //     'vendorName': post.vendorName,
+    //     'userId': post.userId,
+    //     'vendorLocation': post.vendorLocation,
+    //   }).then((value) {
+    //     print("Post data Added$value");
+    //   });
+    //   notifyListeners();
+    // } catch (error) {
+    //   print(error);
+    //   throw (error);
+    // }
+
+    // try {
+    // //   return _firestoreInstance.collection('post-data').add({
+    // //     'vendorPhoneNumber': '6565656556',
+    // //     'postHashtags': ['tasty', 'fastfood'],
+    // //     'postTagFoods': [
+    // //       {'foodId': 'zza'},
+    // //       {'foodId': 'izza'}
+    // //     ],
+    // //     'vendorId': 'Food1',
+    // //     'postedDateTime': Timestamp.now(),
+    // //     'isNewVendor': false,
+    // //     'postTitle': 'The Best',
+    // //     'postId': 'image_picker5511817622945604141.jpg',
+    // //     'vendorName': 'Hub',
+    // //     'userId': '1ty',
+    // //     'vendorLocation': GeoPoint(21, 32),
+    // //   }).then((value) {
+    // //     print("Post data Added$value");
+    // //   }).catchError((error) {
+    // //     print("Post couldn't be added.:- $error");
+    // //   });
+
+    //   notifyListeners();
+    // } catch (error) {
+    //   print(error);
+    //   throw (error);
+    // }
+  }
+
+  Future<void> fetchVendorData() async {
+    _firestoreInstance.collection('DummyData').get().then((querySnapshot) {});
   }
 }
