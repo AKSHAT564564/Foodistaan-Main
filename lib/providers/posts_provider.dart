@@ -11,12 +11,18 @@ import 'package:http/http.dart' as http;
 
 class PostsProvider with ChangeNotifier {
   final _firestoreInstance = FirebaseFirestore.instance;
+
   List<Post>? postItem = [];
 
   PostsProvider({this.postItem});
 
   List<Post> get postItems {
     return [...postItem!];
+  }
+
+  List vendorData = [];
+  List get vendors {
+    return [...vendorData];
   }
 
   Future<void> fetchAndSetPosts() async {
@@ -139,7 +145,42 @@ class PostsProvider with ChangeNotifier {
     // log(post.vendorId.toString());
     // log(post.vendorName.toString());
     // log(post.vendorLocation.toString());
-    log(post.vendorPhoneNumber.toString());
+    // log(post.vendorPhoneNumber.toString());
+
+    try {
+      _firestoreInstance
+          .collection('post-data')
+          .add(post.toMap())
+          .then((value) {
+        print("Post data Added:- $value");
+      });
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw (error);
+    }
+
+    // try {
+    //   _firestoreInstance.collection('post-data').add({
+    //     'vendorPhoneNumber': post.vendorPhoneNumber,
+    //     'postHashtags': post.postHashtags,
+    //     'postTagFoods': post.postTagFoods,
+    //     'vendorId': post.vendorId,
+    //     'postedDateTime': post.postedDateTime,
+    //     'isNewVendor': post.isNewVendor,
+    //     'postTitle': post.postTitle,
+    //     'postId': post.postId,
+    //     'vendorName': post.vendorName,
+    //     'userId': post.userId,
+    //     'vendorLocation': post.vendorLocation,
+    //   }).then((value) {
+    //     print("Post data Added$value");
+    //   });
+    //   notifyListeners();
+    // } catch (error) {
+    //   print(error);
+    //   throw (error);
+    // }
 
     // try {
     // //   return _firestoreInstance.collection('post-data').add({
@@ -168,5 +209,9 @@ class PostsProvider with ChangeNotifier {
     //   print(error);
     //   throw (error);
     // }
+  }
+
+  Future<void> fetchVendorData() async {
+    _firestoreInstance.collection('DummyData').get().then((querySnapshot) {});
   }
 }

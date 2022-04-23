@@ -111,10 +111,6 @@ class _PostsImageWidgetState extends State<PostsImageWidget> {
                             color: Colors.white,
                           ),
                         ),
-                        // Icon(
-                        //   Icons.add_photo_alternate_rounded,
-                        //   color: Colors.white,
-                        // ),
                       ],
                     ),
                   ),

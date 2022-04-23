@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,15 +10,15 @@ import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/model/postModel.dart';
 import 'package:foodistan/providers/posts_provider.dart';
-import 'package:lottie/lottie.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:lottie/lottie.dart' as lottie;
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class PostUploadWidget extends StatefulWidget {
   File? postImageFile;
-  var postHashtagList;
-  PostUploadWidget({Key? key, this.postImageFile, this.postHashtagList})
-      : super(key: key);
+  PostUploadWidget({Key? key, this.postImageFile}) : super(key: key);
 
   @override
   State<PostUploadWidget> createState() => _PostUploadWidgetState();
@@ -30,10 +31,10 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
   String postId = '';
   String postTitle = '';
   List<String>? postHashtags = [];
-  late final List<PostTagFood>? postTagFoods;
+  List<PostTagFood>? postTagFoods = [];
   // late final Timestamp postedDateTime;
-  late final String? userId;
-  late final String vendorId;
+  String? userId = '';
+  String vendorId = '';
   String vendorName = '';
   GeoPoint? vendorLocation;
   String vendorPhoneNumber = '';
@@ -41,6 +42,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
   final _hashtagsTextEditingController = TextEditingController();
   final postNameTextController = TextEditingController();
   final vendorNameTextController = TextEditingController();
+  final vendorLocationTextController = TextEditingController();
   final vendorPhoneNumberTextController = TextEditingController();
   List<String> _hashtagValues = [];
 
@@ -59,6 +61,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
       _hashtagsTextEditingController.dispose();
       postNameTextController.dispose();
       vendorNameTextController.dispose();
+      vendorLocationTextController.dispose();
       vendorPhoneNumberTextController.dispose();
       super.dispose();
     }
@@ -388,12 +391,17 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                                   postedDateTime: Timestamp.now(),
                                   userId: userId!,
                                   isNewVendor: isNewVendor,
-                                  vendorId: 'vendorId',
+                                  vendorId: vendorId,
                                   vendorName: vendorName,
-                                  vendorLocation: GeoPoint(21, 43),
+                                  vendorLocation: vendorLocation!,
                                   vendorPhoneNumber: vendorPhoneNumber))
-                              .whenComplete(() {
-                            print(postId);
+                              .then((value) {
+                            // print(postId);
+                            return AlertDialog(
+                              title: Text(
+                                'Post Uploaded',
+                              ),
+                            );
                           });
                         },
                         child: Text(
@@ -431,7 +439,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
           ),
         ),
         avatar: Container(
-            child: Lottie.network(
+            child: lottie.Lottie.network(
           'https://assets10.lottiefiles.com/packages/lf20_vfz7ny0n.json',
           fit: BoxFit.fill,
         )),
@@ -530,6 +538,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                 Container(
                   height: 7.5.h,
                   child: TextFormField(
+                    controller: vendorLocationTextController,
                     cursorColor: kYellow,
                     readOnly: true,
                     textAlignVertical: TextAlignVertical.center,
@@ -730,9 +739,35 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                     cursorColor: kYellow,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
-                      suffixIcon: Icon(
-                        Icons.my_location_rounded,
-                        color: kRed,
+                      suffixIcon: InkWell(
+                        onTap: (() {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => vendorLocationScreen()),
+                          // );
+                          // showMaterialModalBottomSheet(
+                          //     context: context,
+                          //     builder: (context) {
+                          //       return vendorLocationScreen();
+                          //     });
+                          // showBarModalBottomSheet(
+                          //     duration: Duration(milliseconds: 300),
+                          //     bounce: true,
+                          //     context: context,
+                          //     builder: (context) {
+                          //       return vendorLocationScreen();
+                          //     });
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return vendorLocationScreen();
+                              });
+                        }),
+                        child: Icon(
+                          Icons.my_location_rounded,
+                          color: kRed,
+                        ),
                       ),
                       hintText: 'Vendor Location',
                       hintStyle: TextStyle(
@@ -815,11 +850,116 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
       ),
     );
   }
+
+  Widget vendorLocationScreen() {
+    Completer<GoogleMapController> _controller = Completer();
+    LatLng _center = const LatLng(22.973423, 78.656891);
+    final Set<Marker> _markers = {};
+    LatLng _lastMapPosition = _center;
+    MapType _currentMapType = MapType.normal;
+
+    void _onMapCreated(GoogleMapController controller) {
+      _controller.complete(controller);
+      setState(() {});
+    }
+
+    void _onCameraMove(CameraPosition position) {
+      _lastMapPosition = position.target;
+      setState(() {});
+    }
+
+    void _onMapCloseButton() {
+      Navigator.of(context).pop();
+    }
+
+    Widget button(function, Icon icon) {
+      return FloatingActionButton(
+        onPressed: function,
+        materialTapTargetSize: MaterialTapTargetSize.padded,
+        backgroundColor: kYellow,
+        child: icon,
+      );
+    }
+
+    void _onMapTypeButton() {
+      setState(() {
+        _currentMapType = _currentMapType == MapType.normal
+            ? MapType.satellite
+            : MapType.normal;
+      });
+      print(_currentMapType);
+    }
+
+    void _onAddMarkerButton() {
+      setState(() {
+        _markers.add(Marker(
+          markerId: MarkerId('1'
+              // _lastMapPosition.toString(),
+              ),
+          position: _lastMapPosition,
+          infoWindow: InfoWindow(
+            title: 'Picked Location',
+            snippet: _lastMapPosition.toString(),
+          ),
+          icon: BitmapDescriptor.defaultMarker,
+        ));
+        vendorLocation =
+            GeoPoint(_lastMapPosition.latitude, _lastMapPosition.longitude);
+      });
+      // print(_lastMapPosition);
+      // print(vendorLocation);
+    }
+
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          GoogleMap(
+            onMapCreated: _onMapCreated,
+            initialCameraPosition: CameraPosition(
+              target: _center,
+              zoom: 11,
+            ),
+            mapType: _currentMapType,
+            markers: _markers,
+            onCameraMove: _onCameraMove,
+          ),
+          Positioned(
+            top: 1.h,
+            right: 1.w,
+            // alignment: Alignment.topRight,
+            child: Column(
+              children: <Widget>[
+                Container(
+                    height: 6.h,
+                    width: 6.h,
+                    child: button(
+                        _onMapCloseButton,
+                        Icon(
+                          Icons.close_rounded,
+                          size: 24.sp,
+                        ))),
+                SizedBox(height: 8.h),
+                button(
+                    _onMapTypeButton,
+                    Icon(
+                      Icons.map_rounded,
+                      size: 28.sp,
+                    )),
+                SizedBox(height: 1.h),
+                button(
+                    _onAddMarkerButton,
+                    Icon(
+                      Icons.add_location_rounded,
+                      size: 26.sp,
+                    )),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
-
-
-
-
 
 // class InputHashtagChip extends StatefulWidget {
 //   @override
