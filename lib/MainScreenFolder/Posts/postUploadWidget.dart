@@ -1,15 +1,20 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodistan/MainScreenFolder/AppBar/LocationPointsSearch.dart';
 import 'package:foodistan/MainScreenFolder/Posts/posts_screen.dart';
 import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/constants.dart';
+import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/model/postModel.dart';
 import 'package:foodistan/providers/posts_provider.dart';
+import 'package:foodistan/providers/restaurant_list_provider.dart';
+import 'package:foodistan/restuarant_screens/restuarant_delivery_menu.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lottie/lottie.dart' as lottie;
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -42,9 +47,27 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
   final _hashtagsTextEditingController = TextEditingController();
   final postNameTextController = TextEditingController();
   final vendorNameTextController = TextEditingController();
+  final newVendorNameTextController = TextEditingController();
   final vendorLocationTextController = TextEditingController();
-  final vendorPhoneNumberTextController = TextEditingController();
+  final newVendorLocationTextController = TextEditingController();
+  final newVendorPhoneNumberTextController = TextEditingController();
   List<String> _hashtagValues = [];
+
+  ValueNotifier<List> searchResults = ValueNotifier([]);
+  searchQuery(String query, List items) {
+    List searchResultsTemp = [];
+    // print(query);
+    // print(items);
+    for (var item in items) {
+      RegExp regExp = new RegExp(query, caseSensitive: false);
+      bool containe = regExp.hasMatch(item['search']);
+      if (containe) {
+        searchResultsTemp.add(item);
+      }
+    }
+    searchResults.value = searchResultsTemp;
+    print(searchResultsTemp);
+  }
 
   @override
   void initState() {
@@ -61,8 +84,10 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
       _hashtagsTextEditingController.dispose();
       postNameTextController.dispose();
       vendorNameTextController.dispose();
+      newVendorNameTextController.dispose();
       vendorLocationTextController.dispose();
-      vendorPhoneNumberTextController.dispose();
+      newVendorLocationTextController.dispose();
+      newVendorPhoneNumberTextController.dispose();
       super.dispose();
     }
   }
@@ -467,200 +492,379 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
   }
 
   Widget registeredVendor() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 1.5.h, bottom: 1.5.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Vendor Name',
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w700,
-                      color: kGreyDark),
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  height: 7.5.h,
-                  child: TextFormField(
-                    controller: vendorNameTextController,
-                    cursorColor: kYellow,
-                    textAlignVertical: TextAlignVertical.center,
-                    onEditingComplete: () {
-                      vendorName = vendorNameTextController.text;
-                      print(vendorName);
-                      setState(() {});
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Enter Vendor Name',
-                      hintStyle: TextStyle(
+    return Consumer<RestaurantListProvider>(builder: (_, value, __) {
+      return Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 1.5.h, bottom: 1.5.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Vendor Name',
+                    style: TextStyle(
                         fontSize: 12.sp,
-                        fontWeight: FontWeight.w600,
-                        color: kGrey,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          width: 0.5.w,
-                          color: kYellow,
+                        fontWeight: FontWeight.w700,
+                        color: kGreyDark),
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  Container(
+                    height: 7.5.h,
+                    child: TextFormField(
+                      controller: vendorNameTextController,
+                      cursorColor: kYellow,
+                      textAlignVertical: TextAlignVertical.center,
+                      onEditingComplete: () {
+                        vendorName = vendorNameTextController.text;
+
+                        searchResults.value.clear();
+
+                        // print(vendorName);
+
+                        setState(() {});
+                      },
+                      onChanged: (v) async {
+                        searchQuery(vendorNameTextController.text, value.items);
+                        setState(() {});
+                        //for cross icon in searchbar
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Enter Vendor Name',
+                        hintStyle: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: kGrey,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            width: 0.5.w,
+                            color: kYellow,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 1.5.h, bottom: 1.5.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Vendor Location',
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w700,
-                      color: kGreyDark),
-                ),
-                SizedBox(
-                  height: 1.h,
-                ),
-                Container(
-                  height: 7.5.h,
-                  child: TextFormField(
-                    controller: vendorLocationTextController,
-                    cursorColor: kYellow,
-                    readOnly: true,
-                    textAlignVertical: TextAlignVertical.center,
-                    decoration: InputDecoration(
-                      hintText: 'Vendor Location',
-                      hintStyle: TextStyle(
+            Container(
+              child: ValueListenableBuilder<List>(
+                  valueListenable: searchResults,
+                  builder: (_, value, __) {
+                    return value.isNotEmpty &&
+                            vendorNameTextController.text.isNotEmpty
+                        ? searchVendorNameList(
+                            searchResults: value,
+                          )
+                        : Container();
+                  }),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 1.5.h, bottom: 1.5.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Vendor Location',
+                    style: TextStyle(
                         fontSize: 12.sp,
-                        fontWeight: FontWeight.w600,
-                        color: kGrey,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          width: 0.5.w,
-                          color: kYellow,
+                        fontWeight: FontWeight.w700,
+                        color: kGreyDark),
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  Container(
+                    height: 7.5.h,
+                    child: TextFormField(
+                      scrollPadding: EdgeInsets.zero,
+                      maxLines: 3,
+                      controller: vendorLocationTextController,
+                      cursorColor: kYellow,
+                      readOnly: true,
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(12, 8, 12, 8),
+                        hintText: 'Vendor Location',
+                        hintStyle: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: kGrey,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            width: 0.5.w,
+                            color: kYellow,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 1.5.h),
-          Builder(builder: (context) {
-            return GestureDetector(
-              onTap: () {
-                showBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Container(
-                        height: 60.h,
-                        width: 100.w,
-                        child: Column(
-                          children: [
-                            SizedBox(height: 1.h),
-                            Expanded(
-                              flex: 1,
-                              child: Center(
-                                child: Text(
-                                  "Tag Food",
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: kGreyDark,
+            SizedBox(height: 1.5.h),
+            Builder(builder: (context) {
+              return GestureDetector(
+                onTap: () {
+                  showBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                          height: 60.h,
+                          width: 100.w,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 1.h),
+                              Expanded(
+                                flex: 1,
+                                child: Center(
+                                  child: Text(
+                                    "Tag Food",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: kGreyDark,
+                                    ),
                                   ),
                                 ),
                               ),
+                              Expanded(
+                                flex: 7,
+                                child: tagFoodItemsList(),
+                              ),
+                            ],
+                          ),
+                        );
+                      });
+                },
+                child: Container(
+                  child: Row(
+                    children: [
+                      Text(
+                        "Tag Food Items",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: kRed,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: kRed,
+                        size: 12.sp,
+                      )
+                    ],
+                  ),
+                ),
+              );
+            })
+          ],
+        ),
+      );
+    });
+  }
+
+  Widget tagFoodItemsList() {
+    Provider.of<PostsProvider>(context, listen: false).tagFoodItems.clear();
+    return FutureBuilder(
+        future: Provider.of<PostsProvider>(context, listen: false)
+            .fetchTagFoods(vendorId),
+        builder: (ctx, dataSnapshot) {
+          if (dataSnapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CustomLoadingSpinner());
+          } else {
+            if (dataSnapshot.error != null) {
+              // ...
+              // error handling stuff
+              return Center(
+                child: Column(
+                  children: [
+                    lottie.Lottie.network(
+                        'https://assets6.lottiefiles.com/packages/lf20_ddxv3rxw.json',
+                        fit: BoxFit.fitWidth),
+                    Text(
+                      'Error Occurred!',
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: kGreyDark,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Consumer<PostsProvider>(builder: (_, value, __) {
+                return value.getTagFoodItems.isEmpty
+                    ? Center(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 30.h,
+                              child: lottie.Lottie.network(
+                                  'https://assets3.lottiefiles.com/packages/lf20_js2len.json',
+                                  fit: BoxFit.fill),
                             ),
-                            Expanded(
-                              flex: 7,
-                              child: GridView.builder(
-                                itemCount: 15,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        mainAxisSpacing: 1.5.h,
-                                        crossAxisSpacing: 1.5.h),
-                                itemBuilder: (context, index) {
-                                  return ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Container(
-                                        color: Colors.white,
-                                        child: Column(
-                                          children: [
-                                            Expanded(
-                                              flex: 7,
-                                              child: Container(
-                                                child: Image.network(
-                                                  // "https://uae.microless.com/cdn/no_image.jpg",
-                                                  "https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png",
-                                                  fit: BoxFit.fill,
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: Text(
-                                                '$index',
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: kGreyDark,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        )),
-                                  );
-                                },
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            Text(
+                              'No Food Item Found!',
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w600,
+                                color: kGreyDark,
                               ),
                             ),
                           ],
                         ),
+                      )
+                    : GridView.builder(
+                        itemCount: value.getTagFoodItems.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 1.5.h,
+                            crossAxisSpacing: 1.5.h),
+                        itemBuilder: (context, index) {
+                          var tagSelected = false;
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                tagSelected = !tagSelected;
+                                print(tagSelected);
+                                print(
+                                    "FoodTag Press ${value.getTagFoodItems[index]['title']}");
+                              });
+                            },
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                      color: Colors.white,
+                                      child: Column(
+                                        children: [
+                                          Expanded(
+                                            flex: 7,
+                                            child: Container(
+                                              // child: Image.network(
+                                              //   // "https://uae.microless.com/cdn/no_image.jpg",
+                                              //   "https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png",
+                                              //   fit: BoxFit.fill,
+                                              // ),
+                                              child: Image.network(
+                                                // "https://uae.microless.com/cdn/no_image.jpg",
+                                                "${value.getTagFoodItems[index]['image']}",
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Text(
+                                              '${value.getTagFoodItems[index]['title']}',
+                                              style: TextStyle(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: kGreyDark,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      )),
+                                ),
+                                Positioned(
+                                    child: Visibility(
+                                  visible: tagSelected,
+                                  child: Container(
+                                    height: 3.h,
+                                    width: 3.h,
+                                    color:
+                                        tagSelected ? Colors.green : Colors.red,
+                                  ),
+                                ))
+                              ],
+                            ),
+                          );
+                        },
                       );
-                    });
-              },
-              child: Container(
-                child: Row(
-                  children: [
-                    Text(
-                      "Tag Food Items",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: kRed,
-                      ),
+              });
+            }
+          }
+        });
+  }
+
+  Widget searchVendorNameList({List? searchResults}) {
+    return Container(
+      height: 30.h,
+      child: ListView.builder(
+        padding: EdgeInsets.zero,
+        itemCount: searchResults!.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                vendorNameTextController.text = searchResults[index]['Name'];
+                vendorLocationTextController.text =
+                    searchResults[index]['Address'];
+                vendorLocation = searchResults[index]['Location'];
+                vendorId = searchResults[index]['id'];
+                Provider.of<PostsProvider>(context, listen: false)
+                    .tagFoodItems
+                    .clear();
+                searchResults.clear();
+              });
+            },
+            child: Container(
+              // margin: EdgeInsets.only(top: 0.5.h),
+
+              child: ListTile(
+                minVerticalPadding: 0,
+                minLeadingWidth: 0,
+                horizontalTitleGap: 4.sp,
+                contentPadding: EdgeInsets.zero,
+                leading: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    height: 5.h,
+                    width: 5.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: kRed,
-                      size: 12.sp,
-                    )
-                  ],
+                    child: CachedNetworkImage(
+                      fit: BoxFit.fill,
+                      imageUrl: searchResults[index]['FoodImage'],
+                      placeholder: (context, url) =>
+                          Image.asset('assets/images/thumbnail (2).png'),
+                      errorWidget: (context, url, error) =>
+                          Image.asset('assets/images/thumbnail (2).png'),
+                    ),
+                  ),
+                ),
+                title: Text(
+                  searchResults[index]['Name'],
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            );
-          })
-        ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -687,11 +891,11 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                 Container(
                   height: 7.5.h,
                   child: TextFormField(
-                    controller: vendorNameTextController,
+                    controller: newVendorNameTextController,
                     cursorColor: kYellow,
                     textAlignVertical: TextAlignVertical.center,
                     onEditingComplete: () {
-                      vendorName = vendorNameTextController.text;
+                      vendorName = newVendorNameTextController.text;
                       print(vendorName);
                       setState(() {});
                     },
@@ -736,6 +940,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                 Container(
                   height: 7.5.h,
                   child: TextFormField(
+                    controller: newVendorLocationTextController,
                     cursorColor: kYellow,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
@@ -809,7 +1014,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                 Container(
                   height: 7.5.h,
                   child: TextFormField(
-                    controller: vendorPhoneNumberTextController,
+                    controller: newVendorPhoneNumberTextController,
                     cursorColor: kYellow,
                     textAlignVertical: TextAlignVertical.center,
                     keyboardType: TextInputType.phone,
@@ -819,7 +1024,8 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                     //   setState(() {});
                     // },
                     onChanged: (value) {
-                      vendorPhoneNumber = vendorPhoneNumberTextController.text;
+                      vendorPhoneNumber =
+                          newVendorPhoneNumberTextController.text;
                       print(vendorPhoneNumber);
                       setState(() {});
                     },
