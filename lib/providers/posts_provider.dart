@@ -20,9 +20,13 @@ class PostsProvider with ChangeNotifier {
     return [...postItem!];
   }
 
-  List vendorData = [];
-  List get vendors {
-    return [...vendorData];
+  // List vendorData = [];
+  // List get vendors {
+  //   return [...vendorData];
+  // }
+  List tagFoodItems = [];
+  List get getTagFoodItems {
+    return [...tagFoodItems];
   }
 
   Future<void> fetchAndSetPosts() async {
@@ -211,7 +215,23 @@ class PostsProvider with ChangeNotifier {
     // }
   }
 
-  Future<void> fetchVendorData() async {
-    _firestoreInstance.collection('DummyData').get().then((querySnapshot) {});
+  Future<List> fetchTagFoods(vendor_id) async {
+    // List tagFoodItems = [];
+    final CollectionReference tagFoodList = FirebaseFirestore.instance
+        .collection('DummyData')
+        .doc(vendor_id)
+        .collection('menu-items');
+    try {
+      await tagFoodList.get().then((querySnapshot) => {
+            querySnapshot.docs.forEach((element) {
+              tagFoodItems.add(element.data());
+              print(tagFoodItems);
+            })
+          });
+    } catch (e) {
+      print(e.toString());
+    }
+
+    return tagFoodItems;
   }
 }
