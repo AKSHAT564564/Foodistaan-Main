@@ -6,18 +6,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foodistan/MainScreenFolder/AppBar/LocationPointsSearch.dart';
-import 'package:foodistan/MainScreenFolder/Posts/posts_screen.dart';
 import 'package:foodistan/MainScreenFolder/mainScreenFile.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/customLoadingSpinner.dart';
 import 'package:foodistan/model/postModel.dart';
 import 'package:foodistan/providers/posts_provider.dart';
 import 'package:foodistan/providers/restaurant_list_provider.dart';
-import 'package:foodistan/restuarant_screens/restuarant_delivery_menu.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lottie/lottie.dart' as lottie;
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -944,6 +940,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                     cursorColor: kYellow,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(12, 8, 12, 8),
                       suffixIcon: InkWell(
                         onTap: (() {
                           // Navigator.push(
@@ -1060,18 +1057,18 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
   Widget vendorLocationScreen() {
     Completer<GoogleMapController> _controller = Completer();
     LatLng _center = const LatLng(22.973423, 78.656891);
-    final Set<Marker> _markers = {};
+    Set<Marker> _markers = {};
     LatLng _lastMapPosition = _center;
     MapType _currentMapType = MapType.normal;
 
     void _onMapCreated(GoogleMapController controller) {
       _controller.complete(controller);
-      setState(() {});
+      // setState(() {});
     }
 
     void _onCameraMove(CameraPosition position) {
       _lastMapPosition = position.target;
-      setState(() {});
+      // setState(() {});
     }
 
     void _onMapCloseButton() {
@@ -1098,6 +1095,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
 
     void _onAddMarkerButton() {
       setState(() {
+        _markers.clear();
         _markers.add(Marker(
           markerId: MarkerId('1'
               // _lastMapPosition.toString(),
@@ -1107,8 +1105,10 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
             title: 'Picked Location',
             snippet: _lastMapPosition.toString(),
           ),
-          icon: BitmapDescriptor.defaultMarker,
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
         ));
+        newVendorLocationTextController.text =
+            '${_lastMapPosition.latitude},${_lastMapPosition.longitude}';
         vendorLocation =
             GeoPoint(_lastMapPosition.latitude, _lastMapPosition.longitude);
       });
@@ -1117,52 +1117,58 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
     }
 
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 11,
+      body: Builder(builder: (context) {
+        return Stack(
+          children: <Widget>[
+            Container(
+              height: 100.h,
+              width: 100.w,
+              child: GoogleMap(
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                  target: _center,
+                  zoom: 11,
+                ),
+                mapType: _currentMapType,
+                markers: _markers,
+                onCameraMove: _onCameraMove,
+              ),
             ),
-            mapType: _currentMapType,
-            markers: _markers,
-            onCameraMove: _onCameraMove,
-          ),
-          Positioned(
-            top: 1.h,
-            right: 1.w,
-            // alignment: Alignment.topRight,
-            child: Column(
-              children: <Widget>[
-                Container(
-                    height: 6.h,
-                    width: 6.h,
-                    child: button(
-                        _onMapCloseButton,
-                        Icon(
-                          Icons.close_rounded,
-                          size: 24.sp,
-                        ))),
-                SizedBox(height: 8.h),
-                button(
-                    _onMapTypeButton,
-                    Icon(
-                      Icons.map_rounded,
-                      size: 28.sp,
-                    )),
-                SizedBox(height: 1.h),
-                button(
-                    _onAddMarkerButton,
-                    Icon(
-                      Icons.add_location_rounded,
-                      size: 26.sp,
-                    )),
-              ],
+            Positioned(
+              top: 1.h,
+              right: 1.w,
+              // alignment: Alignment.topRight,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                      height: 6.h,
+                      width: 6.h,
+                      child: button(
+                          _onMapCloseButton,
+                          Icon(
+                            Icons.close_rounded,
+                            size: 24.sp,
+                          ))),
+                  SizedBox(height: 8.h),
+                  button(
+                      _onMapTypeButton,
+                      Icon(
+                        Icons.map_rounded,
+                        size: 28.sp,
+                      )),
+                  SizedBox(height: 1.h),
+                  button(
+                      _onAddMarkerButton,
+                      Icon(
+                        Icons.add_location_rounded,
+                        size: 26.sp,
+                      )),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        );
+      }),
     );
   }
 }
