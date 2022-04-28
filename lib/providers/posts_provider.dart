@@ -152,12 +152,13 @@ class PostsProvider with ChangeNotifier {
     // log(post.vendorPhoneNumber.toString());
 
     try {
-      _firestoreInstance
+      await _firestoreInstance
           .collection('post-data')
           .add(post.toMap())
           .then((value) {
         print("Post data Added:- $value");
       });
+      // print("Post data Added:");
       notifyListeners();
     } catch (error) {
       print(error);

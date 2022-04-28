@@ -13,6 +13,7 @@ import 'package:foodistan/model/postModel.dart';
 import 'package:foodistan/providers/posts_provider.dart';
 import 'package:foodistan/providers/restaurant_list_provider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:lottie/lottie.dart' as lottie;
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -50,6 +51,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
   List<String> _hashtagValues = [];
 
   ValueNotifier<List> searchResults = ValueNotifier([]);
+
   searchQuery(String query, List items) {
     List searchResultsTemp = [];
     // print(query);
@@ -582,7 +584,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                     height: 7.5.h,
                     child: TextFormField(
                       scrollPadding: EdgeInsets.zero,
-                      maxLines: 3,
+                      // maxLines: 3,
                       controller: vendorLocationTextController,
                       cursorColor: kYellow,
                       readOnly: true,
@@ -938,6 +940,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                   child: TextFormField(
                     controller: newVendorLocationTextController,
                     cursorColor: kYellow,
+                    readOnly: true,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.fromLTRB(12, 8, 12, 8),
@@ -959,6 +962,11 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                           //     context: context,
                           //     builder: (context) {
                           //       return vendorLocationScreen();
+                          //     });
+                          // showDialog(
+                          //     context: context,
+                          //     builder: (context) {
+                          //       return VendorLocationScreen();
                           //     });
                           showDialog(
                               context: context,
@@ -1055,25 +1063,106 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
   }
 
   Widget vendorLocationScreen() {
+    ValueNotifier _counter = ValueNotifier<int>(3);
+
+    double _lat = 22.973423;
+    double _lng = 78.656891;
     Completer<GoogleMapController> _controller = Completer();
-    LatLng _center = const LatLng(22.973423, 78.656891);
-    Set<Marker> _markers = {};
-    LatLng _lastMapPosition = _center;
+    Location location = new Location();
+    late bool _serviceEnabled;
+    late PermissionStatus _permissionGranted;
+    // late CameraPosition _currentPosition;
+    late CameraPosition _currentPosition = CameraPosition(
+      target: LatLng(_lat, _lng),
+      zoom: 12,
+    );
+
     MapType _currentMapType = MapType.normal;
 
-    void _onMapCreated(GoogleMapController controller) {
-      _controller.complete(controller);
-      // setState(() {});
+    Set<Marker> markers = new Set();
+
+    _onMapTypeButton() {
+      setState(() {
+        _counter.value += 1;
+        _currentMapType =
+            _currentMapType == MapType.normal ? MapType.hybrid : MapType.normal;
+      });
+      print(_currentMapType);
     }
 
-    void _onCameraMove(CameraPosition position) {
-      _lastMapPosition = position.target;
-      // setState(() {});
+    getmarkers(LatLng tappedPoint) {
+      //markers to place on map
+      print(tappedPoint);
+      setState(() {
+        _counter.value += 1;
+        markers = {};
+        markers.add(Marker(
+          //add first marker
+          markerId: MarkerId(tappedPoint.toString()),
+          position: tappedPoint, //position of marker
+
+          infoWindow: InfoWindow(
+            //popup info
+            title: 'Picked Location ',
+            snippet: '${tappedPoint}',
+          ),
+          icon: BitmapDescriptor.defaultMarker, //Icon for Marker
+        ));
+        newVendorLocationTextController.text =
+            '${tappedPoint.latitude} , ${tappedPoint.longitude}';
+        vendorLocation = GeoPoint(tappedPoint.latitude, tappedPoint.longitude);
+      });
+
+      // print(markers);
+      return markers;
     }
 
-    void _onMapCloseButton() {
+    _locateMe() async {
+      _serviceEnabled = await location.serviceEnabled();
+      if (!_serviceEnabled) {
+        _serviceEnabled = await location.requestService();
+        if (!_serviceEnabled) {
+          return;
+        }
+      }
+
+      _permissionGranted = await location.hasPermission();
+      if (_permissionGranted == PermissionStatus.denied) {
+        _permissionGranted = await location.requestPermission();
+        if (_permissionGranted != PermissionStatus.granted) {
+          return;
+        }
+      }
+      await location.getLocation().then((res) async {
+        final GoogleMapController controller = await _controller.future;
+        final _position = CameraPosition(
+          target: LatLng(res.latitude!, res.longitude!),
+          zoom: 12,
+          // zoom: 9,
+        );
+        _counter.value += 1;
+        controller.animateCamera(CameraUpdate.newCameraPosition(_position));
+        setState(() {
+          _counter.value += 1;
+          _lat = res.latitude!;
+          _lng = res.longitude!;
+        });
+      });
+    }
+
+    _onMapCloseButton() {
       Navigator.of(context).pop();
     }
+
+    // @override
+    // initState() {
+    //   super.initState();
+    //   _currentPosition = CameraPosition(
+    //     target: LatLng(_lat, _lng),
+    //     zoom: 12,
+    //   );
+    //   _locateMe();
+    // }
 
     Widget button(function, Icon icon) {
       return FloatingActionButton(
@@ -1084,91 +1173,62 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
       );
     }
 
-    void _onMapTypeButton() {
-      setState(() {
-        _currentMapType = _currentMapType == MapType.normal
-            ? MapType.satellite
-            : MapType.normal;
-      });
-      print(_currentMapType);
-    }
-
-    void _onAddMarkerButton() {
-      setState(() {
-        _markers.clear();
-        _markers.add(Marker(
-          markerId: MarkerId('1'
-              // _lastMapPosition.toString(),
-              ),
-          position: _lastMapPosition,
-          infoWindow: InfoWindow(
-            title: 'Picked Location',
-            snippet: _lastMapPosition.toString(),
-          ),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-        ));
-        newVendorLocationTextController.text =
-            '${_lastMapPosition.latitude},${_lastMapPosition.longitude}';
-        vendorLocation =
-            GeoPoint(_lastMapPosition.latitude, _lastMapPosition.longitude);
-      });
-      // print(_lastMapPosition);
-      // print(vendorLocation);
-    }
-
     return Scaffold(
-      body: Builder(builder: (context) {
-        return Stack(
-          children: <Widget>[
-            Container(
-              height: 100.h,
-              width: 100.w,
-              child: GoogleMap(
-                onMapCreated: _onMapCreated,
-                initialCameraPosition: CameraPosition(
-                  target: _center,
-                  zoom: 11,
-                ),
-                mapType: _currentMapType,
-                markers: _markers,
-                onCameraMove: _onCameraMove,
-              ),
+      body: Stack(
+        children: <Widget>[
+          ValueListenableBuilder(
+              valueListenable: _counter,
+              builder: (context, value, child) {
+                return Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: GoogleMap(
+                    mapType: _currentMapType,
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: false,
+                    initialCameraPosition: _currentPosition,
+                    markers: markers,
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
+                    onTap: getmarkers,
+                  ),
+                );
+              }),
+          Positioned(
+            top: 1.h,
+            right: 1.w,
+            child: Column(
+              children: <Widget>[
+                Container(
+                    height: 6.h,
+                    width: 6.h,
+                    child: button(
+                        _onMapCloseButton,
+                        Icon(
+                          Icons.close_rounded,
+                          size: 24.sp,
+                        ))),
+                SizedBox(height: 8.h),
+                button(
+                    _onMapTypeButton,
+                    Icon(
+                      Icons.map_rounded,
+                      size: 28.sp,
+                    )),
+                SizedBox(height: 1.h),
+                button(
+                  _locateMe,
+                  Icon(
+                    Icons.location_searching,
+                    size: 26.sp,
+                  ),
+                )
+              ],
             ),
-            Positioned(
-              top: 1.h,
-              right: 1.w,
-              // alignment: Alignment.topRight,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                      height: 6.h,
-                      width: 6.h,
-                      child: button(
-                          _onMapCloseButton,
-                          Icon(
-                            Icons.close_rounded,
-                            size: 24.sp,
-                          ))),
-                  SizedBox(height: 8.h),
-                  button(
-                      _onMapTypeButton,
-                      Icon(
-                        Icons.map_rounded,
-                        size: 28.sp,
-                      )),
-                  SizedBox(height: 1.h),
-                  button(
-                      _onAddMarkerButton,
-                      Icon(
-                        Icons.add_location_rounded,
-                        size: 26.sp,
-                      )),
-                ],
-              ),
-            ),
-          ],
-        );
-      }),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -1320,6 +1380,170 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
 //                     ),
 //                   ),
 //                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// }
+
+// class VendorLocationScreen extends StatefulWidget {
+//   const VendorLocationScreen({Key? key}) : super(key: key);
+
+//   @override
+//   State<VendorLocationScreen> createState() => _VendorLocationScreenState();
+// }
+
+// class _VendorLocationScreenState extends State<VendorLocationScreen> {
+//   double _lat = 22.973423;
+//   double _lng = 78.656891;
+//   Completer<GoogleMapController> _controller = Completer();
+//   Location location = new Location();
+//   late bool _serviceEnabled;
+//   late PermissionStatus _permissionGranted;
+//   late CameraPosition _currentPosition;
+//   MapType _currentMapType = MapType.normal;
+
+//   Set<Marker> markers = new Set();
+
+//   @override
+//   initState() {
+//     super.initState();
+//     _currentPosition = CameraPosition(
+//       target: LatLng(_lat, _lng),
+//       zoom: 12,
+//     );
+//     _locateMe();
+//   }
+
+//   _onMapTypeButton() {
+//     setState(() {
+//       _currentMapType =
+//           _currentMapType == MapType.normal ? MapType.hybrid : MapType.normal;
+//     });
+//     print(_currentMapType);
+//   }
+
+//   getmarkers(LatLng tappedPoint) {
+//     //markers to place on map
+//     print(tappedPoint);
+//     setState(() {
+//       markers = {};
+//       markers.add(Marker(
+//         //add first marker
+//         markerId: MarkerId(tappedPoint.toString()),
+//         position: tappedPoint, //position of marker
+//         infoWindow: InfoWindow(
+//           //popup info
+//           title: 'Picked Location ',
+//           snippet: '${tappedPoint}',
+//         ),
+//         icon: BitmapDescriptor.defaultMarker, //Icon for Marker
+//       ));
+//     });
+
+//     // print(markers);
+//     return markers;
+//   }
+
+//   _locateMe() async {
+//     _serviceEnabled = await location.serviceEnabled();
+//     if (!_serviceEnabled) {
+//       _serviceEnabled = await location.requestService();
+//       if (!_serviceEnabled) {
+//         return;
+//       }
+//     }
+
+//     _permissionGranted = await location.hasPermission();
+//     if (_permissionGranted == PermissionStatus.denied) {
+//       _permissionGranted = await location.requestPermission();
+//       if (_permissionGranted != PermissionStatus.granted) {
+//         return;
+//       }
+//     }
+//     await location.getLocation().then((res) async {
+//       final GoogleMapController controller = await _controller.future;
+//       final _position = CameraPosition(
+//         target: LatLng(res.latitude!, res.longitude!),
+//         zoom: 12,
+//         // zoom: 9,
+//       );
+//       controller.animateCamera(CameraUpdate.newCameraPosition(_position));
+//       setState(() {
+//         _lat = res.latitude!;
+//         _lng = res.longitude!;
+//       });
+//     });
+//   }
+
+//   _onMapCloseButton() {
+//     Navigator.of(context).pop();
+//   }
+
+//   Widget button(function, Icon icon) {
+//     return FloatingActionButton(
+//       onPressed: function,
+//       materialTapTargetSize: MaterialTapTargetSize.padded,
+//       backgroundColor: kYellow,
+//       child: icon,
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Stack(
+//         children: <Widget>[
+//           Container(
+//             height: double.infinity,
+//             width: double.infinity,
+//             child: GoogleMap(
+//               mapType: _currentMapType,
+//               myLocationEnabled: true,
+//               myLocationButtonEnabled: false,
+//               initialCameraPosition: _currentPosition,
+//               markers: markers,
+//               onMapCreated: (GoogleMapController controller) {
+//                 _controller.complete(controller);
+//               },
+//               onTap: getmarkers,
+//             ),
+//           ),
+//           Positioned(
+//             top: 1.h,
+//             right: 1.w,
+//             // alignment: Alignment.topRight,
+//             child: Column(
+//               children: <Widget>[
+//                 Container(
+//                     height: 6.h,
+//                     width: 6.h,
+//                     child: button(
+//                         _onMapCloseButton,
+//                         Icon(
+//                           Icons.close_rounded,
+//                           size: 24.sp,
+//                         ))),
+//                 SizedBox(height: 8.h),
+//                 button(
+//                     _onMapTypeButton,
+//                     Icon(
+//                       Icons.map_rounded,
+//                       size: 28.sp,
+//                     )),
+//                 SizedBox(height: 1.h),
+//                 button(
+//                   _locateMe,
+//                   Icon(
+//                     Icons.location_searching,
+//                     size: 26.sp,
+//                   ),
+//                 )
 //               ],
 //             ),
 //           ),
