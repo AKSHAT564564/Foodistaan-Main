@@ -283,7 +283,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                     // ),
                     Container(
                       // height: 7.h,
-                      margin: EdgeInsets.only(top: 2.h, bottom: 2.h),
+                      margin: EdgeInsets.only(top: 1.h, bottom: 1.h),
                       decoration: BoxDecoration(
                         // color: kYellow.withOpacity(0.8),
                         // color: kCreamy.withOpacity(0.8),
@@ -303,18 +303,15 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                                   color: isNewVendor ? kGreyDark2 : kGreenDark,
                                 ),
                               ),
-                              SizedBox(
-                                height: 1.h,
-                                child: CupertinoSwitch(
-                                  activeColor: kGreen,
-                                  trackColor: kGreen,
-                                  value: isNewVendor,
-                                  onChanged: (bool newswitchValue) {
-                                    setState(() {
-                                      isNewVendor = newswitchValue;
-                                    });
-                                  },
-                                ),
+                              CupertinoSwitch(
+                                activeColor: kGreen,
+                                trackColor: kGreen,
+                                value: isNewVendor,
+                                onChanged: (bool newswitchValue) {
+                                  setState(() {
+                                    isNewVendor = newswitchValue;
+                                  });
+                                },
                               ),
                               Text(
                                 'New Vendor',
@@ -410,7 +407,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                                   postId: postId,
                                   postTitle: postTitle,
                                   postHashtags: postHashtags,
-                                  postTagFoods: [],
+                                  postTagFoods: postTagFoods,
                                   postedDateTime: Timestamp.now(),
                                   userId: userId!,
                                   isNewVendor: isNewVendor,
@@ -617,53 +614,107 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
             Builder(builder: (context) {
               return GestureDetector(
                 onTap: () {
-                  showBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                          height: 60.h,
-                          width: 100.w,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 1.h),
-                              Expanded(
-                                flex: 1,
-                                child: Center(
-                                  child: Text(
-                                    "Tag Food",
-                                    style: TextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: kGreyDark,
+                  vendorLocationTextController.text.isNotEmpty
+                      ? showBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                              height: 60.h,
+                              width: 100.w,
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 1.h),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Center(
+                                      child: Text(
+                                        "Tag Food",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: kGreyDark,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  Expanded(
+                                    flex: 7,
+                                    child: tagFoodItemsList(),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                flex: 7,
-                                child: tagFoodItemsList(),
-                              ),
-                            ],
-                          ),
-                        );
-                      });
+                            );
+                          })
+                      : null;
                 },
                 child: Container(
-                  child: Row(
+                  child: Column(
                     children: [
-                      Text(
-                        "Tag Food Items",
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: kRed,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            "Tag Food Items",
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
+                              color:
+                                  vendorLocationTextController.text.isNotEmpty
+                                      ? kRed
+                                      : kGreyOf,
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: vendorLocationTextController.text.isNotEmpty
+                                ? kRed
+                                : kGreyOf,
+                            size: 12.sp,
+                          )
+                        ],
                       ),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: kRed,
-                        size: 12.sp,
-                      )
+                      postTagFoods!.isNotEmpty
+                          ? Container(
+                              height: 10.h,
+                              width: 100.w,
+                              // color: Colors.red,
+                              margin: EdgeInsets.only(top: 1.h),
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  padding: EdgeInsets.all(2.sp),
+                                  itemCount: postTagFoods!.length,
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        removeTagFood(postTagFoods![index].id);
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Container(
+                                          height: 10.h,
+                                          width: 10.h,
+                                          decoration: BoxDecoration(
+                                            // color: Colors.amber,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.fill,
+                                            imageUrl:
+                                                postTagFoods![index].image,
+                                            placeholder: (context, url) =>
+                                                Image.asset(
+                                                    'assets/images/thumbnail (2).png'),
+                                            errorWidget: (context, url,
+                                                    error) =>
+                                                Image.asset(
+                                                    'assets/images/thumbnail (2).png'),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                            )
+                          : Container(),
                     ],
                   ),
                 ),
@@ -675,8 +726,24 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
     });
   }
 
+  void addTagFood(String Id, String Image) {
+    PostTagFood id = PostTagFood(
+      id: Id,
+      image: Image,
+    );
+    postTagFoods!.add(id);
+    setState(() {});
+  }
+
+  void removeTagFood(String Id) {
+    postTagFoods!.removeWhere((value) => value.id == Id);
+
+    setState(() {});
+  }
+
   Widget tagFoodItemsList() {
     Provider.of<PostsProvider>(context, listen: false).tagFoodItems.clear();
+    postTagFoods = [];
     return FutureBuilder(
         future: Provider.of<PostsProvider>(context, listen: false)
             .fetchTagFoods(vendorId),
@@ -737,65 +804,91 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                             mainAxisSpacing: 1.5.h,
                             crossAxisSpacing: 1.5.h),
                         itemBuilder: (context, index) {
-                          var tagSelected = false;
+                          ValueNotifier tagSelected = ValueNotifier(false);
+
                           return GestureDetector(
                             onTap: () {
                               setState(() {
-                                tagSelected = !tagSelected;
-                                print(tagSelected);
+                                tagSelected.value = !tagSelected.value;
+                                if (tagSelected.value) {
+                                  // postTagFoods!
+                                  //     .add(value.getTagFoodItems[index]['id']);
+                                  addTagFood(
+                                    value.getTagFoodItems[index]['id'],
+                                    value.getTagFoodItems[index]['image'],
+                                  );
+                                } else {
+                                  // postTagFoods!.remove(
+                                  //     value.getTagFoodItems[index]['id']);
+                                  removeTagFood(
+                                      value.getTagFoodItems[index]['id']);
+                                }
+                                print(tagSelected.value);
+                                print(postTagFoods);
                                 print(
                                     "FoodTag Press ${value.getTagFoodItems[index]['title']}");
                               });
                             },
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                      color: Colors.white,
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            flex: 7,
+                            child: ValueListenableBuilder(
+                                valueListenable: tagSelected,
+                                builder: (context, _, child) {
+                                  return Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                            color: Colors.white,
+                                            child: Column(
+                                              children: [
+                                                Expanded(
+                                                  flex: 7,
+                                                  child: Container(
+                                                    // child: Image.network(
+                                                    //   // "https://uae.microless.com/cdn/no_image.jpg",
+                                                    //   "https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png",
+                                                    //   fit: BoxFit.fill,
+                                                    // ),
+                                                    child: Image.network(
+                                                      // "https://uae.microless.com/cdn/no_image.jpg",
+                                                      "${value.getTagFoodItems[index]['image']}",
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    '${value.getTagFoodItems[index]['title']}',
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: kGreyDark,
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            )),
+                                      ),
+                                      Positioned(
+                                          top: 0.5.h,
+                                          right: 6.5.w,
+                                          child: Visibility(
+                                            visible: tagSelected.value,
                                             child: Container(
-                                              // child: Image.network(
-                                              //   // "https://uae.microless.com/cdn/no_image.jpg",
-                                              //   "https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png",
-                                              //   fit: BoxFit.fill,
-                                              // ),
-                                              child: Image.network(
-                                                // "https://uae.microless.com/cdn/no_image.jpg",
-                                                "${value.getTagFoodItems[index]['image']}",
-                                                fit: BoxFit.fill,
+                                              height: 3.h,
+                                              width: 3.h,
+                                              // color: tagSelected.value
+                                              //     ? Colors.green
+                                              //     : Colors.red,
+                                              child: Image.asset(
+                                                'assets/images/teenyicons_tick-circle-outline.png',
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              '${value.getTagFoodItems[index]['title']}',
-                                              style: TextStyle(
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w600,
-                                                color: kGreyDark,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      )),
-                                ),
-                                Positioned(
-                                    child: Visibility(
-                                  visible: tagSelected,
-                                  child: Container(
-                                    height: 3.h,
-                                    width: 3.h,
-                                    color:
-                                        tagSelected ? Colors.green : Colors.red,
-                                  ),
-                                ))
-                              ],
-                            ),
+                                          ))
+                                    ],
+                                  );
+                                }),
                           );
                         },
                       );

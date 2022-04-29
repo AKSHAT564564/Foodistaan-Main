@@ -77,10 +77,12 @@ class Post {
 }
 
 class PostTagFood {
-  final String foodId;
+  final String id;
+  final String image;
 
   PostTagFood({
-    required this.foodId,
+    required this.id,
+    required this.image,
   });
 
   factory PostTagFood.fromJson(String str) =>
@@ -89,10 +91,12 @@ class PostTagFood {
   String toJson() => json.encode(toMap());
 
   factory PostTagFood.fromMap(Map<String, dynamic> json) => PostTagFood(
-        foodId: json["foodId"] == null ? null : json["foodId"],
+        id: json["id"] == null ? null : json["id"],
+        image: json["image"] == null ? null : json["image"],
       );
 
   Map<String, dynamic> toMap() => {
-        "foodId": foodId == null ? null : foodId,
+        "id": id == null ? null : id,
+        "image": image == null ? null : image,
       };
 }
