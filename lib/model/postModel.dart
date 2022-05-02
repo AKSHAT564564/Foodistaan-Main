@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Post {
+class PostModel {
   final String postId;
   final String postTitle;
   final List<String>? postHashtags;
@@ -15,7 +15,7 @@ class Post {
   final GeoPoint vendorLocation;
   final String vendorPhoneNumber;
 
-  Post({
+  PostModel({
     required this.postId,
     required this.postTitle,
     required this.postHashtags,
@@ -29,11 +29,11 @@ class Post {
     required this.vendorPhoneNumber,
   });
 
-  factory Post.fromJson(String str) => Post.fromMap(json.decode(str));
+  factory PostModel.fromJson(String str) => PostModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Post.fromMap(Map<String, dynamic> json) => Post(
+  factory PostModel.fromMap(Map<String, dynamic> json) => PostModel(
         postId: json["postId"] == null ? null : json["postId"],
         postTitle: json["postTitle"] == null ? null : json["postTitle"],
         postHashtags: json["postHashtags"] == null

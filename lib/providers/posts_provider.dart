@@ -7,16 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:foodistan/awsConfig.dart';
 import 'package:foodistan/model/postModel.dart';
 
+import 'package:timeago/timeago.dart' as timeago;
+
 import 'package:http/http.dart' as http;
 
 class PostsProvider with ChangeNotifier {
   final _firestoreInstance = FirebaseFirestore.instance;
 
-  List<Post>? postItem = [];
+  List<PostModel>? postItem = [];
 
   PostsProvider({this.postItem});
 
-  List<Post> get postItems {
+  List<PostModel> get postItems {
     return [...postItem!];
   }
 
@@ -31,7 +33,7 @@ class PostsProvider with ChangeNotifier {
 
   Future<void> fetchAndSetPosts() async {
     try {
-      final List<Post> loadedPostItems = [];
+      final List<PostModel> loadedPostItems = [];
 
       await _firestoreInstance
           .collection("post-data")
@@ -42,7 +44,7 @@ class PostsProvider with ChangeNotifier {
           // if (result.data().isEmpty) {
           //   return;
           // }
-          loadedPostItems.add(Post.fromMap(result.data())
+          loadedPostItems.add(PostModel.fromMap(result.data())
               // Post(
               //   postId: result.data()['postId'],
               //   postTitle: result.data()['postTitle'],
@@ -136,7 +138,7 @@ class PostsProvider with ChangeNotifier {
   }
 
   //Function to add a new Post in firebase
-  Future<void> addPosts(Post post) async {
+  Future<void> addPosts(PostModel post) async {
     // final timestamp = DateTime.now();
     // timestamp.toIso8601String();
     // log(post.postedDateTime.toString());
@@ -235,4 +237,19 @@ class PostsProvider with ChangeNotifier {
 
     return tagFoodItems;
   }
+
+  PostModel findById(String postId) {
+    return postItems.firstWhere(
+      (single) => single.postId == postId,
+      // orElse: () => currentRadio
+    );
+  }
+}
+
+String timeAgo(Timestamp postedDateTime) {
+  final now = DateTime.now();
+  final dateTime = DateTime.fromMicrosecondsSinceEpoch(
+      postedDateTime.microsecondsSinceEpoch,
+      isUtc: true);
+  return timeago.format(now.subtract(now.difference(dateTime)));
 }

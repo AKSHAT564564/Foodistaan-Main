@@ -403,7 +403,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                           Provider.of<PostsProvider>(context, listen: false)
                               .uploadPosts(widget.postImageFile!);
                           Provider.of<PostsProvider>(context, listen: false)
-                              .addPosts(Post(
+                              .addPosts(PostModel(
                                   postId: postId,
                                   postTitle: postTitle,
                                   postHashtags: postHashtags,
