@@ -36,6 +36,7 @@ class _PostsImageWidgetState extends State<PostsImageWidget> {
           toolbarHeight: 7.h,
           backgroundColor: Colors.white,
           elevation: 0,
+          // leadingWidth: 5.w,
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
@@ -49,7 +50,7 @@ class _PostsImageWidgetState extends State<PostsImageWidget> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          centerTitle: true,
+          // centerTitle: true,
         ),
         body: SafeArea(
           child: Stack(

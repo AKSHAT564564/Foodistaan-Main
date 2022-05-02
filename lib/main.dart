@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:foodistan/MainScreenFolder/Posts/post_ListScreen.dart';
 import 'package:foodistan/MainScreenFolder/Posts/posts_screen.dart';
 import 'package:foodistan/UserLogin/user_detail_form.dart';
 import 'package:foodistan/cart_screens/login_pay_cart_screen_main.dart';
@@ -130,6 +131,7 @@ class _MyAppState extends State<MyApp> {
                 CartScreenMainLogin().routeName: (context) =>
                     CartScreenMainLogin(), // main Cart screen on home page
                 '/postScreen': (context) => PostsScreen(),
+                PostListScreen.routeName: (ctx) => PostListScreen(),
                 'CS': (context) => CustomSplashScreen(
                       childScreen: FirebaseAuth.instance.currentUser != null
                           ? MainScreen()

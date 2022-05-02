@@ -13,6 +13,7 @@ import 'package:foodistan/model/postModel.dart';
 import 'package:foodistan/providers/posts_provider.dart';
 import 'package:foodistan/providers/restaurant_list_provider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:lottie/lottie.dart' as lottie;
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -50,6 +51,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
   List<String> _hashtagValues = [];
 
   ValueNotifier<List> searchResults = ValueNotifier([]);
+
   searchQuery(String query, List items) {
     List searchResultsTemp = [];
     // print(query);
@@ -281,7 +283,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                     // ),
                     Container(
                       // height: 7.h,
-                      margin: EdgeInsets.only(top: 2.h, bottom: 2.h),
+                      margin: EdgeInsets.only(top: 1.h, bottom: 1.h),
                       decoration: BoxDecoration(
                         // color: kYellow.withOpacity(0.8),
                         // color: kCreamy.withOpacity(0.8),
@@ -301,18 +303,15 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                                   color: isNewVendor ? kGreyDark2 : kGreenDark,
                                 ),
                               ),
-                              SizedBox(
-                                height: 1.h,
-                                child: CupertinoSwitch(
-                                  activeColor: kGreen,
-                                  trackColor: kGreen,
-                                  value: isNewVendor,
-                                  onChanged: (bool newswitchValue) {
-                                    setState(() {
-                                      isNewVendor = newswitchValue;
-                                    });
-                                  },
-                                ),
+                              CupertinoSwitch(
+                                activeColor: kGreen,
+                                trackColor: kGreen,
+                                value: isNewVendor,
+                                onChanged: (bool newswitchValue) {
+                                  setState(() {
+                                    isNewVendor = newswitchValue;
+                                  });
+                                },
                               ),
                               Text(
                                 'New Vendor',
@@ -404,11 +403,11 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                           Provider.of<PostsProvider>(context, listen: false)
                               .uploadPosts(widget.postImageFile!);
                           Provider.of<PostsProvider>(context, listen: false)
-                              .addPosts(Post(
+                              .addPosts(PostModel(
                                   postId: postId,
                                   postTitle: postTitle,
                                   postHashtags: postHashtags,
-                                  postTagFoods: [],
+                                  postTagFoods: postTagFoods,
                                   postedDateTime: Timestamp.now(),
                                   userId: userId!,
                                   isNewVendor: isNewVendor,
@@ -582,7 +581,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                     height: 7.5.h,
                     child: TextFormField(
                       scrollPadding: EdgeInsets.zero,
-                      maxLines: 3,
+                      // maxLines: 3,
                       controller: vendorLocationTextController,
                       cursorColor: kYellow,
                       readOnly: true,
@@ -615,53 +614,107 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
             Builder(builder: (context) {
               return GestureDetector(
                 onTap: () {
-                  showBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                          height: 60.h,
-                          width: 100.w,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 1.h),
-                              Expanded(
-                                flex: 1,
-                                child: Center(
-                                  child: Text(
-                                    "Tag Food",
-                                    style: TextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: kGreyDark,
+                  vendorLocationTextController.text.isNotEmpty
+                      ? showBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                              height: 60.h,
+                              width: 100.w,
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 1.h),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Center(
+                                      child: Text(
+                                        "Tag Food",
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: kGreyDark,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  Expanded(
+                                    flex: 7,
+                                    child: tagFoodItemsList(),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                flex: 7,
-                                child: tagFoodItemsList(),
-                              ),
-                            ],
-                          ),
-                        );
-                      });
+                            );
+                          })
+                      : null;
                 },
                 child: Container(
-                  child: Row(
+                  child: Column(
                     children: [
-                      Text(
-                        "Tag Food Items",
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: kRed,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            "Tag Food Items",
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
+                              color:
+                                  vendorLocationTextController.text.isNotEmpty
+                                      ? kRed
+                                      : kGreyOf,
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: vendorLocationTextController.text.isNotEmpty
+                                ? kRed
+                                : kGreyOf,
+                            size: 12.sp,
+                          )
+                        ],
                       ),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: kRed,
-                        size: 12.sp,
-                      )
+                      postTagFoods!.isNotEmpty
+                          ? Container(
+                              height: 10.h,
+                              width: 100.w,
+                              // color: Colors.red,
+                              margin: EdgeInsets.only(top: 1.h),
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  padding: EdgeInsets.all(2.sp),
+                                  itemCount: postTagFoods!.length,
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        removeTagFood(postTagFoods![index].id);
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Container(
+                                          height: 10.h,
+                                          width: 10.h,
+                                          decoration: BoxDecoration(
+                                            // color: Colors.amber,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.fill,
+                                            imageUrl:
+                                                postTagFoods![index].image,
+                                            placeholder: (context, url) =>
+                                                Image.asset(
+                                                    'assets/images/thumbnail (2).png'),
+                                            errorWidget: (context, url,
+                                                    error) =>
+                                                Image.asset(
+                                                    'assets/images/thumbnail (2).png'),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                            )
+                          : Container(),
                     ],
                   ),
                 ),
@@ -673,8 +726,24 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
     });
   }
 
+  void addTagFood(String Id, String Image) {
+    PostTagFood id = PostTagFood(
+      id: Id,
+      image: Image,
+    );
+    postTagFoods!.add(id);
+    setState(() {});
+  }
+
+  void removeTagFood(String Id) {
+    postTagFoods!.removeWhere((value) => value.id == Id);
+
+    setState(() {});
+  }
+
   Widget tagFoodItemsList() {
     Provider.of<PostsProvider>(context, listen: false).tagFoodItems.clear();
+    postTagFoods = [];
     return FutureBuilder(
         future: Provider.of<PostsProvider>(context, listen: false)
             .fetchTagFoods(vendorId),
@@ -735,65 +804,91 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                             mainAxisSpacing: 1.5.h,
                             crossAxisSpacing: 1.5.h),
                         itemBuilder: (context, index) {
-                          var tagSelected = false;
+                          ValueNotifier tagSelected = ValueNotifier(false);
+
                           return GestureDetector(
                             onTap: () {
                               setState(() {
-                                tagSelected = !tagSelected;
-                                print(tagSelected);
+                                tagSelected.value = !tagSelected.value;
+                                if (tagSelected.value) {
+                                  // postTagFoods!
+                                  //     .add(value.getTagFoodItems[index]['id']);
+                                  addTagFood(
+                                    value.getTagFoodItems[index]['id'],
+                                    value.getTagFoodItems[index]['image'],
+                                  );
+                                } else {
+                                  // postTagFoods!.remove(
+                                  //     value.getTagFoodItems[index]['id']);
+                                  removeTagFood(
+                                      value.getTagFoodItems[index]['id']);
+                                }
+                                print(tagSelected.value);
+                                print(postTagFoods);
                                 print(
                                     "FoodTag Press ${value.getTagFoodItems[index]['title']}");
                               });
                             },
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                      color: Colors.white,
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            flex: 7,
+                            child: ValueListenableBuilder(
+                                valueListenable: tagSelected,
+                                builder: (context, _, child) {
+                                  return Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                            color: Colors.white,
+                                            child: Column(
+                                              children: [
+                                                Expanded(
+                                                  flex: 7,
+                                                  child: Container(
+                                                    // child: Image.network(
+                                                    //   // "https://uae.microless.com/cdn/no_image.jpg",
+                                                    //   "https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png",
+                                                    //   fit: BoxFit.fill,
+                                                    // ),
+                                                    child: Image.network(
+                                                      // "https://uae.microless.com/cdn/no_image.jpg",
+                                                      "${value.getTagFoodItems[index]['image']}",
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Text(
+                                                    '${value.getTagFoodItems[index]['title']}',
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: kGreyDark,
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            )),
+                                      ),
+                                      Positioned(
+                                          top: 0.5.h,
+                                          right: 6.5.w,
+                                          child: Visibility(
+                                            visible: tagSelected.value,
                                             child: Container(
-                                              // child: Image.network(
-                                              //   // "https://uae.microless.com/cdn/no_image.jpg",
-                                              //   "https://cdn.pixabay.com/photo/2020/09/02/08/19/dinner-5537679_960_720.png",
-                                              //   fit: BoxFit.fill,
-                                              // ),
-                                              child: Image.network(
-                                                // "https://uae.microless.com/cdn/no_image.jpg",
-                                                "${value.getTagFoodItems[index]['image']}",
-                                                fit: BoxFit.fill,
+                                              height: 3.h,
+                                              width: 3.h,
+                                              // color: tagSelected.value
+                                              //     ? Colors.green
+                                              //     : Colors.red,
+                                              child: Image.asset(
+                                                'assets/images/teenyicons_tick-circle-outline.png',
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              '${value.getTagFoodItems[index]['title']}',
-                                              style: TextStyle(
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w600,
-                                                color: kGreyDark,
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      )),
-                                ),
-                                Positioned(
-                                    child: Visibility(
-                                  visible: tagSelected,
-                                  child: Container(
-                                    height: 3.h,
-                                    width: 3.h,
-                                    color:
-                                        tagSelected ? Colors.green : Colors.red,
-                                  ),
-                                ))
-                              ],
-                            ),
+                                          ))
+                                    ],
+                                  );
+                                }),
                           );
                         },
                       );
@@ -938,6 +1033,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                   child: TextFormField(
                     controller: newVendorLocationTextController,
                     cursorColor: kYellow,
+                    readOnly: true,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.fromLTRB(12, 8, 12, 8),
@@ -959,6 +1055,11 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                           //     context: context,
                           //     builder: (context) {
                           //       return vendorLocationScreen();
+                          //     });
+                          // showDialog(
+                          //     context: context,
+                          //     builder: (context) {
+                          //       return VendorLocationScreen();
                           //     });
                           showDialog(
                               context: context,
@@ -1055,25 +1156,106 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
   }
 
   Widget vendorLocationScreen() {
+    ValueNotifier _counter = ValueNotifier<int>(3);
+
+    double _lat = 22.973423;
+    double _lng = 78.656891;
     Completer<GoogleMapController> _controller = Completer();
-    LatLng _center = const LatLng(22.973423, 78.656891);
-    Set<Marker> _markers = {};
-    LatLng _lastMapPosition = _center;
+    Location location = new Location();
+    late bool _serviceEnabled;
+    late PermissionStatus _permissionGranted;
+    // late CameraPosition _currentPosition;
+    late CameraPosition _currentPosition = CameraPosition(
+      target: LatLng(_lat, _lng),
+      zoom: 12,
+    );
+
     MapType _currentMapType = MapType.normal;
 
-    void _onMapCreated(GoogleMapController controller) {
-      _controller.complete(controller);
-      // setState(() {});
+    Set<Marker> markers = new Set();
+
+    _onMapTypeButton() {
+      setState(() {
+        _counter.value += 1;
+        _currentMapType =
+            _currentMapType == MapType.normal ? MapType.hybrid : MapType.normal;
+      });
+      print(_currentMapType);
     }
 
-    void _onCameraMove(CameraPosition position) {
-      _lastMapPosition = position.target;
-      // setState(() {});
+    getmarkers(LatLng tappedPoint) {
+      //markers to place on map
+      print(tappedPoint);
+      setState(() {
+        _counter.value += 1;
+        markers = {};
+        markers.add(Marker(
+          //add first marker
+          markerId: MarkerId(tappedPoint.toString()),
+          position: tappedPoint, //position of marker
+
+          infoWindow: InfoWindow(
+            //popup info
+            title: 'Picked Location ',
+            snippet: '${tappedPoint}',
+          ),
+          icon: BitmapDescriptor.defaultMarker, //Icon for Marker
+        ));
+        newVendorLocationTextController.text =
+            '${tappedPoint.latitude} , ${tappedPoint.longitude}';
+        vendorLocation = GeoPoint(tappedPoint.latitude, tappedPoint.longitude);
+      });
+
+      // print(markers);
+      return markers;
     }
 
-    void _onMapCloseButton() {
+    _locateMe() async {
+      _serviceEnabled = await location.serviceEnabled();
+      if (!_serviceEnabled) {
+        _serviceEnabled = await location.requestService();
+        if (!_serviceEnabled) {
+          return;
+        }
+      }
+
+      _permissionGranted = await location.hasPermission();
+      if (_permissionGranted == PermissionStatus.denied) {
+        _permissionGranted = await location.requestPermission();
+        if (_permissionGranted != PermissionStatus.granted) {
+          return;
+        }
+      }
+      await location.getLocation().then((res) async {
+        final GoogleMapController controller = await _controller.future;
+        final _position = CameraPosition(
+          target: LatLng(res.latitude!, res.longitude!),
+          zoom: 12,
+          // zoom: 9,
+        );
+        _counter.value += 1;
+        controller.animateCamera(CameraUpdate.newCameraPosition(_position));
+        setState(() {
+          _counter.value += 1;
+          _lat = res.latitude!;
+          _lng = res.longitude!;
+        });
+      });
+    }
+
+    _onMapCloseButton() {
       Navigator.of(context).pop();
     }
+
+    // @override
+    // initState() {
+    //   super.initState();
+    //   _currentPosition = CameraPosition(
+    //     target: LatLng(_lat, _lng),
+    //     zoom: 12,
+    //   );
+    //   _locateMe();
+    // }
 
     Widget button(function, Icon icon) {
       return FloatingActionButton(
@@ -1084,91 +1266,62 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
       );
     }
 
-    void _onMapTypeButton() {
-      setState(() {
-        _currentMapType = _currentMapType == MapType.normal
-            ? MapType.satellite
-            : MapType.normal;
-      });
-      print(_currentMapType);
-    }
-
-    void _onAddMarkerButton() {
-      setState(() {
-        _markers.clear();
-        _markers.add(Marker(
-          markerId: MarkerId('1'
-              // _lastMapPosition.toString(),
-              ),
-          position: _lastMapPosition,
-          infoWindow: InfoWindow(
-            title: 'Picked Location',
-            snippet: _lastMapPosition.toString(),
-          ),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-        ));
-        newVendorLocationTextController.text =
-            '${_lastMapPosition.latitude},${_lastMapPosition.longitude}';
-        vendorLocation =
-            GeoPoint(_lastMapPosition.latitude, _lastMapPosition.longitude);
-      });
-      // print(_lastMapPosition);
-      // print(vendorLocation);
-    }
-
     return Scaffold(
-      body: Builder(builder: (context) {
-        return Stack(
-          children: <Widget>[
-            Container(
-              height: 100.h,
-              width: 100.w,
-              child: GoogleMap(
-                onMapCreated: _onMapCreated,
-                initialCameraPosition: CameraPosition(
-                  target: _center,
-                  zoom: 11,
-                ),
-                mapType: _currentMapType,
-                markers: _markers,
-                onCameraMove: _onCameraMove,
-              ),
+      body: Stack(
+        children: <Widget>[
+          ValueListenableBuilder(
+              valueListenable: _counter,
+              builder: (context, value, child) {
+                return Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: GoogleMap(
+                    mapType: _currentMapType,
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: false,
+                    initialCameraPosition: _currentPosition,
+                    markers: markers,
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
+                    onTap: getmarkers,
+                  ),
+                );
+              }),
+          Positioned(
+            top: 1.h,
+            right: 1.w,
+            child: Column(
+              children: <Widget>[
+                Container(
+                    height: 6.h,
+                    width: 6.h,
+                    child: button(
+                        _onMapCloseButton,
+                        Icon(
+                          Icons.close_rounded,
+                          size: 24.sp,
+                        ))),
+                SizedBox(height: 8.h),
+                button(
+                    _onMapTypeButton,
+                    Icon(
+                      Icons.map_rounded,
+                      size: 28.sp,
+                    )),
+                SizedBox(height: 1.h),
+                button(
+                  _locateMe,
+                  Icon(
+                    Icons.location_searching,
+                    size: 26.sp,
+                  ),
+                )
+              ],
             ),
-            Positioned(
-              top: 1.h,
-              right: 1.w,
-              // alignment: Alignment.topRight,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                      height: 6.h,
-                      width: 6.h,
-                      child: button(
-                          _onMapCloseButton,
-                          Icon(
-                            Icons.close_rounded,
-                            size: 24.sp,
-                          ))),
-                  SizedBox(height: 8.h),
-                  button(
-                      _onMapTypeButton,
-                      Icon(
-                        Icons.map_rounded,
-                        size: 28.sp,
-                      )),
-                  SizedBox(height: 1.h),
-                  button(
-                      _onAddMarkerButton,
-                      Icon(
-                        Icons.add_location_rounded,
-                        size: 26.sp,
-                      )),
-                ],
-              ),
-            ),
-          ],
-        );
-      }),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -1320,6 +1473,170 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
 //                     ),
 //                   ),
 //                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// }
+
+// class VendorLocationScreen extends StatefulWidget {
+//   const VendorLocationScreen({Key? key}) : super(key: key);
+
+//   @override
+//   State<VendorLocationScreen> createState() => _VendorLocationScreenState();
+// }
+
+// class _VendorLocationScreenState extends State<VendorLocationScreen> {
+//   double _lat = 22.973423;
+//   double _lng = 78.656891;
+//   Completer<GoogleMapController> _controller = Completer();
+//   Location location = new Location();
+//   late bool _serviceEnabled;
+//   late PermissionStatus _permissionGranted;
+//   late CameraPosition _currentPosition;
+//   MapType _currentMapType = MapType.normal;
+
+//   Set<Marker> markers = new Set();
+
+//   @override
+//   initState() {
+//     super.initState();
+//     _currentPosition = CameraPosition(
+//       target: LatLng(_lat, _lng),
+//       zoom: 12,
+//     );
+//     _locateMe();
+//   }
+
+//   _onMapTypeButton() {
+//     setState(() {
+//       _currentMapType =
+//           _currentMapType == MapType.normal ? MapType.hybrid : MapType.normal;
+//     });
+//     print(_currentMapType);
+//   }
+
+//   getmarkers(LatLng tappedPoint) {
+//     //markers to place on map
+//     print(tappedPoint);
+//     setState(() {
+//       markers = {};
+//       markers.add(Marker(
+//         //add first marker
+//         markerId: MarkerId(tappedPoint.toString()),
+//         position: tappedPoint, //position of marker
+//         infoWindow: InfoWindow(
+//           //popup info
+//           title: 'Picked Location ',
+//           snippet: '${tappedPoint}',
+//         ),
+//         icon: BitmapDescriptor.defaultMarker, //Icon for Marker
+//       ));
+//     });
+
+//     // print(markers);
+//     return markers;
+//   }
+
+//   _locateMe() async {
+//     _serviceEnabled = await location.serviceEnabled();
+//     if (!_serviceEnabled) {
+//       _serviceEnabled = await location.requestService();
+//       if (!_serviceEnabled) {
+//         return;
+//       }
+//     }
+
+//     _permissionGranted = await location.hasPermission();
+//     if (_permissionGranted == PermissionStatus.denied) {
+//       _permissionGranted = await location.requestPermission();
+//       if (_permissionGranted != PermissionStatus.granted) {
+//         return;
+//       }
+//     }
+//     await location.getLocation().then((res) async {
+//       final GoogleMapController controller = await _controller.future;
+//       final _position = CameraPosition(
+//         target: LatLng(res.latitude!, res.longitude!),
+//         zoom: 12,
+//         // zoom: 9,
+//       );
+//       controller.animateCamera(CameraUpdate.newCameraPosition(_position));
+//       setState(() {
+//         _lat = res.latitude!;
+//         _lng = res.longitude!;
+//       });
+//     });
+//   }
+
+//   _onMapCloseButton() {
+//     Navigator.of(context).pop();
+//   }
+
+//   Widget button(function, Icon icon) {
+//     return FloatingActionButton(
+//       onPressed: function,
+//       materialTapTargetSize: MaterialTapTargetSize.padded,
+//       backgroundColor: kYellow,
+//       child: icon,
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Stack(
+//         children: <Widget>[
+//           Container(
+//             height: double.infinity,
+//             width: double.infinity,
+//             child: GoogleMap(
+//               mapType: _currentMapType,
+//               myLocationEnabled: true,
+//               myLocationButtonEnabled: false,
+//               initialCameraPosition: _currentPosition,
+//               markers: markers,
+//               onMapCreated: (GoogleMapController controller) {
+//                 _controller.complete(controller);
+//               },
+//               onTap: getmarkers,
+//             ),
+//           ),
+//           Positioned(
+//             top: 1.h,
+//             right: 1.w,
+//             // alignment: Alignment.topRight,
+//             child: Column(
+//               children: <Widget>[
+//                 Container(
+//                     height: 6.h,
+//                     width: 6.h,
+//                     child: button(
+//                         _onMapCloseButton,
+//                         Icon(
+//                           Icons.close_rounded,
+//                           size: 24.sp,
+//                         ))),
+//                 SizedBox(height: 8.h),
+//                 button(
+//                     _onMapTypeButton,
+//                     Icon(
+//                       Icons.map_rounded,
+//                       size: 28.sp,
+//                     )),
+//                 SizedBox(height: 1.h),
+//                 button(
+//                   _locateMe,
+//                   Icon(
+//                     Icons.location_searching,
+//                     size: 26.sp,
+//                   ),
+//                 )
 //               ],
 //             ),
 //           ),

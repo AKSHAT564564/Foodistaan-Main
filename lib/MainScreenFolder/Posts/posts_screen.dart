@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:foodistan/MainScreenFolder/Posts/post_ListScreen.dart';
 import 'package:foodistan/MainScreenFolder/Posts/postsImageWidget.dart';
 import 'package:foodistan/awsConfig.dart';
 import 'package:foodistan/constants.dart';
@@ -68,17 +69,27 @@ class _PostsScreenState extends State<PostsScreen> {
                           crossAxisSpacing: 1.h,
                           padding: EdgeInsets.only(bottom: 10.h),
                           itemBuilder: (context, index) {
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(10.sp),
-                              child: Card(
-                                // shape: RoundedRectangleBorder(
-                                //     borderRadius: BorderRadius.circular(20.sp)),
-                                // elevation: 0,
-                                margin: EdgeInsets.zero,
-                                child: Image(
-                                  image: NetworkImage(AwsConfig.path +
-                                      post.postItems[index].postId),
-                                  fit: BoxFit.fill,
+                            return GestureDetector(
+                              onTap: () {
+                                print(post.postItems[index]);
+                                print(index);
+                                Navigator.of(context).pushNamed(
+                                  PostListScreen.routeName,
+                                  arguments: post.postItems[index].postId,
+                                );
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10.sp),
+                                child: Card(
+                                  // shape: RoundedRectangleBorder(
+                                  //     borderRadius: BorderRadius.circular(20.sp)),
+                                  // elevation: 0,
+                                  margin: EdgeInsets.zero,
+                                  child: Image(
+                                    image: NetworkImage(AwsConfig.path +
+                                        post.postItems[index].postId),
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                               ),
                             );
