@@ -98,6 +98,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
           toolbarHeight: 7.h,
           backgroundColor: Colors.white,
           elevation: 0,
+          leadingWidth: 7.w,
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
@@ -111,7 +112,7 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          centerTitle: true,
+          // centerTitle: true,
         ),
         body: Stack(
           alignment: Alignment.bottomCenter,
@@ -387,19 +388,6 @@ class _PostUploadWidgetState extends State<PostUploadWidget> {
                       child: MaterialButton(
                         elevation: 5,
                         onPressed: () {
-                          // Provider.of<PostsProvider>(context, listen: false)
-                          //     .addPosts(Post(
-                          //         postId: 'postId',
-                          //         postTitle: 'postTitle',
-                          //         postHashtags: [],
-                          //         postTagFoods: [],
-                          //         postedDateTime: Timestamp.now(),
-                          //         userId: 'userId',
-                          //         isNewVendor: true,
-                          //         vendorId: 'vendorId',
-                          //         vendorName: 'vendorName',
-                          //         vendorLocation: GeoPoint(21, 43),
-                          //         vendorPhoneNumber: 'vendorPhoneNumber'));
                           Provider.of<PostsProvider>(context, listen: false)
                               .uploadPosts(widget.postImageFile!);
                           Provider.of<PostsProvider>(context, listen: false)

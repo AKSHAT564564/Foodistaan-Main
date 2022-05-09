@@ -5,7 +5,6 @@ import 'package:foodistan/MainScreenFolder/Posts/postsImageWidget.dart';
 import 'package:foodistan/awsConfig.dart';
 import 'package:foodistan/constants.dart';
 import 'package:foodistan/customLoadingSpinner.dart';
-import 'package:foodistan/model/postModel.dart';
 import 'package:foodistan/providers/posts_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
@@ -81,9 +80,6 @@ class _PostsScreenState extends State<PostsScreen> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10.sp),
                                 child: Card(
-                                  // shape: RoundedRectangleBorder(
-                                  //     borderRadius: BorderRadius.circular(20.sp)),
-                                  // elevation: 0,
                                   margin: EdgeInsets.zero,
                                   child: Image(
                                     image: NetworkImage(AwsConfig.path +

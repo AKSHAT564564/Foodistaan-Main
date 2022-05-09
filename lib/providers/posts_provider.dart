@@ -2,8 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:foodistan/awsConfig.dart';
 import 'package:foodistan/model/postModel.dart';
 
@@ -22,15 +24,12 @@ class PostsProvider with ChangeNotifier {
     return [...postItem!];
   }
 
-  // List vendorData = [];
-  // List get vendors {
-  //   return [...vendorData];
-  // }
   List tagFoodItems = [];
   List get getTagFoodItems {
     return [...tagFoodItems];
   }
 
+//Future Function is use to Fetch All The Post from Firebase and return a list of Posts
   Future<void> fetchAndSetPosts() async {
     try {
       final List<PostModel> loadedPostItems = [];
@@ -41,28 +40,13 @@ class PostsProvider with ChangeNotifier {
           .then((querySnapshot) {
         querySnapshot.docs.forEach((result) {
           log(result.data().toString());
-          // if (result.data().isEmpty) {
-          //   return;
-          // }
-          loadedPostItems.add(PostModel.fromMap(result.data())
-              // Post(
-              //   postId: result.data()['postId'],
-              //   postTitle: result.data()['postTitle'],
-              //   postHashtags: result.data()['postHashtags'],
-              //   postTagFoods: result.data()['postTagFoods'],
-              //   postedDateTime: result.data()['postedDateTime'].toString(),
-              //   userId: result.data()['userId'],
-              //   isNewVendor: result.data()['isNewVendor'],
-              //   vendorId: result.data()['vendorId'],
-              //   vendorName: result.data()['vendorName'],
-              //   vendorLocation: result.data()['vendorLocation'].toString(),
-              //   vendorPhoneNumber: result.data()['vendorPhoneNumber'])
-              );
+
+          loadedPostItems.add(PostModel.fromMap(result.data()));
         });
       });
 
       postItem = loadedPostItems;
-      // log(postItems.length.toString());
+
       notifyListeners();
     } catch (error) {
       print(error);
@@ -112,14 +96,12 @@ class PostsProvider with ChangeNotifier {
   //   }
   // }
 
+// Function is use to Upload the Post Image to the AWS S3 Bucket. it takes the Image File and Upload it to AWS.
   uploadPosts(File file) async {
     var headers = {'Content-Type': 'image/jpeg'};
     var request = http.Request(
         'PUT', Uri.parse('${AwsConfig.path}${file.path.split('/').last}'));
-    // request.body = file.readAsBytes().toString();
-    // request.body = ;
-    // final bytes = await file.readAsBytes();
-    // // or
+
     final bytes = file.readAsBytesSync();
     request.bodyBytes = bytes;
     request.headers.addAll(headers);
@@ -127,32 +109,14 @@ class PostsProvider with ChangeNotifier {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(response.statusCode);
-      // print(await response.stream.bytesToString());
       return response.statusCode;
     } else {
-      print(response.statusCode);
-      print(response.reasonPhrase);
       return response.statusCode;
     }
   }
 
-  //Function to add a new Post in firebase
+  //Futer Function to add a new Post in firebase
   Future<void> addPosts(PostModel post) async {
-    // final timestamp = DateTime.now();
-    // timestamp.toIso8601String();
-    // log(post.postedDateTime.toString());
-    // log(post.postTagFoods.toString());
-    // log(post.isNewVendor.toString());
-    // log(post.postHashtags.toString());
-    // log(post.postId.toString());
-    // log(post.postTitle.toString());
-    // log(post.userId.toString());
-    // log(post.vendorId.toString());
-    // log(post.vendorName.toString());
-    // log(post.vendorLocation.toString());
-    // log(post.vendorPhoneNumber.toString());
-
     try {
       await _firestoreInstance
           .collection('post-data')
@@ -160,64 +124,15 @@ class PostsProvider with ChangeNotifier {
           .then((value) {
         print("Post data Added:- $value");
       });
-      // print("Post data Added:");
+
       notifyListeners();
     } catch (error) {
       print(error);
       throw (error);
     }
-
-    // try {
-    //   _firestoreInstance.collection('post-data').add({
-    //     'vendorPhoneNumber': post.vendorPhoneNumber,
-    //     'postHashtags': post.postHashtags,
-    //     'postTagFoods': post.postTagFoods,
-    //     'vendorId': post.vendorId,
-    //     'postedDateTime': post.postedDateTime,
-    //     'isNewVendor': post.isNewVendor,
-    //     'postTitle': post.postTitle,
-    //     'postId': post.postId,
-    //     'vendorName': post.vendorName,
-    //     'userId': post.userId,
-    //     'vendorLocation': post.vendorLocation,
-    //   }).then((value) {
-    //     print("Post data Added$value");
-    //   });
-    //   notifyListeners();
-    // } catch (error) {
-    //   print(error);
-    //   throw (error);
-    // }
-
-    // try {
-    // //   return _firestoreInstance.collection('post-data').add({
-    // //     'vendorPhoneNumber': '6565656556',
-    // //     'postHashtags': ['tasty', 'fastfood'],
-    // //     'postTagFoods': [
-    // //       {'foodId': 'zza'},
-    // //       {'foodId': 'izza'}
-    // //     ],
-    // //     'vendorId': 'Food1',
-    // //     'postedDateTime': Timestamp.now(),
-    // //     'isNewVendor': false,
-    // //     'postTitle': 'The Best',
-    // //     'postId': 'image_picker5511817622945604141.jpg',
-    // //     'vendorName': 'Hub',
-    // //     'userId': '1ty',
-    // //     'vendorLocation': GeoPoint(21, 32),
-    // //   }).then((value) {
-    // //     print("Post data Added$value");
-    // //   }).catchError((error) {
-    // //     print("Post couldn't be added.:- $error");
-    // //   });
-
-    //   notifyListeners();
-    // } catch (error) {
-    //   print(error);
-    //   throw (error);
-    // }
   }
 
+//  Future Take Vendor ID and return the Food Items list
   Future<List> fetchTagFoods(vendor_id) async {
     // List tagFoodItems = [];
     final CollectionReference tagFoodList = FirebaseFirestore.instance
@@ -238,14 +153,37 @@ class PostsProvider with ChangeNotifier {
     return tagFoodItems;
   }
 
+// This Function is use to find the Post from List of Post it takes PostId and return a Single Post
   PostModel findById(String postId) {
     return postItems.firstWhere(
       (single) => single.postId == postId,
-      // orElse: () => currentRadio
+    );
+  }
+
+// This Function is use to add Liked By feature to the Post. It Takes the PostId and Current UserId and Update the Post Likes
+  // addLikedBy(postId, userId) async {
+  //   await FirebaseFirestore.instance.collection('post-data').doc().update({
+  //     'likes': FieldValue.arrayUnion([userId])
+  //   }).then((value) => debugPrint(postId));
+
+  //   notifyListeners();
+  // }
+
+  //This Future is use to Share Post on different platforms. it take the Post
+  Future<void> shareApp(PostModel post) async {
+    var url = 'http://maps.google.com/maps?q=loc:';
+    await FlutterShare.share(
+      chooserTitle: "Share To",
+      title: post.postTitle,
+      text:
+          '${post.vendorName}\n\nFor more details on street foods near you, download Streato App from Playstore/Appstore. ',
+      linkUrl:
+          '$url${post.vendorLocation.latitude},${post.vendorLocation.longitude}',
     );
   }
 }
 
+// This Function is use to set time ago for the post. It takes TimeStamp/Posted Datetime of post and return the time ago the post was posted.
 String timeAgo(Timestamp postedDateTime) {
   final now = DateTime.now();
   final dateTime = DateTime.fromMicrosecondsSinceEpoch(

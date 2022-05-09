@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class PostModel {
   final String postId;
@@ -15,6 +17,8 @@ class PostModel {
   final GeoPoint vendorLocation;
   final String vendorPhoneNumber;
 
+  List<Like>? likes;
+
   PostModel({
     required this.postId,
     required this.postTitle,
@@ -27,6 +31,7 @@ class PostModel {
     required this.vendorName,
     required this.vendorLocation,
     required this.vendorPhoneNumber,
+    this.likes,
   });
 
   factory PostModel.fromJson(String str) => PostModel.fromMap(json.decode(str));
@@ -54,6 +59,9 @@ class PostModel {
         vendorPhoneNumber: json["vendorPhoneNumber"] == null
             ? null
             : json["vendorPhoneNumber"],
+        likes: json["likes"] == null
+            ? null
+            : List<Like>.from(json["likes"].map((x) => x)),
       );
 
   Map<String, dynamic> toMap() => {
@@ -73,6 +81,7 @@ class PostModel {
         "vendorLocation": vendorLocation == null ? null : vendorLocation,
         "vendorPhoneNumber":
             vendorPhoneNumber == null ? null : vendorPhoneNumber,
+        "likes": likes == null ? null : List<dynamic>.from(likes!.map((x) => x))
       };
 }
 
@@ -99,4 +108,10 @@ class PostTagFood {
         "id": id == null ? null : id,
         "image": image == null ? null : image,
       };
+}
+
+class Like {
+  final User user;
+
+  Like({required this.user});
 }
