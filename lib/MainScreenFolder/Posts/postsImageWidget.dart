@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:foodistan/MainScreenFolder/Posts/postUploadWidget.dart';
 import 'package:foodistan/constants.dart';
-import 'package:foodistan/providers/posts_provider.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
+
 import 'package:sizer/sizer.dart';
 
 class PostsImageWidget extends StatefulWidget {
@@ -36,7 +35,7 @@ class _PostsImageWidgetState extends State<PostsImageWidget> {
           toolbarHeight: 7.h,
           backgroundColor: Colors.white,
           elevation: 0,
-          // leadingWidth: 5.w,
+          leadingWidth: 7.w,
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
